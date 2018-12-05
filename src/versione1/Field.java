@@ -12,6 +12,11 @@ public class Field<String, T> {
         this.value = value;
     }
 
+    public Field(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public String getName() {
         return name;
     }
@@ -22,6 +27,10 @@ public class Field<String, T> {
 
     public T getValue() {
         return value;
+    }
+
+    public void setValue(T value) {
+        this.value = value;
     }
 }
 
