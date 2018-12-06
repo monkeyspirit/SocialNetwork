@@ -1,5 +1,9 @@
 # Folders
 bin
+librerie
+
+# Others
+*.iml
 
 # Compiled class file
 *.class
