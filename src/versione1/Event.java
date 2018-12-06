@@ -28,25 +28,12 @@ public abstract class Event{
         L'alternativa è avere un metodo getCampo(String nomeCampo) che itera l'array cercando
         un campo con nome = nomeCampo ed eventualmente lo restituisce.
         Qual è la soluzione migliore secondo voi?
+    Maria: per me come soluzione è fattibile, l'array era stato pensato effettivamente come contenitore ma in realtà sarebbe
+        solo una struttura in più che ci potrebbe dare fastidio, in caso potremmo ri introdurlo in seguito.
+
 	 */
 
-	/*
-	Da qualche parte dobbiamo mettere questo pezzo di codice, direi di metterlo nel costruttore, quando si creerà la classe figlia il costruttore della padre si occuperà di
-	inserire i campi nell'arrayLit di campi
-		this.fields = new ArrayList<>();
-		fields.add(title);
-		fields.add(numOfPartecipants);
-		fields.add(registrationDeadline);
-		fields.add(place);
-		fields.add(date);
-		fields.add(time);
-		fields.add(duration);
-		fields.add(indTee);
-		fields.add(teeInclude);
-		fields.add(endDate);
-		fields.add(endTime);
-		fields.add(note);
-	*/
+
 
     /**
      * Costruttore vuoto: viene inizializzato l'array di campi, ciascuno dei quali con
@@ -75,6 +62,9 @@ public abstract class Event{
 	    this.indTee.setValue(indTee);
     }
 
+
+
+    //Metodo che non avrebbe più senso in mancanza dell'ArrayList
 	private void init() {
 		fields.add(title);
 		fields.add(numOfPartecipants);
@@ -92,7 +82,7 @@ public abstract class Event{
 
     public ArrayList<Field> getFields() {
         return fields;
-    }
+    } //Metodo che non avrebbe più senso in mancanza dell'ArrayList
 
     public Field getTitle() {
         return title;
@@ -141,4 +131,6 @@ public abstract class Event{
     public Field getNote() {
         return note;
     }
+
+
 }
