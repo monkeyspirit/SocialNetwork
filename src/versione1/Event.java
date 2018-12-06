@@ -21,6 +21,7 @@ public abstract class Event{
 	/*
 	Da qualche parte dobbiamo mettere questo pezzo di codice, direi di metterlo nel costruttore, quando si creerà la classe figlia il costruttore della padre si occuperà di
 	inserire i campi nell'arrayLit di campi
+		this.fields = new ArrayList<>();
 		fields.add(title);
 		fields.add(numOfPlayers);
 		fields.add(place);
