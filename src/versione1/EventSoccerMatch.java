@@ -4,14 +4,31 @@ import java.util.Date;
 
 public class EventSoccerMatch extends Event{
 
+    /*
+    Maria: pensavo ad una cosa del genere per gli enum
+
+    public enum Gender {
+        MALE, FEMALE, GENITORE1, GENITORE2 ---> tanta stima per Pietro :)
+    }
+
+    public enum AgeGroup {
+
+    }
+     */
+
+
+
+    //Costanti della classe EventSoccerMatch
     public static final String GENDER_NAME = "Gender";
     public static final String GENDER_DESCRIPTION = "Gender of the partecipant";
     public static final String AGEGROUP_NAME = "Age group";
     public static final String AGEGROUP_DESCRIPTION = "Lower and upper limit of the partecipant's age";
 
+    //Attributi della classe EventSoccerMatch
     private Field gender = new Field(GENDER_NAME, GENDER_DESCRIPTION);
     private Field ageGroup = new Field(AGEGROUP_NAME, AGEGROUP_DESCRIPTION);
 
+    //Costruttore che chiama il costruttore della classe madre Event
     public EventSoccerMatch() {
         super();
     }

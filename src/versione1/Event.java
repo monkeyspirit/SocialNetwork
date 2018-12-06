@@ -1,24 +1,53 @@
 package versione1;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Event{
 
-	//Attributes of the event class that are the same for all the events
+    //Costanti della classe Event
+    public static final String TITLE_NAME = "Titolo";
+    public static final String TITLE_DESCRIPTION = "Campo facoltativo che consiste in un nome di fantasia attribuito all’evento";
+    public static final String NUMPLAY_NAME = "Numero di partecipanti";
+    public static final String NUMPLAY_DESCRIPTION = "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento";
+    public static final String REGDEADLINE_NAME = "Termine ultimo iscrizione";
+    public static final String REGDEADLINE_DESCRIPTION = "Campo obbligatorio che inidica l'ultima data possibile per iscriversi";
+    public static final String PLACE_NAME = "Luogo";
+    public static final String PLACE_DESCRIPTION = "Campo obbligatorio che indica l’indirizzo del luogo che ospiterà l’evento oppure, se l’evento è itinerante, il luogo di ritrovo dei partecipanti";
+    public static final String DATE_NAME = "Data";
+    public static final String DATE_DESCRIPTION = "Campo obbligatorio che indica la data in cui l’evento proposto deve svolgersi o, nel caso l’evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell’evento";
+    public static final String TIME_NAME = "Ora";
+    public static final String TIME_DESCRIPTION = "Campo obbligatorio che indica l’ora in cui i partecipanti dovranno trovarsi nel luogo “Luogo” in data “Data” per dare inizio all’evento";
+    public static final String DURATION_NAME = "Durata";
+    public static final String DURATION_DESCRIPTION =  "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano più giorni consecutivi";
+    public static final String INDTEE_NAME = "Quota individuale";
+    public static final String INDTEE_DESCRIPTION = "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all’iniziativa dovrà sostenere (si noti che la spesa può anche essere nulla)";
+    public static final String TEEINC_NAME = "Compreso nella quota";
+    public static final String TEEINC_DESCRIPTION = "Campo facoltativo che indica tutte le voci di spesa comprese nell’ammontare indicato nella “Quota individuale”";
+    public static final String ENDDATE_NAME = "Data conclusiva";
+    public static final String ENDDATE_DESCRIPTION = "Campo facoltativo che fissa la data di conclusione dell’evento";
+    public static final String ENDTIME_NAME = "Ora conclusiva";
+    public static final String ENDTIME_DESCRIPTION = "Campo facoltativo che stima l’ora di conclusione dell’evento";
+    public static final String NOTE_NAME = "Note";
+    public static final String NOTE_DESCRIPTION = "Campo facoltativo contenente informazioni aggiuntive circa l’evento";
+
+
+	//Attributi della classe Event
 	private ArrayList<Field> fields;
-	private Field title = new Field("Titolo","Campo facoltativo che consiste in un nome di fantasia attribuito all’evento");
-	private Field numOfPartecipants = new Field("Numero di partecipanti", "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento");
-	private Field registrationDeadline = new Field("Termine ultimo iscrizione", "Campo obbligatorio che inidica l'ultima data possibile per iscriversi");
-	private Field place = new Field("Luogo", "Campo obbligatorio che indica l’indirizzo del luogo che ospiterà l’evento oppure, se l’evento è itinerante, il luogo di ritrovo dei partecipanti");
-	private Field date = new Field("Data","Campo obbligatorio che indica la data in cui l’evento proposto deve svolgersi o, nel caso l’evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell’evento");
-	private Field time = new Field("Ora", "Campo obbligatorio che indica l’ora in cui i partecipanti dovranno trovarsi nel luogo “Luogo” in data “Data” per dare inizio all’evento");
-	private Field duration = new Field("Durata", "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano più giorni consecutivi");
-	private Field indTee = new Field("Quota individuale","Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all’iniziativa dovrà sostenere (si noti che la spesa può anche essere nulla)");
-	private Field teeInclude = new Field("Compreso nella quota", "Campo facoltativo che indica tutte le voci di spesa comprese nell’ammontare indicato nella “Quota individuale”");
-	private Field endDate = new Field("Data conclusiva","Campo facoltativo che fissa la data di conclusione dell’evento");
-	private Field endTime = new Field("Ora conclusiva", "Campo facoltativo che stima l’ora di conclusione dell’evento");
-	private Field note = new Field("Note","Campo facoltativo contenente informazioni aggiuntive circa l’evento");
+	private Field title = new Field(TITLE_NAME,TITLE_DESCRIPTION);
+	private Field numOfPartecipants = new Field(NUMPLAY_NAME, NUMPLAY_DESCRIPTION);
+	private Field registrationDeadline = new Field(REGDEADLINE_NAME, REGDEADLINE_DESCRIPTION);
+	private Field place = new Field(PLACE_NAME, PLACE_DESCRIPTION);
+	private Field date = new Field(DATE_NAME,DATE_DESCRIPTION);
+	private Field time = new Field(TIME_NAME, TIME_DESCRIPTION);
+	private Field duration = new Field(DURATION_NAME, DURATION_DESCRIPTION);
+	private Field indTee = new Field(INDTEE_NAME,INDTEE_DESCRIPTION);
+	private Field teeInclude = new Field(TEEINC_NAME, TEEINC_DESCRIPTION);
+	private Field endDate = new Field(ENDDATE_NAME,ENDDATE_DESCRIPTION);
+	private Field endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
+	private Field note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
 
 
 	/*
