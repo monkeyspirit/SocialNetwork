@@ -1,6 +1,6 @@
 package versione1;
 
-public class Field<String, T> {
+public class Field<T> {
 
     private String name;
     private String description;
@@ -15,6 +15,7 @@ public class Field<String, T> {
     public Field(String name, String description) {
         this.name = name;
         this.description = description;
+        this.value = null;
     }
 
     public String getName() {
