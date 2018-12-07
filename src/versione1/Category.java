@@ -3,9 +3,18 @@ package versione1;
 import java.util.ArrayList;
 
 public abstract class Category {
-	private String name;
-	private String description;
-	private ArrayList<Event> events = new ArrayList<>();
+
+	//Attributi
+	private ArrayList<Event> events;
+
+	/**
+	 * Costruttore Category
+	 */
+	public Category() {
+		this.events =  new ArrayList<>();
+	}
+
+	//Metodi
 	public abstract String getName();
 	public abstract String getDescription();
 	

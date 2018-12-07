@@ -93,7 +93,7 @@ public abstract class Event{
 
 
 
-    //Metodo che non avrebbe più senso in mancanza dell'ArrayList
+    //Metodo da togliere in mancanza dell'ArrayList
 	private void init() {
 		fields.add(title);
 		fields.add(numOfPartecipants);
@@ -111,7 +111,7 @@ public abstract class Event{
 
     public ArrayList<Field> getFields() {
         return fields;
-    } //Metodo che non avrebbe più senso in mancanza dell'ArrayList
+    } //Metodo da togliere in mancanza dell'ArrayList
 
     public Field getTitle() {
         return title;

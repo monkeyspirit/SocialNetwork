@@ -4,17 +4,7 @@ import java.util.Date;
 
 public class EventSoccerMatch extends Event{
 
-    /*
-    Maria: pensavo ad una cosa del genere per gli enum
 
-    public enum Gender {
-        MALE, FEMALE, GENITORE1, GENITORE2 ---> tanta stima per Pietro :)
-    }
-
-    public enum AgeGroup {
-
-    }
-     */
 
 
 
