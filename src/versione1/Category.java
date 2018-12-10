@@ -10,7 +10,10 @@ public abstract class Category {
 	private String description;
 
 	/**
-	 * Costruttore Category
+	 * Costruttore Category: inizializza il nome e la descrizione della categoria (figlia)
+	 * e l'arratlist degli eventi associati alla categoria creata
+	 * @param name
+	 * @param description
 	 */
 	public Category(String name, String description) {
 		this.events =  new ArrayList<>();
@@ -19,6 +22,8 @@ public abstract class Category {
 	}
 
 	//Metodi
+
+
 	public String getName() {
 		return this.name;
 	}

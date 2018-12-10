@@ -1,6 +1,6 @@
 package versione1;
 
-/* fasce d'età , potremmo anche usare una libreria esterna */
+/* fasce d'eta, potremmo anche usare una libreria esterna */
 
 public enum AgeGroup {
 

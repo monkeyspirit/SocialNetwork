@@ -49,21 +49,6 @@ public abstract class Event{
 	private Field endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
 	private Field note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
 
-
-	/*
-	Pietro: dite che potremmo fare a meno dell'array di eventi?
-        Per me sÃ¬: dal momento che quando dovremo ricavare informazioni su un campo, anche per piazzarlo
-        nell'interfaccia grafica, useremo il get su quel campo specifico..
-        L'alternativa Ã¨ avere un metodo getCampo(String nomeCampo) che itera l'array cercando
-        un campo con nome = nomeCampo ed eventualmente lo restituisce.
-        Qual Ã¨ la soluzione migliore secondo voi?
-    Maria: per me come soluzione Ã¨ fattibile, l'array era stato pensato effettivamente come contenitore ma in realtÃ  sarebbe
-        solo una struttura in piÃ¹ che ci potrebbe dare fastidio, in caso potremmo ri introdurlo in seguito.
-
-	 */
-
-
-
     /**
      * Costruttore vuoto: viene inizializzato l'array di campi, ciascuno dei quali con
      * nome e descrizione ma senza valore.
