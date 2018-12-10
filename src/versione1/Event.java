@@ -8,7 +8,7 @@ import java.util.Date;
 public abstract class Event{
 
     //Costanti della classe Event
-    public static final String TITLE_NAME = "Titolo";
+	public static final String TITLE_NAME = "Titolo";
     public static final String TITLE_DESCRIPTION = "Campo facoltativo che consiste in un nome di fantasia attribuito all’evento";
     public static final String NUMPLAY_NAME = "Numero di partecipanti";
     public static final String NUMPLAY_DESCRIPTION = "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento";
@@ -52,13 +52,13 @@ public abstract class Event{
 
 	/*
 	Pietro: dite che potremmo fare a meno dell'array di eventi?
-        Per me sì: dal momento che quando dovremo ricavare informazioni su un campo, anche per piazzarlo
+        Per me sÃ¬: dal momento che quando dovremo ricavare informazioni su un campo, anche per piazzarlo
         nell'interfaccia grafica, useremo il get su quel campo specifico..
-        L'alternativa è avere un metodo getCampo(String nomeCampo) che itera l'array cercando
+        L'alternativa Ã¨ avere un metodo getCampo(String nomeCampo) che itera l'array cercando
         un campo con nome = nomeCampo ed eventualmente lo restituisce.
-        Qual è la soluzione migliore secondo voi?
-    Maria: per me come soluzione è fattibile, l'array era stato pensato effettivamente come contenitore ma in realtà sarebbe
-        solo una struttura in più che ci potrebbe dare fastidio, in caso potremmo ri introdurlo in seguito.
+        Qual Ã¨ la soluzione migliore secondo voi?
+    Maria: per me come soluzione Ã¨ fattibile, l'array era stato pensato effettivamente come contenitore ma in realtÃ  sarebbe
+        solo una struttura in piÃ¹ che ci potrebbe dare fastidio, in caso potremmo ri introdurlo in seguito.
 
 	 */
 
