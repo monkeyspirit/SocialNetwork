@@ -1,4 +1,4 @@
-package sample;
+package versione1;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -13,8 +13,7 @@ public class SampleController {
     private ListView categoryListView;
     @FXML
     private ListView eventListView;
-
-    SocialNetwork socialNetwork = new SocialNetwork();
+    private SocialNetwork socialNetwork;
 
     @FXML
     private void initialize() {
