@@ -12,7 +12,7 @@ public class EventSoccerMatch extends Event{
     //Costanti della classe EventSoccerMatch
     public static final String GENDER_NAME = "Sesso";
     public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
-    public static final String AGEGROUP_NAME = "Intervallo di età";
+    public static final String AGEGROUP_NAME = "Fascia di eta";
     public static final String AGEGROUP_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
 
     //Attributi della classe EventSoccerMatch

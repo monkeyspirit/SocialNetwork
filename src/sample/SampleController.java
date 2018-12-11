@@ -9,6 +9,7 @@ import versione1.SocialNetwork;
 
 public class SampleController {
 
+
     @FXML
     private ListView categoryListView;
     @FXML
@@ -19,18 +20,19 @@ public class SampleController {
 
     @FXML
     private void initialize() {
-    	/*EventSoccerMatch eventSoccerMatch = new EventSoccerMatch();
+        SocialNetwork socialNetwork = new SocialNetwork();
+        EventSoccerMatch eventSoccerMatch = new EventSoccerMatch();
     	SoccerMatch soccerMatch = new SoccerMatch();
     	soccerMatch.addEvent(eventSoccerMatch);
-    	socialNetwork.addCategory(new SoccerMatch());*/
+    	socialNetwork.addCategory(new SoccerMatch());
         System.out.println("Carico la View...");
         System.out.println(socialNetwork.getCategories().get(0).getName());
-//       for (Category category : socialNetwork.getCategories()) { // popolo automaticamente la ListView con gli elementi dell'array caetgories di SocialNetwork
-         //   categoryListView.getItems().add(category.getName());
-            /*for (String element : eventSoccerMatch.getStructure()) {
+        for (Category category : socialNetwork.getCategories()) { // popolo automaticamente la ListView con gli elementi dell'array caetgories di SocialNetwork
+            categoryListView.getItems().add(category.getName());
+            for (String element : eventSoccerMatch.getStructure()) {
             	eventListView.getItems().add(element);
-            }*/
-        //}
+            }
+        }
         
     }
 
