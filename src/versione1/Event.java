@@ -3,9 +3,10 @@ package versione1;
 import com.sun.org.apache.regexp.internal.RE;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
-public abstract class Event{
+public abstract class Event extends ArrayList<Event> {
 
     //Costanti della classe Event
 	public static final String TITLE_NAME = "Titolo";
@@ -35,7 +36,6 @@ public abstract class Event{
 
 
 	//Attributi della classe Event
-	private ArrayList<Field> fields;
 	private Field title = new Field(TITLE_NAME,TITLE_DESCRIPTION);
 	private Field numOfPartecipants = new Field(NUMPLAY_NAME, NUMPLAY_DESCRIPTION);
 	private Field registrationDeadline = new Field(REGDEADLINE_NAME, REGDEADLINE_DESCRIPTION);
@@ -54,8 +54,6 @@ public abstract class Event{
      * nome e descrizione ma senza valore.
      */
 	public Event() {
-		this.fields = new ArrayList<>();
-		init();
 	}
 
     /**
@@ -77,27 +75,14 @@ public abstract class Event{
     }
 
 
+    /**
+     * Costruttore Event : lo uso solo perc
+    */
+    public Event(Field title) {
+        this.title = title;
+    }
 
-    //Metodo da togliere in mancanza dell'ArrayList
-	private void init() {
-		fields.add(title);
-		fields.add(numOfPartecipants);
-		fields.add(registrationDeadline);
-		fields.add(place);
-		fields.add(date);
-		fields.add(time);
-		fields.add(duration);
-		fields.add(indTee);
-		fields.add(teeInclude);
-		fields.add(endDate);
-		fields.add(endTime);
-		fields.add(note);
-	}
-
-    public ArrayList<Field> getFields() {
-        return fields;
-    } //Metodo da togliere in mancanza dell'ArrayList
-
+    //Setter e Getter
     public Field getTitle() {
         return title;
     }
@@ -146,6 +131,12 @@ public abstract class Event{
         return note;
     }
 
+    //Metodi
+
+    /**
+     * Metodo che serve per ottenere la struttur dei campi di un evento
+     * @return
+     */
     public ArrayList<String> getStructure(){
     	ArrayList<String> structure = new ArrayList<String>();
     	structure.add(this.getTitle().getName());
@@ -163,5 +154,6 @@ public abstract class Event{
     	return structure;
     	
     }
+
 
 }

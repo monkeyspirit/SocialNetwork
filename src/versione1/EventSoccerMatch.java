@@ -20,6 +20,7 @@ public class EventSoccerMatch extends Event{
         super();
     }
 
+
     /**
      * Costruttore EventSoccerMatch: chiama il costruttore dei campi obbligatori
      * della classe madre e inizializza l'attributo valore di gender e ageGroup.
@@ -38,7 +39,13 @@ public class EventSoccerMatch extends Event{
         this.gender.setValue(gender);
         this.ageGroup.setValue(ageGroup);
     }
-    
+
+
+
+    /**
+     * Metodo che serve per ottenere la struttura delle stringhe dell'evento
+     * @return structure
+     */
     public ArrayList<String> getStructure(){
     	ArrayList<String> structure = super.getStructure();
     	structure.add(this.getGender().getName());
@@ -53,4 +60,9 @@ public class EventSoccerMatch extends Event{
     public Field<AgeGroup> getAgeGroup() {
         return ageGroup;
     }
+
+
+
+
+
 }
