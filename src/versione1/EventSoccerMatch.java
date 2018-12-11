@@ -1,5 +1,6 @@
 package versione1;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class EventSoccerMatch extends Event{
@@ -9,10 +10,10 @@ public class EventSoccerMatch extends Event{
 
 
     //Costanti della classe EventSoccerMatch
-    public static final String GENDER_NAME = "Gender";
-    public static final String GENDER_DESCRIPTION = "Gender of the partecipant";
-    public static final String AGEGROUP_NAME = "Age group";
-    public static final String AGEGROUP_DESCRIPTION = "Lower and upper limit of the partecipant's age";
+    public static final String GENDER_NAME = "Sesso";
+    public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
+    public static final String AGEGROUP_NAME = "Intervallo di età";
+    public static final String AGEGROUP_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
 
     //Attributi della classe EventSoccerMatch
     private Field gender = new Field(GENDER_NAME, GENDER_DESCRIPTION);
@@ -40,6 +41,13 @@ public class EventSoccerMatch extends Event{
         super(numOfPartecipants, registrationDeadline, place, date, time, indTee);
         this.gender.setValue(gender);
         this.ageGroup.setValue(ageGroup);
+    }
+    
+    public ArrayList<String> getStructure(){
+    	ArrayList<String> structure = super.getStructure();
+    	structure.add(this.getGender().getName());
+    	structure.add(this.getAgeGroup().getName());
+    	return structure;
     }
 
     public Field<Gender> getGender() {
