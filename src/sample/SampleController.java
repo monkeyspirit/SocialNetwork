@@ -1,40 +1,55 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import versione1.Category;
-import versione1.EventSoccerMatch;
-import versione1.SoccerMatch;
-import versione1.SocialNetwork;
+import versione1.*;
 
-public class SampleController {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+public class SampleController{
 
 
     @FXML
     private ListView categoryListView;
-    @FXML
     private ListView eventListView;
-    private SocialNetwork socialNetwork;
 
-    public void setSocialNetwork( SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
+    @FXML
+    //private ListView eventListView;
+    private SocialNetwork socialNetwork;
+    private EventSoccerMatch eventSoccerMatch;
+
+
+    //Metodi
+
+    public void setSocialNetwork(SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
+
+    public SocialNetwork getSocialNetwork() { return socialNetwork;}
+
+    public EventSoccerMatch getEventSoccerMatch() { return eventSoccerMatch; }
+
+    public void setEventSoccerMatch(EventSoccerMatch eventSoccerMatch) { this.eventSoccerMatch = eventSoccerMatch; }
+
 
     @FXML
     private void initialize() {
-        SocialNetwork socialNetwork = new SocialNetwork();
-        EventSoccerMatch eventSoccerMatch = new EventSoccerMatch();
-    	SoccerMatch soccerMatch = new SoccerMatch();
-    	soccerMatch.addEvent(eventSoccerMatch);
-    	socialNetwork.addCategory(new SoccerMatch());
         System.out.println("Carico la View...");
-        System.out.println(socialNetwork.getCategories().get(0).getName());
+
         for (Category category : socialNetwork.getCategories()) { // popolo automaticamente la ListView con gli elementi dell'array caetgories di SocialNetwork
             categoryListView.getItems().add(category.getName());
-            for (String element : eventSoccerMatch.getStructure()) {
-            	eventListView.getItems().add(element);
-            }
         }
-        
+
+
+
+
     }
+
 
 
 }

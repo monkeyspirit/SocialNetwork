@@ -5,10 +5,6 @@ import java.util.Date;
 
 public class EventSoccerMatch extends Event{
 
-
-
-
-
     //Costanti della classe EventSoccerMatch
     public static final String GENDER_NAME = "Sesso";
     public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
