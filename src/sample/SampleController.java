@@ -18,10 +18,9 @@ public class SampleController{
 
     @FXML
     private ListView categoryListView;
+    @FXML
     private ListView eventListView;
 
-    @FXML
-    //private ListView eventListView;
     private SocialNetwork socialNetwork;
     private EventSoccerMatch eventSoccerMatch;
 
@@ -39,10 +38,18 @@ public class SampleController{
 
     @FXML
     private void initialize() {
+
         System.out.println("Carico la View...");
 
-        for (Category category : socialNetwork.getCategories()) { // popolo automaticamente la ListView con gli elementi dell'array caetgories di SocialNetwork
-            categoryListView.getItems().add(category.getName());
+        ObservableList<Category> categories = FXCollections.observableArrayList(socialNetwork.getCategories());
+        ObservableList<Event> events;
+
+        for (int i=0; i<categories.size();i++) { // popolo automaticamente la ListView con gli elementi dell'array caetgories di SocialNetwork
+            categoryListView.getItems().add(categories.get(i).getName());
+            events = FXCollections.observableArrayList( FXCollections.observableArrayList(categories.get(i).getEvents()));
+            for (int j=0; j<events.size(); j++) {
+                eventListView.getItems().add(events.get(j).getTitle().getName());
+            }
         }
 
 
