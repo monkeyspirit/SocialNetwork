@@ -23,6 +23,8 @@ public class SampleController{
 
     private SocialNetwork socialNetwork;
     private EventSoccerMatch eventSoccerMatch;
+    private ObservableList<Category> categories;
+    ObservableList<Event> events;
 
 
     //Metodi
@@ -41,14 +43,15 @@ public class SampleController{
 
         System.out.println("Carico la View...");
 
-        ObservableList<Category> categories = FXCollections.observableArrayList(socialNetwork.getCategories());
-        ObservableList<Event> events;
+        categories = FXCollections.observableArrayList(socialNetwork.getCategories());
+
 
         for (int i=0; i<categories.size();i++) { // popolo automaticamente la ListView con gli elementi dell'array caetgories di SocialNetwork
             categoryListView.getItems().add(categories.get(i).getName());
+
             events = FXCollections.observableArrayList( FXCollections.observableArrayList(categories.get(i).getEvents()));
             for (int j=0; j<events.size(); j++) {
-                eventListView.getItems().add(events.get(j).getTitle().getName());
+                //eventListView.getItems().add(events.get(j).getTitle().getName());
             }
         }
 
