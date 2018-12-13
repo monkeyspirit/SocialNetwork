@@ -41,6 +41,8 @@ public class SampleController{
     @FXML
     private void initialize() {
 
+
+
         System.out.println("Carico la View...");
 
         categories = FXCollections.observableArrayList(socialNetwork.getCategories());
