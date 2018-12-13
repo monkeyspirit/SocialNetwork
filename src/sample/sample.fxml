@@ -14,7 +14,7 @@
               <items>
                 <AnchorPane pickOnBounds="false">
                      <children>
-                        <ListView fx:id="categoryListView" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="categoryListView" onMouseClicked="#handleMouseClick" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane>
