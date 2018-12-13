@@ -24,6 +24,8 @@ public class Main extends Application {
 
         // Carico il file per la grafica
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("sample.fxml"));
+//        FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml")); --> Maria: non avevo niente da fare ahaha
+
         SampleController controller = new SampleController();
 
         // Creo le istanze principali del mio programma --> quando inseriremo il metodo di lettura

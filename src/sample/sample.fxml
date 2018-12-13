@@ -10,14 +10,14 @@
    <tabs>
       <Tab closable="false" text="Bacheca">
          <content>
-            <SplitPane disable="true" dividerPositions="0.3">
+            <SplitPane disable="true" dividerPositions="0.46153846153846156">
               <items>
-                <AnchorPane pickOnBounds="false">
+                <AnchorPane maxWidth="178.0" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="324.0" prefWidth="178.0">
                      <children>
-                        <ListView fx:id="categoryListView" onMouseClicked="#handleMouseClick" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="categoryListView" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleMouseClick" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
-                <AnchorPane>
+                <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
                      <children>
                         <ListView fx:id="eventListView" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
