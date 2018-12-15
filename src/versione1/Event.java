@@ -1,9 +1,6 @@
 package versione1;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 public abstract class Event extends ArrayList<Event> {
@@ -82,6 +79,11 @@ public abstract class Event extends ArrayList<Event> {
         this.title = title;
     }
 
+    public Event(String name, int Par){
+        this.title.setValue(name);
+        this.numOfPartecipants.setValue(Par);
+    }
+
     //Setter e Getter
     public Field getTitle() {
         return title;
@@ -134,7 +136,7 @@ public abstract class Event extends ArrayList<Event> {
     //Metodi
 
     /**
-     * Metodo che serve per ottenere la struttur dei campi di un evento
+     * Metodo che serve per ottenere la strutture dei campi di un evento
      * @return
      */
     public ArrayList<String> getStructure(){
@@ -153,6 +155,19 @@ public abstract class Event extends ArrayList<Event> {
     	structure.add(this.getNote().getName());
     	return structure;
     	
+    }
+
+    public String toString(){
+        return "Title: " + this.title.getValue()
+                + ", NumOfPar: " + this.numOfPartecipants.getValue()
+                + ", RegDeadLine: " + this.registrationDeadline.getValue()
+                + ", Place: " + this.place.getValue()
+                + ", Date: " + this.date.getValue()
+                + ", Time: " + this.time.getValue()
+                + ", IndTee: " + this.indTee.getValue()
+                + ", TeeInc: " + this.teeInclude.getValue()
+                + ", EndDate: " + this.endDate.getValue()
+                + ", Note: " + this.note.getValue();
     }
 
 

@@ -26,7 +26,7 @@
             </SplitPane>
          </content>
       </Tab>
-      <Tab text="Utente">
+      <Tab closable="false" text="Utente">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>

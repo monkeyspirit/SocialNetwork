@@ -40,6 +40,10 @@ public class EventSoccerMatch extends Event{
         this.ageGroup.setValue(ageGroup);
     }
 
+    public EventSoccerMatch(String name, int numPar){
+        super(name, numPar);
+    }
+
 
 
     /**
@@ -61,6 +65,14 @@ public class EventSoccerMatch extends Event{
         return ageGroup;
     }
 
+
+    @Override
+    public String toString() {
+        return  super.toString()
+                + ", Gender: " + this.gender.getValue()
+                + ", AgeGroup: " + this.ageGroup.getValue();
+
+    }
 
 
 
