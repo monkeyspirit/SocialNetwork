@@ -1,19 +1,13 @@
 package sample;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import versione1.*;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import versione1.Category;
+import versione1.Event;
+import versione1.EventSoccerMatch;
+import versione1.SocialNetwork;
 
 public class SampleController{
 
@@ -58,18 +52,18 @@ public class SampleController{
 
         System.out.println("Carico la View...");
 
-        categories = FXCollections.observableArrayList(socialNetwork.getCategories());
-
-
-        for (int i=0; i<categories.size();i++) { // popolo automaticamente la ListView con gli elementi dell'array caetgories di SocialNetwork
-            categoryListView.getItems().add(categories.get(i).getName());
-
-
-            events = FXCollections.observableArrayList( FXCollections.observableArrayList(categories.get(i).getEvents()));
-            for (int j=0; j<events.size(); j++) {
-                //eventListView.getItems().add(events.get(j).getTitle().getName());
-            }
-        }
+//        categories = FXCollections.observableArrayList(socialNetwork.getCategories());
+//
+//
+//        for (int i=0; i<categories.size();i++) { // popolo automaticamente la ListView con gli elementi dell'array caetgories di SocialNetwork
+//            categoryListView.getItems().add(categories.get(i).getName());
+//
+//
+//            events = FXCollections.observableArrayList( FXCollections.observableArrayList(categories.get(i).getEvents()));
+//            for (int j=0; j<events.size(); j++) {
+//                //eventListView.getItems().add(events.get(j).getTitle().getName());
+//            }
+//        }
 
 
 

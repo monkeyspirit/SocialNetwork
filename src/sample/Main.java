@@ -1,7 +1,5 @@
 package sample;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,17 +9,9 @@ import versione1.EventSoccerMatch;
 import versione1.SoccerMatch;
 import versione1.SocialNetwork;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class Main extends Application {
 
 
-
-
-
-    SampleController controller;
-    FXMLLoader loader;
 
     /**
      * Il metodo start ha il compito principale di far avviare l'interfaccia grafica e impostare
@@ -34,10 +24,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         // Carico il file per la grafica
-        loader = new FXMLLoader(Main.class.getResource("sample.fxml"));
-//        FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml")); --> Maria: non avevo niente da fare ahaha
+//        FXMLLoader loader = new FXMLLoader(Main.class.getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml"));
 
-        controller = new SampleController();
+        SampleController controller = new SampleController();
 
         // Creo le istanze principali del mio programma --> quando inseriremo il metodo di lettura
         // e scrittura da file qui ci vorra una struttura di controllo come un case o un if
@@ -48,25 +38,6 @@ public class Main extends Application {
         EventSoccerMatch eventSoccerMatch = new EventSoccerMatch("Partita a mompiano", 13);
         soccer_match.addEvent(eventSoccerMatch);
         social.addCategory(soccer_match);
-
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-
-        //serializzo
-        String personeJSon = gson.toJson(social.getCategories().get(0).toString());
-
-        // visualizzo JSon
-        System.out.println("JSON: " + personeJSon);
-
-        // Stampo file json
-        try (FileWriter file = new FileWriter("myGson.json")) {
-            file.write(personeJSon);
-            System.out.println("Successfully Copied JSON Object to File...");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
 
 
         // Imposto il controller
