@@ -8,15 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import versione1.Category;
 import versione1.Event;
-import versione1.EventSoccerMatch;
 import versione1.SocialNetwork;
 
 import java.io.IOException;
@@ -36,18 +32,6 @@ public class SampleController {
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    // ~~~~~ newEvent Stage ~~~~~~~~~~~
-
-    @FXML
-    private TextField title;
-    @FXML
-    private TextField numPart;
-    @FXML
-    private Button create;
-    @FXML
-    private ChoiceBox<String> catType;
-
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
     private Category catSelected;
@@ -66,24 +50,6 @@ public class SampleController {
 
     public SocialNetwork getSocialNetwork() { return socialNetwork;}
 
-
-//
-//    public void showEvents(String categoryName) {
-//        Category category = null;
-//        for(Category cat : categories) {
-//            if(cat.getName().equals(categoryName)) {
-//                category = cat;
-//                break;
-//            }
-//        }
-//        if(eventListView.getItems().size()==0) {
-//            eventsSoccerMatch = FXCollections.observableArrayList(category.getEvents());
-//            for (int j=0; j<eventsSoccerMatch.size(); j++) {
-//                eventListView.getItems().add(eventsSoccerMatch.get(j).getTitle().getValue());
-//            }
-//        }
-//
-//    }
 
 
 
@@ -134,7 +100,12 @@ public class SampleController {
     public void openEventEditor(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loaderCreate = new FXMLLoader(Main.class.getResource("newEvent.fxml"));
-        loaderCreate.setController(this);
+        //loaderCreate.setController(this);
+        CreateController createController = new CreateController();
+
+        loaderCreate.setController(createController);
+
+        createController.setSocialNetwork(socialNetwork);
 
         Stage create = new Stage();
 
@@ -147,33 +118,33 @@ public class SampleController {
     }
 
 
-    /**
-     * Metodo per la creazione effettiva dell'evento
-     * @param actionEvent
-     * @throws IOException
-     */
-    public void createEvent(ActionEvent actionEvent) throws IOException {
-
-        ObservableList<String> listOfCat = FXCollections.observableArrayList(SOCCER_NAME);
-        catType= new ChoiceBox<>(listOfCat);
-        catType.setItems(listOfCat);
-
-
-        String category = catType.getSelectionModel().getSelectedItem();
-        String titleIns = title.getText();
-        int numParIns = Integer.parseInt(numPart.getText());
-
-        switch (category) {
-            case SOCCER_NAME: {
-
-                EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns);
-                socialNetwork.getCategories().get(0).addEvent(match);
-            }
-        }
-
-
-
-    }
+//    /**
+//     * Metodo per la creazione effettiva dell'evento
+//     * @param actionEvent
+//     * @throws IOException
+//     */
+//    public void createEvent(ActionEvent actionEvent) throws IOException {
+//
+//        ObservableList<String> listOfCat = FXCollections.observableArrayList(SOCCER_NAME);
+//        catType= new ChoiceBox<>(listOfCat);
+//        catType.setItems(listOfCat);
+//
+//
+//        String category = catType.getSelectionModel().getSelectedItem();
+//        String titleIns = title.getText();
+//        int numParIns = Integer.parseInt(numPart.getText());
+//
+//        switch (category) {
+//            case SOCCER_NAME: {
+//
+//                EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns);
+//                socialNetwork.getCategories().get(0).addEvent(match);
+//            }
+//        }
+//
+//
+//
+//    }
 
 
 }
