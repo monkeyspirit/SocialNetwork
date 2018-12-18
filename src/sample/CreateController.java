@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import versione1.Category;
 import versione1.EventSoccerMatch;
 import versione1.SocialNetwork;
@@ -28,14 +29,21 @@ public class CreateController {
     @FXML
     private ChoiceBox<String> catType;
 
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
     private SocialNetwork socialNetwork;
     private Category catSelected;
+    private Stage thisStage;
 
 
     // ~~~~~~~~ Metodi ~~~~~~~~~~~~~
+
+
+    public void setThisStage(Stage thisStage) {
+        this.thisStage = thisStage;
+    }
 
     public void setSocialNetwork(SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
 
@@ -44,7 +52,6 @@ public class CreateController {
 
     @FXML
     private void initialize() throws IOException {
-
 
         catType.setItems(FXCollections.observableArrayList(SOCCER_NAME));
 
@@ -68,6 +75,7 @@ public class CreateController {
 
                 EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns);
                 socialNetwork.getCategories().get(0).addEvent(match);
+                thisStage.close();
             }
         }
 

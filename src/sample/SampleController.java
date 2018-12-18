@@ -109,42 +109,17 @@ public class SampleController {
 
         Stage create = new Stage();
 
+        createController.setThisStage(create);
         Parent eventCreate =  (Parent) loaderCreate.load();
         Scene scene = new Scene(eventCreate, 600, 400);
         create.setTitle("Crea");
         create.setScene(scene);
         create.show();
 
+
     }
 
 
-//    /**
-//     * Metodo per la creazione effettiva dell'evento
-//     * @param actionEvent
-//     * @throws IOException
-//     */
-//    public void createEvent(ActionEvent actionEvent) throws IOException {
-//
-//        ObservableList<String> listOfCat = FXCollections.observableArrayList(SOCCER_NAME);
-//        catType= new ChoiceBox<>(listOfCat);
-//        catType.setItems(listOfCat);
-//
-//
-//        String category = catType.getSelectionModel().getSelectedItem();
-//        String titleIns = title.getText();
-//        int numParIns = Integer.parseInt(numPart.getText());
-//
-//        switch (category) {
-//            case SOCCER_NAME: {
-//
-//                EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns);
-//                socialNetwork.getCategories().get(0).addEvent(match);
-//            }
-//        }
-//
-//
-//
-//    }
 
 
 }
