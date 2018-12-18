@@ -85,6 +85,28 @@ public abstract class Event extends ArrayList<Event> {
     }
 
     //Setter e Getter
+
+
+    public void setTitle(Field title) {
+        this.title = title;
+    }
+
+    public void setDuration(Field duration) {
+        this.duration = duration;
+    }
+
+    public void setEndDate(Field endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setEndTime(Field endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setNote(Field note) {
+        this.note = note;
+    }
+
     public Field getTitle() {
         return title;
     }
@@ -133,6 +155,10 @@ public abstract class Event extends ArrayList<Event> {
         return note;
     }
 
+
+
+
+
     //Metodi
 
     /**
@@ -156,6 +182,7 @@ public abstract class Event extends ArrayList<Event> {
     	return structure;
     	
     }
+
 
 
 }

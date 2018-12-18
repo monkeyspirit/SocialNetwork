@@ -15,4 +15,8 @@ public class SoccerMatch extends Category {
 	}
 
 
+
+    public void addEvent(EventSoccerMatch event) {
+		super.getEvents().add(event);
+    }
 }

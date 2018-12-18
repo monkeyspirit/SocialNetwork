@@ -40,12 +40,4 @@ public abstract class Category {
 		this.events.add(event);
 	}
 
-	public String toString(){
-
-		String catToString = "Name: " + this.name+ ", Events: { " + events.get(0).toString() +" }";
-
-
-		return  catToString;
-	}
-	
 }

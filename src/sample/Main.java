@@ -9,8 +9,6 @@ import versione1.EventSoccerMatch;
 import versione1.SoccerMatch;
 import versione1.SocialNetwork;
 
-import javax.swing.*;
-
 public class Main extends Application {
 
     private static Stage guiStage;
@@ -37,8 +35,12 @@ public class Main extends Application {
         // e queste righe saranno in una parte di codice alternativa
         SocialNetwork social = new SocialNetwork();
         SoccerMatch soccer_match = new SoccerMatch();
-        EventSoccerMatch eventSoccerMatch = new EventSoccerMatch();
-        soccer_match.addEvent(eventSoccerMatch);
+        EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a mompiano", 13);
+        EventSoccerMatch eventSoccerMatch2 = new EventSoccerMatch("Partita a remedello", 15);
+
+
+        soccer_match.addEvent(eventSoccerMatch1);
+        soccer_match.addEvent(eventSoccerMatch2);
         social.addCategory(soccer_match);
 
 
@@ -61,24 +63,24 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        SocialNetwork social = new SocialNetwork();
-		SoccerMatch soccer_match = new SoccerMatch();
-		social.addCategory(soccer_match);
-		EventSoccerMatch evento = new EventSoccerMatch();
-		String messaggio = "Scegli che categoria visualizzare tra le seguenti: \n 1 - " + soccer_match.getName();
-		String output = null;
-		int input = Integer.parseInt( JOptionPane.showInputDialog(messaggio) );
-		if(input == 1) {
-			output = evento.getTitle().getName() +"\n"+
-				     evento.getNumOfPartecipants().getName() +"\n"+
-					 evento.getRegistrationDeadline().getName() +"\n"+
-					 evento.getPlace().getName();
-					//etc..
-		}
-		JOptionPane.showMessageDialog(null, output);
+//        SocialNetwork social = new SocialNetwork();
+//		SoccerMatch soccer_match = new SoccerMatch();
+//		social.addCategory(soccer_match);
+//		EventSoccerMatch evento = new EventSoccerMatch();
+//		String messaggio = "Scegli che categoria visualizzare tra le seguenti: \n 1 - " + soccer_match.getName();
+//		String output = null;
+//		int input = Integer.parseInt( JOptionPane.showInputDialog(messaggio) );
+//		if(input == 1) {
+//			output = evento.getTitle().getName() +"\n"+
+//				     evento.getNumOfPartecipants().getName() +"\n"+
+//					 evento.getRegistrationDeadline().getName() +"\n"+
+//					 evento.getPlace().getName();
+//					//etc..
+//		}
+//		JOptionPane.showMessageDialog(null, output);
 
 
-//        launch(args);
+        launch(args);
 
 
 

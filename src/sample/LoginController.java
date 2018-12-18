@@ -43,6 +43,7 @@ public class LoginController {
 
 
         Stage primaryStage = Main.getStage();
+
         // Imposto lo stage e la scene principali
         Parent root =  (Parent) loader.load();
         Scene scene = new Scene(root, 600, 400);

@@ -15,10 +15,6 @@ public class EventSoccerMatch extends Event{
     private Field gender = new Field(GENDER_NAME, GENDER_DESCRIPTION);
     private Field ageGroup = new Field(AGEGROUP_NAME, AGEGROUP_DESCRIPTION);
 
-    //Costruttore che chiama il costruttore della classe madre Event
-    public EventSoccerMatch() {
-        super();
-    }
 
 
     /**
@@ -66,13 +62,6 @@ public class EventSoccerMatch extends Event{
     }
 
 
-    @Override
-    public String toString() {
-        return  super.toString()
-                + ", Gender: " + this.gender.getValue()
-                + ", AgeGroup: " + this.ageGroup.getValue();
-
-    }
 
 
 
