@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -24,55 +25,63 @@ import java.util.ArrayList;
 public class SampleController {
 
 
+    // ~~~~~ Sample Stage ~~~~~~~~~~~~~
+
     @FXML
     private ListView categoryListView;
     @FXML
     private ListView eventListView;
 
-    // Crea evento
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    // ~~~~~ newEvent Stage ~~~~~~~~~~~
+
     @FXML
     private TextField title;
     @FXML
     private TextField numPart;
     @FXML
     private Button create;
+    @FXML
+    private ChoiceBox<Category> catType;
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
     private Category catSelected;
 
     private SocialNetwork socialNetwork;
-    private EventSoccerMatch eventSoccerMatch;
-    private ObservableList<Category> categories;
-    private ObservableList<Event> eventsSoccerMatch;
-    private ObservableList<String> catname;
-    ObservableList<String> Eventname;
+    private ArrayList<String> catName;
+    private ArrayList<String> eventName;
+    private ObservableList<String> obsCatName;
+    private ObservableList<String> obsEventName;
 
-    // Metodi
+
+
+    // ~~~~~~~~ Metodi ~~~~~~~~~~~~~
 
     public void setSocialNetwork(SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
 
     public SocialNetwork getSocialNetwork() { return socialNetwork;}
 
-    public EventSoccerMatch getEventSoccerMatch() { return eventSoccerMatch; }
 
-    public void setEventSoccerMatch(EventSoccerMatch eventSoccerMatch) { this.eventSoccerMatch = eventSoccerMatch; }
-
-
-    public void showEvents(String categoryName) {
-        Category category = null;
-        for(Category cat : categories) {
-            if(cat.getName().equals(categoryName)) {
-                category = cat;
-                break;
-            }
-        }
-        if(eventListView.getItems().size()==0) {
-            eventsSoccerMatch = FXCollections.observableArrayList(category.getEvents());
-            for (int j=0; j<eventsSoccerMatch.size(); j++) {
-                eventListView.getItems().add(eventsSoccerMatch.get(j).getTitle().getValue());
-            }
-        }
-
-    }
+//
+//    public void showEvents(String categoryName) {
+//        Category category = null;
+//        for(Category cat : categories) {
+//            if(cat.getName().equals(categoryName)) {
+//                category = cat;
+//                break;
+//            }
+//        }
+//        if(eventListView.getItems().size()==0) {
+//            eventsSoccerMatch = FXCollections.observableArrayList(category.getEvents());
+//            for (int j=0; j<eventsSoccerMatch.size(); j++) {
+//                eventListView.getItems().add(eventsSoccerMatch.get(j).getTitle().getValue());
+//            }
+//        }
+//
+//    }
 
 
 
@@ -84,63 +93,71 @@ public class SampleController {
             @Override
             public void handle(MouseEvent event) {
 
-                for(Category cat : socialNetwork.getCategories()) {
-                    if(cat.getName().equals(categoryListView.getSelectionModel().getSelectedItems())) {
-                        catSelected = cat;
-                        break;
-                    }
+                Category selected = null;
+
+//                System.out.println("Hai cliccato su "+categoryListView.getSelectionModel().getSelectedIndex());
+                selected = socialNetwork.findCategoryByIndex(categoryListView.getSelectionModel().getSelectedIndex());
+
+                eventName = new ArrayList<>();
+
+                for(Event match : selected.getEvents()){
+                    eventName.add((String) match.getTitle().getValue());
                 }
-                System.out.println("Hai cliccato su "+categoryListView.getSelectionModel().getSelectedItems());
 
-                ArrayList<String> eventnameStr = new ArrayList<>();
-                for(int i=0; i<catSelected.getEvents().size(); i++) {
-                    eventnameStr.add((String) catSelected.getEvents().get(i).getTitle().getValue());
-                     }
-                Eventname = FXCollections.observableArrayList(eventnameStr);
+                obsEventName = FXCollections.observableArrayList(eventName);
+                eventListView.setItems(obsEventName);
 
-                eventListView.setItems(Eventname);
             }
         });
 
-        System.out.println("Carico la View Utente...");
+//        System.out.println("Carico la View Utente...");
+        catName = new ArrayList<>();
 
-        ArrayList<String> catnameStr = new ArrayList<>();
-        for(int i=0; i<socialNetwork.getCategories().size(); i++) {
-            catnameStr.add(socialNetwork.getCategories().get(i).getName());
+        for(Category category : socialNetwork.getCategories()){
+            catName.add(category.getName());
         }
-        catname = FXCollections.observableArrayList(catnameStr);
-        categoryListView.setItems(catname);
 
-        System.out.println(" Le categorie sono: " + socialNetwork.getCategories().size());
-        System.out.println( " Gli eventi sono: "+ socialNetwork.getCategories().get(0).getEvents().size());
+        obsCatName = FXCollections.observableArrayList(catName);
+
+        categoryListView.setItems(obsCatName);
+
 
     }
 
+
+    /**
+     * Metodo per l'apertura dell'editor per inserire un nuovo evento della categoria Partita di calcio
+     * @param actionEvent
+     * @throws IOException
+     */
     public void openEventEditor(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loaderCreate = new FXMLLoader(Main.class.getResource("newEvent.fxml"));
-
-        // Imposto il controller
         loaderCreate.setController(this);
 
         Stage create = new Stage();
 
-        Parent eventcreate =  (Parent) loaderCreate.load();
-        Scene scene = new Scene(eventcreate, 600, 400);
+        Parent eventCreate =  (Parent) loaderCreate.load();
+        Scene scene = new Scene(eventCreate, 600, 400);
         create.setTitle("Crea");
         create.setScene(scene);
         create.show();
 
     }
 
+
+    /**
+     * Metodo per la creazione effettiva dell'evento
+     * @param actionEvent
+     * @throws IOException
+     */
     public void createEvent(ActionEvent actionEvent) throws IOException {
 
-        String titolo = title.getText();
-        int numeroPart = Integer.parseInt(numPart.getText());
-        EventSoccerMatch partita = new EventSoccerMatch(titolo, numeroPart);
+        String titleIns = title.getText();
+        int numParIns = Integer.parseInt(numPart.getText());
+        EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns);
 
-        socialNetwork.getCategories().get(0).addEvent(partita);
-
+        socialNetwork.getCategories().get(0).addEvent(match);
 
     }
 

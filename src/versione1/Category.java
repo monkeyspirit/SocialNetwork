@@ -35,9 +35,11 @@ public abstract class Category {
 	public ArrayList<Event> getEvents() {
 		return this.events;
 	}
-	
+
 	public void addEvent(Event event) {
 		this.events.add(event);
 	}
+
+	public String toString() { return this.name; }
 
 }

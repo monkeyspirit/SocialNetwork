@@ -1,11 +1,5 @@
 package versione1;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
 public class SocialNetwork {
@@ -27,6 +21,11 @@ public class SocialNetwork {
 	
 	public ArrayList<Category> getCategories(){
 		return this.categories;
+	}
+
+
+	public Category findCategoryByIndex(int index){
+		return categories.get(index);
 	}
 
 

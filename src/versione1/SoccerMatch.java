@@ -15,7 +15,10 @@ public class SoccerMatch extends Category {
 	}
 
 
-
+	/**
+	 * Metodo per l'aggiunta di un nuovo evento all'arraylist di eventi
+	 * @param event
+	 */
     public void addEvent(EventSoccerMatch event) {
 		super.getEvents().add(event);
     }
