@@ -134,6 +134,7 @@ public class SampleController {
     public void openEventEditor(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loaderCreate = new FXMLLoader(Main.class.getResource("newEvent.fxml"));
+        loaderCreate.setController(this);
 
         Stage create = new Stage();
 
