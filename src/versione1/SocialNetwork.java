@@ -24,6 +24,19 @@ public class SocialNetwork {
 	}
 
 
+
+	public Category findCategoryByName(String name){
+		Category find = null;
+
+		for(int i=0; i<categories.size(); i++){
+			if ( name.equals(categories.get(i).getName())){
+				find = categories.get(i);
+			}
+		}
+
+		return find;
+	}
+
 	public Category findCategoryByIndex(int index){
 		return categories.get(index);
 	}

@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 public class SampleController {
 
+    public static final String SOCCER_NAME = "Partite di calcio";
+
 
     // ~~~~~ Sample Stage ~~~~~~~~~~~~~
 
@@ -43,7 +45,7 @@ public class SampleController {
     @FXML
     private Button create;
     @FXML
-    private ChoiceBox<Category> catType;
+    private ChoiceBox<String> catType;
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -121,7 +123,6 @@ public class SampleController {
 
         categoryListView.setItems(obsCatName);
 
-
     }
 
 
@@ -133,7 +134,6 @@ public class SampleController {
     public void openEventEditor(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loaderCreate = new FXMLLoader(Main.class.getResource("newEvent.fxml"));
-        loaderCreate.setController(this);
 
         Stage create = new Stage();
 
@@ -153,11 +153,24 @@ public class SampleController {
      */
     public void createEvent(ActionEvent actionEvent) throws IOException {
 
+        ObservableList<String> listOfCat = FXCollections.observableArrayList(SOCCER_NAME);
+        catType= new ChoiceBox<>(listOfCat);
+        catType.setItems(listOfCat);
+
+
+        String category = catType.getSelectionModel().getSelectedItem();
         String titleIns = title.getText();
         int numParIns = Integer.parseInt(numPart.getText());
-        EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns);
 
-        socialNetwork.getCategories().get(0).addEvent(match);
+        switch (category) {
+            case SOCCER_NAME: {
+
+                EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns);
+                socialNetwork.getCategories().get(0).addEvent(match);
+            }
+        }
+
+
 
     }
 
