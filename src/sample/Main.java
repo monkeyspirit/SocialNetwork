@@ -9,9 +9,15 @@ import versione1.EventSoccerMatch;
 import versione1.SoccerMatch;
 import versione1.SocialNetwork;
 
+import javax.swing.*;
+
 public class Main extends Application {
 
+    private static Stage guiStage;
 
+    public static Stage getStage() {
+        return guiStage;
+    }
 
     /**
      * Il metodo start ha il compito principale di far avviare l'interfaccia grafica e impostare
@@ -23,58 +29,56 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        // Carico il file per la grafica
-//        FXMLLoader loader = new FXMLLoader(Main.class.getResource("sample.fxml"));
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml"));
+        guiStage = primaryStage;
 
-        SampleController controller = new SampleController();
 
         // Creo le istanze principali del mio programma --> quando inseriremo il metodo di lettura
         // e scrittura da file qui ci vorra una struttura di controllo come un case o un if
         // e queste righe saranno in una parte di codice alternativa
         SocialNetwork social = new SocialNetwork();
         SoccerMatch soccer_match = new SoccerMatch();
-
-        EventSoccerMatch eventSoccerMatch = new EventSoccerMatch("Partita a mompiano", 13);
+        EventSoccerMatch eventSoccerMatch = new EventSoccerMatch();
         soccer_match.addEvent(eventSoccerMatch);
         social.addCategory(soccer_match);
 
 
-        // Imposto il controller
-        loader.setController(controller);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+        LoginController loginContr = new LoginController();
 
-        // Passo a controller il riferimento a social network
-        controller.setSocialNetwork(social);
+        loader.setController(loginContr);
+
+        loginContr.setSocialNetwork(social);
 
         // Imposto lo stage e la scene principali
         Parent root =  (Parent) loader.load();
         Scene scene = new Scene(root, 600, 400);
-        primaryStage.setTitle("Bacheca");
+        primaryStage.setTitle("Login");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
 
     public static void main(String[] args) {
 
-//        SocialNetwork social = new SocialNetwork();
-//		SoccerMatch soccer_match = new SoccerMatch();
-//		social.addCategory(soccer_match);
-//		EventSoccerMatch evento = new EventSoccerMatch();
-//		String messaggio = "Scegli che categoria visualizzare tra le seguenti: \n 1 - " + soccer_match.getName();
-//		String output = null;
-//		int input = Integer.parseInt( JOptionPane.showInputDialog(messaggio) );
-//		if(input == 1) {
-//			output = evento.getTitle().getName() +"\n"+
-//				     evento.getNumOfPartecipants().getName() +"\n"+
-//					 evento.getRegistrationDeadline().getName() +"\n"+
-//					 evento.getPlace().getName();
-//					//etc..
-//		}
-//		JOptionPane.showMessageDialog(null, output);
+        SocialNetwork social = new SocialNetwork();
+		SoccerMatch soccer_match = new SoccerMatch();
+		social.addCategory(soccer_match);
+		EventSoccerMatch evento = new EventSoccerMatch();
+		String messaggio = "Scegli che categoria visualizzare tra le seguenti: \n 1 - " + soccer_match.getName();
+		String output = null;
+		int input = Integer.parseInt( JOptionPane.showInputDialog(messaggio) );
+		if(input == 1) {
+			output = evento.getTitle().getName() +"\n"+
+				     evento.getNumOfPartecipants().getName() +"\n"+
+					 evento.getRegistrationDeadline().getName() +"\n"+
+					 evento.getPlace().getName();
+					//etc..
+		}
+		JOptionPane.showMessageDialog(null, output);
 
 
-        launch(args);
+//        launch(args);
 
 
 

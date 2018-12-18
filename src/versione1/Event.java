@@ -157,18 +157,5 @@ public abstract class Event extends ArrayList<Event> {
     	
     }
 
-    public String toString(){
-        return "Title: " + this.title.getValue()
-                + ", NumOfPar: " + this.numOfPartecipants.getValue()
-                + ", RegDeadLine: " + this.registrationDeadline.getValue()
-                + ", Place: " + this.place.getValue()
-                + ", Date: " + this.date.getValue()
-                + ", Time: " + this.time.getValue()
-                + ", IndTee: " + this.indTee.getValue()
-                + ", TeeInc: " + this.teeInclude.getValue()
-                + ", EndDate: " + this.endDate.getValue()
-                + ", Note: " + this.note.getValue();
-    }
-
 
 }
