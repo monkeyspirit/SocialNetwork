@@ -36,6 +36,11 @@ public class LoginController {
     public void setSocialNetwork(SocialNetwork social) { this.social = social; }
 
 
+    /**
+     * Il metodo serve per inizializzare la finstra relativa al login, il pulsante "checkRg" serve per
+     * sapere se l'utente è nuovo o già registrato in caso venga cliccato il testo sul bottone cambia
+     * @throws IOException
+     */
     @FXML
     private void initialize() throws IOException {
 
@@ -66,6 +71,10 @@ public class LoginController {
     }
 
 
+    /**
+     * Il metodo serve per lanciare la nuova finestra dopo l'accesso o la registrazione con controllo delle credenziali
+     * @throws IOException
+     */
     public void loadSecond() throws IOException {
 
             // Carico il file per la grafica
@@ -88,6 +97,7 @@ public class LoginController {
             primaryStage.setScene(scene);
             primaryStage.show();
         }
+
 
 
 }

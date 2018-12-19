@@ -83,6 +83,16 @@ public class CreateController {
     }
 
 
+    /**
+     * Il metodo serve per inizializzare la finestra, in particolare per impostare gli observable list nei
+     * choiceBox e per rendere determinati choiceBox abilitati o meno in base alla scelta della categoria.
+     * Se si seleziona Partita di Calcio viene abilitata la selezione della fascia di età e del genere,
+     * poichè non ci deve essere inconsistenza tra fascia di età minima e massima il choiceBox della massima
+     * viene abilitato solo dopo aver selezionato la minima e con valori suoeriori (maggiore stretto) dalla
+     * minima selezionata
+     *
+     * @throws IOException
+     */
     @FXML
     private void initialize() throws IOException {
         ageGroup = new AgeGroup();
@@ -116,8 +126,8 @@ public class CreateController {
 
 
     /**
-     * Metodo per la creazione effettiva dell'evento, il metotodo applicato su thisStage chiude la finestra corrente una volta inseriti tutti
-     * i campi e effettuati i controlli
+     * Metodo per la creazione effettiva dell'evento, il metotodo applicato su thisStage chiude la finestra corrente una volta
+     * inseriti tutti i campi e effettuati i controlli
      *
      * @param actionEvent
      * @throws IOException
@@ -128,7 +138,6 @@ public class CreateController {
 
         titleIns = title.getText();
         numParIns = Integer.parseInt(numPart.getText());
-        deadLineIns = deadLine.getValue();
 
 
         switch (category) {
