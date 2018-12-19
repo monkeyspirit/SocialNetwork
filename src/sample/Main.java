@@ -35,8 +35,8 @@ public class Main extends Application {
         // e queste righe saranno in una parte di codice alternativa
         SocialNetwork social = new SocialNetwork();
         SoccerMatch soccer_match = new SoccerMatch();
-        EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a mompiano", 13);
-        EventSoccerMatch eventSoccerMatch2 = new EventSoccerMatch("Partita a remedello", 15);
+        EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a Mompiano", 13);
+        EventSoccerMatch eventSoccerMatch2 = new EventSoccerMatch("Partita a Remedello", 15);
 
 
         soccer_match.addEvent(eventSoccerMatch1);

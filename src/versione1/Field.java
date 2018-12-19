@@ -6,6 +6,11 @@ public class Field<T> {
     private String description;
     private T value;
 
+    public Field(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public Field(String name, String description, T value) {
         this.name = name;
         this.description = description;
