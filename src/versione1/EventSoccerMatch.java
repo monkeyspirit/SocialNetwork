@@ -49,12 +49,7 @@ public class EventSoccerMatch extends Event{
         return ageGroup;
     }
     
-    public ArrayList<Field> getFields(){
-    	ArrayList fields = super.getFields();
-    	fields.add(gender);
-    	fields.add(ageGroup);
-    	return fields;
-    }
+  
 
 
 

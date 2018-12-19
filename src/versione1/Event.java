@@ -155,22 +155,6 @@ public abstract class Event extends ArrayList<Event> {
         return note;
     }
 
-    public ArrayList<Field> getFields(){
-    	ArrayList<Field> fields = new ArrayList<>();
-    	fields.add(title);
-    	fields.add(place);
-    	fields.add(date);
-    	fields.add(time);
-    	fields.add(duration);
-    	fields.add(indTee);
-    	fields.add(teeInclude);
-    	fields.add(endDate);
-    	fields.add(endTime);
-    	fields.add(note);
-    	fields.add(numOfPartecipants);
-    	fields.add(registrationDeadline);
-    	return fields;
-    }
 
 
 
