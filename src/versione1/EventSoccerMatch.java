@@ -12,8 +12,8 @@ public class EventSoccerMatch extends Event{
     public static final String AGEGROUP_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
 
     //Attributi della classe EventSoccerMatch
-    private Field gender = new Field(GENDER_NAME, GENDER_DESCRIPTION);
-    private Field ageGroup = new Field(AGEGROUP_NAME, AGEGROUP_DESCRIPTION);
+    private Field gender = new Field(GENDER_NAME, GENDER_DESCRIPTION,true);
+    private Field ageGroup = new Field(AGEGROUP_NAME, AGEGROUP_DESCRIPTION,true);
 
 
 
@@ -41,18 +41,6 @@ public class EventSoccerMatch extends Event{
     }
 
 
-
-    /**
-     * Metodo che serve per ottenere la struttura delle stringhe dell'evento
-     * @return structure
-     */
-    public ArrayList<String> getStructure(){
-    	ArrayList<String> structure = super.getStructure();
-    	structure.add(this.getGender().getName());
-    	structure.add(this.getAgeGroup().getName());
-    	return structure;
-    }
-
     public Field<Gender> getGender() {
         return gender;
     }
@@ -60,7 +48,13 @@ public class EventSoccerMatch extends Event{
     public Field<AgeGroup> getAgeGroup() {
         return ageGroup;
     }
-
+    
+    public ArrayList<Field> getFields(){
+    	ArrayList fields = super.getFields();
+    	fields.add(gender);
+    	fields.add(ageGroup);
+    	return fields;
+    }
 
 
 

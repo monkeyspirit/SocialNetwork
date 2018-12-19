@@ -41,8 +41,11 @@ public class SocialNetwork {
 		return categories.get(index);
 	}
 
-
-	
-	
-
+	public boolean validate(Event event) {
+		for(Field field : event.getFields()) {
+			if(field.getObligatory() == true && field.getValue()==null)
+				return false;
+		}
+	return true;
+	}
 }

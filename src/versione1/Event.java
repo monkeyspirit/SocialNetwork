@@ -33,18 +33,18 @@ public abstract class Event extends ArrayList<Event> {
 
 
 	//Attributi della classe Event
-	private Field title = new Field(TITLE_NAME,TITLE_DESCRIPTION);
-	private Field numOfPartecipants = new Field(NUMPLAY_NAME, NUMPLAY_DESCRIPTION);
-	private Field registrationDeadline = new Field(REGDEADLINE_NAME, REGDEADLINE_DESCRIPTION);
-	private Field place = new Field(PLACE_NAME, PLACE_DESCRIPTION);
-	private Field date = new Field(DATE_NAME,DATE_DESCRIPTION);
-	private Field time = new Field(TIME_NAME, TIME_DESCRIPTION);
-	private Field duration = new Field(DURATION_NAME, DURATION_DESCRIPTION);
-	private Field indTee = new Field(INDTEE_NAME,INDTEE_DESCRIPTION);
-	private Field teeInclude = new Field(TEEINC_NAME, TEEINC_DESCRIPTION);
-	private Field endDate = new Field(ENDDATE_NAME,ENDDATE_DESCRIPTION);
-	private Field endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
-	private Field note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
+	private Field title = new Field(TITLE_NAME,TITLE_DESCRIPTION,false);
+	private Field numOfPartecipants = new Field(NUMPLAY_NAME, NUMPLAY_DESCRIPTION,true);
+	private Field registrationDeadline = new Field(REGDEADLINE_NAME, REGDEADLINE_DESCRIPTION,true);
+	private Field place = new Field(PLACE_NAME, PLACE_DESCRIPTION,true);
+	private Field date = new Field(DATE_NAME,DATE_DESCRIPTION,true);
+	private Field time = new Field(TIME_NAME, TIME_DESCRIPTION,true);
+	private Field duration = new Field(DURATION_NAME, DURATION_DESCRIPTION,false);
+	private Field indTee = new Field(INDTEE_NAME,INDTEE_DESCRIPTION,true);
+	private Field teeInclude = new Field(TEEINC_NAME, TEEINC_DESCRIPTION,false);
+	private Field endDate = new Field(ENDDATE_NAME,ENDDATE_DESCRIPTION,false);
+	private Field endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION,false);
+	private Field note = new Field(NOTE_NAME,NOTE_DESCRIPTION,false);
 
     /**
      * Costruttore vuoto: viene inizializzato l'array di campi, ciascuno dei quali con
@@ -155,32 +155,21 @@ public abstract class Event extends ArrayList<Event> {
         return note;
     }
 
-
-
-
-
-    //Metodi
-
-    /**
-     * Metodo che serve per ottenere la strutture dei campi di un evento
-     * @return
-     */
-    public ArrayList<String> getStructure(){
-    	ArrayList<String> structure = new ArrayList<String>();
-    	structure.add(this.getTitle().getName());
-    	structure.add(this.getNumOfPartecipants().getName());
-    	structure.add(this.getRegistrationDeadline().getName());
-    	structure.add(this.getPlace().getName());
-    	structure.add(this.getDate().getName());
-    	structure.add(this.getTime().getName());
-    	structure.add(this.getDuration().getName());
-    	structure.add(this.getIndTee().getName());
-    	structure.add(this.getTeeInclude().getName());
-    	structure.add(this.getEndDate().getName());
-    	structure.add(this.getEndTime().getName());
-    	structure.add(this.getNote().getName());
-    	return structure;
-    	
+    public ArrayList<Field> getFields(){
+    	ArrayList<Field> fields = new ArrayList<>();
+    	fields.add(title);
+    	fields.add(place);
+    	fields.add(date);
+    	fields.add(time);
+    	fields.add(duration);
+    	fields.add(indTee);
+    	fields.add(teeInclude);
+    	fields.add(endDate);
+    	fields.add(endTime);
+    	fields.add(note);
+    	fields.add(numOfPartecipants);
+    	fields.add(registrationDeadline);
+    	return fields;
     }
 
 

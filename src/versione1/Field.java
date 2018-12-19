@@ -5,6 +5,7 @@ public class Field<T> {
     private String name;
     private String description;
     private T value;
+    private boolean obligatory;
 
     public Field(String name, String description, T value) {
         this.name = name;
@@ -12,10 +13,11 @@ public class Field<T> {
         this.value = value;
     }
 
-    public Field(String name, String description) {
+    public Field(String name, String description, Boolean obligatory) {
         this.name = name;
         this.description = description;
         this.value = null;
+        this.obligatory = obligatory;
     }
 
     public String getName() {
@@ -25,7 +27,11 @@ public class Field<T> {
     public String getDescription() {
         return description;
     }
-
+    
+    public Boolean getObligatory() {
+    	return this.obligatory;
+    }
+    
     public T getValue() {
         return value;
     }
