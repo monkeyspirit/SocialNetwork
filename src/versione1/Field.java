@@ -5,19 +5,11 @@ public class Field<T> {
     private String name;
     private String description;
     private T value;
-    private boolean obligatory;
 
     public Field(String name, String description, T value) {
         this.name = name;
         this.description = description;
         this.value = value;
-    }
-
-    public Field(String name, String description, Boolean obligatory) {
-        this.name = name;
-        this.description = description;
-        this.value = null;
-        this.obligatory = obligatory;
     }
 
     public String getName() {
