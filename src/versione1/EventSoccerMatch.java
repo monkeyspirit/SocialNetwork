@@ -12,8 +12,8 @@ public class EventSoccerMatch extends Event{
     public static final String AGEGROUP_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
 
     //Attributi della classe EventSoccerMatch
-    private Field gender = new Field(GENDER_NAME, GENDER_DESCRIPTION,true);
-    private Field ageGroup = new Field(AGEGROUP_NAME, AGEGROUP_DESCRIPTION,true);
+    private Field gender = new Field(GENDER_NAME, GENDER_DESCRIPTION);
+    private Field ageGroup = new Field(AGEGROUP_NAME, AGEGROUP_DESCRIPTION);
 
 
 
