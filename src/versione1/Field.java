@@ -20,10 +20,6 @@ public class Field<T> {
         return description;
     }
     
-    public Boolean getObligatory() {
-    	return this.obligatory;
-    }
-    
     public T getValue() {
         return value;
     }
