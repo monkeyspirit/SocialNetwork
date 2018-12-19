@@ -33,18 +33,18 @@ public abstract class Event extends ArrayList<Event> {
 
 
 	//Attributi della classe Event
-	private Field title = new Field(TITLE_NAME,TITLE_DESCRIPTION,false);
-	private Field numOfPartecipants = new Field(NUMPLAY_NAME, NUMPLAY_DESCRIPTION,true);
-	private Field registrationDeadline = new Field(REGDEADLINE_NAME, REGDEADLINE_DESCRIPTION,true);
-	private Field place = new Field(PLACE_NAME, PLACE_DESCRIPTION,true);
-	private Field date = new Field(DATE_NAME,DATE_DESCRIPTION,true);
-	private Field time = new Field(TIME_NAME, TIME_DESCRIPTION,true);
-	private Field duration = new Field(DURATION_NAME, DURATION_DESCRIPTION,false);
-	private Field indTee = new Field(INDTEE_NAME,INDTEE_DESCRIPTION,true);
-	private Field teeInclude = new Field(TEEINC_NAME, TEEINC_DESCRIPTION,false);
-	private Field endDate = new Field(ENDDATE_NAME,ENDDATE_DESCRIPTION,false);
-	private Field endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION,false);
-	private Field note = new Field(NOTE_NAME,NOTE_DESCRIPTION,false);
+	private Field title = new Field(TITLE_NAME,TITLE_DESCRIPTION);
+	private Field numOfPartecipants = new Field(NUMPLAY_NAME, NUMPLAY_DESCRIPTION);
+	private Field registrationDeadline = new Field(REGDEADLINE_NAME, REGDEADLINE_DESCRIPTION);
+	private Field place = new Field(PLACE_NAME, PLACE_DESCRIPTION);
+	private Field date = new Field(DATE_NAME,DATE_DESCRIPTION);
+	private Field time = new Field(TIME_NAME, TIME_DESCRIPTION);
+	private Field duration = new Field(DURATION_NAME, DURATION_DESCRIPTION);
+	private Field indTee = new Field(INDTEE_NAME,INDTEE_DESCRIPTION);
+	private Field teeInclude = new Field(TEEINC_NAME, TEEINC_DESCRIPTION);
+	private Field endDate = new Field(ENDDATE_NAME,ENDDATE_DESCRIPTION);
+	private Field endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
+	private Field note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
 
     /**
      * Costruttore vuoto: viene inizializzato l'array di campi, ciascuno dei quali con
