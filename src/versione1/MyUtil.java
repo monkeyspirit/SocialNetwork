@@ -1,9 +1,10 @@
 package versione1;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class MyUtil {
-	
-	
+
+
 	
 	
 	
@@ -104,7 +105,43 @@ public class MyUtil {
 			return false;
 		return true;
 	}
-	
+
+
+
+	// ---------METODO PER IMPOSTAZIONE DELLA DURATA IN BASE A MINUTI, ORE Ì, GIORNI -----------
+
+	public static ArrayList<Integer> getArray(int min, int max) {
+		ArrayList<Integer> choose = new ArrayList<>();
+		for(int i=min; i<=max; i++){
+			choose.add(i);
+		}
+		return choose;
+	}
+
+	// ---------METODO CHE TORNA SCRITTA PER LA DURATA------7
+
+	public static String getDurationFormat(int format, int day, int hour, int minute ){
+		String durationFormat = "";
+
+		switch(format){
+			//formato giorno
+			case 0:{
+				durationFormat += day;
+			}
+			//formato ore e minuti
+			case 1: {
+				durationFormat = hour+":"+minute;
+			}
+		}
+
+		return durationFormat;
+	}
+
+
+
+
+
+
 	
 	
 }

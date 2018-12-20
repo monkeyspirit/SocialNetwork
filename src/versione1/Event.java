@@ -1,9 +1,9 @@
 package versione1;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-public abstract class Event extends ArrayList<Event> {
+public abstract class Event{
 
     //Costanti della classe Event
 	public static final String TITLE_NAME = "Titolo";
@@ -62,7 +62,7 @@ public abstract class Event extends ArrayList<Event> {
      * @param time ora dell'evento
      * @param indTee quota individuale
      */
-	public Event(int numOfPartecipants, Date registrationDeadline, String place, Date date, Date time, float indTee) {
+	public Event(int numOfPartecipants, LocalDate registrationDeadline, String place, LocalDate date, LocalTime time, float indTee) {
 	    this.numOfPartecipants.setValue(numOfPartecipants);
 	    this.registrationDeadline.setValue(registrationDeadline);
 	    this.place.setValue(place);
@@ -71,6 +71,22 @@ public abstract class Event extends ArrayList<Event> {
 	    this.indTee.setValue(indTee);
     }
 
+
+    public Event(String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String noteIns) {
+        this.title.setValue(titleIns);
+        this.numOfPartecipants.setValue(numParIns);
+        this.registrationDeadline.setValue(deadLineIns);
+        this.place.setValue(placeIns);
+        this.date.setValue(dateIns);
+        this.time.setValue(timeIns);
+        this.indTee.setValue(indTeeIns);
+        this.duration.setValue(durationIns);
+        this.indTee.setValue(indTeeIns);
+        this.teeInclude.setValue(totTeeIns);
+        this.endDate.setValue(endDateIns);
+        this.endTime.setValue(endTimeIns);
+        this.note.setValue(noteIns);
+    }
 
     /**
      * Costruttore Event : lo uso solo perc
@@ -84,28 +100,9 @@ public abstract class Event extends ArrayList<Event> {
         this.numOfPartecipants.setValue(Par);
     }
 
+
     //Setter e Getter
 
-
-    public void setTitle(Field title) {
-        this.title = title;
-    }
-
-    public void setDuration(Field duration) {
-        this.duration = duration;
-    }
-
-    public void setEndDate(Field endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setEndTime(Field endTime) {
-        this.endTime = endTime;
-    }
-
-    public void setNote(Field note) {
-        this.note = note;
-    }
 
     public Field getTitle() {
         return title;
@@ -115,9 +112,7 @@ public abstract class Event extends ArrayList<Event> {
         return numOfPartecipants;
     }
 
-    public Field getRegistrationDeadline() {
-        return registrationDeadline;
-    }
+    public Field getRegistrationDeadline() { return registrationDeadline; }
 
     public Field getPlace() {
         return place;
