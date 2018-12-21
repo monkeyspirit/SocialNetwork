@@ -118,28 +118,6 @@ public class MyUtil {
 		return choose;
 	}
 
-	// ---------METODO CHE TORNA SCRITTA PER LA DURATA------7
-
-	public static String getDurationFormat(int format, int day, int hour, int minute ){
-		String durationFormat = "";
-
-		switch(format){
-			//formato giorno
-			case 0:{
-				durationFormat += day;
-			}
-			//formato ore e minuti
-			case 1: {
-				durationFormat = hour+":"+minute;
-			}
-		}
-
-		return durationFormat;
-	}
-
-
-
-
 
 
 	

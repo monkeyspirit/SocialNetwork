@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import versione1.*;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,13 +20,33 @@ public class CreateController {
 
     public static final String SOCCER_NAME = "Partite di calcio";
 
+    // Messaggi di errore
+    public static final String MISSCATEGORY =  "Inserire una categoria";
+    public static final String MISSNUMPAR = "Inserire numero partecipanti";
+    public static final String MISSDEADLINE = "Inserire la data di termine";
+    public static final String ERRDEADLINE = "La data di termine indicata non risulta valida in quanto precedente al giorno corrente";
+    public static final String MISSPLACE = "Inserire il luogo";
+    public static final String MISSDATE = "Inserire la data in cui si tiene l'evento";
+    public static final String ERRDATEBFDEADLINE = "La data inserita non risulta valida in quando risulta precedente alla data di termine";
+    public static final String ERRDATEMISSDEAD = "La data inserita non risulta valida in quando manca la data di termine";
+    public static final String MISSTIME = "Inserire l'orario";
+    public static final String ERRTIMEERRDATE = "L'orario inserito non risulta valido in quanto la data inserita non risulta valida";
+    public static final String MISSTEE = "Inserire la quota individuale";
+    public static final String ERRENDDBFDATE = "La data di conclusione non risulta valida in quanto precedente alla data dell'evento";
+    public static final String ERRENDTBFTIMEEQDT = "L'orario di conclusione non risulta valido in quanto precedente all'orario di inizio";
+    public static final String MISSAGE = "Inserire la fascia di eta'";
+    public static final String MISSGENDER = "Inserire il genere";
+
+
+
+
 
     // ~~~~~ newEvent Stage ~~~~~~~~~~~
 
     @FXML
     private Label durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
     @FXML
-    private TextField titleTxtF, numPTxtF, placeTxtF, indTeeTxtF, totTeeTxtF;
+    private TextField titleTxtF, numPTxtF, placeTxtF, indTeeTxtF;
     @FXML
     private Button createBtn;
     @FXML
@@ -39,14 +60,13 @@ public class CreateController {
     @FXML
     private JFXTimePicker endTimeTP, timeTP;
     @FXML
-    private TextArea noteTxtA;
+    private TextArea noteTxtA, totTeeTxtA;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    private boolean create = false;
     private ArrayList<Integer> isValid;
     private AgeGroup ageGroup;
     private ArrayList<Integer> ageRangeMin;
-
+    private String[] errorMsg = new  String[11];
 
 
     // ~~~~~~ Campi FACOLTATIVI ~~~~~~~~
@@ -61,7 +81,6 @@ public class CreateController {
 
     private boolean endDateIsVal = false;
     private boolean endTimeIsVal = false;
-    private boolean durIsVal = false;
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -140,8 +159,9 @@ public class CreateController {
                     genderCB.setDisable(false);
                     durBigCB.setDisable(false);
                     durLitCB.setDisable(true);
-                    durUnitLbl.setText("d");
+                    durUnitLbl.setText("Giorno/i");
                     durBigCB.setItems(FXCollections.observableArrayList(MyUtil.getArray(1, 10)));
+
                 }
             }
         });
@@ -160,17 +180,25 @@ public class CreateController {
         endDateDP.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(endDateIsVal == true && dateIsVal == true && (endDateDP.getValue().isEqual(dateDP.getValue())) && (endTimeTP.getValue() == null)) {
+                if((endDateDP.getValue().isEqual(dateDP.getValue())) && (endTimeTP.getValue() == null)) {
                     durBigCB.setDisable(false);
                     durBigCB.setItems(FXCollections.observableArrayList(MyUtil.getArray(0, 23)));
                     durLitCB.setDisable(false);
-                    durLitCB.setItems(FXCollections.observableArrayList(MyUtil.getArray(1, 59)));
-                    durUnitLbl.setText("hh:mm");
+                    if(durBigCB.getValue()!= null && durBigCB.getValue().equals(0)){
+                        durLitCB.setItems(FXCollections.observableArrayList(MyUtil.getArray(1, 59)));
+                    }
+                    else{
+                        durLitCB.setItems(FXCollections.observableArrayList(MyUtil.getArray(0, 59)));
+                    }
+
+                    durUnitLbl.setText("Ore:Minuti");
+                    endTimeTP.setDisable(false);
                 }
                 else {
                     durBigCB.setDisable(true);
                     durLitCB.setDisable(true);
                     durUnitLbl.setText(" ");
+                    endTimeTP.setDisable(false);
                 }
             }
         });
@@ -185,6 +213,11 @@ public class CreateController {
         });
 
         genderCB.setItems(FXCollections.observableArrayList(Gender.Maschile, Gender.Femminile));
+
+        for(int i=0; i< 11; i++){
+            System.out.println(errorMsg[i]);
+        }
+
 
     }
 
@@ -213,6 +246,7 @@ public class CreateController {
         if (catCB.getSelectionModel().getSelectedItem() == null) {
             catLbl.setTextFill(Color.RED);
             catIsVal = false;
+            JOptionPane.showMessageDialog(null, MISSCATEGORY);
         } else {
             categoryIns = catCB.getSelectionModel().getSelectedItem();
             catLbl.setTextFill(Color.BLACK);
@@ -231,11 +265,13 @@ public class CreateController {
             if (numPTxtF.getText().isEmpty() || !MyUtil.checkInteger(numPTxtF.getText())) {
                 numPLbl.setTextFill(Color.RED);
                 numIsVal = false;
+                errorMsg[1] = MISSNUMPAR;
             } else {
                 String numPS = numPTxtF.getText();
                 numPLbl.setTextFill(Color.BLACK);
                 numParIns = Integer.parseInt(numPS);
                 numIsVal = true;
+                errorMsg[1] = null;
             }
 
             // Acquisco il campo data e controllo che non sia una data precedente ad oggi e vuota
@@ -245,10 +281,19 @@ public class CreateController {
             if ((deadLineDP.getValue() == null) || deadLineDP.getValue().isBefore(LocalDate.now().plusDays(1))) {
                 deadLLbl.setTextFill(Color.RED);
                 deadLineIsVal = false;
+
+                if(deadLineDP.getValue() == null){
+                    errorMsg[2] = MISSDEADLINE;
+                }
+                else {
+                    errorMsg[2] = ERRDEADLINE;
+                }
+
             } else {
                 deadLineIns = deadLineDP.getValue();
                 deadLLbl.setTextFill(Color.BLACK);
                 deadLineIsVal = true;
+                errorMsg[2] = null;
             }
 
             // Acquisisco il luogo controllando che sia inserito e che sia una stringa
@@ -258,10 +303,12 @@ public class CreateController {
             if (placeTxtF.getText().isEmpty() || !MyUtil.checkString(placeTxtF.getText())) {
                 placeLbl.setTextFill(Color.RED);
                 placeIsVal = false;
+                errorMsg[3] = MISSPLACE;
             } else {
                 placeIns = placeTxtF.getText();
                 placeLbl.setTextFill(Color.BLACK);
                 placeIsVal = true;
+                errorMsg[3] = null;
             }
 
             // Acquisisco la data dell'evento, controllo che il campo non sia vuoto, non sia prima il termine ultimo + 1
@@ -271,10 +318,22 @@ public class CreateController {
             if ((dateDP.getValue() == null) || deadLineIsVal == false || dateDP.getValue().isBefore(deadLineIns.plusDays(1))) {
                 dateLbl.setTextFill(Color.RED);
                 dateIsVal = false;
+
+                if(dateDP.getValue() == null){
+                   errorMsg[4] = MISSDATE;
+                }
+                else if (deadLineIsVal == false ) {
+                    errorMsg[4] = ERRDATEMISSDEAD;
+                }
+                else {
+                    errorMsg[4] = ERRDATEBFDEADLINE;
+                }
+
             } else {
                 dateIns = dateDP.getValue();
                 dateLbl.setTextFill(Color.BLACK);
                 dateIsVal = true;
+                errorMsg[4] = null;
             }
 
             // Acquisisco l ora a cui si verifichera
@@ -284,10 +343,19 @@ public class CreateController {
             if (timeTP.getValue() == null || dateIsVal == false) {
                 timeLbl.setTextFill(Color.RED);
                 timeIsVal = false;
+
+                if(timeTP.getValue() == null){
+                    errorMsg[5] = MISSTIME;
+                }
+                else {
+                    errorMsg[5] = ERRTIMEERRDATE;
+                }
+
             } else {
                 timeIns = timeTP.getValue();
                 timeLbl.setTextFill(Color.BLACK);
                 timeIsVal = true;
+                errorMsg[5] = null;
             }
 
             // Acquisisco la quota individuale e controllo non sia vuota, in caso la converto in decimale
@@ -297,17 +365,19 @@ public class CreateController {
             if (indTeeTxtF.getText().isEmpty() || !MyUtil.checkFloat(indTeeTxtF.getText())) {
                 indTeeLbl.setTextFill(Color.RED);
                 indTeeIsVal = false;
+                errorMsg[6] = MISSTEE;
             } else {
                 String indTeeS = indTeeTxtF.getText();
                 indTeeLbl.setTextFill(Color.BLACK);
                 indTeeIns = Float.parseFloat(indTeeS);
                 indTeeIsVal = true;
+                errorMsg[6] = null;
             }
 
             // Indicala voci di spesa
             // FACOLTATIVO
             // voci della quota
-            totTeeIns = totTeeTxtF.getText();
+            totTeeIns = totTeeTxtA.getText();
 
 
             // Acquisisco se c e la data di termine e controllo che non sia prima della data dell evento
@@ -318,34 +388,60 @@ public class CreateController {
                 if (endDateDP.getValue().isBefore(dateIns)) {
                     endDateLbl.setTextFill(Color.RED);
                     endDateIsVal = false;
+                    errorMsg[7] = ERRENDDBFDATE;
                 } else {
                     endDateIns = endDateDP.getValue();
                     endDateLbl.setTextFill(Color.BLACK);
                     endDateIsVal = true;
+                    errorMsg[7] = null;
                 }
             }
             else {
+
                 endDateIsVal = true;
+                if(durBigCB.getValue() != null){
+                    durD = durBigCB.getValue();
+                    durationIns = String.valueOf(durD);
+
+                }
+
             }
 
 
             // Acquisisco se c e l ora di termine e controllo non sia prima dell ora impostata nello stesso giorno
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // ora conclusiva
+            if (endTimeTP.getValue() != null && timeIsVal == true) {
 
-            if (endTimeTP.getValue() != null && timeIsVal == true && endDateIsVal == true && dateIsVal == true) {
                 if (endTimeTP.getValue().isBefore(timeIns) && endDateIns.isEqual(dateIns)) {
+
                     endTimeLbl.setTextFill(Color.RED);
                     endTimeIsVal = false;
+                    errorMsg[8] = ERRENDTBFTIMEEQDT;
+
                 } else {
+
                     endTimeIns = endTimeTP.getValue();
                     endTimeLbl.setTextFill(Color.BLACK);
                     endTimeIsVal = true;
+                    errorMsg[8] = null;
+
                 }
             }
+
             else {
+
                 endTimeIsVal = true;
+
+                if( durBigCB.getValue()!= null && durLitCB.getValue() != null){
+                    durH = durBigCB.getValue();
+                    durM = durLitCB.getValue();
+                    durationIns = durH+":"+durM;
+                }
+
             }
+
+
 
 
             // Acquisisco l eta controllando che l'utente la inserisca se ha scelto partita di calcio
@@ -363,9 +459,11 @@ public class CreateController {
                     ageRangeIns = ageGroup.getRange();
                     ageLbl.setTextFill(Color.BLACK);
                     ageIsVal = true;
+                    errorMsg[9] = null;
                 } else {
                     ageLbl.setTextFill(Color.RED);
                     ageIsVal = false;
+                    errorMsg[9] = MISSAGE;
                 }
 
 
@@ -373,22 +471,17 @@ public class CreateController {
                 if (genderCB.getSelectionModel().getSelectedItem() == null) {
                     genderLbl.setTextFill(Color.RED);
                     genderIsVal = false;
+                    errorMsg[10] = MISSGENDER;
                 } else {
                     genderLbl.setTextFill(Color.BLACK);
                     genderIsVal = true;
+                    errorMsg[10] = null;
                 }
             }
 
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
-            // durata
-//            else if (endDateIns == null) {
-//                durD = durBigCB.getValue();
-//                durationIns = MyUtil.getDurationFormat(0, durD, 0, 0);
-//            } else if (endTimeIns == null) {
-//                durH = durBigCB.getValue();
-//                durM = durLitCB.getValue();
-//                durationIns = MyUtil.getDurationFormat(1, 0, durH, durM);
-//            }
+            // durata --> guardare end time e end date
+
 
 
             // FACOLTATIVO
@@ -396,15 +489,26 @@ public class CreateController {
             noteIns = noteTxtA.getText();
 
 
+
             switch (categoryIns) {
                 case SOCCER_NAME: {
                     if (catIsVal && numIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && ageIsVal && genderIsVal) {
 
+                        if(endDateIns == null ){
+                            endDateIns = dateIns.plusDays(Integer.parseInt(durationIns));
+                        }
+                        else if(endDateIns.isEqual(dateIns)){
+                            if(endTimeIns == null){
+                                endTimeIns = timeIns.plusHours(durH).plusMinutes(durM);
+
+                            }
+                        }
+
+
+
                         EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns);
                         socialNetwork.getCategories().get(0).addEvent(match);
                         thisStage.close();
-
-
                         System.out.println(match.getTitle().getValue());
                         System.out.println(match.getNumOfPartecipants().getValue());
                         System.out.println(match.getRegistrationDeadline().getValue());
@@ -422,9 +526,24 @@ public class CreateController {
 
 
                     }
+                    else {
+                        String msgPopUp = "";
+                        for(int i=1; i< 11; i++){
+                            if(errorMsg[i] != null){
+                                msgPopUp += errorMsg[i] + "\n";
+                            }
+                        }
+                        JOptionPane.showMessageDialog(null, msgPopUp);
+                    }
+
+                    break;
                 }
             }
         }
+
+
+
+
     }
 
 
