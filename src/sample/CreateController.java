@@ -160,7 +160,7 @@ public class CreateController {
         endDateDP.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if((endDateDP.getValue().isEqual(dateDP.getValue())) && (endTimeTP.getValue() == null)) {
+                if(endDateIsVal == true && dateIsVal == true && (endDateDP.getValue().isEqual(dateDP.getValue())) && (endTimeTP.getValue() == null)) {
                     durBigCB.setDisable(false);
                     durBigCB.setItems(FXCollections.observableArrayList(MyUtil.getArray(0, 23)));
                     durLitCB.setDisable(false);
