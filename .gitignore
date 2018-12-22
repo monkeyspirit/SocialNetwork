@@ -1,9 +1,12 @@
 # Folders
 bin
+out
 librerie
 
 # Others
 *.iml
+.classpath
+.project
 
 # Compiled class file
 *.class
