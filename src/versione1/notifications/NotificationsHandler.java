@@ -1,12 +1,10 @@
 package versione1.notifications;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
+import utilities.FileUtility;
+import versione1.EventSoccerMatch;
+import versione1.User;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,54 +28,54 @@ public class NotificationsHandler {
 
     }
 
-    /*public ArrayList<Notification> getNotifications(ArrayList<Event> currentEvents) throws FileNotFoundException {
+    public ArrayList<Notification> getSoccerMatchNotifications(User user, ArrayList<EventSoccerMatch> currentEvents) throws FileNotFoundException {
         ArrayList<Notification> notifications = new ArrayList<>();
+        ArrayList<EventSoccerMatch> oldEvents = new FileUtility().getUserLocalSoccerMatchEvents(user);
+        /* Adesso devo confrontare le due liste currentEvents e oldEvents per ottenere
+           informazioni come:
+           1) nuovi eventi creati da altri utenti mentre ero offline: confronto
+           le due liste e comunico la presenza di eventi in currentEvents
+           che non ci sono in oldEvents.
+           2) eventi chiusi
+           3) eventi falliti
+           4) eventi terminati
 
-        // leggo da file la lista degli eventi in un JsonReader
-        JsonReader readerEventiJson = new JsonReader(new FileReader(OLD_EVENTS_FILE_PATH));
-
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
-
-        Type listType = new TypeToken<ArrayList<Persona>>(){}.getType(); //questo serve se l'oggetto è di tipo generic
-        ArrayList<Event> oldEvents = gson.fromJson(readerEventiJson, listType);
-
-
-        //costruisco il messaggio usando uno dei metodi privati di questa classe
-        String message =
-        //creo e aggiungo la notifica
+            costruisco ciascun messaggio usando uno dei metodi privati di questa classe
+        String message = buildNotification...();
+            creo e aggiungo la notifica
         notifications.add(new Notification(message));
+        */
 
         return notifications;
-    }*/
+    }
 
     /**
      * Costruisce il messaggio della notifica per un evento confermato le cui iscrizioni si sono chiuse
      * @param eventName nome dell'evento
      * @param startDate data d'inizio dell'evento
      */
-    /*private String buildNotificationClosed (String eventName, Date startDate) {
-        message = eventName + MSG_CLOSED + startDate;
+    private String buildNotificationClosed (String eventName, Date startDate) {
+        String message = eventName + MSG_CLOSED + startDate;
         return message;
-    }*/
+    }
 
     /**
      * Costruisce il messaggio della notifica per un evento fallito
      * @param eventName nome dell'evento
      */
-    /*private String buildNotificationFailed (String eventName) {
-        message = eventName + MSG_FAILED;
+    private String buildNotificationFailed (String eventName) {
+        String message = eventName + MSG_FAILED;
         return message;
-    }*/
+    }
 
     /**
      * Costruisce il messaggio della notifica per un evento terminato
      * @param eventName nome dell'evento
      */
-    /*private String buildNotificationTerminated (String eventName) {
-        message = eventName + MSG_TERMINATED;
+    private String buildNotificationTerminated (String eventName) {
+        String message = eventName + MSG_TERMINATED;
         return message;
-    }*/
+    }
 
 
 }

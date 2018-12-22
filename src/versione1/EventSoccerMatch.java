@@ -6,7 +6,7 @@ import java.time.LocalTime;
 public class EventSoccerMatch extends Event{
 
     //Costanti della classe EventSoccerMatch
-    public static final String TYPE = "EventSoccerMatch"; //serve per la deserializzazione in caso di un'array di eventi
+    public static final String TYPE = "EventSoccerMatch"; //serve per la deserializzazione di un'array di eventi
     public static final String GENDER_NAME = "Sesso";
     public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
     public static final String AGERANGE_NAME = "Fascia di eta";

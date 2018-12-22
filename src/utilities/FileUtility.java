@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import versione1.Event;
 import versione1.EventSoccerMatch;
+import versione1.User;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -13,12 +14,18 @@ import java.util.ArrayList;
 
 /**
  * Questa classe serve per leggere/scrivere da/su file liste di oggetti di un certo tipo.
+ *
+ * ### DISTINZIONE TRA FILE LOCALI E GLOBALI ###
+ * il motivo principale è di poter distinguere il file globale che contiene lo stato più
+ * aggiornato dell'applicazione, dal file locale che contiene lo stato locale al momento
+ * del logout di un certo utente (meccanismo che sfrutteremo per generare le notifiche)
  */
 public class FileUtility {
 
-    public static final String SOCCER_MATCH_EVENTS_FILE = "JsonFiles/SoccerMatchEvents.json";
+    public static final String SOCCER_MATCH_EVENTS_FILE_PATH = "JsonFiles/";
+    public static final String SOCCER_MATCH_EVENTS_FILE = "SoccerMatchEvents";
 
-    final RuntimeTypeAdapterFactory<Event> typeFactory;
+    private RuntimeTypeAdapterFactory<Event> typeFactory;
     private GsonBuilder builder;
     private Gson gson;
 
@@ -41,13 +48,60 @@ public class FileUtility {
      * Serializza la lista di eventSoccerMatch e la scrive in un file .json
      * @param soccerMatchEvents La lista di eventi che si vuole serializzare
      */
-    public void writeSoccerMatchEvents(ArrayList<Event> soccerMatchEvents) {
-        System.out.println("EVENTI: " + soccerMatchEvents);
+    public void writeGlobalSoccerMatchEvents(ArrayList<Event> soccerMatchEvents) {
+        String fileName = PathBuilder.buildJsonFilePath(SOCCER_MATCH_EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE);
+        eventListToJsonFile(soccerMatchEvents, fileName);
+    }
+
+    /**
+     * Legge il file SoccerMatchEvents.json ed effettua la deserializzazione degli EventSoccerMatch
+     * @return lista di EventSoccerMatch
+     */
+    public ArrayList<EventSoccerMatch> getGlobalSoccerMatchEvents() {
+        String filePath = PathBuilder.buildJsonFilePath(SOCCER_MATCH_EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE);
+        return readSoccerMatchEvents(filePath);
+    }
+
+    /**
+     * Serializza la lista di eventSoccerMatch dell'utente e la scrive in un file .json
+     * @param user l'utente attualmente loggato
+     * @param soccerMatchEvents La lista di eventi che si vuole serializzare
+     */
+    public void writeUserLocalSoccerMatchEvents(User user, ArrayList<Event> soccerMatchEvents) {
+        String fileName = PathBuilder.buildJsonFilePath(SOCCER_MATCH_EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE, user.getUsername());
+        eventListToJsonFile(soccerMatchEvents, fileName);
+    }
+
+    public ArrayList<EventSoccerMatch> getUserLocalSoccerMatchEvents(User user) {
+        String filePath = PathBuilder.buildJsonFilePath(SOCCER_MATCH_EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE, user.getUsername());
+        return readSoccerMatchEvents(filePath);
+    }
+
+
+    private ArrayList<EventSoccerMatch> readSoccerMatchEvents(String filePath) {
+        Type listType = new TypeToken<ArrayList<EventSoccerMatch>>() {}.getType(); //listType contiene il tipo di elemento che si vuole deserializzare
+
+        ArrayList<EventSoccerMatch> soccerMatchEventsDeserialized = null;
+        try {
+            JsonReader reader = new JsonReader(new FileReader(filePath)); //leggo dal file SoccerMatchEvents.json la lista degli eventi di quel tipo
+            soccerMatchEventsDeserialized = gson.fromJson(reader, listType);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return soccerMatchEventsDeserialized;
+    }
+
+    /**
+     * Scrive una lista di eventi nel file .json specificato
+     * @param eventList lista di eventi
+     * @param fileName nome del file
+     */
+    private void eventListToJsonFile(ArrayList<Event> eventList, String fileName) {
         //serializzo
         try {
-            Writer writer = new FileWriter(SOCCER_MATCH_EVENTS_FILE);
-            System.out.println("Scrivo il file: " + SOCCER_MATCH_EVENTS_FILE);
-            gson.toJson(soccerMatchEvents, writer);
+            Writer writer = new FileWriter(fileName);
+            System.out.println("Scrivo il file: " + fileName);
+            gson.toJson(eventList, writer);
             writer.flush();
             writer.close();
         } catch (IOException e) {
@@ -55,23 +109,6 @@ public class FileUtility {
         }
     }
 
-    /**
-     * Legge il file SoccerMatchEvents.json ed effettua la deserializzazione degli EventSoccerMatch
-     * @return lista di EventSoccerMatch
-     */
-    public ArrayList<EventSoccerMatch> readSoccerMatchEvents() {
-        Type listType = new TypeToken<ArrayList<EventSoccerMatch>>() {}.getType(); //listType contiene il tipo di elemento che si vuole deserializzare
-
-        ArrayList<EventSoccerMatch> soccerMatchEventsDeserialized = null;
-        try {
-            JsonReader reader = new JsonReader(new FileReader(SOCCER_MATCH_EVENTS_FILE)); //leggo dal file SoccerMatchEvents.json la lista degli eventi di quel tipo
-            soccerMatchEventsDeserialized = gson.fromJson(reader, listType);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return soccerMatchEventsDeserialized;
-    }
 
     //CON LO STESSO APPROCCIO SI LEGGONO E SCRIVONO UTENTI/EVENTI DI ALTRE CATEGORIE/..
 }
