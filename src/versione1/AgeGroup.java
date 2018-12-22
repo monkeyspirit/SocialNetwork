@@ -10,6 +10,9 @@ import java.util.ArrayList;
 public class AgeGroup {
     ArrayList<Integer> numeri;
 
+    /**
+     * Il costruttore inizializza l'array numeri con {1,2..19,20,30..90,100}
+     */
     public AgeGroup(){
         numeri = new ArrayList<>();
         for(int i=1; i<100; i++){
@@ -37,7 +40,6 @@ public class AgeGroup {
                else if(j>20 && (j%10==0)){
                    numMin.add(j);
                }
-
            }
         }
 

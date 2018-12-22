@@ -3,7 +3,7 @@ package versione1;
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class Event extends ArrayList<Event> {
+public abstract class Event {
 
     //Costanti della classe Event
 	public static final String TITLE_NAME = "Titolo";
@@ -33,6 +33,8 @@ public abstract class Event extends ArrayList<Event> {
 
 
 	//Attributi della classe Event
+    private String type; //serve per la serializzazione/deserializzazione in modo da poter distinguere il tipo specifico di Event
+
 	private Field title = new Field(TITLE_NAME,TITLE_DESCRIPTION);
 	private Field numOfPartecipants = new Field(NUMPLAY_NAME, NUMPLAY_DESCRIPTION);
 	private Field registrationDeadline = new Field(REGDEADLINE_NAME, REGDEADLINE_DESCRIPTION);
@@ -62,7 +64,8 @@ public abstract class Event extends ArrayList<Event> {
      * @param time ora dell'evento
      * @param indTee quota individuale
      */
-	public Event(int numOfPartecipants, Date registrationDeadline, String place, Date date, Date time, float indTee) {
+	public Event(String type, int numOfPartecipants, Date registrationDeadline, String place, Date date, Date time, float indTee) {
+	    this.type = type;
 	    this.numOfPartecipants.setValue(numOfPartecipants);
 	    this.registrationDeadline.setValue(registrationDeadline);
 	    this.place.setValue(place);
@@ -75,11 +78,13 @@ public abstract class Event extends ArrayList<Event> {
     /**
      * Costruttore Event : lo uso solo perc
     */
-    public Event(Field title) {
+    public Event(String type, Field title) {
+        this.type = type;
         this.title = title;
     }
 
-    public Event(String name, int Par){
+    public Event(String type, String name, int Par){
+        this.type = type;
         this.title.setValue(name);
         this.numOfPartecipants.setValue(Par);
     }

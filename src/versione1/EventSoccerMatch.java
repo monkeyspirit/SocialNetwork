@@ -6,6 +6,7 @@ import java.util.Date;
 public class EventSoccerMatch extends Event{
 
     //Costanti della classe EventSoccerMatch
+    public static final String TYPE = "EventSoccerMatch";
     public static final String GENDER_NAME = "Sesso";
     public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
     public static final String AGEGROUP_NAME = "Fascia di eta";
@@ -31,13 +32,13 @@ public class EventSoccerMatch extends Event{
      * @param ageGroup fascia d'età dei partecipanti
      */
     public EventSoccerMatch(int numOfPartecipants, Date registrationDeadline, String place, Date date, Date time, float indTee, Gender gender, AgeGroup ageGroup) {
-        super(numOfPartecipants, registrationDeadline, place, date, time, indTee);
+        super(TYPE, numOfPartecipants, registrationDeadline, place, date, time, indTee);
         this.gender.setValue(gender);
         this.ageGroup.setValue(ageGroup);
     }
 
     public EventSoccerMatch(String name, int numPar){
-        super(name, numPar);
+        super(TYPE, name, numPar);
     }
 
 
@@ -48,11 +49,12 @@ public class EventSoccerMatch extends Event{
     public Field<AgeGroup> getAgeGroup() {
         return ageGroup;
     }
-    
-  
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "EventSoccerMatch{" +
+                "gender=" + gender +
+                ", ageGroup=" + ageGroup +
+                '}';
+    }
 }

@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import versione1.EventSoccerMatch;
+import utilities.FileUtility;
 import versione1.SoccerMatch;
 import versione1.SocialNetwork;
 
@@ -42,7 +43,6 @@ public class Main extends Application {
         soccer_match.addEvent(eventSoccerMatch1);
         soccer_match.addEvent(eventSoccerMatch2);
         social.addCategory(soccer_match);
-
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
         LoginController loginContr = new LoginController();

@@ -33,5 +33,13 @@ public class Field<T> {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return "Field{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }
 

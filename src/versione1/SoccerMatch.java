@@ -1,5 +1,7 @@
 package versione1;
 
+import java.util.ArrayList;
+
 public class SoccerMatch extends Category {
 
 	public static final String SOCCER_NAME = "Partite di calcio";
@@ -20,6 +22,6 @@ public class SoccerMatch extends Category {
 	 * @param event
 	 */
     public void addEvent(EventSoccerMatch event) {
-		super.getEvents().add(event);
+		super.addEvent(event);
     }
 }
