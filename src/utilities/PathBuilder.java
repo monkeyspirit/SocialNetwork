@@ -4,7 +4,7 @@ public class PathBuilder {
 
     /**
      * Costruisce il path per il file: path/fileName.json
-     * @param path percorso fino alla cartella in cui il file è contenuto
+     * @param path percorso fino alla cartella in cui il file e' contenuto
      * @param fileName nome del file
      * @return path/fileName.json
      */
@@ -14,7 +14,7 @@ public class PathBuilder {
 
     /**
      * Costruisce il path per il file: path/user_fileName.json
-     * @param path percorso fino alla cartella in cui il file è contenuto
+     * @param path percorso fino alla cartella in cui il file e' contenuto
      * @param fileName nome del file
      * @param user nome dell'utente
      * @return path/user_fileName.json

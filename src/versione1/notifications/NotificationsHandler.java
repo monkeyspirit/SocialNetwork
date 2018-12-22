@@ -12,7 +12,7 @@ import java.util.Date;
  * Questa classe si occupa di creare l'array di notifiche.
  * Per farlo legge da un file la vecchia lista degli eventi salvata al momento della chiusura
  * dell'ultima sessione, e la confronta con quella degli eventi attuali che invece viene passata
- * come parametro (per evitare di leggere il file dei nuovi eventi in più punti del programma
+ * come parametro (per evitare di leggere il file dei nuovi eventi in piu' punti del programma
  * lascio che sia l'oggetto chiamante a preoccuparsi di caricare i nuovi eventi dal file)
  */
 public class NotificationsHandler {

@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Questa classe serve per leggere/scrivere da/su file liste di oggetti di un certo tipo.
  *
  * ### DISTINZIONE TRA FILE LOCALI E GLOBALI ###
- * il motivo principale è di poter distinguere il file globale che contiene lo stato più
+ * il motivo principale e' di poter distinguere il file globale che contiene lo stato piu'
  * aggiornato dell'applicazione, dal file locale che contiene lo stato locale al momento
  * del logout di un certo utente (meccanismo che sfrutteremo per generare le notifiche)
  */
@@ -38,7 +38,7 @@ public class FileUtility {
     public FileUtility() {
         typeFactory = RuntimeTypeAdapterFactory
                 .of(Event.class, "type") // Qui si deve specificare il tipo della superclasse e quale attributo guardare per identificare i figli (attributo type)
-                .registerSubtype(EventSoccerMatch.class, "EventSoccerMatch"); //Qui si associa il valore dell'attributo "type" all'interno di ciascuna classe figlia con il tipo corrispondente della classe (è necessario aggiungere una riga per ogni sottoclasse che si crea)
+                .registerSubtype(EventSoccerMatch.class, "EventSoccerMatch"); //Qui si associa il valore dell'attributo "type" all'interno di ciascuna classe figlia con il tipo corrispondente della classe (e' necessario aggiungere una riga per ogni sottoclasse che si crea)
 
         builder = new GsonBuilder().registerTypeAdapterFactory(typeFactory);
         gson = builder.create();
