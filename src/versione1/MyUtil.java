@@ -1,9 +1,10 @@
 package versione1;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class MyUtil {
-	
-	
+
+
 	
 	
 	
@@ -104,7 +105,21 @@ public class MyUtil {
 			return false;
 		return true;
 	}
-	
+
+
+
+	// ---------METODO PER IMPOSTAZIONE DELLA DURATA IN BASE A MINUTI, ORE Ì, GIORNI -----------
+
+	public static ArrayList<Integer> getArray(int min, int max) {
+		ArrayList<Integer> choose = new ArrayList<>();
+		for(int i=min; i<=max; i++){
+			choose.add(i);
+		}
+		return choose;
+	}
+
+
+
 	
 	
 }

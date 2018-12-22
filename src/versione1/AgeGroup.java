@@ -8,7 +8,8 @@ import java.util.ArrayList;
  */
 
 public class AgeGroup {
-    ArrayList<Integer> numeri;
+    private ArrayList<Integer> numeri;
+    private String range;
 
     /**
      * Il costruttore inizializza l'array numeri con {1,2..19,20,30..90,100}
@@ -44,5 +45,14 @@ public class AgeGroup {
         }
 
         return numMin;
+    }
+
+    public String getRange() {
+        return range;
+    }
+
+    public void setRange(int min, int max) {
+        String concat = String.valueOf(min)+"-"+String.valueOf(max);
+        this.range = concat;
     }
 }
