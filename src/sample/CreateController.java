@@ -320,7 +320,7 @@ public class CreateController {
                 dateIsVal = false;
 
                 if(dateDP.getValue() == null){
-                   errorMsg[4] = MISSDATE;
+                    errorMsg[4] = MISSDATE;
                 }
                 else if (deadLineIsVal == false ) {
                     errorMsg[4] = ERRDATEMISSDEAD;
@@ -494,11 +494,12 @@ public class CreateController {
                 case SOCCER_NAME: {
                     if (catIsVal && numIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && ageIsVal && genderIsVal) {
 
-                        if(endDateIns == null ){
+                        if(endDateIns == null &&  durationIns !=null){
                             endDateIns = dateIns.plusDays(Integer.parseInt(durationIns));
                         }
-                        else if(endDateIns.isEqual(dateIns)){
-                            if(endTimeIns == null){
+
+                        else{
+                            if(endTimeIns == null && durationIns !=null){
                                 endTimeIns = timeIns.plusHours(durH).plusMinutes(durM);
 
                             }
@@ -508,21 +509,26 @@ public class CreateController {
 
                         EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns);
                         socialNetwork.getCategories().get(0).addEvent(match);
+
+//                        for(int i = 0; i<socialNetwork.getCategories().get(0).getEvents().size(); i++) {
+//                            System.out.println(socialNetwork.getCategories().get(0).getEvents());
+//                        }
+
                         thisStage.close();
-                        System.out.println(match.getTitle().getValue());
-                        System.out.println(match.getNumOfPartecipants().getValue());
-                        System.out.println(match.getRegistrationDeadline().getValue());
-                        System.out.println(match.getPlace().getValue());
-                        System.out.println(match.getDate().getValue());
-                        System.out.println(match.getTime().getValue());
-                        System.out.println(match.getDuration().getValue());
-                        System.out.println(match.getIndTee().getValue());
-                        System.out.println(match.getTeeInclude().getValue());
-                        System.out.println(match.getEndDate().getValue());
-                        System.out.println(match.getEndTime().getValue());
-                        System.out.println(match.getAgeRange().getValue());
-                        System.out.println(match.getGender().getValue());
-                        System.out.println(match.getNote().getValue());
+//                        System.out.println(match.getTitle().getValue());
+//                        System.out.println(match.getNumOfPartecipants().getValue());
+//                        System.out.println(match.getRegistrationDeadline().getValue());
+//                        System.out.println(match.getPlace().getValue());
+//                        System.out.println(match.getDate().getValue());
+//                        System.out.println(match.getTime().getValue());
+//                        System.out.println(match.getDuration().getValue());
+//                        System.out.println(match.getIndTee().getValue());
+//                        System.out.println(match.getTeeInclude().getValue());
+//                        System.out.println(match.getEndDate().getValue());
+//                        System.out.println(match.getEndTime().getValue());
+//                        System.out.println(match.getAgeRange().getValue());
+//                        System.out.println(match.getGender().getValue());
+//                        System.out.println(match.getNote().getValue());
 
 
                     }
