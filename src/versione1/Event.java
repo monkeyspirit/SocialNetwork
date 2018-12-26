@@ -48,6 +48,8 @@ public abstract class Event {
 	private Field endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
 	private Field note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
 
+	private User creator; //serve per capire chi è il creatore dell'utente
+
     /**
      * Costruttore vuoto: viene inizializzato l'array di campi, ciascuno dei quali con
      * nome e descrizione ma senza valore.
@@ -56,26 +58,23 @@ public abstract class Event {
 	}
 
     /**
-     * Costruttore dei campi obbligatori: viene popolato l'attributo valore di ciascun campo obbligatorio.
-     * @param numOfPartecipants numero dei partecipanti
-     * @param registrationDeadline termine ultimo iscrizione
-     * @param place luogo dell'evento
-     * @param date data dell'evento
-     * @param time ora dell'evento
-     * @param indTee quota individuale
+     * Coatruttore degli eventi, vengono settati tutti i valori dei cmapi e quello dell'utente creatore
+     * @param type
+     * @param titleIns
+     * @param numParIns
+     * @param deadLineIns
+     * @param placeIns
+     * @param dateIns
+     * @param timeIns
+     * @param durationIns
+     * @param indTeeIns
+     * @param totTeeIns
+     * @param endDateIns
+     * @param endTimeIns
+     * @param noteIns
+     * @param creator
      */
-	public Event(String type, int numOfPartecipants, LocalDate registrationDeadline, String place, LocalDate date, LocalTime time, float indTee) {
-	    this.type = type;
-	    this.numOfPartecipants.setValue(numOfPartecipants);
-	    this.registrationDeadline.setValue(registrationDeadline);
-	    this.place.setValue(place);
-	    this.date.setValue(date);
-	    this.time.setValue(time);
-	    this.indTee.setValue(indTee);
-    }
-
-
-    public Event(String type, String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String noteIns) {
+    public Event(String type, String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String noteIns,  User creator) {
         this.type = type;
 	    this.title.setValue(titleIns);
         this.numOfPartecipants.setValue(numParIns);
@@ -90,20 +89,21 @@ public abstract class Event {
         this.endDate.setValue(endDateIns);
         this.endTime.setValue(endTimeIns);
         this.note.setValue(noteIns);
+        this.creator = creator;
     }
 
     /**
-     * Costruttore Event : lo uso solo perc
-    */
-    public Event(String type, Field title) {
-        this.type = type;
-        this.title = title;
-    }
-
-    public Event(String type, String name, int Par){
+     * Costruttore di Event che uso nel Main per velocizzare il processo e avere già eventi
+     * @param type
+     * @param name
+     * @param Par
+     * @param creator
+     */
+    public Event(String type, String name, int Par, User creator){
         this.type = type;
         this.title.setValue(name);
         this.numOfPartecipants.setValue(Par);
+        this.creator = creator;
     }
 
 
@@ -156,7 +156,6 @@ public abstract class Event {
         return note;
     }
 
-
-
+    public User getCreator() { return creator; }
 
 }

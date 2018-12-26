@@ -66,6 +66,7 @@ public class CreateController {
     private ArrayList<Integer> isValid;
     private AgeGroup ageGroup;
     private ArrayList<Integer> ageRangeMin;
+    private User creator;
     private String[] errorMsg = new  String[11];
 
 
@@ -131,6 +132,7 @@ public class CreateController {
         return socialNetwork;
     }
 
+    public void setCreator(User creator) { this.creator = creator;  }
 
     /**
      * Il metodo serve per inizializzare la finestra, in particolare per impostare gli observable list nei
@@ -505,9 +507,7 @@ public class CreateController {
                             }
                         }
 
-
-
-                        EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns);
+                        EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
                         socialNetwork.getCategories().get(0).addEvent(match);
 
 //                        for(int i = 0; i<socialNetwork.getCategories().get(0).getEvents().size(); i++) {

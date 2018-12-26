@@ -9,6 +9,7 @@ import versione1.EventSoccerMatch;
 import utilities.FileUtility;
 import versione1.SoccerMatch;
 import versione1.SocialNetwork;
+import versione1.User;
 
 public class Main extends Application {
 
@@ -36,8 +37,10 @@ public class Main extends Application {
         // e queste righe saranno in una parte di codice alternativa
         SocialNetwork social = new SocialNetwork();
         SoccerMatch soccer_match = new SoccerMatch();
-        EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a Mompiano", 13);
-        EventSoccerMatch eventSoccerMatch2 = new EventSoccerMatch("Partita a Remedello", 15);
+        User system = new User("System");
+        social.addUser(system);
+        EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a Mompiano", 13, system );
+        EventSoccerMatch eventSoccerMatch2 = new EventSoccerMatch("Partita a Remedello", 15, system);
 
 
         soccer_match.addEvent(eventSoccerMatch1);
@@ -54,7 +57,7 @@ public class Main extends Application {
         // Imposto lo stage e la scene principali
         Parent root =  (Parent) loader.load();
         Scene scene = new Scene(root, 600, 400);
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle("Accesso");
         primaryStage.setScene(scene);
         primaryStage.show();
 

@@ -1,18 +1,17 @@
 package sample;
 
+import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import versione1.SocialNetwork;
+import versione1.User;
 
 import java.io.IOException;
 
@@ -21,18 +20,22 @@ public class LoginController {
     // ~~~~~ Sample Stage ~~~~~~~~~~~~~
 
     @FXML
-    private Button login;
+    private Button loginBtn;
     @FXML
-    private CheckBox checkRg;
+    private CheckBox checkRgCB;
     @FXML
-    private PasswordField psswd;
+    private TextField usrnameTF;
     @FXML
-    private TextField usrname;
+    private Label errorLbl;
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+    public static final String MISSUSERNAME = "Attenzione: inserire un nome utente";
+    public static final String ERRALREADYUSE = "Attenzione: il nome utente esiste";
+    public static final String ERRNORUSE = "Attenzione: il nome utente non esiste";
     private SocialNetwork social;
+    private User sessionUser;
     public void setSocialNetwork(SocialNetwork social) { this.social = social; }
 
 
@@ -44,15 +47,15 @@ public class LoginController {
     @FXML
     private void initialize() throws IOException {
 
-        checkRg.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        checkRgCB.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
 
-               if(checkRg.isSelected()){
-                   login.setText("Registrati");
+               if(checkRgCB.isSelected()){
+                   loginBtn.setText("Registrati");
                }
                else {
-                   login.setText("Accedi");
+                   loginBtn.setText("Accedi");
                }
 
             }
@@ -66,7 +69,43 @@ public class LoginController {
 
 
 
-    public void checkAccess(ActionEvent event){
+    public void checkAccess() throws IOException {
+
+        if(usrnameTF.getText().isEmpty()){
+            errorLbl.setTextFill(Color.RED);
+            errorLbl.setText(MISSUSERNAME);
+        }
+        else {
+            String accessName = usrnameTF.getText();
+
+            //Se checkRGCB è selezionato vuol dire che sto inserendo un nuovo utente
+            if(checkRgCB.isSelected()){
+                if(social.doesUserExist(accessName) == false){
+                    sessionUser = new User(accessName);
+                    social.addUser(sessionUser);
+                    loadSecond();
+                    System.out.println("Utente creato: "+sessionUser.getUsername());
+                }
+                else{
+                    errorLbl.setTextFill(Color.RED);
+                    errorLbl.setText(ERRALREADYUSE);
+                }
+            }
+            else {
+                if(social.doesUserExist(accessName) == false){
+                    errorLbl.setTextFill(Color.RED);
+                    errorLbl.setText(ERRNORUSE);
+                }
+                else{
+                   sessionUser = social.findUserByName(accessName);
+                   loadSecond();
+                   System.out.println("Utente accesso: "+sessionUser.getUsername());
+
+                }
+
+            }
+        }
+
 
     }
 
@@ -86,7 +125,7 @@ public class LoginController {
 
             // Passo a controller il riferimento a social network
             controller.setSocialNetwork(social);
-
+            controller.setSessionUser(sessionUser);
 
             Stage primaryStage = Main.getStage();
 

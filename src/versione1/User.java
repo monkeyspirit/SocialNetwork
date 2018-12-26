@@ -23,7 +23,4 @@ public class User {
         return username;
     }
 
-    public String toString(){
-        return "Username: " + this.username;
-    }
 }

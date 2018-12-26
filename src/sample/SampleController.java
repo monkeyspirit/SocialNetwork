@@ -9,11 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import versione1.Category;
 import versione1.Event;
 import versione1.SocialNetwork;
+import versione1.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ public class SampleController {
     private ListView categoryListView;
     @FXML
     private ListView eventListView;
+    @FXML
+    private Tab userTb;
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -37,6 +41,7 @@ public class SampleController {
     private Category catSelected;
 
     private SocialNetwork socialNetwork;
+    private User sessionUser;
     private ArrayList<String> catName;
     private ArrayList<String> eventName;
     private ObservableList<String> obsCatName;
@@ -50,13 +55,15 @@ public class SampleController {
 
     public SocialNetwork getSocialNetwork() { return socialNetwork;}
 
+    public User getSessionUserUser() { return sessionUser; }
 
-
+    public void setSessionUser(User sessionUser) { this.sessionUser = sessionUser; }
 
     @FXML
     private void initialize() throws IOException {
 
-//  Funziona come pezzo di codice ma così è inutile
+        userTb.setText(sessionUser.getUsername());
+
         categoryListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -78,7 +85,7 @@ public class SampleController {
             }
         });
 
-//        System.out.println("Carico la View Utente...");
+        System.out.println("Carico la View Utente di: "+sessionUser.getUsername());
         catName = new ArrayList<>();
 
         for(Category category : socialNetwork.getCategories()){
@@ -106,6 +113,7 @@ public class SampleController {
         loaderCreate.setController(createController);
 
         createController.setSocialNetwork(socialNetwork);
+        createController.setCreator(sessionUser);
 
         Stage create = new Stage();
 

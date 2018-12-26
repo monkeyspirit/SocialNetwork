@@ -35,14 +35,14 @@ public class EventSoccerMatch extends Event{
      * @param genderIns
      * @param noteIns
      */
-    public EventSoccerMatch(String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Enum<Gender> genderIns, String noteIns) {
-        super(TYPE, titleIns,  numParIns,  deadLineIns,  placeIns,  dateIns,  timeIns,  durationIns,  indTeeIns,  totTeeIns,  endDateIns,  endTimeIns, noteIns);
+    public EventSoccerMatch(String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Enum<Gender> genderIns, String noteIns, User creatorIns) {
+        super(TYPE, titleIns,  numParIns,  deadLineIns,  placeIns,  dateIns,  timeIns,  durationIns,  indTeeIns,  totTeeIns,  endDateIns,  endTimeIns, noteIns, creatorIns);
         this.gender.setValue(genderIns);
         this.ageRange.setValue(ageRangeIns);
     }
 
-    public EventSoccerMatch(String name, int numPar){
-        super(TYPE, name, numPar);
+    public EventSoccerMatch(String name, int numPar, User creatorIns){
+        super(TYPE, name, numPar, creatorIns);
     }
 
 

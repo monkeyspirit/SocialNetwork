@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,13 +10,14 @@
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="login" layoutX="256.0" layoutY="235.0" mnemonicParsing="false" onAction="#loadSecond" prefHeight="26.0" prefWidth="90.0" text="Accedi" />
-      <CheckBox fx:id="checkRg" layoutX="198.0" layoutY="302.0" mnemonicParsing="false" text="Nuovo utente? Registrati" />
-      <TextField fx:id="usrname" layoutX="215.0" layoutY="174.0" promptText="Username" />
+      <Button fx:id="loginBtn" layoutX="256.0" layoutY="235.0" mnemonicParsing="false" onAction="#checkAccess" prefHeight="26.0" prefWidth="90.0" text="Accedi" />
+      <CheckBox fx:id="checkRgCB" layoutX="198.0" layoutY="302.0" mnemonicParsing="false" text="Nuovo utente? Registrati" />
+      <TextField fx:id="usrnameTF" layoutX="215.0" layoutY="174.0" promptText="Username" />
       <ImageView fitHeight="90.0" fitWidth="199.0" layoutX="256.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@calendar_icon-icons.com_59193.png" />
          </image>
       </ImageView>
+      <Label fx:id="errorLbl" layoutX="180.0" layoutY="340.0" prefHeight="21.0" prefWidth="276.0" textAlignment="LEFT" />
    </children>
 </AnchorPane>

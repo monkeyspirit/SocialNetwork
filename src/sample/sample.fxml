@@ -9,7 +9,7 @@
 
 <TabPane prefHeight="370.0" prefWidth="546.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <tabs>
-      <Tab closable="false" text="Bacheca">
+      <Tab fx:id="showcaseTb" closable="false" text="Bacheca">
          <content>
             <SplitPane disable="true" dividerPositions="0.46153846153846156">
               <items>
@@ -27,7 +27,7 @@
             </SplitPane>
          </content>
       </Tab>
-      <Tab closable="false" text="Utente">
+      <Tab fx:id="userTb" closable="false" >
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
