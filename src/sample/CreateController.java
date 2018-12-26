@@ -216,10 +216,10 @@ public class CreateController {
 
         genderCB.setItems(FXCollections.observableArrayList(Gender.Maschile, Gender.Femminile));
 
-        for(int i=0; i< 11; i++){
-            System.out.println(errorMsg[i]);
-        }
-
+//        for(int i=0; i< 11; i++){
+//            System.out.println(errorMsg[i]);
+//        }
+//
 
     }
 

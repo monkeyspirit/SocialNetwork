@@ -50,6 +50,7 @@ public abstract class Event {
 
 	private User creator; //serve per capire chi è il creatore dell'utente
 
+
     /**
      * Costruttore vuoto: viene inizializzato l'array di campi, ciascuno dei quali con
      * nome e descrizione ma senza valore.

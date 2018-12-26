@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="687.0" prefWidth="569.0">
+         <children>
+            <Label fx:id="titleLbl" layoutX="70.0" layoutY="119.0" prefHeight="20.0" prefWidth="49.0" text="Titolo" />
+            <Label fx:id="numPLbl" layoutX="70.0" layoutY="152.0" text="Numero partecipanti" />
+            <Label fx:id="deadLLbl" layoutX="70.0" layoutY="191.0" prefHeight="18.0" prefWidth="197.0" text="Termine ultimo di iscrizione" />
+            <Label fx:id="placeLbl" layoutX="70.0" layoutY="226.0" prefHeight="18.0" prefWidth="57.0" text="Luogo" />
+            <Label fx:id="dateLbl" layoutX="70.0" layoutY="262.0" prefHeight="18.0" prefWidth="47.0" text="Data" />
+            <Label fx:id="timeLbl" layoutX="70.0" layoutY="297.0" prefHeight="18.0" prefWidth="87.0" text="Ora" />
+            <Label fx:id="durLbl" layoutX="70.0" layoutY="330.0" prefHeight="18.0" prefWidth="69.0" text="Durata" />
+            <Label fx:id="indTeeLbl" layoutX="70.0" layoutY="363.0" prefHeight="18.0" prefWidth="126.0" text="Quota individuale" />
+            <Label fx:id="totTeLbl" layoutX="70.0" layoutY="393.0" prefHeight="18.0" prefWidth="165.0" text="Compreso nella quota" />
+            <Label fx:id="endDateLbl" layoutX="68.0" layoutY="426.0" prefHeight="18.0" prefWidth="104.0" text="Data conclusiva" />
+            <Label fx:id="endTimeLbl" layoutX="68.0" layoutY="458.0" text="Ora conclusiva" />
+            <Label fx:id="noteLbl" layoutX="68.0" layoutY="582.0" text="Note" />
+            <Label fx:id="ageLbl" layoutX="68.0" layoutY="491.0" />
+            <Label fx:id="genderLbl" layoutX="68.0" layoutY="526.0" />
+            <Label fx:id="creatorLbl" layoutX="70.0" layoutY="46.0" text="Creatore" />
+
+            <Label fx:id="titleLblEvent" layoutX="300.0" layoutY="119.0" prefHeight="21.0" prefWidth="197.0" />
+            <Label fx:id="numPLblEvent" layoutX="300.0" layoutY="152.0" prefHeight="21.0" prefWidth="179.0" />
+            <Label fx:id="deadLLblEvent" layoutX="300.0" layoutY="191.0" prefHeight="18.0" prefWidth="197.0" />
+            <Label fx:id="placeLblEvent" layoutX="300.0" layoutY="226.0" prefHeight="21.0" prefWidth="202.0" />
+            <Label fx:id="dateLblEvent" layoutX="300.0" layoutY="262.0" prefHeight="21.0" prefWidth="186.0" />
+            <Label fx:id="timeLblEvent" layoutX="300.0" layoutY="297.0" prefHeight="21.0" prefWidth="227.0" />
+            <Label fx:id="durLblEvent" layoutX="300.0" layoutY="330.0" prefHeight="21.0" prefWidth="201.0" />
+            <Label fx:id="indTeeLblEvent" layoutX="300.0" layoutY="363.0" prefHeight="21.0" prefWidth="214.0" />
+            <Label fx:id="totTeLblEvent" layoutX="300.0" layoutY="393.0" prefHeight="21.0" prefWidth="215.0" />
+            <Label fx:id="endDateLblEvent" layoutX="300.0" layoutY="426.0" prefHeight="21.0" prefWidth="228.0" />
+            <Label fx:id="endTimeLblEvent" layoutX="300.0" layoutY="458.0" prefHeight="21.0" prefWidth="202.0" />
+            <Label fx:id="noteLblEvent" layoutX="300.0" layoutY="582.0" prefHeight="21.0" prefWidth="187.0" />
+            <Label fx:id="ageLblEvent" layoutX="300.0" layoutY="491.0" prefHeight="21.0" prefWidth="195.0" />
+            <Label fx:id="genderLblEvent" layoutX="300.0" layoutY="526.0" prefHeight="21.0" prefWidth="203.0" />
+            <Label fx:id="creatorLblEvent" layoutX="300.0" layoutY="46.0" prefHeight="21.0" prefWidth="129.0" />
+
+
+
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

@@ -39,6 +39,7 @@ public class SampleController {
 
 
     private Category catSelected;
+    private Event eventSelected;
 
     private SocialNetwork socialNetwork;
     private User sessionUser;
@@ -68,22 +69,44 @@ public class SampleController {
             @Override
             public void handle(MouseEvent event) {
 
-                Category selected = null;
+                if (!categoryListView.getSelectionModel().isEmpty()) {
+                    catSelected = socialNetwork.findCategoryByIndex(categoryListView.getSelectionModel().getSelectedIndex());
 
-//                System.out.println("Hai cliccato su "+categoryListView.getSelectionModel().getSelectedIndex());
-                selected = socialNetwork.findCategoryByIndex(categoryListView.getSelectionModel().getSelectedIndex());
+                    eventName = new ArrayList<>();
 
-                eventName = new ArrayList<>();
+                    for (Event match : catSelected.getEvents()) {
+                        eventName.add((String) match.getTitle().getValue());
+                    }
 
-                for(Event match : selected.getEvents()){
-                    eventName.add((String) match.getTitle().getValue());
+                    obsEventName = FXCollections.observableArrayList(eventName);
+                    eventListView.setItems(obsEventName);
+
+                    eventListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+
+                            if(!eventListView.getSelectionModel().isEmpty()) {
+                                ArrayList<Event> events = socialNetwork.findCategoryByIndex(categoryListView.getSelectionModel().getSelectedIndex()).getEvents();
+                                int indexEvent = eventListView.getSelectionModel().getSelectedIndex();
+
+                                eventSelected = events.get(indexEvent);
+                                try {
+                                    openEventView();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        }
+                    });
+
                 }
-
-                obsEventName = FXCollections.observableArrayList(eventName);
-                eventListView.setItems(obsEventName);
-
             }
+
         });
+
+
+
 
         System.out.println("Carico la View Utente di: "+sessionUser.getUsername());
         catName = new ArrayList<>();
@@ -95,6 +118,27 @@ public class SampleController {
         obsCatName = FXCollections.observableArrayList(catName);
 
         categoryListView.setItems(obsCatName);
+
+    }
+
+    public void openEventView() throws IOException {
+
+        FXMLLoader loaderEvent = new FXMLLoader(Main.class.getResource("viewEvent.fxml"));
+        EventController eventController = new EventController();
+
+        loaderEvent.setController(eventController);
+
+        eventController.setCatSelected(catSelected);
+        eventController.setEventSoccerSelected(eventSelected);
+
+
+        Stage view = new Stage();
+
+        Parent eventView = loaderEvent.load();
+        Scene sceneEvent = new Scene(eventView, 600, 400);
+        view.setTitle((String)eventSelected.getTitle().getValue());
+        view.setScene(sceneEvent);
+        view.show();
 
     }
 
