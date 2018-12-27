@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="687.0" prefWidth="569.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="740.0" prefWidth="568.0">
          <children>
             <Label fx:id="titleLbl" layoutX="70.0" layoutY="119.0" prefHeight="20.0" prefWidth="49.0" text="Titolo" />
             <Label fx:id="numPLbl" layoutX="70.0" layoutY="152.0" text="Numero partecipanti" />
@@ -39,6 +40,8 @@
             <Label fx:id="ageLblEvent" layoutX="300.0" layoutY="491.0" prefHeight="21.0" prefWidth="195.0" />
             <Label fx:id="genderLblEvent" layoutX="300.0" layoutY="526.0" prefHeight="21.0" prefWidth="203.0" />
             <Label fx:id="creatorLblEvent" layoutX="300.0" layoutY="46.0" prefHeight="21.0" prefWidth="129.0" />
+
+            <Button layoutX="140.0" layoutY="628.0" mnemonicParsing="false" text="Iscriviti" onAction="#subScribe"/>
 
 
 

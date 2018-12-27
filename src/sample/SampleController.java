@@ -43,6 +43,7 @@ public class SampleController {
 
     private SocialNetwork socialNetwork;
     private User sessionUser;
+
     private ArrayList<String> catName;
     private ArrayList<String> eventName;
     private ObservableList<String> obsCatName;
@@ -130,6 +131,7 @@ public class SampleController {
 
         eventController.setCatSelected(catSelected);
         eventController.setEventSoccerSelected(eventSelected);
+        eventController.setSessionUser(sessionUser.getUsername());
 
 
         Stage view = new Stage();
@@ -150,14 +152,15 @@ public class SampleController {
      */
     public void openEventEditor(ActionEvent actionEvent) throws IOException {
 
-        FXMLLoader loaderCreate = new FXMLLoader(Main.class.getResource("newEvent.fxml"));
+        FXMLLoader loaderCreate = new FXMLLoader(Main.class.getResource("createEvent.fxml"));
         //loaderCreate.setController(this);
         CreateController createController = new CreateController();
 
         loaderCreate.setController(createController);
 
         createController.setSocialNetwork(socialNetwork);
-        createController.setCreator(sessionUser);
+        createController.setCreator(sessionUser.getUsername());
+
 
         Stage create = new Stage();
 

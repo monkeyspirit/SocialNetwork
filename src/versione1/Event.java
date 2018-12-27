@@ -2,6 +2,7 @@ package versione1;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public abstract class Event {
 
@@ -48,7 +49,9 @@ public abstract class Event {
 	private Field endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
 	private Field note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
 
-	private User creator; //serve per capire chi è il creatore dell'utente
+	private String creator; //serve per capire chi è il creatore dell'utente
+
+    private ArrayList<String> partecipants;
 
 
     /**
@@ -75,7 +78,7 @@ public abstract class Event {
      * @param noteIns
      * @param creator
      */
-    public Event(String type, String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String noteIns,  User creator) {
+    public Event(String type, String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String noteIns,  String creator) {
         this.type = type;
 	    this.title.setValue(titleIns);
         this.numOfPartecipants.setValue(numParIns);
@@ -91,6 +94,7 @@ public abstract class Event {
         this.endTime.setValue(endTimeIns);
         this.note.setValue(noteIns);
         this.creator = creator;
+        partecipants = new ArrayList<>();
     }
 
     /**
@@ -100,11 +104,12 @@ public abstract class Event {
      * @param Par
      * @param creator
      */
-    public Event(String type, String name, int Par, User creator){
+    public Event(String type, String name, int Par, String creator){
         this.type = type;
         this.title.setValue(name);
         this.numOfPartecipants.setValue(Par);
         this.creator = creator;
+        partecipants = new ArrayList<>();
     }
 
 
@@ -157,6 +162,40 @@ public abstract class Event {
         return note;
     }
 
-    public User getCreator() { return creator; }
+    public String getCreator() { return creator; }
 
+    public ArrayList<String> getPartecipants() { return partecipants; }
+
+    public void addPartecipants(String addThis){
+
+        // CI DEVE ESSERE UN IF CHE CONTROLLA CHE LO STATO DELLA PROPOSTA NON SIA CHIUSO, O CHE
+        // LA DATA DI SCADENZA NON SIA GIA PASSATA, TUTTO CIO VA NELLA GRAFICA PERO
+        // if(stato==ok && dataTermine.isAfter ){
+
+        partecipants.add(addThis);
+        // }
+
+    }
+
+    public boolean alrRegister(String controlThis){
+
+        boolean alrReg = false;
+
+        for(int i=0; i< partecipants.size(); i++){
+            if( controlThis.equals(partecipants.get(i))){
+                alrReg = true;
+            }
+        }
+        return alrReg;
+    }
+
+    public boolean numParEQMax(){
+        boolean isNumMax = false;
+
+        if(partecipants.size() == (int) numOfPartecipants.getValue()){
+            isNumMax = true;
+        }
+
+        return isNumMax;
+    }
 }

@@ -39,9 +39,10 @@ public class Main extends Application {
         SoccerMatch soccer_match = new SoccerMatch();
         User system = new User("System");
         social.addUser(system);
-        EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a Mompiano", 13, system );
-        EventSoccerMatch eventSoccerMatch2 = new EventSoccerMatch("Partita a Remedello", 15, system);
-
+        EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a Mompiano", 1, system.getUsername() );
+        eventSoccerMatch1.addPartecipants(system.getUsername());
+        EventSoccerMatch eventSoccerMatch2 = new EventSoccerMatch("Partita a Remedello", 2, system.getUsername());
+        eventSoccerMatch2.addPartecipants(system.getUsername());
 
         soccer_match.addEvent(eventSoccerMatch1);
         soccer_match.addEvent(eventSoccerMatch2);

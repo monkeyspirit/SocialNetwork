@@ -63,10 +63,8 @@ public class CreateController {
     private TextArea noteTxtA, totTeeTxtA;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    private ArrayList<Integer> isValid;
     private AgeGroup ageGroup;
     private ArrayList<Integer> ageRangeMin;
-    private User creator;
     private String[] errorMsg = new  String[11];
 
 
@@ -115,24 +113,19 @@ public class CreateController {
 
     private SocialNetwork socialNetwork;
     private Stage thisStage;
+    private String creator;
 
 
     // ~~~~~~~~ Metodi ~~~~~~~~~~~~~
 
 
-    public void setThisStage(Stage thisStage) {
-        this.thisStage = thisStage;
-    }
+    public void setThisStage(Stage thisStage) { this.thisStage = thisStage; }
 
-    public void setSocialNetwork(SocialNetwork socialNetwork) {
-        this.socialNetwork = socialNetwork;
-    }
+    public void setSocialNetwork(SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
 
-    public SocialNetwork getSocialNetwork() {
-        return socialNetwork;
-    }
+    public SocialNetwork getSocialNetwork() { return socialNetwork; }
 
-    public void setCreator(User creator) { this.creator = creator;  }
+    public void setCreator(String creator) { this.creator = creator;  }
 
     /**
      * Il metodo serve per inizializzare la finestra, in particolare per impostare gli observable list nei
@@ -146,16 +139,20 @@ public class CreateController {
      */
     @FXML
     private void initialize() throws IOException {
-        isValid = new ArrayList<>();
+
         ageGroup = new AgeGroup();
         ageRangeMin = ageGroup.getNumeri();
 
         catCB.setItems(FXCollections.observableArrayList(SOCCER_NAME));
 
+        /**
+         * ActionListeren che permette di ottenere la lista degli eventi della categoria selezionata sulla
+         * ListView delle categorie
+         */
         catCB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(catCB.getSelectionModel().getSelectedItem().equals(SOCCER_NAME)){
+                if(catCB.getSelectionModel().getSelectedItem().equals(SOCCER_NAME)){ //Se si seleziona il vuoto così non da errore
                     minAgeCB.setDisable(false);
                     minAgeCB.setItems(FXCollections.observableArrayList(ageRangeMin));
                     genderCB.setDisable(false);
@@ -168,6 +165,11 @@ public class CreateController {
             }
         });
 
+        /**
+         * ActionListeren che permette una volta selezionato il minimo dell'età di selezionare il max, in questo modo lo popolo con i
+         * numeri maggiorni stretti del minimo, dopo i 20 anni si va di decina in decina per facilitare
+         * la scelta all'utente
+         */
         minAgeCB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -178,7 +180,11 @@ public class CreateController {
         });
 
 
-
+        /**
+         * ActionListener che controlla la selezione della data finale, se tale valore è uguale alla data iniziale
+         * allora i ChoiceBox si settano per attendere la durata in ore e minuti, se la data finale è diversa dalla data iniziale
+         * invece i ChoiceBox della durata si disattivano perchè in questo modo l'utente inserisce solo i valori esatti
+         */
         endDateDP.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -205,6 +211,9 @@ public class CreateController {
             }
         });
 
+        /**
+         * ActionListener che nel caso in cui venga scelta l'ora finale disattiva i ChoiceBox della durata
+         */
         endTimeTP.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -214,12 +223,8 @@ public class CreateController {
             }
         });
 
+        //Aggiungo gli elementi dell'Enum <Gender> al Choice Box del genere
         genderCB.setItems(FXCollections.observableArrayList(Gender.Maschile, Gender.Femminile));
-
-//        for(int i=0; i< 11; i++){
-//            System.out.println(errorMsg[i]);
-//        }
-//
 
     }
 
@@ -234,17 +239,21 @@ public class CreateController {
      * - ora
      * - quota individuale
      * Gli altri campi sono facolatitivi e quindi possono anche essere omessi.
-     * In oltre è obbligatorio prima di creare l'evento selezionare a quale categoria appartenga.
+     * In oltre si ha l'obbligo prima di creare l'evento selezionare a quale categoria appartenga.
+     * Ogni volta che viene selezionato qualcosa che non va bene o si commettono erroi viene stampato un msg
+     * errore relativo a cosa succede e diventa rossa la label
      *
      * @param actionEvent
      * @throws IOException
      */
     public void createEvent(ActionEvent actionEvent) throws IOException {
 
-        // Acquisisco la categoria dal choiceBox, e se la categoria non selezionata non vado avanti
+
         // OBBLIGATORIO
         // categoria
 
+        // Acquisisco la categoria dal choiceBox, e se la categoria non viene selezionata non vado avanti
+        // Nel caso in cui non sia selezionata diventa rossa la label e compare un msg di errore
         if (catCB.getSelectionModel().getSelectedItem() == null) {
             catLbl.setTextFill(Color.RED);
             catIsVal = false;
@@ -508,6 +517,7 @@ public class CreateController {
                         }
 
                         EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
+                        match.addPartecipants(creator);
                         socialNetwork.getCategories().get(0).addEvent(match);
 
 //                        for(int i = 0; i<socialNetwork.getCategories().get(0).getEvents().size(); i++) {

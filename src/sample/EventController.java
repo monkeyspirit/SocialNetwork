@@ -6,6 +6,7 @@ import versione1.Category;
 import versione1.Event;
 import versione1.EventSoccerMatch;
 
+import javax.swing.*;
 import java.time.LocalDate;
 
 public class EventController {
@@ -17,8 +18,11 @@ public class EventController {
 
     EventSoccerMatch eventSoccerSelected;
     Category catSelected;
+    String sessionUser;
 
     public void setCatSelected(Category catSelected) { this.catSelected = catSelected;  }
+
+    public void setSessionUser(String sessionUser) { this.sessionUser = sessionUser; }
 
     public void setEventSoccerSelected(Event eventSelected) {
         if(catSelected.getName().equals(SOCCER_NAME)) {
@@ -27,10 +31,13 @@ public class EventController {
     }
 
     @FXML
+    /**
+     * Inizializzo tutti i parametri realtivi ai campi degli eventi
+     * Creo i bottoni per l'iscrizione all'evento
+     */
     private void initialize(){
 
-
-        creatorLblEvent.setText(eventSoccerSelected.getCreator().getUsername());
+        creatorLblEvent.setText(eventSoccerSelected.getCreator());
 
         if(eventSoccerSelected.getTitle().getValue() != null){
             titleLblEvent.setText((String) eventSoccerSelected.getTitle().getValue());
@@ -122,6 +129,28 @@ public class EventController {
                 genderLblEvent.setText(" ");
             }
         }
+
+    }
+
+    public void subScribe(){
+
+
+            if (!eventSoccerSelected.alrRegister(sessionUser)) {
+
+                if(eventSoccerSelected.numParEQMax()){
+                    JOptionPane.showMessageDialog(null, "Attenzione: numero massimo di partecipanti raggiunto");
+                }
+                else{
+                    eventSoccerSelected.addPartecipants(sessionUser);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Attenzione: risulti precedentemente iscritto");
+            }
+
+            for (int i = 0; i < eventSoccerSelected.getPartecipants().size(); i++) {
+                System.out.println(eventSoccerSelected.getPartecipants().get(i));
+            }
 
     }
 
