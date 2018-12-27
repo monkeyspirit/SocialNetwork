@@ -36,9 +36,9 @@ public class Main extends Application {
         // e scrittura da file qui ci vorra una struttura di controllo come un case o un if
         // e queste righe saranno in una parte di codice alternativa
         SocialNetwork social = new SocialNetwork();
+        social.loadUsersListFromFile(); //NUOVO: carico la lista di utenti da file
         SoccerMatch soccer_match = new SoccerMatch();
-        User system = new User("System");
-        social.addUser(system);
+        User system = social.getUsers().get(0); //prendo il primo utente di quella lista (non volevo cancellarti l'esempio)
         EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a Mompiano", 1, system.getUsername() );
         eventSoccerMatch1.addPartecipants(system.getUsername());
         EventSoccerMatch eventSoccerMatch2 = new EventSoccerMatch("Partita a Remedello", 2, system.getUsername());

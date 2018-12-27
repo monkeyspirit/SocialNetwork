@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import utilities.FileUtility;
 import versione1.SocialNetwork;
 import versione1.User;
 
@@ -82,9 +83,10 @@ public class LoginController {
             if(checkRgCB.isSelected()){
                 if(social.doesUserExist(accessName) == false){
                     sessionUser = new User(accessName);
-                    social.addUser(sessionUser);
+                    social.registerNewUser(sessionUser); //registro un nuovo utente
+                    social.loginUser(sessionUser); //loggo l'utente creato (potremmo accorpare i due metodi in uno)
                     loadSecond();
-                    System.out.println("Utente creato: "+sessionUser.getUsername());
+                    System.out.println("Utente creato: " + social.getLoggedUser().getUsername());
                 }
                 else{
                     errorLbl.setTextFill(Color.RED);
@@ -96,10 +98,11 @@ public class LoginController {
                     errorLbl.setTextFill(Color.RED);
                     errorLbl.setText(ERRNORUSE);
                 }
-                else{
-                   sessionUser = social.findUserByName(accessName);
-                   loadSecond();
-                   System.out.println("Utente accesso: "+sessionUser.getUsername());
+                else {
+                    sessionUser = social.findUserByName(accessName);
+                    social.loginUser(sessionUser); //imposto l'utente attualmente loggato
+                    loadSecond();
+                    System.out.println("Utente loggato: " + social.getLoggedUser().getUsername());
 
                 }
 

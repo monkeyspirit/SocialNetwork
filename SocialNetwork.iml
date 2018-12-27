@@ -25,5 +25,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="gson-2.8.5" level="project" />
+    <orderEntry type="library" name="JavaFX SDK" level="project" />
   </component>
 </module>

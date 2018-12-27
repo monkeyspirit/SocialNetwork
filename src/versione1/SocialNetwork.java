@@ -1,5 +1,7 @@
 package versione1;
 
+import utilities.FileUtility;
+
 import java.util.ArrayList;
 
 public class SocialNetwork {
@@ -7,6 +9,9 @@ public class SocialNetwork {
 	//Attributi
 	private ArrayList<Category> categories;
 	private ArrayList<User> users;
+	private User loggedUser; //utente attualmente loggato
+	private FileUtility fileUtility;
+
 	
 	/**
 	 * Costruttore SocialNetwork
@@ -14,6 +19,7 @@ public class SocialNetwork {
 	public SocialNetwork() {
 		this.categories = new ArrayList<Category>();
 		this.users = new ArrayList<>();
+		this.fileUtility = new FileUtility();
 	}
 
 	//Metodi
@@ -27,7 +33,9 @@ public class SocialNetwork {
 
 	public ArrayList<User> getUsers() { return users;	}
 
-	public void addUser(User user) { this.users.add(user);	}
+	public void addUser(User user) {
+		this.users.add(user);
+	}
 
 	/**
 	 * Metodo per la ricerca di una categoria all'interno del Social Network, la ricerca
@@ -37,15 +45,15 @@ public class SocialNetwork {
 	 * @return
 	 */
 	public Category findCategoryByName(String name){
-		Category find = null;
+		Category found = null;
 
 		for(int i=0; i<categories.size(); i++){
 			if ( name.equals(categories.get(i).getName())){
-				find = categories.get(i);
+				found = categories.get(i);
 			}
 		}
 
-		return find;
+		return found;
 	}
 
 	/**
@@ -78,12 +86,44 @@ public class SocialNetwork {
 	}
 
 	public User findUserByName(String username){
-		User finded = null;
+		User found = null;
 		for(int i=0; i<users.size(); i++){
 			if(username.equals(users.get(i).getUsername())){
-				finded = users.get(i);
+				found = users.get(i);
 			}
 		}
-		return finded;
+		return found;
+	}
+
+	/**
+	 * Registra un nuovo utente, aggiungendolo alla lisa di utenti e aggiornando il file contenente la list
+	 * @param user
+	 */
+	public void registerNewUser(User user) {
+		addUser(user); //aggiungo utente all'array
+		updateUsersListFile(); //aggiorno il file degli utenti
+	}
+
+	public void loginUser(User loggedUser) {
+		this.loggedUser = loggedUser;
+	}
+
+	public User getLoggedUser() {
+		return loggedUser;
+	}
+
+	/**
+	 * legge il file conenente la lista di utenti registrati lo carica all'interno di users
+	 */
+	public void loadUsersListFromFile() {
+		this.users = fileUtility.readUsersList();
+	}
+
+	/**
+	 * Aggiorna il file contenente la lista degli utenti.
+	 */
+	private void updateUsersListFile () {
+		System.out.println("Aggiorno il file della lista di utenti");
+		fileUtility.writeUsersList(this.users);
 	}
 }
