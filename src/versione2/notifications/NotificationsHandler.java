@@ -1,4 +1,4 @@
-package versione1.notifications;
+package versione2.notifications;
 
 import utilities.FileUtility;
 import versione1.EventSoccerMatch;

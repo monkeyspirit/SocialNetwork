@@ -42,6 +42,10 @@ public abstract class Category {
 
 	public String toString() { return this.name; }
 
-
+	public void controlEventState(){
+		for(int i=0; i<events.size(); i++){
+			events.get(i).controlState();
+		}
+	}
 
 }

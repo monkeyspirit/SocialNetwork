@@ -1,6 +1,6 @@
 package versione1;
 
-import versione1.notifications.Notification;
+import versione2.notifications.Notification;
 
 import java.util.ArrayList;
 

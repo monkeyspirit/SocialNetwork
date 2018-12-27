@@ -36,6 +36,7 @@ public class CreateController {
     public static final String ERRENDTBFTIMEEQDT = "L'orario di conclusione non risulta valido in quanto precedente all'orario di inizio";
     public static final String MISSAGE = "Inserire la fascia di eta'";
     public static final String MISSGENDER = "Inserire il genere";
+    public static final String MISSDURDATE = "Inserire o la durata o il giorno e l'ora di termine";
 
 
 
@@ -44,7 +45,7 @@ public class CreateController {
     // ~~~~~ newEvent Stage ~~~~~~~~~~~
 
     @FXML
-    private Label durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
+    private Label durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
     @FXML
     private TextField titleTxtF, numPTxtF, placeTxtF, indTeeTxtF;
     @FXML
@@ -65,7 +66,7 @@ public class CreateController {
 
     private AgeGroup ageGroup;
     private ArrayList<Integer> ageRangeMin;
-    private String[] errorMsg = new  String[11];
+    private String[] errorMsg = new  String[12];
 
 
     // ~~~~~~ Campi FACOLTATIVI ~~~~~~~~
@@ -106,6 +107,7 @@ public class CreateController {
     private boolean indTeeIsVal = false;
     private boolean ageIsVal= false;
     private boolean genderIsVal = false;
+    private boolean durIsVal = false;
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -492,7 +494,16 @@ public class CreateController {
 
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // durata --> guardare end time e end date
-
+            if( (endDateDP.getValue() == null || endTimeTP.getValue() == null ) && durationIns == null ){
+                errorMsg[11] = MISSDURDATE;
+                durLbl.setTextFill(Color.RED);
+                durIsVal = false;
+            }
+            else {
+                errorMsg[11] = null;
+                durLbl.setTextFill(Color.BLACK);
+                durIsVal = true;
+            }
 
 
             // FACOLTATIVO
@@ -503,7 +514,7 @@ public class CreateController {
 
             switch (categoryIns) {
                 case SOCCER_NAME: {
-                    if (catIsVal && numIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && ageIsVal && genderIsVal) {
+                    if (catIsVal && numIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && ageIsVal && genderIsVal && durIsVal) {
 
                         if(endDateIns == null &&  durationIns !=null){
                             endDateIns = dateIns.plusDays(Integer.parseInt(durationIns));
@@ -520,31 +531,13 @@ public class CreateController {
                         match.addPartecipants(creator);
                         socialNetwork.getCategories().get(0).addEvent(match);
 
-//                        for(int i = 0; i<socialNetwork.getCategories().get(0).getEvents().size(); i++) {
-//                            System.out.println(socialNetwork.getCategories().get(0).getEvents());
-//                        }
 
                         thisStage.close();
-//                        System.out.println(match.getTitle().getValue());
-//                        System.out.println(match.getNumOfPartecipants().getValue());
-//                        System.out.println(match.getRegistrationDeadline().getValue());
-//                        System.out.println(match.getPlace().getValue());
-//                        System.out.println(match.getDate().getValue());
-//                        System.out.println(match.getTime().getValue());
-//                        System.out.println(match.getDuration().getValue());
-//                        System.out.println(match.getIndTee().getValue());
-//                        System.out.println(match.getTeeInclude().getValue());
-//                        System.out.println(match.getEndDate().getValue());
-//                        System.out.println(match.getEndTime().getValue());
-//                        System.out.println(match.getAgeRange().getValue());
-//                        System.out.println(match.getGender().getValue());
-//                        System.out.println(match.getNote().getValue());
-
 
                     }
                     else {
                         String msgPopUp = "";
-                        for(int i=1; i< 11; i++){
+                        for(int i=1; i< 12; i++){
                             if(errorMsg[i] != null){
                                 msgPopUp += errorMsg[i] + "\n";
                             }

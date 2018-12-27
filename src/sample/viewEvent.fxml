@@ -24,6 +24,9 @@
             <Label fx:id="ageLbl" layoutX="68.0" layoutY="491.0" />
             <Label fx:id="genderLbl" layoutX="68.0" layoutY="526.0" />
             <Label fx:id="creatorLbl" layoutX="70.0" layoutY="46.0" text="Creatore" />
+            <Label layoutX="67.0" layoutY="82.0" text="Stato" />
+
+
 
             <Label fx:id="titleLblEvent" layoutX="300.0" layoutY="119.0" prefHeight="21.0" prefWidth="197.0" />
             <Label fx:id="numPLblEvent" layoutX="300.0" layoutY="152.0" prefHeight="21.0" prefWidth="179.0" />
@@ -40,9 +43,9 @@
             <Label fx:id="ageLblEvent" layoutX="300.0" layoutY="491.0" prefHeight="21.0" prefWidth="195.0" />
             <Label fx:id="genderLblEvent" layoutX="300.0" layoutY="526.0" prefHeight="21.0" prefWidth="203.0" />
             <Label fx:id="creatorLblEvent" layoutX="300.0" layoutY="46.0" prefHeight="21.0" prefWidth="129.0" />
+            <Label fx:id="stateLblEvent" layoutX="300.0" layoutY="82.0" prefHeight="21.0" prefWidth="155.0" />
 
-            <Button layoutX="140.0" layoutY="628.0" mnemonicParsing="false" text="Iscriviti" onAction="#subScribe"/>
-
+            <Button layoutX="140.0" layoutY="628.0" mnemonicParsing="false" onAction="#subScribe" text="Iscriviti" />
 
 
          </children></AnchorPane>

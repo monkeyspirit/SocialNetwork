@@ -1,5 +1,8 @@
 package versione1;
 
+import versione2.State;
+import versione2.StateValue;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -35,7 +38,6 @@ public abstract class Event {
 
 	//Attributi della classe Event
     private String type; //serve per la serializzazione/deserializzazione in modo da poter distinguere il tipo specifico di Event
-
 	private Field title = new Field(TITLE_NAME,TITLE_DESCRIPTION);
 	private Field numOfPartecipants = new Field(NUMPLAY_NAME, NUMPLAY_DESCRIPTION);
 	private Field registrationDeadline = new Field(REGDEADLINE_NAME, REGDEADLINE_DESCRIPTION);
@@ -48,6 +50,8 @@ public abstract class Event {
 	private Field endDate = new Field(ENDDATE_NAME,ENDDATE_DESCRIPTION);
 	private Field endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
 	private Field note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
+
+	private State state;
 
 	private String creator; //serve per capire chi è il creatore dell'utente
 
@@ -94,6 +98,9 @@ public abstract class Event {
         this.endTime.setValue(endTimeIns);
         this.note.setValue(noteIns);
         this.creator = creator;
+        this.state = new State();
+        this.state.setStateValue(StateValue.Aperta);  // Appena costruisco l'evento il suo stato è attivo
+        this.state.setSwitchDate(deadLineIns);  // Appena costruisco l'evento setto la switch date alla deadLine
         partecipants = new ArrayList<>();
     }
 
@@ -108,6 +115,9 @@ public abstract class Event {
         this.type = type;
         this.title.setValue(name);
         this.numOfPartecipants.setValue(Par);
+        this.state = new State();
+        this.state.setStateValue(StateValue.Aperta);  // Appena costruisco l'evento il suo stato è attivo
+        this.state.setSwitchDate(null);  // Appena costruisco l'evento setto la switch date alla deadLine
         this.creator = creator;
         partecipants = new ArrayList<>();
     }
@@ -166,6 +176,9 @@ public abstract class Event {
 
     public ArrayList<String> getPartecipants() { return partecipants; }
 
+    public State getState() { return state; }
+
+
     public void addPartecipants(String addThis){
 
         // CI DEVE ESSERE UN IF CHE CONTROLLA CHE LO STATO DELLA PROPOSTA NON SIA CHIUSO, O CHE
@@ -197,5 +210,24 @@ public abstract class Event {
         }
 
         return isNumMax;
+    }
+
+    public void controlState(){
+
+       // if(LocalDate.now().equals(state.getSwitchDate())){
+
+            if(partecipants.size() == (int) numOfPartecipants.getValue()){
+                state.setStateValue(StateValue.Chiusa);
+
+//                if(LocalDate.now().isAfter((LocalDate) endDate.getValue())){
+//                    state.setStateValue(StateValue.Conclusa);
+//                }
+
+            }
+            else if (partecipants.size() < (int) numOfPartecipants.getValue()){
+                state.setStateValue(StateValue.Fallita);
+            }
+
+        //}
     }
 }

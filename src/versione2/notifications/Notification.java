@@ -1,4 +1,4 @@
-package versione1.notifications;
+package versione2.notifications;
 
 public class Notification {
 

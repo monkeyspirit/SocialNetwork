@@ -14,7 +14,7 @@ public class EventController {
     public static final String SOCCER_NAME = "Partite di calcio";
 
     @FXML
-    private Label ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
+    private Label stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
 
     EventSoccerMatch eventSoccerSelected;
     Category catSelected;
@@ -38,6 +38,8 @@ public class EventController {
     private void initialize(){
 
         creatorLblEvent.setText(eventSoccerSelected.getCreator());
+
+        stateLblEvent.setText(String.valueOf(eventSoccerSelected.getState().getStateValue()));
 
         if(eventSoccerSelected.getTitle().getValue() != null){
             titleLblEvent.setText((String) eventSoccerSelected.getTitle().getValue());
