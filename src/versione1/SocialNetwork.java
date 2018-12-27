@@ -77,7 +77,7 @@ public class SocialNetwork {
 		boolean exist = false;
 
 		for(int i=0; i<users.size(); i++){
-			if(accessName.equals(users.get(i).getUsername())){
+			if(accessName.equalsIgnoreCase(users.get(i).getUsername())){
 				exist = true;
 			}
 		}
@@ -88,7 +88,7 @@ public class SocialNetwork {
 	public User findUserByName(String username){
 		User found = null;
 		for(int i=0; i<users.size(); i++){
-			if(username.equals(users.get(i).getUsername())){
+			if(username.equalsIgnoreCase(users.get(i).getUsername())){
 				found = users.get(i);
 			}
 		}
