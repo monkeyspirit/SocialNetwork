@@ -45,7 +45,7 @@
             <Label fx:id="creatorLblEvent" layoutX="300.0" layoutY="46.0" prefHeight="21.0" prefWidth="129.0" />
             <Label fx:id="stateLblEvent" layoutX="300.0" layoutY="82.0" prefHeight="21.0" prefWidth="155.0" />
 
-            <Button layoutX="140.0" layoutY="628.0" mnemonicParsing="false" onAction="#subScribe" text="Iscriviti" />
+            <Button fx:id="subScribeBtn" layoutX="140.0" layoutY="628.0" mnemonicParsing="false" onAction="#subScribe" text="Iscriviti" />
 
 
          </children></AnchorPane>

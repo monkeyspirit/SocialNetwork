@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import versione1.Category;
 import versione1.Event;
@@ -15,6 +16,8 @@ public class EventController {
 
     @FXML
     private Label stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
+    @FXML
+    private Button subScribeBtn;
 
     EventSoccerMatch eventSoccerSelected;
     Category catSelected;
@@ -36,6 +39,8 @@ public class EventController {
      * Creo i bottoni per l'iscrizione all'evento
      */
     private void initialize(){
+
+        subScribeBtn.setDisable(eventSoccerSelected.alrRegister(sessionUser));
 
         creatorLblEvent.setText(eventSoccerSelected.getCreator());
 
@@ -136,7 +141,6 @@ public class EventController {
 
     public void subScribe(){
 
-
             if (!eventSoccerSelected.alrRegister(sessionUser)) {
 
                 if(eventSoccerSelected.numParEQMax()){
@@ -144,6 +148,7 @@ public class EventController {
                 }
                 else{
                     eventSoccerSelected.addPartecipants(sessionUser);
+                    subScribeBtn.setDisable(true);
                 }
 
             } else {
