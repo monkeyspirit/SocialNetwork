@@ -51,4 +51,8 @@ public class ControlThread extends Thread {
         }
 
     }
+
+    public static void deleteAll(){
+        Thread.interrupted();
+    }
 }

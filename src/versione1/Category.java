@@ -48,4 +48,28 @@ public abstract class Category {
 		}
 	}
 
+	public Event findEventByName(String event){
+	    Event find = null;
+
+	    for(int i=0; i<events.size(); i++){
+	        if(event.equals(events.get(i).getTitle().getValue())){
+	            find = events.get(i);
+            }
+        }
+
+	    return find;
+    }
+
+    public boolean arlExistEvent(String event){
+        boolean find = false;
+
+        for(int i=0; i<events.size(); i++){
+            if(event.equalsIgnoreCase((String) events.get(i).getTitle().getValue())){
+                find = true;
+            }
+        }
+
+        return find;
+    }
+
 }

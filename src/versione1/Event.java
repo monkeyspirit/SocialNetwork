@@ -190,12 +190,12 @@ public abstract class Event {
 
     }
 
-    public boolean alrRegister(String controlThis){
+    public boolean alrRegister(String controlThisUser){
 
         boolean alrReg = false;
 
         for(int i=0; i< partecipants.size(); i++){
-            if( controlThis.equals(partecipants.get(i))){
+            if( controlThisUser.equals(partecipants.get(i))){
                 alrReg = true;
             }
         }

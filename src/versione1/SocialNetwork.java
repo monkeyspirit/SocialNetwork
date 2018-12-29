@@ -126,4 +126,23 @@ public class SocialNetwork {
 		System.out.println("Aggiorno il file della lista di utenti");
 		fileUtility.writeUsersList(this.users);
 	}
+
+	public ArrayList<String> findEventByUserName(String userSession){
+
+		ArrayList<String> eventsUser = new ArrayList<String>();
+
+		for(int i=0; i<categories.size(); i++){
+			Category catSel = categories.get(i);
+			ArrayList<Event> eventsByCat = catSel.getEvents();
+			for(int j=0; j < eventsByCat.size(); j++){
+				if(eventsByCat.get(j).alrRegister(userSession)== true){
+					eventsUser.add((String) eventsByCat.get(j).getTitle().getValue());
+				}
+			}
+
+		}
+
+		return eventsUser;
+	}
+
 }

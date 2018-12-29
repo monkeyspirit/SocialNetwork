@@ -12,6 +12,8 @@ import versione1.SocialNetwork;
 import versione1.User;
 import versione2.ControlThread;
 
+import static versione2.ControlThread.deleteAll;
+
 
 public class Main extends Application {
 
@@ -46,7 +48,7 @@ public class Main extends Application {
 
         User system = social.getUsers().get(0); //prendo il primo utente di quella lista (non volevo cancellarti l'esempio)
 
-        EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a Mompiano", 1, system.getUsername() );
+        EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a Mompiano", 5, system.getUsername() );
         eventSoccerMatch1.addPartecipants(system.getUsername());
         EventSoccerMatch eventSoccerMatch2 = new EventSoccerMatch("Partita a Remedello", 2, system.getUsername());
         eventSoccerMatch2.addPartecipants(system.getUsername());
@@ -62,6 +64,11 @@ public class Main extends Application {
 
         loginContr.setSocialNetwork(social);
 
+        ControlThread t1 = new ControlThread();
+        t1.start();
+        t1.setSocialNetwork(social);
+
+
         // Imposto lo stage e la scene principali
         Parent root =  (Parent) loader.load();
         Scene scene = new Scene(root, 600, 400);
@@ -69,21 +76,12 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-
-        ControlThread t1 = new ControlThread();
-        t1.start();
-        t1.setSocialNetwork(social);
-
-
     }
 
 
     public static void main(String[] args) {
 
-
         launch(args);
-
-
 
     }
 

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
@@ -30,11 +31,13 @@ public class SampleController {
     // ~~~~~ Sample Stage ~~~~~~~~~~~~~
 
     @FXML
-    private ListView categoryListView;
-    @FXML
-    private ListView eventListView;
+    private ListView categoryListView, eventListView, userEventListView;
+
     @FXML
     private Tab userTb;
+
+    @FXML
+    private Button refreshBtn;
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -48,8 +51,10 @@ public class SampleController {
 
     private ArrayList<String> catName;
     private ArrayList<String> eventName;
+    private ArrayList<String> userEventName;
     private ObservableList<String> obsCatName;
     private ObservableList<String> obsEventName;
+    private ObservableList<String> obsUserEvent;
 
     private Stage view, create;
 
@@ -70,6 +75,18 @@ public class SampleController {
 
         userTb.setText(sessionUser.getUsername());
 
+        System.out.println("Carico la View Utente di: "+sessionUser.getUsername());
+        catName = new ArrayList<>();
+
+        for(Category category : socialNetwork.getCategories()){
+            catName.add(category.getName());
+        }
+
+        obsCatName = FXCollections.observableArrayList(catName);
+
+        categoryListView.setItems(obsCatName);
+
+
         categoryListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -80,7 +97,10 @@ public class SampleController {
                     eventName = new ArrayList<>();
 
                     for (Event match : catSelected.getEvents()) {
-                        eventName.add((String) match.getTitle().getValue());
+                        if(match.getState().getStateValue().toString().equals("Aperta")){
+                            eventName.add((String) match.getTitle().getValue());
+                        }
+
                     }
 
                     obsEventName = FXCollections.observableArrayList(eventName);
@@ -91,10 +111,7 @@ public class SampleController {
                         public void handle(MouseEvent event) {
 
                             if(!eventListView.getSelectionModel().isEmpty()) {
-                                ArrayList<Event> events = socialNetwork.findCategoryByIndex(categoryListView.getSelectionModel().getSelectedIndex()).getEvents();
-                                int indexEvent = eventListView.getSelectionModel().getSelectedIndex();
-
-                                eventSelected = events.get(indexEvent);
+                                eventSelected = catSelected.findEventByName((String) eventListView.getSelectionModel().getSelectedItem());
                                 try {
                                     openEventView();
                                 } catch (IOException e) {
@@ -110,19 +127,38 @@ public class SampleController {
 
         });
 
+        userEventName = socialNetwork.findEventByUserName(sessionUser.getUsername());
+        obsUserEvent = FXCollections.observableArrayList(userEventName);
+
+        userEventListView.setItems(obsUserEvent);
+
+        refreshBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                userEventName = socialNetwork.findEventByUserName(sessionUser.getUsername());
+                obsUserEvent = FXCollections.observableArrayList(userEventName);
+
+                userEventListView.setItems(obsUserEvent);
+            }
+        });
+
+        userEventListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+                if(!userEventListView.getSelectionModel().isEmpty()) {
+                    eventSelected = catSelected.findEventByName((String) userEventListView.getSelectionModel().getSelectedItem());
+                    try {
+                        openEventView();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        });
 
 
-
-        System.out.println("Carico la View Utente di: "+sessionUser.getUsername());
-        catName = new ArrayList<>();
-
-        for(Category category : socialNetwork.getCategories()){
-            catName.add(category.getName());
-        }
-
-        obsCatName = FXCollections.observableArrayList(catName);
-
-        categoryListView.setItems(obsCatName);
 
     }
 
@@ -191,8 +227,16 @@ public class SampleController {
 
         loginContr.setSocialNetwork(socialNetwork);
 
-        view.close();
-        create.close();
+        if(view != null){
+            view.close();
+        }
+        if(create != null){
+            create.close();
+        }
+
+
+
+
         Stage newLogin = Main.getStage();
 
         // Imposto lo stage e la scene principali

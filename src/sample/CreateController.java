@@ -37,7 +37,7 @@ public class CreateController {
     public static final String MISSAGE = "Inserire la fascia di eta'";
     public static final String MISSGENDER = "Inserire il genere";
     public static final String MISSDURDATE = "Inserire o la durata o il giorno e l'ora di termine";
-
+    public static final String ALREXISTTIT = "Esiste gia' un evento con quest titolo";
 
 
 
@@ -45,7 +45,7 @@ public class CreateController {
     // ~~~~~ newEvent Stage ~~~~~~~~~~~
 
     @FXML
-    private Label durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
+    private Label titleLbl,durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
     @FXML
     private TextField titleTxtF, numPTxtF, placeTxtF, indTeeTxtF;
     @FXML
@@ -66,7 +66,7 @@ public class CreateController {
 
     private AgeGroup ageGroup;
     private ArrayList<Integer> ageRangeMin;
-    private String[] errorMsg = new  String[12];
+    private String[] errorMsg = new  String[13];
 
 
     // ~~~~~~ Campi FACOLTATIVI ~~~~~~~~
@@ -99,6 +99,7 @@ public class CreateController {
 
 
     private boolean catIsVal = false;
+    private boolean titIsVal = false;
     private boolean numIsVal = false;
     private boolean deadLineIsVal = false;
     private boolean placeIsVal = false;
@@ -269,7 +270,19 @@ public class CreateController {
             // Acquisisco se c e il titolo
             // FACOLTATIVO
             //titolo
-            titleIns = titleTxtF.getText();
+            if(titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).arlExistEvent(titleTxtF.getText()) == true){
+                errorMsg[12] = ALREXISTTIT;
+                titleLbl.setTextFill(Color.RED);
+                titIsVal = false;
+            }
+            else if (titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).arlExistEvent(titleTxtF.getText()) == false){
+                titleIns = titleTxtF.getText();
+                errorMsg[12] = null;
+                titleLbl.setTextFill(Color.BLACK);
+                titIsVal = true;
+
+            }
+
 
             // Acquisisco il numero di partecipanti, controllo sia inserito e che sia un valore numerico
             // OBBLIGATORIO
@@ -514,7 +527,7 @@ public class CreateController {
 
             switch (categoryIns) {
                 case SOCCER_NAME: {
-                    if (catIsVal && numIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && ageIsVal && genderIsVal && durIsVal) {
+                    if (catIsVal && titIsVal && numIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && ageIsVal && genderIsVal && durIsVal) {
 
                         if(endDateIns == null &&  durationIns !=null){
                             endDateIns = dateIns.plusDays(Integer.parseInt(durationIns));
@@ -537,7 +550,7 @@ public class CreateController {
                     }
                     else {
                         String msgPopUp = "";
-                        for(int i=1; i< 12; i++){
+                        for(int i=1; i< errorMsg.length; i++){
                             if(errorMsg[i] != null){
                                 msgPopUp += errorMsg[i] + "\n";
                             }
