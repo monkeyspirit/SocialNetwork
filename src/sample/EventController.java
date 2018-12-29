@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import versione1.Category;
 import versione1.Event;
 import versione1.EventSoccerMatch;
+import versione2.StateValue;
 
 import javax.swing.*;
 import java.time.LocalDate;
@@ -15,7 +16,7 @@ public class EventController {
     public static final String SOCCER_NAME = "Partite di calcio";
 
     @FXML
-    private Label stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
+    private Label placesAvbLbl, stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
     @FXML
     private Button subScribeBtn;
 
@@ -40,7 +41,7 @@ public class EventController {
      */
     private void initialize(){
 
-        subScribeBtn.setDisable(eventSoccerSelected.alrRegister(sessionUser));
+        subScribeBtn.setDisable(eventSoccerSelected.alrRegister(sessionUser) ||eventSoccerSelected.getState().getStateValue().equals(StateValue.Chiusa) == true);
 
         creatorLblEvent.setText(eventSoccerSelected.getCreator());
 
@@ -137,21 +138,20 @@ public class EventController {
             }
         }
 
+        int postiDisponibili = (int) eventSoccerSelected.getNumOfPartecipants().getValue() - eventSoccerSelected.getPartecipants().size();
+        placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
+
     }
 
     public void subScribe(){
 
             if (!eventSoccerSelected.alrRegister(sessionUser)) {
-
-                if(eventSoccerSelected.numParEQMax()){
-                    JOptionPane.showMessageDialog(null, "Attenzione: numero massimo di partecipanti raggiunto");
-                }
-                else{
                     eventSoccerSelected.addPartecipants(sessionUser);
                     subScribeBtn.setDisable(true);
-                }
-
-            } else {
+                    int postiDisponibili = (int) eventSoccerSelected.getNumOfPartecipants().getValue() - eventSoccerSelected.getPartecipants().size();
+                    placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
+            }
+            else {
                 JOptionPane.showMessageDialog(null, "Attenzione: risulti precedentemente iscritto");
             }
 

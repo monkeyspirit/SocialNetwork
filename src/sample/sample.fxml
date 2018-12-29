@@ -20,18 +20,21 @@
                   </AnchorPane>
                 <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
                      <children>
-                        <ListView fx:id="eventListView"  minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="eventListView" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
               </items>
             </SplitPane>
          </content>
       </Tab>
-      <Tab fx:id="userTb" closable="false" >
+      <Tab fx:id="userTb" closable="false">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="newEvent" layoutX="223.0" layoutY="127.0" mnemonicParsing="false" onAction="#openEventEditor" text="Crea evento" />
+
+                   <Button fx:id="newEventBtn" layoutX="223.0" layoutY="127.0" mnemonicParsing="false" onAction="#openEventEditor" text="Crea evento" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="223.0" AnchorPane.topAnchor="127.0" />
+                   <Button fx:id="exitBtn" layoutX="470.0" layoutY="283.0" mnemonicParsing="false" onAction="#exitUser" prefHeight="34.0" prefWidth="62.0" text="Esci" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="470.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="283.0" />
+
                </children></AnchorPane>
         </content>
       </Tab>

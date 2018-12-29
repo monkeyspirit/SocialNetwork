@@ -5,9 +5,9 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="778.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="740.0" prefWidth="568.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="775.0" prefWidth="572.0">
          <children>
             <Label fx:id="titleLbl" layoutX="70.0" layoutY="119.0" prefHeight="20.0" prefWidth="49.0" text="Titolo" />
             <Label fx:id="numPLbl" layoutX="70.0" layoutY="152.0" text="Numero partecipanti" />
@@ -46,6 +46,7 @@
             <Label fx:id="stateLblEvent" layoutX="300.0" layoutY="82.0" prefHeight="21.0" prefWidth="155.0" />
 
             <Button fx:id="subScribeBtn" layoutX="140.0" layoutY="628.0" mnemonicParsing="false" onAction="#subScribe" text="Iscriviti" />
+            <Label fx:id="placesAvbLbl" layoutX="120.0" layoutY="666.0" prefHeight="21.0" prefWidth="183.0" />
 
 
          </children></AnchorPane>

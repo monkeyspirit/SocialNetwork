@@ -11,29 +11,29 @@ public abstract class Event {
 
     //Costanti della classe Event
 	public static final String TITLE_NAME = "Titolo";
-    public static final String TITLE_DESCRIPTION = "Campo facoltativo che consiste in un nome di fantasia attribuito allâ€™evento";
+    public static final String TITLE_DESCRIPTION = "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento";
     public static final String NUMPLAY_NAME = "Numero di partecipanti";
     public static final String NUMPLAY_DESCRIPTION = "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento";
     public static final String REGDEADLINE_NAME = "Termine ultimo iscrizione";
     public static final String REGDEADLINE_DESCRIPTION = "Campo obbligatorio che inidica l'ultima data possibile per iscriversi";
     public static final String PLACE_NAME = "Luogo";
-    public static final String PLACE_DESCRIPTION = "Campo obbligatorio che indica lâ€™indirizzo del luogo che ospiterÃ  lâ€™evento oppure, se lâ€™evento Ã¨ itinerante, il luogo di ritrovo dei partecipanti";
+    public static final String PLACE_DESCRIPTION = "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti";
     public static final String DATE_NAME = "Data";
-    public static final String DATE_DESCRIPTION = "Campo obbligatorio che indica la data in cui lâ€™evento proposto deve svolgersi o, nel caso lâ€™evento non termini nello stesso giorno in cui ha inizio, la data di inizio dellâ€™evento";
+    public static final String DATE_DESCRIPTION = "Campo obbligatorio che indica la data in cui l'evento proposto deve svolgersi o, nel caso l'evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell'evento";
     public static final String TIME_NAME = "Ora";
-    public static final String TIME_DESCRIPTION = "Campo obbligatorio che indica lâ€™ora in cui i partecipanti dovranno trovarsi nel luogo â€œLuogoâ€� in data â€œDataâ€� per dare inizio allâ€™evento";
+    public static final String TIME_DESCRIPTION = "Campo obbligatorio che indica l'ora in cui i partecipanti dovranno trovarsi nel luogo 'Luogo' in data 'Data' per dare inizio all'evento";
     public static final String DURATION_NAME = "Durata";
-    public static final String DURATION_DESCRIPTION =  "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piÃ¹ giorni consecutivi";
+    public static final String DURATION_DESCRIPTION =  "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu' giorni consecutivi";
     public static final String INDTEE_NAME = "Quota individuale";
-    public static final String INDTEE_DESCRIPTION = "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante allâ€™iniziativa dovrÃ  sostenere (si noti che la spesa puÃ² anche essere nulla)";
+    public static final String INDTEE_DESCRIPTION = "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all'iniziativa dovra'  sostenere (si noti che la spesa puo' anche essere nulla)";
     public static final String TEEINC_NAME = "Compreso nella quota";
-    public static final String TEEINC_DESCRIPTION = "Campo facoltativo che indica tutte le voci di spesa comprese nellâ€™ammontare indicato nella â€œQuota individualeâ€�";
+    public static final String TEEINC_DESCRIPTION = "Campo facoltativo che indica tutte le voci di spesa comprese nell'ammontare indicato nella 'Quota individuale'";
     public static final String ENDDATE_NAME = "Data conclusiva";
-    public static final String ENDDATE_DESCRIPTION = "Campo facoltativo che fissa la data di conclusione dellâ€™evento";
+    public static final String ENDDATE_DESCRIPTION = "Campo facoltativo che fissa la data di conclusione dell'evento";
     public static final String ENDTIME_NAME = "Ora conclusiva";
-    public static final String ENDTIME_DESCRIPTION = "Campo facoltativo che stima lâ€™ora di conclusione dellâ€™evento";
+    public static final String ENDTIME_DESCRIPTION = "Campo facoltativo che stima l'ora di conclusione dell'evento";
     public static final String NOTE_NAME = "Note";
-    public static final String NOTE_DESCRIPTION = "Campo facoltativo contenente informazioni aggiuntive circa lâ€™evento";
+    public static final String NOTE_DESCRIPTION = "Campo facoltativo contenente informazioni aggiuntive circa l'evento";
 
 
 	//Attributi della classe Event
@@ -66,7 +66,7 @@ public abstract class Event {
 	}
 
     /**
-     * Coatruttore degli eventi, vengono settati tutti i valori dei cmapi e quello dell'utente creatore
+     * Costruttore degli eventi, vengono settati tutti i valori dei cmapi e quello dell'utente creatore
      * @param type
      * @param titleIns
      * @param numParIns
@@ -212,6 +212,18 @@ public abstract class Event {
         return isNumMax;
     }
 
+    public boolean deadLineAfter(){
+        boolean deadLine = false;
+
+        LocalDate deadLineReg = (LocalDate) registrationDeadline.getValue();
+
+        if(deadLineReg.isAfter(LocalDate.now())){
+            deadLine = true;
+        }
+
+        return deadLine;
+    }
+
     public void controlState(){
 
        // if(LocalDate.now().equals(state.getSwitchDate())){
@@ -224,9 +236,12 @@ public abstract class Event {
 //                }
 
             }
-            else if (partecipants.size() < (int) numOfPartecipants.getValue()){
-                state.setStateValue(StateValue.Fallita);
+            else{
+                state.setStateValue(StateValue.Aperta);
             }
+//            else if (partecipants.size() < (int) numOfPartecipants.getValue()){
+//                state.setStateValue(StateValue.Fallita);
+//            }
 
         //}
     }

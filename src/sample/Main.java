@@ -10,6 +10,7 @@ import utilities.FileUtility;
 import versione1.SoccerMatch;
 import versione1.SocialNetwork;
 import versione1.User;
+import versione2.ControlThread;
 
 
 public class Main extends Application {
@@ -68,14 +69,25 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+
+        ControlThread t1 = new ControlThread();
+        t1.start();
+        t1.setSocialNetwork(social);
+
+
     }
 
 
     public static void main(String[] args) {
 
+
         launch(args);
 
+
+
     }
+
+
 
 
 

@@ -20,6 +20,8 @@ import versione1.User;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.sun.javafx.scene.control.skin.Utils.getResource;
+
 public class SampleController {
 
     public static final String SOCCER_NAME = "Partite di calcio";
@@ -48,6 +50,8 @@ public class SampleController {
     private ArrayList<String> eventName;
     private ObservableList<String> obsCatName;
     private ObservableList<String> obsEventName;
+
+    private Stage view, create;
 
 
 
@@ -122,6 +126,10 @@ public class SampleController {
 
     }
 
+    /**
+     * Metodo per la creazione di un nuovo evento, chiama il controller dedicato
+     * @throws IOException
+     */
     public void openEventView() throws IOException {
 
         FXMLLoader loaderEvent = new FXMLLoader(Main.class.getResource("viewEvent.fxml"));
@@ -134,7 +142,7 @@ public class SampleController {
         eventController.setSessionUser(sessionUser.getUsername());
 
 
-        Stage view = new Stage();
+        view = new Stage();
 
         Parent eventView = loaderEvent.load();
         Scene sceneEvent = new Scene(eventView, 600, 400);
@@ -162,7 +170,7 @@ public class SampleController {
         createController.setCreator(sessionUser.getUsername());
 
 
-        Stage create = new Stage();
+        create = new Stage();
 
         createController.setThisStage(create);
         Parent eventCreate =  (Parent) loaderCreate.load();
@@ -171,8 +179,30 @@ public class SampleController {
         create.setScene(scene);
         create.show();
 
-
     }
+
+
+    public void exitUser() throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml"));
+        LoginController loginContr = new LoginController();
+
+        loader.setController(loginContr);
+
+        loginContr.setSocialNetwork(socialNetwork);
+
+        view.close();
+        create.close();
+        Stage newLogin = Main.getStage();
+
+        // Imposto lo stage e la scene principali
+        Parent root =  (Parent) loader.load();
+        Scene scene = new Scene(root, 600, 400);
+        newLogin.setTitle("Accesso");
+        newLogin.setScene(scene);
+        newLogin.show();
+    }
+
 
 
 
