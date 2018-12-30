@@ -42,11 +42,7 @@ public abstract class Category {
 
 	public String toString() { return this.name; }
 
-	public void controlEventState(){
-		for(int i=0; i<events.size(); i++){
-			events.get(i).controlState();
-		}
-	}
+
 
 	public Event findEventByName(String event){
 	    Event find = null;
@@ -72,4 +68,9 @@ public abstract class Category {
         return find;
     }
 
+	public void controlEventState(){
+		for(int i=0; i<events.size(); i++){
+			events.get(i).controlState();
+		}
+	}
 }

@@ -14,8 +14,8 @@ public class Notification {
         this.message = message;
     }
 
-    public void setRead (boolean read) {
-        this.read = read;
+    public void setRead () {
+        this.read = true;
     }
 
     public String getMessage() {

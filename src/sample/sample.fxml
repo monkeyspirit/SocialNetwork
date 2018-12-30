@@ -33,24 +33,24 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
 
-                   <Button fx:id="newEventBtn" layoutX="223.0" layoutY="127.0" mnemonicParsing="false" onAction="#openEventEditor" text="Crea evento" />
+                   <Button fx:id="newEventBtn" layoutX="183.0" layoutY="130.0" mnemonicParsing="false" onAction="#openEventEditor" prefHeight="31.0" prefWidth="106.0" text="Crea evento" />
                    <Button fx:id="exitBtn" layoutX="470.0" layoutY="283.0" mnemonicParsing="false" onAction="#exitUser" prefHeight="34.0" prefWidth="62.0" text="Esci" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="470.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="283.0" />
 
-                   <ScrollPane layoutX="14.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0">
+                   <ScrollPane layoutX="14.0" layoutY="66.0" prefHeight="189.0" prefWidth="163.0">
                      <content>
-                        <ListView fx:id="userEventListView" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="userEventListView" prefHeight="201.0" prefWidth="169.0" />
                      </content></ScrollPane>
                   <Button fx:id="refreshEventBtn" layoutX="14.0" layoutY="35.0" mnemonicParsing="false" text="Ricarica lista eventi" />
-                  <ScrollPane layoutX="332.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0">
+                  <ScrollPane layoutX="300.0" layoutY="66.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                      <AnchorPane prefHeight="211.0" prefWidth="234.0">
                            <children>
-                              <ListView fx:id="notificationListView" prefHeight="200.0" prefWidth="200.0" />
+                              <ListView fx:id="notificationListView" prefHeight="327.0" prefWidth="466.0" />
                            </children>
                         </AnchorPane>
                     </content>
                   </ScrollPane>
-                  <Button fx:id="refreshNotBtn" layoutX="332.0" layoutY="35.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="184.0" text="Ricarica lista notifiche" />
+                  <Button fx:id="refreshNotBtn" layoutX="300.0" layoutY="35.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="184.0" text="Ricarica lista notifiche" />
 
                </children></AnchorPane>
         </content>

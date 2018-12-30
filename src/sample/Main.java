@@ -12,9 +12,6 @@ import versione1.SocialNetwork;
 import versione1.User;
 import versione2.ControlThread;
 
-import static versione2.ControlThread.deleteAll;
-
-
 public class Main extends Application {
 
     private static Stage guiStage;

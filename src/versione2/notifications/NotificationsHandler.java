@@ -1,8 +1,10 @@
 package versione2.notifications;
 
 import utilities.FileUtility;
+import versione1.Event;
 import versione1.EventSoccerMatch;
 import versione1.User;
+import versione2.StateValue;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -20,17 +22,18 @@ public class NotificationsHandler {
     public static final String OLD_EVENTS_FILE_PATH = " "; //file degli eventi salvati dopo l'ultima chiusura
 
     public static final String MSG_CLOSED = " è ufficialmente chiusa e inizierà il giorno: ";
-    public static final String MSG_FAILED = " è fallita";
+    public static final String MSG_FAILED = " è fallita in quanto non è stato raggiunto il numero minimo di partecipanti.";
     public static final String MSG_TERMINATED = " si è conclusa con successo.";
+    public static final String MSG_NEW = " è stato creato mentre non c'eri.";
 
 
     public NotificationsHandler() {
-
     }
 
-    public ArrayList<Notification> getSoccerMatchNotifications(User user, ArrayList<EventSoccerMatch> currentEvents) throws FileNotFoundException {
+    public ArrayList<Notification> getSoccerMatchNotifications(User user, ArrayList<Event> currentEvents) throws FileNotFoundException {
         ArrayList<Notification> notifications = new ArrayList<>();
-        ArrayList<EventSoccerMatch> oldEvents = new FileUtility().getUserLocalSoccerMatchEvents(user);
+
+//        ArrayList<EventSoccerMatch> oldEvents = new FileUtility().getUserLocalSoccerMatchEvents(user);
         /* Adesso devo confrontare le due liste currentEvents e oldEvents per ottenere
            informazioni come:
            1) nuovi eventi creati da altri utenti mentre ero offline: confronto
@@ -44,9 +47,41 @@ public class NotificationsHandler {
         String message = buildNotification...();
             creo e aggiungo la notifica
         notifications.add(new Notification(message));
+
         */
 
+//        for(Event event: currentEvents){
+//                if(!oldEvents.contains(event)){
+//                   String messageNew = buildNotificationNewEvent((String) event.getTitle().getValue());
+//                   notifications.add(new Notification(messageNew));
+//                }
+//        }
+
+        for (Event event: currentEvents) {
+            if(event.getState().getStateValue().equals(StateValue.Chiusa)){
+                String messageClosed = buildNotificationClosed((String) event.getTitle().getValue());
+                notifications.add(new Notification(messageClosed));
+            }
+            else if (event.getState().getStateValue().equals(StateValue.Fallita)){
+                String messageFailed = buildNotificationFailed((String) event.getTitle().getValue());
+                notifications.add(new Notification(messageFailed));
+            }
+            else if(event.getState().getStateValue().equals(StateValue.Conclusa)){
+                String messageConclused = buildNotificationTerminated((String) event.getTitle().getValue());
+                notifications.add(new Notification(messageConclused));
+            }
+        }
+
         return notifications;
+    }
+
+    /**
+     * Costruisce il messaggio della notifica per un evento nuovo
+     * @param eventName nome dell'evento
+     */
+    private String buildNotificationNewEvent (String eventName) {
+        String message = eventName + MSG_NEW;
+        return message;
     }
 
     /**
@@ -56,6 +91,11 @@ public class NotificationsHandler {
      */
     private String buildNotificationClosed (String eventName, Date startDate) {
         String message = eventName + MSG_CLOSED + startDate;
+        return message;
+    }
+
+    private String buildNotificationClosed (String eventName) {
+        String message = eventName + MSG_CLOSED;
         return message;
     }
 

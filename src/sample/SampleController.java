@@ -130,7 +130,7 @@ public class SampleController {
 
         });
 
-        userEventName = socialNetwork.findEventByUserName(sessionUser.getUsername());
+        userEventName = socialNetwork.findEventByUserNameS(sessionUser.getUsername());
         obsUserEvent = FXCollections.observableArrayList(userEventName);
 
         userEventListView.setItems(obsUserEvent);
@@ -138,10 +138,11 @@ public class SampleController {
         refreshEventBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                userEventName = socialNetwork.findEventByUserName(sessionUser.getUsername());
+                userEventName = socialNetwork.findEventByUserNameS(sessionUser.getUsername());
                 obsUserEvent = FXCollections.observableArrayList(userEventName);
 
                 userEventListView.setItems(obsUserEvent);
+
             }
         });
 
@@ -164,6 +165,7 @@ public class SampleController {
 
         notifyName = sessionUser.getNotificationsMessage();
         notificationListView.setItems(FXCollections.observableArrayList(notifyName));
+
 
         refreshNotBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

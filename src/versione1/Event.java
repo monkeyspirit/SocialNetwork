@@ -180,16 +180,11 @@ public abstract class Event {
 
 
     public void addPartecipants(String addThis){
-
-        // CI DEVE ESSERE UN IF CHE CONTROLLA CHE LO STATO DELLA PROPOSTA NON SIA CHIUSO, O CHE
-        // LA DATA DI SCADENZA NON SIA GIA PASSATA, TUTTO CIO VA NELLA GRAFICA PERO
-        // if(stato==ok && dataTermine.isAfter ){
-
         partecipants.add(addThis);
-        // }
 
     }
 
+    // Controlla se un utente è già registrato nella lista partecipanti
     public boolean alrRegister(String controlThisUser){
 
         boolean alrReg = false;
@@ -202,6 +197,7 @@ public abstract class Event {
         return alrReg;
     }
 
+    // Controlla se il numero di utenti è uguale al massimo
     public boolean numParEQMax(){
         boolean isNumMax = false;
 
@@ -212,6 +208,7 @@ public abstract class Event {
         return isNumMax;
     }
 
+    // Controlla se siamo oltre la data di termine iscrizione
     public boolean deadLineAfter(){
         boolean deadLine = false;
 
@@ -224,6 +221,8 @@ public abstract class Event {
         return deadLine;
     }
 
+
+    // Controlla e modifica lo stato degli eventi
     public void controlState(){
 
         // Per gli eventi aperti:

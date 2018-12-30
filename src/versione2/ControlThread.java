@@ -1,10 +1,11 @@
 package versione2;
-
 import versione1.Category;
 import versione1.Event;
 import versione1.EventSoccerMatch;
 import versione1.SocialNetwork;
+import versione2.notifications.NotificationsHandler;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class ControlThread extends Thread {
@@ -13,10 +14,12 @@ public class ControlThread extends Thread {
     SocialNetwork socialNetwork;
     ArrayList<Category> categories;
     ArrayList<ArrayList<Event>> events;
+    NotificationsHandler notificationHandler;
 
 
     public void setSocialNetwork(SocialNetwork socialNetwork) {
         this.socialNetwork = socialNetwork;
+        this.notificationHandler = socialNetwork.getNotificationsHandler();
         categories = socialNetwork.getCategories();
         events = new ArrayList<>();
 
@@ -30,29 +33,35 @@ public class ControlThread extends Thread {
     public void run() {
         i = 0;
 
-        while(true){
-            System.out.println("Controllo eventi numero: " + i);
+        while (true) {
+//            System.out.println("Controllo eventi numero: " + i);
 
-            i ++ ;
+            i++;
 
-            for(int k=0; k<events.size(); k++){
-                for(int h=0; h<events.get(k).size(); h++){
+            for (int k = 0; k < events.size(); k++) {
+                for (int h = 0; h < events.get(k).size(); h++) {
                     events.get(k).get(h).controlState();
+
                 }
             }
 
+            if(socialNetwork.getLoggedUser()!= null) {
+                try {
+                    socialNetwork.getLoggedUser().setNotifications(notificationHandler.getSoccerMatchNotifications(socialNetwork.getLoggedUser(), socialNetwork.findEventByUserNameE(socialNetwork.getLoggedUser().getUsername())));
 
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
+
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
         }
 
-    }
-
-    public static void deleteAll(){
-        Thread.interrupted();
     }
 }

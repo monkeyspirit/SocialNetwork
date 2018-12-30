@@ -304,8 +304,7 @@ public class CreateController {
             // OBBLIGATORIO
             // termine ultimo iscrizione
 
-//            if ((deadLineDP.getValue() == null) || deadLineDP.getValue().isBefore(LocalDate.now().plusDays(1))) {
-            if ((deadLineDP.getValue() == null) || deadLineDP.getValue().isBefore(LocalDate.now())) { //faccio la prova del cambio di stato
+            if ((deadLineDP.getValue() == null) || deadLineDP.getValue().isBefore(LocalDate.now().plusDays(1))) {
                 deadLLbl.setTextFill(Color.RED);
                 deadLineIsVal = false;
 

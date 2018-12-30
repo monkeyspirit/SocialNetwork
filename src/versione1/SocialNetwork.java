@@ -1,6 +1,7 @@
 package versione1;
 
 import utilities.FileUtility;
+import versione2.notifications.NotificationsHandler;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ public class SocialNetwork {
 	private ArrayList<User> users;
 	private User loggedUser; //utente attualmente loggato
 	private FileUtility fileUtility;
+	private NotificationsHandler notificationsHandler;
 
 	
 	/**
@@ -20,6 +22,7 @@ public class SocialNetwork {
 		this.categories = new ArrayList<Category>();
 		this.users = new ArrayList<>();
 		this.fileUtility = new FileUtility();
+		this.notificationsHandler = new NotificationsHandler();
 	}
 
 	//Metodi
@@ -31,7 +34,9 @@ public class SocialNetwork {
 		return this.categories;
 	}
 
-	public ArrayList<User> getUsers() { return users;	}
+	public ArrayList<User> getUsers() { return this.users;	}
+
+	public NotificationsHandler getNotificationsHandler() { return this.notificationsHandler; }
 
 	public void addUser(User user) {
 		this.users.add(user);
@@ -85,6 +90,7 @@ public class SocialNetwork {
 		return exist;
 	}
 
+	// Controlla se l'utente è già presente nella lista utenti e incaso lo ritorna come valore
 	public User findUserByName(String username){
 		User found = null;
 		for(int i=0; i<users.size(); i++){
@@ -127,7 +133,8 @@ public class SocialNetwork {
 		fileUtility.writeUsersList(this.users);
 	}
 
-	public ArrayList<String> findEventByUserName(String userSession){
+	// Metodo che serve per trovare tutti gli eventi a cui è iscritto un dato utente e ne ritorna i nomi
+	public ArrayList<String> findEventByUserNameS(String userSession){
 
 		ArrayList<String> eventsUser = new ArrayList<String>();
 
@@ -144,5 +151,25 @@ public class SocialNetwork {
 
 		return eventsUser;
 	}
+
+	// Simile al precedente ma in questo caso trona un arraylist di eventi, serve per la classe notification
+	public ArrayList<Event> findEventByUserNameE(String userSession){
+
+		ArrayList<Event> eventsUser = new ArrayList<>();
+
+		for(int i=0; i<categories.size(); i++){
+			Category catSel = categories.get(i);
+			ArrayList<Event> eventsByCat = catSel.getEvents();
+			for(int j=0; j < eventsByCat.size(); j++){
+				if(eventsByCat.get(j).alrRegister(userSession)== true){
+					eventsUser.add(eventsByCat.get(j));
+				}
+			}
+
+		}
+
+		return eventsUser;
+	}
+
 
 }

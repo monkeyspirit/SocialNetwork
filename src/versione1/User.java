@@ -24,8 +24,9 @@ public class User {
         return username;
     }
 
-    public ArrayList<Notification> getNotifications() { return notifications; }
+    public ArrayList<Notification> getNotifications() { return this.notifications; }
 
+    public void setNotifications(ArrayList<Notification> notifications) { this.notifications = notifications; }
 
     public ArrayList<String> getNotificationsMessage() {
         ArrayList<String> message = new ArrayList<>();
@@ -37,4 +38,5 @@ public class User {
 
         return message;
     }
+
 }
