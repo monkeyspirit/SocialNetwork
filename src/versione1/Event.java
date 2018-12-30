@@ -6,8 +6,9 @@ import versione2.StateValue;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public abstract class Event {
+public abstract class Event extends Observable {
 
     //Costanti della classe Event
 	public static final String TITLE_NAME = "Titolo";
@@ -100,7 +101,7 @@ public abstract class Event {
         this.creator = creator;
         this.state = new State();
         this.state.setStateValue(StateValue.Aperta);  // Appena costruisco l'evento il suo stato è attivo
-        this.state.setSwitchDate(deadLineIns);  // Appena costruisco l'evento setto la switch date alla deadLine
+        this.state.setSwitchDate(deadLineIns.plusDays(1));  // Appena costruisco l'evento setto la switch date alla deadLine
         partecipants = new ArrayList<>();
     }
 
@@ -233,10 +234,12 @@ public abstract class Event {
                 // se il numero di partecipanti è uguale al numero richiesto è chiusa
                 if(partecipants.size() == (int) numOfPartecipants.getValue()){
                     state.setStateValue(StateValue.Chiusa);
+                    sendNotification(this.title.getValue() +" è stata chiusa.");
                 }
                 // se il numero di partecipanti è minore al numero richiesto è fallita
                 else if (partecipants.size() < (int) numOfPartecipants.getValue()) {
                     state.setStateValue(StateValue.Fallita);
+                    sendNotification(this.title.getValue() +" è fallita.");
                 }
             }
             // Questo else if  lo usano gli eventi di sistema
@@ -244,6 +247,7 @@ public abstract class Event {
                 // se il numero di partecipanti è uguale al numero richiesto è chiusa
                 if(partecipants.size() == (int) numOfPartecipants.getValue()){
                     state.setStateValue(StateValue.Chiusa);
+                    sendNotification(this.title.getValue() +" è stata chiusa.");
                 }
             }
         }
@@ -254,9 +258,15 @@ public abstract class Event {
             //se la data di termine equivale ad oggi
             if(endDate.getValue() != null && LocalDate.now().equals(endDate.getValue())) {
                 state.setStateValue(StateValue.Conclusa);
+                sendNotification(this.title.getValue() +" è conclusa.");
             }
 
         }
 
+    }
+
+    public void sendNotification(String stateChange){
+        setChanged();
+        notifyObservers(stateChange);
     }
 }

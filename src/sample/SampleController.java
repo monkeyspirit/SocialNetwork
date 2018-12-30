@@ -17,12 +17,9 @@ import versione1.Category;
 import versione1.Event;
 import versione1.SocialNetwork;
 import versione1.User;
-import versione2.notifications.Notification;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 public class SampleController {
 
@@ -165,14 +162,14 @@ public class SampleController {
         });
 
 
-        notifyName = sessionUser.getNotificationsMessage();
+        notifyName = sessionUser.getNotifications();
         notificationListView.setItems(FXCollections.observableArrayList(notifyName));
 
 
         refreshNotBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                notifyName = sessionUser.getNotificationsMessage();
+                notifyName = sessionUser.getNotifications();
                 notificationListView.setItems(FXCollections.observableArrayList(notifyName));
             }
         });
@@ -229,7 +226,9 @@ public class SampleController {
 
         eventController.setCatSelected(catSelected);
         eventController.setEventSoccerSelected(eventSelected);
-        eventController.setSessionUser(sessionUser.getUsername());
+        eventController.setSessionUser(sessionUser);
+        eventController.setSessionUsername(sessionUser.getUsername());
+
 
 
         view = new Stage();

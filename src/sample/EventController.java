@@ -6,10 +6,10 @@ import javafx.scene.control.Label;
 import versione1.Category;
 import versione1.Event;
 import versione1.EventSoccerMatch;
+import versione1.User;
 import versione2.StateValue;
 
 import javax.swing.*;
-import java.time.LocalDate;
 
 public class EventController {
 
@@ -20,19 +20,22 @@ public class EventController {
     @FXML
     private Button subScribeBtn;
 
-    EventSoccerMatch eventSoccerSelected;
-    Category catSelected;
-    String sessionUser;
+    private EventSoccerMatch eventSoccerSelected;
+    private Category catSelected;
+    private String sessionUsername;
+    private User sessionUser;
 
     public void setCatSelected(Category catSelected) { this.catSelected = catSelected;  }
 
-    public void setSessionUser(String sessionUser) { this.sessionUser = sessionUser; }
+    public void setSessionUsername(String sessionUsername) { this.sessionUsername = sessionUsername; }
 
     public void setEventSoccerSelected(Event eventSelected) {
         if(catSelected.getName().equals(SOCCER_NAME)) {
             this.eventSoccerSelected = (EventSoccerMatch) eventSelected;
         }
     }
+
+    public void setSessionUser(User sessionUser) { this.sessionUser = sessionUser; }
 
     @FXML
     /**
@@ -41,7 +44,7 @@ public class EventController {
      */
     private void initialize(){
 
-        subScribeBtn.setDisable(eventSoccerSelected.alrRegister(sessionUser) ||eventSoccerSelected.getState().getStateValue().equals(StateValue.Chiusa) == true);
+        subScribeBtn.setDisable(eventSoccerSelected.alrRegister(sessionUsername) ||eventSoccerSelected.getState().getStateValue().equals(StateValue.Chiusa) == true);
 
         creatorLblEvent.setText(eventSoccerSelected.getCreator());
 
@@ -145,8 +148,11 @@ public class EventController {
 
     public void subScribe(){
 
-            if (!eventSoccerSelected.alrRegister(sessionUser)) {
-                    eventSoccerSelected.addPartecipants(sessionUser);
+            if (!eventSoccerSelected.alrRegister(sessionUsername)) {
+                    eventSoccerSelected.addPartecipants(sessionUsername);
+
+                    eventSoccerSelected.addObserver(sessionUser);  // imposto l'osservatore
+
                     subScribeBtn.setDisable(true);
                     int postiDisponibili = (int) eventSoccerSelected.getNumOfPartecipants().getValue() - eventSoccerSelected.getPartecipants().size();
                     placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);

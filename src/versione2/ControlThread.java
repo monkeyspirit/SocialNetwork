@@ -14,12 +14,12 @@ public class ControlThread extends Thread {
     SocialNetwork socialNetwork;
     ArrayList<Category> categories;
     ArrayList<ArrayList<Event>> events;
-    NotificationsHandler notificationHandler;
+//    NotificationsHandler notificationHandler;
 
 
     public void setSocialNetwork(SocialNetwork socialNetwork) {
         this.socialNetwork = socialNetwork;
-        this.notificationHandler = socialNetwork.getNotificationsHandler();
+//        this.notificationHandler = socialNetwork.getNotificationsHandler();
         categories = socialNetwork.getCategories();
         events = new ArrayList<>();
 
@@ -45,14 +45,15 @@ public class ControlThread extends Thread {
                 }
             }
 
-            if(socialNetwork.getLoggedUser()!= null) {
-                try {
-                    socialNetwork.getLoggedUser().setNotifications(notificationHandler.getSoccerMatchNotifications(socialNetwork.getLoggedUser(), socialNetwork.findEventByUserNameE(socialNetwork.getLoggedUser().getUsername())));
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
+            //Usati con HAndler e notification
+//            if(socialNetwork.getLoggedUser()!= null) {
+//                try {
+//                    socialNetwork.getLoggedUser().setNotifications(notificationHandler.getSoccerMatchNotifications(socialNetwork.getLoggedUser(), socialNetwork.findEventByUserNameE(socialNetwork.getLoggedUser().getUsername())));
+//
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//            }
 
 //            try {
 //                Thread.sleep(1000);

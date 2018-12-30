@@ -12,7 +12,7 @@ public class SocialNetwork {
 	private ArrayList<User> users;
 	private User loggedUser; //utente attualmente loggato
 	private FileUtility fileUtility;
-	private NotificationsHandler notificationsHandler;
+//	private NotificationsHandler notificationsHandler;
 
 	
 	/**
@@ -22,7 +22,7 @@ public class SocialNetwork {
 		this.categories = new ArrayList<Category>();
 		this.users = new ArrayList<>();
 		this.fileUtility = new FileUtility();
-		this.notificationsHandler = new NotificationsHandler();
+//		this.notificationsHandler = new NotificationsHandler();
 	}
 
 	//Metodi
@@ -36,7 +36,7 @@ public class SocialNetwork {
 
 	public ArrayList<User> getUsers() { return this.users;	}
 
-	public NotificationsHandler getNotificationsHandler() { return this.notificationsHandler; }
+//	public NotificationsHandler getNotificationsHandler() { return this.notificationsHandler; }
 
 	public void addUser(User user) {
 		this.users.add(user);

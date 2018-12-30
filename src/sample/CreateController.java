@@ -304,7 +304,8 @@ public class CreateController {
             // OBBLIGATORIO
             // termine ultimo iscrizione
 
-            if ((deadLineDP.getValue() == null) || deadLineDP.getValue().isBefore(LocalDate.now().plusDays(1))) {
+            //deadLineDP.getValue().isBefore(LocalDate.now().plusDays(1) --> evita che il giorno di termine sia oggi
+            if ((deadLineDP.getValue() == null) || deadLineDP.getValue().isBefore(LocalDate.now())) {
                 deadLLbl.setTextFill(Color.RED);
                 deadLineIsVal = false;
 
@@ -542,6 +543,9 @@ public class CreateController {
 
                         EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
                         match.addPartecipants(creator);
+
+                        match.addObserver(socialNetwork.getLoggedUser()); // imposto l'osservatore
+
                         socialNetwork.getCategories().get(0).addEvent(match);
 
 
