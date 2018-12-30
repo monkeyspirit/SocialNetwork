@@ -58,8 +58,10 @@ public class SampleController {
     private ObservableList<String> obsEventName;
     private ObservableList<String> obsUserEvent;
 
+    private String notification;
 
-    private Stage view, create;
+
+    private Stage view, create, notify;
 
 
 
@@ -175,6 +177,43 @@ public class SampleController {
             }
         });
 
+        notificationListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+                if(!notificationListView.getSelectionModel().isEmpty()) {
+                    notification = (String) notificationListView.getSelectionModel().getSelectedItem();
+                    try {
+                        openNotificationView();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        });
+
+
+    }
+
+    public void openNotificationView() throws IOException {
+
+        FXMLLoader loaderNotify = new FXMLLoader(Main.class.getResource("viewNotify.fxml"));
+        NotificationController notificationController = new NotificationController();
+
+        loaderNotify.setController(notificationController);
+
+        notificationController.setSessionUser(sessionUser);
+        notificationController.setNotification(notification);
+
+        notify = new Stage();
+        notificationController.setThisStage(notify);
+
+        Parent notifyView = loaderNotify.load();
+        Scene sceneNotify = new Scene(notifyView, 600, 400);
+        notify.setTitle("Notifica");
+        notify.setScene(sceneNotify);
+        notify.show();
     }
 
     /**
