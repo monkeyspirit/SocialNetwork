@@ -226,23 +226,38 @@ public abstract class Event {
 
     public void controlState(){
 
-       // if(LocalDate.now().equals(state.getSwitchDate())){
+        // Per gli eventi aperti:
+        if(state.getStateValue().equals(StateValue.Aperta)){
 
-            if(partecipants.size() == (int) numOfPartecipants.getValue()){
-                state.setStateValue(StateValue.Chiusa);
-
-//                if(LocalDate.now().isAfter((LocalDate) endDate.getValue())){
-//                    state.setStateValue(StateValue.Conclusa);
-//                }
-
+            // se la data di cambio stato non è nulla ed è uguale ad oggi fai:
+            if(state.getSwitchDate() != null && LocalDate.now().equals(state.getSwitchDate())){
+                // se il numero di partecipanti è uguale al numero richiesto è chiusa
+                if(partecipants.size() == (int) numOfPartecipants.getValue()){
+                    state.setStateValue(StateValue.Chiusa);
+                }
+                // se il numero di partecipanti è minore al numero richiesto è fallita
+                else if (partecipants.size() < (int) numOfPartecipants.getValue()) {
+                    state.setStateValue(StateValue.Fallita);
+                }
             }
-            else{
-                state.setStateValue(StateValue.Aperta);
+            // Questo else if  lo usano gli eventi di sistema
+            else if(state.getSwitchDate() == null){
+                // se il numero di partecipanti è uguale al numero richiesto è chiusa
+                if(partecipants.size() == (int) numOfPartecipants.getValue()){
+                    state.setStateValue(StateValue.Chiusa);
+                }
             }
-//            else if (partecipants.size() < (int) numOfPartecipants.getValue()){
-//                state.setStateValue(StateValue.Fallita);
-//            }
+        }
 
-        //}
+        // Quando sono chiuse le imposto concluse quando terminano
+        if(state.getStateValue().equals(StateValue.Chiusa)) {
+
+            //se la data di termine equivale ad oggi
+            if(endDate.getValue() != null && LocalDate.now().equals(endDate.getValue())) {
+                state.setStateValue(StateValue.Conclusa);
+            }
+
+        }
+
     }
 }

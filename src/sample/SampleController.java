@@ -17,6 +17,7 @@ import versione1.Category;
 import versione1.Event;
 import versione1.SocialNetwork;
 import versione1.User;
+import versione2.notifications.Notification;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,13 +32,13 @@ public class SampleController {
     // ~~~~~ Sample Stage ~~~~~~~~~~~~~
 
     @FXML
-    private ListView categoryListView, eventListView, userEventListView;
+    private ListView notificationListView,categoryListView, eventListView, userEventListView;
 
     @FXML
     private Tab userTb;
 
     @FXML
-    private Button refreshBtn;
+    private Button refreshEventBtn, refreshNotBtn;
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -52,9 +53,11 @@ public class SampleController {
     private ArrayList<String> catName;
     private ArrayList<String> eventName;
     private ArrayList<String> userEventName;
+    private ArrayList<String> notifyName;
     private ObservableList<String> obsCatName;
     private ObservableList<String> obsEventName;
     private ObservableList<String> obsUserEvent;
+
 
     private Stage view, create;
 
@@ -132,7 +135,7 @@ public class SampleController {
 
         userEventListView.setItems(obsUserEvent);
 
-        refreshBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        refreshEventBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 userEventName = socialNetwork.findEventByUserName(sessionUser.getUsername());
@@ -159,6 +162,16 @@ public class SampleController {
         });
 
 
+        notifyName = sessionUser.getNotificationsMessage();
+        notificationListView.setItems(FXCollections.observableArrayList(notifyName));
+
+        refreshNotBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                notifyName = sessionUser.getNotificationsMessage();
+                notificationListView.setItems(FXCollections.observableArrayList(notifyName));
+            }
+        });
 
     }
 
@@ -211,6 +224,8 @@ public class SampleController {
         createController.setThisStage(create);
         Parent eventCreate =  (Parent) loaderCreate.load();
         Scene scene = new Scene(eventCreate, 600, 400);
+
+        create.setX(400); // In questo modo non è sovrapposto a quello degli eventi
         create.setTitle("Crea");
         create.setScene(scene);
         create.show();
