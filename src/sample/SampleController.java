@@ -150,7 +150,7 @@ public class SampleController {
             public void handle(MouseEvent event) {
 
                 if(!userEventListView.getSelectionModel().isEmpty()) {
-                    eventSelected = catSelected.findEventByName((String) userEventListView.getSelectionModel().getSelectedItem());
+                    eventSelected = socialNetwork.findEventByEventName((String) userEventListView.getSelectionModel().getSelectedItem());
                     try {
                         openEventView();
                     } catch (IOException e) {
@@ -224,8 +224,7 @@ public class SampleController {
 
         loaderEvent.setController(eventController);
 
-        eventController.setCatSelected(catSelected);
-        eventController.setEventSoccerSelected(eventSelected);
+        eventController.setEventSelected(eventSelected);
         eventController.setSessionUser(sessionUser);
         eventController.setSessionUsername(sessionUser.getUsername());
 

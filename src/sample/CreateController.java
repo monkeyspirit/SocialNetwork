@@ -508,7 +508,7 @@ public class CreateController {
 
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // durata --> guardare end time e end date
-            if( (endDateDP.getValue() == null || endTimeTP.getValue() == null ) && durationIns == null ){
+            if( (endDateDP.getValue() != null && endTimeTP.getValue() == null ) && durationIns == null ){
                 errorMsg[11] = MISSDURDATE;
                 durLbl.setTextFill(Color.RED);
                 durIsVal = false;
@@ -530,10 +530,12 @@ public class CreateController {
                 case SOCCER_NAME: {
                     if (catIsVal && titIsVal && numIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && ageIsVal && genderIsVal && durIsVal) {
 
-                        if(endDateIns == null &&  durationIns !=null){
+                        if(endDateIns == null &&  durationIns !=null) {
                             endDateIns = dateIns.plusDays(Integer.parseInt(durationIns));
                         }
-
+                        else if(endDateIns == null &&  durationIns == null){
+                            endDateIns = dateIns.plusDays(1);
+                        }
                         else{
                             if(endTimeIns == null && durationIns !=null){
                                 endTimeIns = timeIns.plusHours(durH).plusMinutes(durM);

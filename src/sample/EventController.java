@@ -21,18 +21,15 @@ public class EventController {
     private Button subScribeBtn;
 
     private EventSoccerMatch eventSoccerSelected;
-    private Category catSelected;
     private String sessionUsername;
     private User sessionUser;
 
-    public void setCatSelected(Category catSelected) { this.catSelected = catSelected;  }
 
     public void setSessionUsername(String sessionUsername) { this.sessionUsername = sessionUsername; }
 
-    public void setEventSoccerSelected(Event eventSelected) {
-        if(catSelected.getName().equals(SOCCER_NAME)) {
+    public void setEventSelected(Event eventSelected) {
             this.eventSoccerSelected = (EventSoccerMatch) eventSelected;
-        }
+
     }
 
     public void setSessionUser(User sessionUser) { this.sessionUser = sessionUser; }
@@ -129,7 +126,7 @@ public class EventController {
             noteLblEvent.setText(" ");
         }
 
-        if(catSelected.getName().equals(SOCCER_NAME)) {
+        if(eventSoccerSelected.getType().equals(SOCCER_NAME)) {
             ageLbl.setText("Fascia d'età");
             genderLbl.setText("Genere");
             ageLblEvent.setText((String) eventSoccerSelected.getAgeRange().getValue());

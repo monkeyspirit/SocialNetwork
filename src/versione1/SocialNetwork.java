@@ -171,5 +171,19 @@ public class SocialNetwork {
 		return eventsUser;
 	}
 
+	public Event findEventByEventName(String eventName){
+		Event find = null;
+
+		for(int i=0; i<categories.size(); i++){
+			for(int k=0; k<categories.get(i).getEvents().size(); k++){
+				if(eventName.equals((String) categories.get(i).getEvents().get(k).getTitle().getValue())){
+					find = categories.get(i).getEvents().get(k);
+				}
+			}
+		}
+
+		return find;
+	}
+
 
 }

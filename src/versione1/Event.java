@@ -180,6 +180,8 @@ public abstract class Event extends Observable {
 
     public State getState() { return state; }
 
+    public String getType() { return type; }
+
 
     public void addPartecipants(String addThis){
         partecipants.add(addThis);
