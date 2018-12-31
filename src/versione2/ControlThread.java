@@ -19,21 +19,31 @@ public class ControlThread extends Thread {
 
     public void setSocialNetwork(SocialNetwork socialNetwork) {
         this.socialNetwork = socialNetwork;
-//        this.notificationHandler = socialNetwork.getNotificationsHandler();
+        /*
+        this.notificationHandler = socialNetwork.getNotificationsHandler();
         categories = socialNetwork.getCategories();
         events = new ArrayList<>();
 
         for(int j=0; j<categories.size(); j++){
             events.add(categories.get(i).getEvents());
         }
+        */
 
     }
 
     @Override
     public void run() {
-        i = 0;
+       // i = 0;
 
         while (true) {
+        	
+        	if(socialNetwork != null) {
+        		for (Category cat : socialNetwork.getCategories()) {
+        			cat.controlEventState();
+        		}
+        	}
+        		
+        	/*
         	events.clear();
             for(int j=0; j<categories.size(); j++){
                 events.add(categories.get(j).getEvents());
@@ -48,6 +58,7 @@ public class ControlThread extends Thread {
 
                 }
             }
+            */
 
             //Usati con HAndler e notification
 //            if(socialNetwork.getLoggedUser()!= null) {
