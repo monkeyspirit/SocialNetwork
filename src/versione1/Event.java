@@ -5,6 +5,7 @@ import versione2.StateValue;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -101,7 +102,7 @@ public abstract class Event extends Observable {
         this.creator = creator;
         this.state = new State();
         this.state.setStateValue(StateValue.Aperta);  // Appena costruisco l'evento il suo stato è attivo
-        this.state.setSwitchDate(deadLineIns.plusDays(1));  // Appena costruisco l'evento setto la switch date alla deadLine
+        //this.state.setSwitchDate(deadLineIns.plusDays(1));  // Appena costruisco l'evento setto la switch date alla deadLine
         partecipants = new ArrayList<>();
     }
 
@@ -265,6 +266,41 @@ public abstract class Event extends Observable {
 
     }
 
+    /*
+    public void controlState() {
+    	// Per gli eventi aperti:
+        if(state.getStateValue().equals(StateValue.Aperta)){
+        	//controllo se la data attuale coincide con quella di scadenza per le iscrizioni
+        	if(LocalDate.now().equals(registrationDeadline.getValue()) || LocalDate.now().isAfter((ChronoLocalDate) registrationDeadline.getValue())) {
+        		state.setStateValue(StateValue.Fallita);
+        		state.setSwitchDate("La proposta è fallita il giorno:" + LocalDate.now());
+        		sendNotification(this.title.getValue() +" è fallita.");
+        	}
+        	else {
+        		if(partecipants.size() == (int)numOfPartecipants.getValue()) {
+        			state.setStateValue(StateValue.Chiusa);
+            		state.setSwitchDate("La proposta è stata chiusa il giorno:" + LocalDate.now());
+            		sendNotification(this.title.getValue() +" è chiusa.");
+        		}
+        	}
+        }
+     // Quando sono chiuse le imposto concluse quando terminano
+        else if(state.getStateValue().equals(StateValue.Chiusa)) {
+        	if(endDate != null) {
+        		if(LocalDate.now().equals(endDate.getValue())) {
+        			state.setStateValue(StateValue.Conclusa);
+            		state.setSwitchDate(state.getSwitchDate() + "\n L'evento è concluso il giorno:" + LocalDate.now());
+            		sendNotification(this.title.getValue() +" è conclusa.");
+        		}		
+        	}
+        	else if(LocalDate.now().isAfter((ChronoLocalDate) date.getValue())){
+        		state.setStateValue(StateValue.Conclusa);
+        		state.setSwitchDate(state.getSwitchDate() + "\n L'evento è concluso il giorno:" + LocalDate.now());
+        		sendNotification(this.title.getValue() +" è conclusa.");
+        	}
+        }
+    }
+    */
     public void sendNotification(String stateChange){
         setChanged();
         notifyObservers(stateChange);

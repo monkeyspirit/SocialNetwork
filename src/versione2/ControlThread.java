@@ -34,6 +34,10 @@ public class ControlThread extends Thread {
         i = 0;
 
         while (true) {
+        	events.clear();
+            for(int j=0; j<categories.size(); j++){
+                events.add(categories.get(j).getEvents());
+            }
 //            System.out.println("Controllo eventi numero: " + i);
 
             i++;
