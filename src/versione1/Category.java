@@ -23,7 +23,6 @@ public abstract class Category {
 
 	//Metodi
 
-
 	public String getName() {
 		return this.name;
 	}
@@ -40,32 +39,31 @@ public abstract class Category {
 		this.events.add(event);
 	}
 
-	public String toString() { return this.name; }
-
-
-
-	public Event findEventByName(String event){
-	    Event find = null;
-
-	    for(int i=0; i<events.size(); i++){
-	        if(event.equals(events.get(i).getTitle().getValue())){
-	            find = events.get(i);
-            }
-        }
-
-	    return find;
+	/**
+	 * Cerca un evento a partire dal nome
+	 * @param eventNameToFind il nome dell'evento da cercare
+	 * @return l'evento, se questo è stato trovato
+	 */
+	public Event findEventByName(String eventNameToFind){
+		for (Event event : events) {
+			if(eventNameToFind.equalsIgnoreCase((String)event.getTitle().getValue()))
+				return event;
+		}
+	    return null;
     }
 
-    public boolean arlExistEvent(String event){
-        boolean find = false;
+	/**
+	 * Controlla se un evento con un certo nome è già presente nella lista degli eventi
+	 * @param event l'evento da cercare
+	 * @return true se l'evento è già presente, false altrimenti
+	 */
+	public boolean doesEventAlreadyExist(String event){
 
-        for(int i=0; i<events.size(); i++){
-            if(event.equalsIgnoreCase((String) events.get(i).getTitle().getValue())){
-                find = true;
-            }
-        }
-
-        return find;
+		for (Event e:events) {
+			if(event.equalsIgnoreCase((String) e.getTitle().getValue()))
+				return true;
+		}
+		return false;
     }
 
 	public void controlEventState(){

@@ -36,7 +36,7 @@ public class ControlThread extends Thread {
        // i = 0;
 
         while (true) {
-        	
+
         	if(socialNetwork != null) {
         		for (Category cat : socialNetwork.getCategories()) {
         			cat.controlEventState();

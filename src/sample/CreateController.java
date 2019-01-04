@@ -270,12 +270,12 @@ public class CreateController {
             // Acquisisco se c e il titolo
             // FACOLTATIVO
             //titolo
-            if(titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).arlExistEvent(titleTxtF.getText()) == true){
+            if(titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).doesEventAlreadyExist(titleTxtF.getText()) == true){
                 errorMsg[12] = ALREXISTTIT;
                 titleLbl.setTextFill(Color.RED);
                 titIsVal = false;
             }
-            else if (titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).arlExistEvent(titleTxtF.getText()) == false){
+            else if (titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).doesEventAlreadyExist(titleTxtF.getText()) == false){
                 titleIns = titleTxtF.getText();
                 errorMsg[12] = null;
                 titleLbl.setTextFill(Color.BLACK);
@@ -544,7 +544,7 @@ public class CreateController {
                         }
 
                         EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
-                        match.addPartecipants(creator);
+                        match.addParticipants(creator);
 
                         match.addObserver(socialNetwork.getLoggedUser()); // imposto l'osservatore
 

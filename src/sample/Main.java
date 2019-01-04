@@ -46,9 +46,9 @@ public class Main extends Application {
         User system = social.getUsers().get(0); //prendo il primo utente di quella lista (non volevo cancellarti l'esempio)
 
         EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a Mompiano", 5, system.getUsername() );
-        eventSoccerMatch1.addPartecipants(system.getUsername());
+        eventSoccerMatch1.addParticipants(system.getUsername());
         EventSoccerMatch eventSoccerMatch2 = new EventSoccerMatch("Partita a Remedello", 2, system.getUsername());
-        eventSoccerMatch2.addPartecipants(system.getUsername());
+        eventSoccerMatch2.addParticipants(system.getUsername());
         soccer_match.addEvent(eventSoccerMatch1);
         soccer_match.addEvent(eventSoccerMatch2);
 
