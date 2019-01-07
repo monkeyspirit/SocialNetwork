@@ -11,7 +11,7 @@ public class ControlThread extends Thread {
     SocialNetwork socialNetwork;
     ArrayList<Category> categories;
     ArrayList<ArrayList<Event>> events;
-//    NotificationsHandler notificationHandler;
+//    NotificationsBuilder notificationHandler;
 
 
     public void setSocialNetwork(SocialNetwork socialNetwork) {

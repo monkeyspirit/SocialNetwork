@@ -13,7 +13,7 @@ public class SocialNetwork {
 	private List<User> users;
 	private User loggedUser; //utente attualmente loggato
 	private FileUtility fileUtility;
-//	private NotificationsHandler notificationsHandler;
+//	private NotificationsBuilder notificationsHandler;
 
 	
 	/**
@@ -24,7 +24,7 @@ public class SocialNetwork {
 	    this.soccerMatchCategory = new SoccerMatchCategory();
 	    this.categories.add(soccerMatchCategory); //aggiungo la categoria all'array
 		this.fileUtility = new FileUtility();
-//		this.notificationsHandler = new NotificationsHandler();
+//		this.notificationsHandler = new NotificationsBuilder();
 	}
 
 	public void addCategory(Category category) {
@@ -41,7 +41,7 @@ public class SocialNetwork {
 
 	public List<User> getUsers() { return this.users;	}
 
-//	public NotificationsHandler getNotificationsHandler() { return this.notificationsHandler; }
+//	public NotificationsBuilder getNotificationsHandler() { return this.notificationsHandler; }
 
 	public void addUser(User user) {
 		this.users.add(user);

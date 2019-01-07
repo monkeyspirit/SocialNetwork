@@ -16,16 +16,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/gson-2.8.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="gson-2.8.5" level="project" />
-    <orderEntry type="library" name="JavaFX SDK" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.8.5" level="project" />
   </component>
 </module>

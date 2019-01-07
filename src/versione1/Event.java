@@ -2,6 +2,7 @@ package versione1;
 
 import versione2.State;
 import versione2.StateValue;
+import versione2.notifications.NotificationsBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -258,7 +259,7 @@ public abstract class Event extends Observable {
                 //se la data di termine equivale ad oggi
                 if(endDate.getValue() != null && LocalDate.now().equals(endDate.getValue())) {
                     state.setStateValue(StateValue.Conclusa);
-                    sendNotification(this.title.getValue() +" e' conclusa.");
+                    sendNotification(NotificationsBuilder.buildNotificationTerminated(this.title.getValue()));
                 }
         }
     }

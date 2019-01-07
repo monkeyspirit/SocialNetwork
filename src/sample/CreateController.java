@@ -126,8 +126,6 @@ public class CreateController {
 
     public void setSocialNetwork(SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
 
-    public SocialNetwork getSocialNetwork() { return socialNetwork; }
-
     public void setCreator(String creator) { this.creator = creator;  }
 
     /**
@@ -568,15 +566,5 @@ public class CreateController {
                 }
             }
         }
-
-
-
-
     }
-
-
-
-
-
-
 }

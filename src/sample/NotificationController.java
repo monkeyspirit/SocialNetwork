@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import versione1.User;
-import versione2.notifications.Notification;
 
 
 public class NotificationController {

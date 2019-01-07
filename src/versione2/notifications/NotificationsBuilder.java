@@ -15,69 +15,21 @@ import java.util.Date;
  * come parametro (per evitare di leggere il file dei nuovi eventi in piu' punti del programma
  * lascio che sia l'oggetto chiamante a preoccuparsi di caricare i nuovi eventi dal file)
  */
-public class NotificationsHandler {
+public class NotificationsBuilder {
 
-    public static final String OLD_EVENTS_FILE_PATH = " "; //file degli eventi salvati dopo l'ultima chiusura
 
     public static final String MSG_CLOSED = " è ufficialmente chiusa e inizierà il giorno: ";
+    public static final String MSG_CLOSED_NO_DATE = " è ufficialmente chiusa.";
     public static final String MSG_FAILED = " è fallita in quanto non è stato raggiunto il numero minimo di partecipanti.";
     public static final String MSG_TERMINATED = " si è conclusa con successo.";
     public static final String MSG_NEW = " è stato creato mentre non c'eri.";
 
 
-    public NotificationsHandler() {
-    }
-
-    public ArrayList<Notification> getSoccerMatchNotifications(User user, ArrayList<Event> currentEvents) throws FileNotFoundException {
-        ArrayList<Notification> notifications = new ArrayList<>();
-
-//        ArrayList<SoccerMatchEvent> oldEvents = new FileUtility().readUserLocalSoccerMatchEvents(user);
-        /* Adesso devo confrontare le due liste currentEvents e oldEvents per ottenere
-           informazioni come:
-           1) nuovi eventi creati da altri utenti mentre ero offline: confronto
-           le due liste e comunico la presenza di eventi in currentEvents
-           che non ci sono in oldEvents.
-           2) eventi chiusi
-           3) eventi falliti
-           4) eventi terminati
-
-            costruisco ciascun messaggio usando uno dei metodi privati di questa classe
-        String message = buildNotification...();
-            creo e aggiungo la notifica
-        notifications.add(new Notification(message));
-
-        */
-
-//        for(Event event: currentEvents){
-//                if(!oldEvents.contains(event)){
-//                   String messageNew = buildNotificationNewEvent((String) event.getTitle().getValue());
-//                   notifications.add(new Notification(messageNew));
-//                }
-//        }
-
-        for (Event event: currentEvents) {
-            if(event.getState().getStateValue().equals(StateValue.Chiusa)){
-                String messageClosed = buildNotificationClosed((String) event.getTitle().getValue());
-                notifications.add(new Notification(messageClosed));
-            }
-            else if (event.getState().getStateValue().equals(StateValue.Fallita)){
-                String messageFailed = buildNotificationFailed((String) event.getTitle().getValue());
-                notifications.add(new Notification(messageFailed));
-            }
-            else if(event.getState().getStateValue().equals(StateValue.Conclusa)){
-                String messageConclused = buildNotificationTerminated((String) event.getTitle().getValue());
-                notifications.add(new Notification(messageConclused));
-            }
-        }
-
-        return notifications;
-    }
-
     /**
      * Costruisce il messaggio della notifica per un evento nuovo
      * @param eventName nome dell'evento
      */
-    private String buildNotificationNewEvent (String eventName) {
+    public static String buildNotificationNewEvent (String eventName) {
         String message = eventName + MSG_NEW;
         return message;
     }
@@ -87,13 +39,13 @@ public class NotificationsHandler {
      * @param eventName nome dell'evento
      * @param startDate data d'inizio dell'evento
      */
-    private String buildNotificationClosed (String eventName, Date startDate) {
+    public static String buildNotificationClosed (String eventName, Date startDate) {
         String message = eventName + MSG_CLOSED + startDate;
         return message;
     }
 
-    private String buildNotificationClosed (String eventName) {
-        String message = eventName + MSG_CLOSED;
+    public static String buildNotificationClosed (String eventName) {
+        String message = eventName + MSG_CLOSED_NO_DATE;
         return message;
     }
 
@@ -101,7 +53,7 @@ public class NotificationsHandler {
      * Costruisce il messaggio della notifica per un evento fallito
      * @param eventName nome dell'evento
      */
-    private String buildNotificationFailed (String eventName) {
+    public static String buildNotificationFailed (String eventName) {
         String message = eventName + MSG_FAILED;
         return message;
     }
@@ -110,7 +62,7 @@ public class NotificationsHandler {
      * Costruisce il messaggio della notifica per un evento terminato
      * @param eventName nome dell'evento
      */
-    private String buildNotificationTerminated (String eventName) {
+    public static String buildNotificationTerminated (String eventName) {
         String message = eventName + MSG_TERMINATED;
         return message;
     }
