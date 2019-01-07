@@ -3,22 +3,22 @@ package versione1;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class EventSoccerMatch extends Event{
+public class SoccerMatchEvent extends Event{
 
-    //Costanti della classe EventSoccerMatch
-    public static final String TYPE = "EventSoccerMatch"; //serve per la deserializzazione di un'array di eventi
+    //Costanti della classe SoccerMatchEvent
+    public static final String TYPE = "SoccerMatchEvent"; //serve per la deserializzazione di una lista di eventi
     public static final String GENDER_NAME = "Sesso";
     public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
     public static final String AGERANGE_NAME = "Fascia di eta";
     public static final String AGERANGE_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
 
-    //Attributi della classe EventSoccerMatch
+    //Attributi della classe SoccerMatchEvent
     private Field gender = new Field(GENDER_NAME, GENDER_DESCRIPTION);
     private Field ageRange = new Field(AGERANGE_NAME, AGERANGE_DESCRIPTION);
 
 
     /**
-     * Costruttore EventSoccerMatch: chiama il costruttore dei campi obbligatori
+     * Costruttore SoccerMatchEvent: chiama il costruttore dei campi obbligatori
      * della classe madre e inizializza l'attributo valore di gender e ageGroup.
      * @param titleIns
      * @param numParIns
@@ -36,13 +36,13 @@ public class EventSoccerMatch extends Event{
      * @param noteIns
      * @param creatorIns
      */
-    public EventSoccerMatch(String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Enum<Gender> genderIns, String noteIns, String creatorIns) {
+    public SoccerMatchEvent(String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Enum<Gender> genderIns, String noteIns, String creatorIns) {
         super(TYPE, titleIns,  numParIns,  deadLineIns,  placeIns,  dateIns,  timeIns,  durationIns,  indTeeIns,  totTeeIns,  endDateIns,  endTimeIns, noteIns, creatorIns);
         this.gender.setValue(genderIns);
         this.ageRange.setValue(ageRangeIns);
     }
 
-    public EventSoccerMatch(String name, int numPar, String creatorIns){
+    public SoccerMatchEvent(String name, int numPar, String creatorIns){
         super(TYPE, name, numPar, creatorIns);
     }
 
@@ -54,4 +54,6 @@ public class EventSoccerMatch extends Event{
     public Field getAgeRange() {
         return ageRange;
     }
+
+
 }

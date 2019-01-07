@@ -1,8 +1,6 @@
 package versione2.notifications;
 
-import utilities.FileUtility;
 import versione1.Event;
-import versione1.EventSoccerMatch;
 import versione1.User;
 import versione2.StateValue;
 
@@ -33,7 +31,7 @@ public class NotificationsHandler {
     public ArrayList<Notification> getSoccerMatchNotifications(User user, ArrayList<Event> currentEvents) throws FileNotFoundException {
         ArrayList<Notification> notifications = new ArrayList<>();
 
-//        ArrayList<EventSoccerMatch> oldEvents = new FileUtility().getUserLocalSoccerMatchEvents(user);
+//        ArrayList<SoccerMatchEvent> oldEvents = new FileUtility().readUserLocalSoccerMatchEvents(user);
         /* Adesso devo confrontare le due liste currentEvents e oldEvents per ottenere
            informazioni come:
            1) nuovi eventi creati da altri utenti mentre ero offline: confronto

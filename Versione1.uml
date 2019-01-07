@@ -6,16 +6,16 @@
     <node x="646.9453703703705" y="64.0">versione1.User</node>
     <node x="682.6" y="2479.0">sample.Main</node>
     <node x="277.8493055555556" y="2170.0">sample.SampleController</node>
-    <node x="0.0" y="1642.0">versione1.EventSoccerMatch</node>
+    <node x="0.0" y="1642.0">versione1.SoccerMatchEvent</node>
     <node x="531.5622685185185" y="310.0">versione1.Event</node>
     <node x="558.9453703703705" y="1990.0">versione1.SocialNetwork</node>
     <node x="304.97037037037046" y="0.0">versione1.Field</node>
-    <node x="899.9453703703705" y="2002.5">versione1.SoccerMatch</node>
+    <node x="899.9453703703705" y="2002.5">versione1.SoccerMatchCategory</node>
     <node x="673.4749999999999" y="1678.0">versione1.Category</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="versione1.EventSoccerMatch" target="versione1.Field">
+    <edge source="versione1.SoccerMatchEvent" target="versione1.Field">
       <point x="0.0" y="-149.0" />
       <point x="287.0" y="1622.0" />
       <point x="281.46203703703713" y="1622.0" />
@@ -37,7 +37,7 @@
       <point x="839.8203703703705" y="2145.0" />
       <point x="120.375" y="65.0" />
     </edge>
-    <edge source="sample.Main" target="versione1.SoccerMatch">
+    <edge source="sample.Main" target="versione1.SoccerMatchCategory">
       <point x="50.0" y="-40.0" />
       <point x="832.6" y="2449.0" />
       <point x="1030.9453703703705" y="2449.0" />
@@ -57,7 +57,7 @@
       <point x="599.0703703703705" y="2145.0" />
       <point x="-120.375" y="65.0" />
     </edge>
-    <edge source="versione1.SoccerMatch" target="versione1.Category">
+    <edge source="versione1.SoccerMatchCategory" target="versione1.Category">
       <point x="68.25" y="-52.5" />
       <point x="1104.6953703703705" y="1960.0" />
       <point x="918.2750000000001" y="1960.0" />
@@ -83,13 +83,13 @@
       <point x="700.675" y="1960.0" />
       <point x="-108.79999999999995" y="113.0" />
     </edge>
-    <edge source="versione1.EventSoccerMatch" target="versione1.Event">
+    <edge source="versione1.SoccerMatchEvent" target="versione1.Event">
       <point x="229.60000000000002" y="-149.0" />
       <point x="516.6" y="1622.0" />
       <point x="663.5622685185185" y="1622.0" />
       <point x="-44.0" y="641.0" />
     </edge>
-    <edge source="sample.SampleController" target="versione1.EventSoccerMatch">
+    <edge source="sample.SampleController" target="versione1.SoccerMatchEvent">
       <point x="-78.19999999999993" y="-124.5" />
       <point x="395.14930555555566" y="2145.0" />
       <point x="376.52430555555566" y="2145.0" />

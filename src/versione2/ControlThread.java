@@ -1,11 +1,8 @@
 package versione2;
 import versione1.Category;
 import versione1.Event;
-import versione1.EventSoccerMatch;
 import versione1.SocialNetwork;
-import versione2.notifications.NotificationsHandler;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class ControlThread extends Thread {

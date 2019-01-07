@@ -5,12 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import versione1.EventSoccerMatch;
-import utilities.FileUtility;
-import versione1.SoccerMatch;
-import versione1.SocialNetwork;
-import versione1.User;
+import versione1.*;
 import versione2.ControlThread;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
 
 public class Main extends Application {
 
@@ -40,19 +40,38 @@ public class Main extends Application {
         SocialNetwork social = new SocialNetwork();
         social.loadUsersListFromFile(); //NUOVO: carico la lista di utenti da file
 
-        SoccerMatch soccer_match = new SoccerMatch();
-        social.addCategory(soccer_match);
+        //aggiungo la categoria soccer Match al social network
+        social.addCategory(new SoccerMatchCategory());
 
-        User system = social.getUsers().get(0); //prendo il primo utente di quella lista (non volevo cancellarti l'esempio)
+        User system = social.getUsers().get(0); //prendo il primo utente di quella lista
 
-        EventSoccerMatch eventSoccerMatch1 = new EventSoccerMatch("Partita a Mompiano", 5, system.getUsername() );
-        eventSoccerMatch1.addParticipants(system.getUsername());
-        EventSoccerMatch eventSoccerMatch2 = new EventSoccerMatch("Partita a Remedello", 2, system.getUsername());
-        eventSoccerMatch2.addParticipants(system.getUsername());
-        soccer_match.addEvent(eventSoccerMatch1);
-        soccer_match.addEvent(eventSoccerMatch2);
+        social.loadSoccerMatchEventListFromFile();
+        //Il blocco seguente serve per creare un nuovo evento e scriverlo su file
+        /*
+        SoccerMatchEvent soccerMatchEvent1 = new SoccerMatchEvent(
+                "Finale a San Siro",
+                10,
+                LocalDate.of(2019, Month.MARCH, 1),
+                "San Siro",
+                LocalDate.of(2019, Month.MARCH, 8),
+                LocalTime.of(21,00),
+                "2",
+                25,
+                "Pulizia spogliatoi, affitto campo, divise nuove",
+                LocalDate.of(2019, Month.FEBRUARY, 15),
+                LocalTime.of(22,45),
+                "18-25",
+                Gender.Maschile,
+                "Finale",
+                "Giacomo"
+        );
+        soccerMatchEvent1.addParticipant("Giacomo"); //posso aggiungere il creatore?
+        soccerMatchEvent1.addParticipant("Maria");
+        soccerMatchEvent1.addParticipant("Pietro");
 
-        soccer_match.controlEventState();
+        social.getSoccerMatchCategory().addEvent(soccerMatchEvent1);
+        social.writeSoccerMatchEventListOnFile(); */
+        social.getSoccerMatchCategory().controlEventState();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
         LoginController loginContr = new LoginController();

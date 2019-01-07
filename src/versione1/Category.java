@@ -1,24 +1,25 @@
 package versione1;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Category {
+public abstract class Category <T extends Event> {
 
 	//Attributi
-	private ArrayList<Event> events;
+	private List<T> events;
 	private String name;
 	private String description;
 
 	/**
 	 * Costruttore Category: inizializza il nome e la descrizione della categoria (figlia)
-	 * e l'arratlist degli eventi associati alla categoria creata
+	 * e la list degli eventi associati alla categoria creata
 	 * @param name
 	 * @param description
 	 */
 	public Category(String name, String description) {
-		this.events =  new ArrayList<>();
 		this.name = name;
 		this.description = description;
+		this.events = new ArrayList<>();
 	}
 
 	//Metodi
@@ -31,11 +32,15 @@ public abstract class Category {
 		return this.description;
 	}
 	
-	public ArrayList<Event> getEvents() {
+	public List<T> getEvents() {
 		return this.events;
 	}
 
-	public void addEvent(Event event) {
+	public void setEvents(List<T> events) {
+		this.events = events;
+	}
+
+	public void addEvent(T event) {
 		this.events.add(event);
 	}
 
@@ -44,8 +49,8 @@ public abstract class Category {
 	 * @param eventNameToFind il nome dell'evento da cercare
 	 * @return l'evento, se questo è stato trovato
 	 */
-	public Event findEventByName(String eventNameToFind){
-		for (Event event : events) {
+	public T findEventByName(String eventNameToFind){
+		for (T event : events) {
 			if(eventNameToFind.equalsIgnoreCase((String)event.getTitle().getValue()))
 				return event;
 		}
@@ -59,7 +64,7 @@ public abstract class Category {
 	 */
 	public boolean doesEventAlreadyExist(String event){
 
-		for (Event e:events) {
+		for (T e : events) {
 			if(event.equalsIgnoreCase((String) e.getTitle().getValue()))
 				return true;
 		}

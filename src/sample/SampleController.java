@@ -20,6 +20,7 @@ import versione1.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SampleController {
 
@@ -41,16 +42,16 @@ public class SampleController {
 
 
 
-    private Category catSelected;
+    private Category<? extends Event> catSelected;
     private Event eventSelected;
 
     private SocialNetwork socialNetwork;
     private User sessionUser;
 
-    private ArrayList<String> catName;
-    private ArrayList<String> eventName;
-    private ArrayList<String> userEventName;
-    private ArrayList<String> notifyName;
+    private List<String> catName;
+    private List<String> eventName;
+    private List<String> userEventName;
+    private List<String> notifyName;
     private ObservableList<String> obsCatName;
     private ObservableList<String> obsEventName;
     private ObservableList<String> obsUserEvent;
@@ -79,12 +80,11 @@ public class SampleController {
 
         System.out.println("Carico la View Utente di: "+sessionUser.getUsername());
         catName = new ArrayList<>();
-
         for(Category category : socialNetwork.getCategories()){
             catName.add(category.getName());
         }
 
-        obsCatName = FXCollections.observableArrayList(catName);
+        obsCatName = FXCollections.observableList(catName);
 
         categoryListView.setItems(obsCatName);
 
@@ -97,7 +97,6 @@ public class SampleController {
                     catSelected = socialNetwork.findCategoryByIndex(categoryListView.getSelectionModel().getSelectedIndex());
 
                     eventName = new ArrayList<>();
-
                     for (Event match : catSelected.getEvents()) {
                         if(match.getState().getStateValue().toString().equals("Aperta")){
                             eventName.add((String) match.getTitle().getValue());
@@ -105,7 +104,7 @@ public class SampleController {
 
                     }
 
-                    obsEventName = FXCollections.observableArrayList(eventName);
+                    obsEventName = FXCollections.observableList(eventName);
                     eventListView.setItems(obsEventName);
 
                     eventListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -130,7 +129,7 @@ public class SampleController {
         });
 
         userEventName = socialNetwork.findEventByUserNameS(sessionUser.getUsername());
-        obsUserEvent = FXCollections.observableArrayList(userEventName);
+        obsUserEvent = FXCollections.observableList(userEventName);
 
         userEventListView.setItems(obsUserEvent);
 
@@ -138,7 +137,7 @@ public class SampleController {
             @Override
             public void handle(MouseEvent event) {
                 userEventName = socialNetwork.findEventByUserNameS(sessionUser.getUsername());
-                obsUserEvent = FXCollections.observableArrayList(userEventName);
+                obsUserEvent = FXCollections.observableList(userEventName);
 
                 userEventListView.setItems(obsUserEvent);
 
@@ -163,14 +162,14 @@ public class SampleController {
 
 
         notifyName = sessionUser.getNotifications();
-        notificationListView.setItems(FXCollections.observableArrayList(notifyName));
+        notificationListView.setItems(FXCollections.observableList(notifyName));
 
 
         refreshNotBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 notifyName = sessionUser.getNotifications();
-                notificationListView.setItems(FXCollections.observableArrayList(notifyName));
+                notificationListView.setItems(FXCollections.observableList(notifyName));
             }
         });
 

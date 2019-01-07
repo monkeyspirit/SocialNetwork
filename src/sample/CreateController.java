@@ -267,7 +267,7 @@ public class CreateController {
             catIsVal = true;
 
 
-            // Acquisisco se c e il titolo
+            // Acquisisco se c'e' il titolo
             // FACOLTATIVO
             //titolo
             if(titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).doesEventAlreadyExist(titleTxtF.getText()) == true){
@@ -543,12 +543,12 @@ public class CreateController {
                             }
                         }
 
-                        EventSoccerMatch match = new EventSoccerMatch(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
-                        match.addParticipants(creator);
+                        SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
+                        match.addParticipant(creator);
 
                         match.addObserver(socialNetwork.getLoggedUser()); // imposto l'osservatore
 
-                        socialNetwork.getCategories().get(0).addEvent(match);
+                        socialNetwork.getSoccerMatchCategory().addEvent(match);
 
 
                         thisStage.close();

@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import versione1.Event;
-import versione1.EventSoccerMatch;
+import versione1.SoccerMatchEvent;
 import versione1.User;
 import versione2.StateValue;
 
@@ -19,7 +19,7 @@ public class EventController {
     @FXML
     private Button subScribeBtn;
 
-    private EventSoccerMatch eventSoccerSelected;
+    private SoccerMatchEvent eventSoccerSelected;
     private String sessionUsername;
     private User sessionUser;
 
@@ -27,7 +27,7 @@ public class EventController {
     public void setSessionUsername(String sessionUsername) { this.sessionUsername = sessionUsername; }
 
     public void setEventSelected(Event eventSelected) {
-            this.eventSoccerSelected = (EventSoccerMatch) eventSelected;
+            this.eventSoccerSelected = (SoccerMatchEvent) eventSelected;
 
     }
 
@@ -145,7 +145,7 @@ public class EventController {
     public void subScribe(){
 
             if (!eventSoccerSelected.isUserAlreadyRegistered(sessionUsername)) {
-                    eventSoccerSelected.addParticipants(sessionUsername);
+                    eventSoccerSelected.addParticipant(sessionUsername);
 
                     eventSoccerSelected.addObserver(sessionUser);  // imposto l'osservatore
 

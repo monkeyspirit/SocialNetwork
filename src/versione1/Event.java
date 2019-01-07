@@ -6,6 +6,7 @@ import versione2.StateValue;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 import static versione2.StateValue.*;
@@ -41,28 +42,26 @@ public abstract class Event extends Observable {
 
 	//Attributi della classe Event
     private String type; //serve per la serializzazione/deserializzazione in modo da poter distinguere il tipo specifico di Event
-	private Field title = new Field(TITLE_NAME,TITLE_DESCRIPTION);
-	private Field numOfParticipants = new Field(NUMPLAY_NAME, NUMPLAY_DESCRIPTION);
-	private Field registrationDeadline = new Field(REGDEADLINE_NAME, REGDEADLINE_DESCRIPTION);
-	private Field place = new Field(PLACE_NAME, PLACE_DESCRIPTION);
-	private Field date = new Field(DATE_NAME,DATE_DESCRIPTION);
-	private Field time = new Field(TIME_NAME, TIME_DESCRIPTION);
-	private Field duration = new Field(DURATION_NAME, DURATION_DESCRIPTION);
-	private Field indTee = new Field(INDTEE_NAME,INDTEE_DESCRIPTION);
-	private Field teeInclude = new Field(TEEINC_NAME, TEEINC_DESCRIPTION);
-	private Field endDate = new Field(ENDDATE_NAME,ENDDATE_DESCRIPTION);
-	private Field endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
-	private Field note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
+	private Field<String> title = new Field(TITLE_NAME,TITLE_DESCRIPTION);
+	private Field<Integer> numOfParticipants = new Field(NUMPLAY_NAME, NUMPLAY_DESCRIPTION);
+	private Field<LocalDate> registrationDeadline = new Field(REGDEADLINE_NAME, REGDEADLINE_DESCRIPTION);
+	private Field<String> place = new Field(PLACE_NAME, PLACE_DESCRIPTION);
+	private Field<LocalDate> date = new Field(DATE_NAME,DATE_DESCRIPTION);
+	private Field<LocalTime> time = new Field(TIME_NAME, TIME_DESCRIPTION);
+	private Field<String> duration = new Field(DURATION_NAME, DURATION_DESCRIPTION); //perché string?
+	private Field<Float> indTee = new Field(INDTEE_NAME,INDTEE_DESCRIPTION); //float ?
+	private Field<String> teeInclude = new Field(TEEINC_NAME, TEEINC_DESCRIPTION);
+	private Field<LocalDate> endDate = new Field(ENDDATE_NAME,ENDDATE_DESCRIPTION);
+	private Field<LocalTime> endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
+	private Field<String> note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
 
 	private State state;
-
 	private String creator; //serve per capire chi e' il creatore dell'utente
-
-    private ArrayList<String> participants;
+    private List<String> participants;
 
 
     /**
-     * Costruttore vuoto: viene inizializzato l'array di campi, ciascuno dei quali con
+     * Costruttore vuoto: viene inizializzato la lista di campi, ciascuno dei quali con
      * nome e descrizione ma senza valore.
      */
 	public Event() {
@@ -104,25 +103,25 @@ public abstract class Event extends Observable {
         this.state = new State();
         this.state.setStateValue(Aperta);  // Appena costruisco l'evento il suo stato e' attivo
         //this.state.setSwitchDate(deadLineIns.plusDays(1));  // Appena costruisco l'evento setto la switch date alla deadLine
-        participants = new ArrayList<>();
+        this.participants = new ArrayList<>();
     }
 
     /**
      * Costruttore di Event che uso nel Main per velocizzare il processo e avere gia' eventi
      * @param type
      * @param name
-     * @param Par
+     * @param numOfParticipants
      * @param creator
      */
-    public Event(String type, String name, int Par, String creator){
+    public Event(String type, String name, int numOfParticipants, String creator){
         this.type = type;
         this.title.setValue(name);
-        this.numOfParticipants.setValue(Par);
+        this.numOfParticipants.setValue(numOfParticipants);
         this.state = new State();
         this.state.setStateValue(Aperta);  // Appena costruisco l'evento il suo stato e' attivo
         this.state.setSwitchDate(null);  // Appena costruisco l'evento setto la switch date alla deadLine
         this.creator = creator;
-        participants = new ArrayList<>();
+        this.participants = new ArrayList<>();
     }
 
 
@@ -177,13 +176,13 @@ public abstract class Event extends Observable {
 
     public String getCreator() { return creator; }
 
-    public ArrayList<String> getParticipants() { return participants; }
+    public List<String> getParticipants() { return participants; }
 
     public State getState() { return state; }
 
     public String getType() { return type; }
 
-    public void addParticipants(String participantUsername){
+    public void addParticipant(String participantUsername){
         participants.add(participantUsername);
     }
 
@@ -249,7 +248,7 @@ public abstract class Event extends Observable {
                 // Questo else if  lo usano gli eventi di sistema
                 else if(state.getSwitchDate() == null){
                     // se il numero di partecipanti e' uguale al numero richiesto e' chiusa
-                    if(participants.size() == (int) numOfParticipants.getValue()){
+                    if(participants.size() == (int) numOfParticipants.getValue()){ //getValue ritorna un double... come mai?
                         state.setStateValue(Chiusa);
                         sendNotification(this.title.getValue() +" e' stata chiusa.");
                     }

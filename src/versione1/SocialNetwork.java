@@ -3,12 +3,14 @@ package versione1;
 import utilities.FileUtility;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SocialNetwork {
 
 	//Attributi
-	private ArrayList<Category> categories;
-	private ArrayList<User> users;
+    private List<Category<? extends Event>> categories;
+	private SoccerMatchCategory soccerMatchCategory;
+	private List<User> users;
 	private User loggedUser; //utente attualmente loggato
 	private FileUtility fileUtility;
 //	private NotificationsHandler notificationsHandler;
@@ -18,22 +20,26 @@ public class SocialNetwork {
 	 * Costruttore SocialNetwork
 	 */
 	public SocialNetwork() {
-		this.categories = new ArrayList<Category>();
-		this.users = new ArrayList<>();
+	    this.categories = new ArrayList<>();
+	    this.soccerMatchCategory = new SoccerMatchCategory();
+	    this.categories.add(soccerMatchCategory); //aggiungo la categoria all'array
 		this.fileUtility = new FileUtility();
 //		this.notificationsHandler = new NotificationsHandler();
 	}
 
-	//Metodi
 	public void addCategory(Category category) {
-		this.categories.add(category);
-	}
-	
-	public ArrayList<Category> getCategories(){
-		return this.categories;
+	    this.categories.add(category);
+    }
+
+    public List<Category<? extends Event>> getCategories() {
+	    return this.categories;
+    }
+
+	public SoccerMatchCategory getSoccerMatchCategory(){
+		return this.soccerMatchCategory;
 	}
 
-	public ArrayList<User> getUsers() { return this.users;	}
+	public List<User> getUsers() { return this.users;	}
 
 //	public NotificationsHandler getNotificationsHandler() { return this.notificationsHandler; }
 
@@ -135,14 +141,26 @@ public class SocialNetwork {
 		fileUtility.writeUsersList(this.users);
 	}
 
-	// Metodo che serve per trovare tutti gli eventi a cui è iscritto un dato utente e ne ritorna i nomi
-	public ArrayList<String> findEventByUserNameS(String userSession){
+	/**
+	 * legge il file contenente la lista di EventSoccerMatch lo carica all'interno della lista di eventi della categoria corrispondente
+	 */
+	public void loadSoccerMatchEventListFromFile() {
+		soccerMatchCategory.setEvents(fileUtility.readSoccerMatchEvents());
+	}
+
+	public void writeSoccerMatchEventListOnFile() {
+        System.out.println("Aggiorno il file della lista di EventSoccerMatch");
+        fileUtility.writeSoccerMatchEvents(soccerMatchCategory.getEvents());
+    }
+
+	// Metodo che serve per trovare tutti gli eventi a cui e' iscritto un dato utente e ne ritorna i nomi
+	public List<String> findEventByUserNameS(String userSession){
 
 		ArrayList<String> eventsUser = new ArrayList<>();
 
 		for(int i=0; i<categories.size(); i++){
 			Category catSel = categories.get(i);
-			ArrayList<Event> eventsByCat = catSel.getEvents();
+			List<Event> eventsByCat = catSel.getEvents();
 			for(int j=0; j < eventsByCat.size(); j++){
 				if(eventsByCat.get(j).isUserAlreadyRegistered(userSession)== true){
 					eventsUser.add((String) eventsByCat.get(j).getTitle().getValue());
@@ -155,13 +173,13 @@ public class SocialNetwork {
 	}
 
 	// Simile al precedente ma in questo caso trona un arraylist di eventi, serve per la classe notification
-	public ArrayList<Event> findEventByUserNameE(String userSession){
+	public List<Event> findEventByUserNameE(String userSession){
 
 		ArrayList<Event> eventsUser = new ArrayList<>();
 
 		for(int i=0; i<categories.size(); i++){
 			Category catSel = categories.get(i);
-			ArrayList<Event> eventsByCat = catSel.getEvents();
+			List<Event> eventsByCat = catSel.getEvents();
 			for(int j=0; j < eventsByCat.size(); j++){
 				if(eventsByCat.get(j).isUserAlreadyRegistered(userSession)== true){
 					eventsUser.add(eventsByCat.get(j));
@@ -179,7 +197,7 @@ public class SocialNetwork {
 	 * @return il riferimento all'evento nel caso in cui sia stato trovato
 	 */
 	public Event findEventByEventName(String eventName){
-		for (Category category : categories) {
+		for (Category<? extends Event> category : categories) {
 			for (Event event : category.getEvents()) {
 				if(eventName.equalsIgnoreCase((String) event.getTitle().getValue()))
 					return event;
