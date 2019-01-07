@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import versione1.Category;
 import versione1.Event;
 import versione1.SocialNetwork;
 import versione1.User;
+import versione2.GraphicThread;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,19 +26,31 @@ import java.util.List;
 
 public class SampleController {
 
-    public static final String SOCCER_NAME = "Partite di calcio";
 
+    private GraphicThread graphicThread;
+    public void setGraphicThread(GraphicThread graphicThread) { this.graphicThread = graphicThread; }
+
+
+    public static final String SOCCER_NAME = "Partite di calcio";
 
     // ~~~~~ Sample Stage ~~~~~~~~~~~~~
 
     @FXML
     private ListView notificationListView,categoryListView, eventListView, userEventListView;
 
+    public ListView getNotificationListView() { return notificationListView; }
+
+    public ListView getCategoryListView() { return categoryListView; }
+
+    public ListView getEventListView() { return eventListView; }
+
+    public ListView getUserEventListView() { return userEventListView; }
+
     @FXML
     private Tab userTb;
 
-    @FXML
-    private Button refreshEventBtn, refreshNotBtn;
+
+
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -53,8 +67,6 @@ public class SampleController {
     private List<String> userEventName;
     private List<String> notifyName;
     private ObservableList<String> obsCatName;
-    private ObservableList<String> obsEventName;
-    private ObservableList<String> obsUserEvent;
 
     private String notification;
 
@@ -78,6 +90,7 @@ public class SampleController {
 
         userTb.setText(sessionUser.getUsername());
 
+
         System.out.println("Carico la View Utente di: "+sessionUser.getUsername());
         catName = new ArrayList<>();
         for(Category category : socialNetwork.getCategories()){
@@ -89,23 +102,12 @@ public class SampleController {
         categoryListView.setItems(obsCatName);
 
 
+
         categoryListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
 
                 if (!categoryListView.getSelectionModel().isEmpty()) {
-                    catSelected = socialNetwork.findCategoryByIndex(categoryListView.getSelectionModel().getSelectedIndex());
-
-                    eventName = new ArrayList<>();
-                    for (Event match : catSelected.getEvents()) {
-                        if(match.getState().getStateValue().toString().equals("Aperta")){
-                            eventName.add((String) match.getTitle().getValue());
-                        }
-
-                    }
-
-                    obsEventName = FXCollections.observableList(eventName);
-                    eventListView.setItems(obsEventName);
 
                     eventListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
@@ -129,20 +131,8 @@ public class SampleController {
         });
 
         userEventName = socialNetwork.findEventByUserNameS(sessionUser.getUsername());
-        obsUserEvent = FXCollections.observableList(userEventName);
+        userEventListView.setItems(FXCollections.observableList(userEventName));
 
-        userEventListView.setItems(obsUserEvent);
-
-        refreshEventBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                userEventName = socialNetwork.findEventByUserNameS(sessionUser.getUsername());
-                obsUserEvent = FXCollections.observableList(userEventName);
-
-                userEventListView.setItems(obsUserEvent);
-
-            }
-        });
 
         userEventListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -165,13 +155,6 @@ public class SampleController {
         notificationListView.setItems(FXCollections.observableList(notifyName));
 
 
-        refreshNotBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                notifyName = sessionUser.getNotifications();
-                notificationListView.setItems(FXCollections.observableList(notifyName));
-            }
-        });
 
         notificationListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -180,7 +163,7 @@ public class SampleController {
                 if(!notificationListView.getSelectionModel().isEmpty()) {
                     notification = (String) notificationListView.getSelectionModel().getSelectedItem();
                     try {
-                        openNotificationView();
+                        openNotificationView(notificationListView.getSelectionModel().getSelectedIndex());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -189,10 +172,57 @@ public class SampleController {
             }
         });
 
+        graphicThread.setSampleController(this);
+
+        graphicThread.setCategoryListView(categoryListView);
+        graphicThread.setNotificationListView(notificationListView);
+        graphicThread.setEventListView(eventListView);
+        graphicThread.setUserEventListView(userEventListView);
+
+        graphicThread.start();
+    }
+
+
+    /**
+     * Il Metodo si occupa di aggiornare gli elementi delle listview in modo che poi il thread aggiorni la grafica
+     */
+    public void refreshListView(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if (!categoryListView.getSelectionModel().isEmpty()) {
+                    catSelected = socialNetwork.findCategoryByIndex(categoryListView.getSelectionModel().getSelectedIndex());
+
+                    eventName = new ArrayList<>();
+                    for (Event match : catSelected.getEvents()) {
+                        if (match.getState().getStateValue().toString().equals("Aperta")) {
+                            eventName.add((String) match.getTitle().getValue());
+                        }
+
+                    }
+
+                    eventListView.setItems(FXCollections.observableList(eventName));
+                }
+
+                userEventName = socialNetwork.findEventByUserNameS(sessionUser.getUsername());
+                userEventListView.setItems(FXCollections.observableList(userEventName));
+
+                notifyName = sessionUser.getNotifications();
+                notificationListView.setItems(FXCollections.observableList(notifyName));
+
+
+
+            }
+        });
 
     }
 
-    public void openNotificationView() throws IOException {
+
+
+
+
+
+    public void openNotificationView(int notificaitonIndex) throws IOException {
 
         FXMLLoader loaderNotify = new FXMLLoader(Main.class.getResource("viewNotify.fxml"));
         NotificationController notificationController = new NotificationController();
@@ -201,6 +231,9 @@ public class SampleController {
 
         notificationController.setSessionUser(sessionUser);
         notificationController.setNotification(notification);
+        notificationController.setNotificationIndex(notificaitonIndex);
+        notificationController.setNotificationListView(notificationListView);
+
 
         notify = new Stage();
         notificationController.setThisStage(notify);
@@ -211,6 +244,13 @@ public class SampleController {
         notify.setScene(sceneNotify);
         notify.show();
     }
+
+
+
+
+
+
+
 
     /**
      * Metodo per la creazione di un nuovo evento, chiama il controller dedicato
@@ -238,6 +278,11 @@ public class SampleController {
         view.show();
 
     }
+
+
+
+
+
 
 
     /**
@@ -268,7 +313,13 @@ public class SampleController {
         create.setScene(scene);
         create.show();
 
+
+
     }
+
+
+
+
 
 
     public void exitUser() throws IOException {

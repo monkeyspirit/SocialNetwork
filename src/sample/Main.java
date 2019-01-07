@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import versione1.*;
 import versione2.ControlThread;
+import versione2.GraphicThread;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -80,9 +81,13 @@ public class Main extends Application {
 
         loginContr.setSocialNetwork(social);
 
-        ControlThread t1 = new ControlThread();
-        t1.start();
-        t1.setSocialNetwork(social);
+        ControlThread controlThread = new ControlThread();
+        controlThread.start();
+        controlThread.setSocialNetwork(social);
+
+        GraphicThread graphicThread = new GraphicThread();
+
+        loginContr.setGraphicThread(graphicThread);
 
 
         // Imposto lo stage e la scene principali
@@ -98,6 +103,10 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         launch(args);
+
+        if(!guiStage.isShowing()){
+            System.exit(4);
+        }
 
     }
 

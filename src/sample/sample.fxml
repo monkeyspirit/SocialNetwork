@@ -40,7 +40,7 @@
                      <content>
                         <ListView fx:id="userEventListView" prefHeight="201.0" prefWidth="169.0" />
                      </content></ScrollPane>
-                  <Button fx:id="refreshEventBtn" layoutX="14.0" layoutY="35.0" mnemonicParsing="false" text="Ricarica lista eventi" />
+
                   <ScrollPane layoutX="300.0" layoutY="66.0">
                     <content>
                       <AnchorPane prefHeight="211.0" prefWidth="234.0">
@@ -50,7 +50,6 @@
                         </AnchorPane>
                     </content>
                   </ScrollPane>
-                  <Button fx:id="refreshNotBtn" layoutX="300.0" layoutY="35.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="184.0" text="Ricarica lista notifiche" />
 
                </children></AnchorPane>
         </content>

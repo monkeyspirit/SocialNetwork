@@ -13,12 +13,16 @@ import javafx.stage.Stage;
 import utilities.FileUtility;
 import versione1.SocialNetwork;
 import versione1.User;
+import versione2.GraphicThread;
 
 import java.io.IOException;
 
 public class LoginController {
 
-    // ~~~~~ Sample Stage ~~~~~~~~~~~~~
+    private GraphicThread graphicThread;
+    public void setGraphicThread(GraphicThread graphicThread) { this.graphicThread = graphicThread; }
+
+// ~~~~~ Sample Stage ~~~~~~~~~~~~~
 
     @FXML
     private Button loginBtn;
@@ -129,6 +133,7 @@ public class LoginController {
             // Passo a controller il riferimento a social network
             controller.setSocialNetwork(social);
             controller.setSessionUser(sessionUser);
+            controller.setGraphicThread(graphicThread);
 
             Stage primaryStage = Main.getStage();
 
