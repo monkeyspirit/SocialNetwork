@@ -28,28 +28,35 @@ public class GraphicThread extends Thread {
 
             while (true) {
 
-                sampleController.refreshListView();
+                    sampleController.refreshListView();
 
-                categoryListView.refresh();
-                if(!categoryListView.getSelectionModel().isEmpty()){
-                    eventListView.refresh();
-                }
+                    categoryListView.refresh();
+                    if(!categoryListView.getSelectionModel().isEmpty()){
+                        eventListView.refresh();
+                    }
 
-                userEventListView.refresh();
-                System.out.println(userEventListView.getItems());
-                notificationListView.refresh();
-                System.out.println(notificationListView);
+                    userEventListView.refresh();
+                    System.out.println(userEventListView.getItems());
+                    notificationListView.refresh();
+                    System.out.println(notificationListView);
 
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
             }
 
 
 
+    }
+
+    /**
+     * NON FUNZIONA... HELP, COME SI FERMAVANO I THREAD ?
+     */
+    public void deleteThread(){
+        Thread.currentThread().interrupt();
     }
 
 }

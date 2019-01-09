@@ -85,9 +85,6 @@ public class Main extends Application {
         controlThread.start();
         controlThread.setSocialNetwork(social);
 
-        GraphicThread graphicThread = new GraphicThread();
-
-        loginContr.setGraphicThread(graphicThread);
 
 
         // Imposto lo stage e la scene principali

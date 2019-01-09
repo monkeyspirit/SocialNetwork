@@ -339,6 +339,7 @@ public class SampleController {
         }
 
 
+        graphicThread.deleteThread();
 
 
         Stage newLogin = Main.getStage();

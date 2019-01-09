@@ -19,9 +19,6 @@ import java.io.IOException;
 
 public class LoginController {
 
-    private GraphicThread graphicThread;
-    public void setGraphicThread(GraphicThread graphicThread) { this.graphicThread = graphicThread; }
-
 // ~~~~~ Sample Stage ~~~~~~~~~~~~~
 
     @FXML
@@ -133,7 +130,11 @@ public class LoginController {
             // Passo a controller il riferimento a social network
             controller.setSocialNetwork(social);
             controller.setSessionUser(sessionUser);
+
+            GraphicThread graphicThread = new GraphicThread();
+
             controller.setGraphicThread(graphicThread);
+            graphicThread.setSampleController(controller);
 
             Stage primaryStage = Main.getStage();
 
