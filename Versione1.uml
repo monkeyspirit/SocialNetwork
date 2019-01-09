@@ -3,107 +3,40 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="646.9453703703705" y="64.0">versione1.User</node>
-    <node x="682.6" y="2479.0">sample.Main</node>
-    <node x="277.8493055555556" y="2170.0">sample.SampleController</node>
-    <node x="0.0" y="1642.0">versione1.SoccerMatchEvent</node>
-    <node x="531.5622685185185" y="310.0">versione1.Event</node>
-    <node x="558.9453703703705" y="1990.0">versione1.SocialNetwork</node>
-    <node x="304.97037037037046" y="0.0">versione1.Field</node>
-    <node x="899.9453703703705" y="2002.5">versione1.SoccerMatchCategory</node>
-    <node x="673.4749999999999" y="1678.0">versione1.Category</node>
+    <node x="1108.0" y="1180.0">versione1.User</node>
+    <node x="1470.0" y="1180.0">sample.Main</node>
+    <node x="452.0" y="1180.0">sample.SampleController</node>
+    <node x="55.0" y="0.0">versione1.Event</node>
+    <node x="0.0" y="1006.0">versione1.SoccerMatchCategory</node>
+    <node x="0.0" y="1180.0">versione1.SocialNetwork</node>
+    <node x="834.0" y="1180.0">versione1.Field</node>
+    <node x="366.0" y="779.0">versione1.SoccerMatchEvent</node>
+    <node x="5.0" y="731.0">versione1.Category</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="versione1.SoccerMatchEvent" target="versione1.Field">
-      <point x="0.0" y="-149.0" />
-      <point x="287.0" y="1622.0" />
-      <point x="281.46203703703713" y="1622.0" />
-      <point x="281.46203703703713" y="290.0" />
-      <point x="400.38703703703715" y="290.0" />
-      <point x="-19.083333333333314" y="125.0" />
-    </edge>
-    <edge source="sample.Main" target="sample.SampleController">
-      <point x="-83.33333333333337" y="-40.0" />
-      <point x="699.2666666666667" y="2459.0" />
-      <point x="375.5993055555556" y="2459.0" />
-      <point x="-97.75" y="124.5" />
-    </edge>
-    <edge source="sample.Main" target="versione1.SocialNetwork">
-      <point x="16.66666666666663" y="-40.0" />
-      <point x="799.2666666666667" y="2439.0" />
-      <point x="861.6622685185185" y="2439.0" />
-      <point x="861.6622685185185" y="2145.0" />
-      <point x="839.8203703703705" y="2145.0" />
-      <point x="120.375" y="65.0" />
-    </edge>
-    <edge source="sample.Main" target="versione1.SoccerMatchCategory">
-      <point x="50.0" y="-40.0" />
-      <point x="832.6" y="2449.0" />
-      <point x="1030.9453703703705" y="2449.0" />
-      <point x="1030.9453703703705" y="2145.0" />
-      <point x="968.1953703703705" y="2145.0" />
-      <point x="-68.25" y="52.5" />
-    </edge>
     <edge source="versione1.Category" target="versione1.Event">
-      <point x="-68.0" y="-113.0" />
-      <point x="741.4749999999999" y="1622.0" />
-      <point x="751.5622685185185" y="1622.0" />
-      <point x="44.0" y="641.0" />
-    </edge>
-    <edge source="sample.SampleController" target="versione1.SocialNetwork">
-      <point x="78.20000000000005" y="-124.5" />
-      <point x="551.5493055555556" y="2145.0" />
-      <point x="599.0703703703705" y="2145.0" />
-      <point x="-120.375" y="65.0" />
+      <point x="0.0" y="-112.5" />
+      <point x="175.5" y="706.0" />
+      <point x="321.0" y="706.0" />
+      <point x="-266.0" y="340.5" />
     </edge>
     <edge source="versione1.SoccerMatchCategory" target="versione1.Category">
-      <point x="68.25" y="-52.5" />
-      <point x="1104.6953703703705" y="1960.0" />
-      <point x="918.2750000000001" y="1960.0" />
-      <point x="108.80000000000007" y="113.0" />
-    </edge>
-    <edge source="versione1.Event" target="versione1.Field">
-      <point x="117.33333333333337" y="-641.0" />
-      <point x="824.8956018518519" y="270.0" />
-      <point x="514.8870370370371" y="270.0" />
-      <point x="95.41666666666663" y="125.0" />
-    </edge>
-    <edge source="versione1.SocialNetwork" target="versione1.Category">
-      <point x="-80.25" y="-65.0" />
-      <point x="639.1953703703705" y="1970.0" />
-      <point x="755.075" y="1970.0" />
-      <point x="-54.39999999999998" y="113.0" />
-    </edge>
-    <edge source="sample.SampleController" target="versione1.Category">
-      <point x="0.0" y="-124.5" />
-      <point x="473.3493055555556" y="2145.0" />
-      <point x="454.58703703703713" y="2145.0" />
-      <point x="454.58703703703713" y="1960.0" />
-      <point x="700.675" y="1960.0" />
-      <point x="-108.79999999999995" y="113.0" />
+      <point x="0.0" y="-64.5" />
+      <point x="0.0" y="112.5" />
     </edge>
     <edge source="versione1.SoccerMatchEvent" target="versione1.Event">
-      <point x="229.60000000000002" y="-149.0" />
-      <point x="516.6" y="1622.0" />
-      <point x="663.5622685185185" y="1622.0" />
-      <point x="-44.0" y="641.0" />
-    </edge>
-    <edge source="sample.SampleController" target="versione1.SoccerMatchEvent">
-      <point x="-78.19999999999993" y="-124.5" />
-      <point x="395.14930555555566" y="2145.0" />
-      <point x="376.52430555555566" y="2145.0" />
-      <point x="376.52430555555566" y="1970.0" />
-      <point x="430.5" y="1970.0" />
-      <point x="143.5" y="149.0" />
+      <point x="0.0" y="-64.5" />
+      <point x="998.5" y="706.0" />
+      <point x="853.0" y="706.0" />
+      <point x="266.0" y="340.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="640.0" y="242.0" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="640.0" y="173.0" />
   <SelectedNodes>
     <node>versione1.User</node>
   </SelectedNodes>
   <Categories>
-    <Category>Fields</Category>
     <Category>Constructors</Category>
     <Category>Methods</Category>
   </Categories>
