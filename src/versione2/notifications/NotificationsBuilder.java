@@ -5,8 +5,15 @@ import versione1.User;
 import versione2.StateValue;
 
 import java.io.FileNotFoundException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+
 
 /**
  * Questa classe si occupa di creare l'array di notifiche.
@@ -17,13 +24,23 @@ import java.util.Date;
  */
 public class NotificationsBuilder {
 
-
     public static final String MSG_CLOSED = " è ufficialmente chiusa e inizierà il giorno: ";
     public static final String MSG_CLOSED_NO_DATE = " è ufficialmente chiusa.";
     public static final String MSG_FAILED = " è fallita in quanto non è stato raggiunto il numero minimo di partecipanti.";
     public static final String MSG_TERMINATED = " si è conclusa con successo.";
     public static final String MSG_NEW = " è stato creato mentre non c'eri.";
 
+
+
+    public static String buildReminder(String title, LocalDate date, LocalTime time, String place, Float tee){
+        String reminder = "Ricordati che hai l'evento: "+title+" che si terra' "+date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ITALY)+" "+date.getDayOfMonth()+" "+date.getMonth().getDisplayName(TextStyle.FULL, Locale.ITALY)+ " del "+date.getYear()+" alle ore "+time.getHour()+":"+time.getMinute()+".\n";
+        reminder+="Il luogo di ritrovo e': "+place+".\n";
+        if(tee!=0){
+            reminder+="Ricordati di pagare: "+tee+" €.\n";
+        }
+
+        return reminder;
+    }
 
     /**
      * Costruisce il messaggio della notifica per un evento nuovo

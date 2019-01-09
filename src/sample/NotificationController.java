@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import versione1.SocialNetwork;
 import versione1.User;

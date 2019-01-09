@@ -64,6 +64,8 @@ public abstract class Event  {
 
 
     private String notificationToSend;
+    private String reminder;
+
 
     /**
      * Costruttore vuoto: viene inizializzato la lista di campi, ciascuno dei quali con
@@ -163,6 +165,9 @@ public abstract class Event  {
 
     public String getNotificationToSend() { return notificationToSend; }
 
+    public String getReminder() { return reminder; }
+
+
     public List<String> getParticipants() { return participants; }
 
     public String getStateValueAndSwitchDate() {
@@ -231,7 +236,6 @@ public abstract class Event  {
         // Per gli eventi aperti:
         switch (state.get(state.size()-1).getStateValue()) {
 
-
             case Aperta:
 
                 // se il numero di partecipanti e' uguale al numero richiesto e' chiusa
@@ -239,8 +243,10 @@ public abstract class Event  {
                     state.add(new State(StateValue.Chiusa, LocalDate.now()));
 
                     isChanged = true;
-
                     notificationToSend = NotificationsBuilder.buildNotificationClosed(this.title.getValue());
+                    reminder = NotificationsBuilder.buildReminder(this.title.getValue(), this.date.getValue(), this.time.getValue(), this.place.getValue(), this.indTee.getValue());
+
+
                 }
 
                 // se la data di termine ed e' uguale ad oggi e non abbiamo il numero di partecipanti fallisce
