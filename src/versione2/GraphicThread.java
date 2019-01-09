@@ -36,9 +36,9 @@ public class GraphicThread extends Thread {
                     }
 
                     userEventListView.refresh();
-                    System.out.println(userEventListView.getItems());
+
                     notificationListView.refresh();
-                    System.out.println(notificationListView);
+
 
                     try {
                         Thread.sleep(1000);

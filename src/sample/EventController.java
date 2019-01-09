@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import versione1.Event;
 import versione1.SoccerMatchEvent;
+import versione1.SocialNetwork;
 import versione1.User;
 import versione2.StateValue;
 
@@ -18,11 +19,13 @@ public class EventController {
     private Label placesAvbLbl, stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
     @FXML
     private Button subScribeBtn;
-
+    private SocialNetwork socialNetwork;
     private SoccerMatchEvent eventSoccerSelected;
     private String sessionUsername;
     private User sessionUser;
 
+
+    public void setSocialNetwork(SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
 
     public void setSessionUsername(String sessionUsername) { this.sessionUsername = sessionUsername; }
 
@@ -147,8 +150,7 @@ public class EventController {
             if (!eventSoccerSelected.isUserAlreadyRegistered(sessionUsername)) {
                     eventSoccerSelected.addParticipant(sessionUsername);
 
-                    eventSoccerSelected.addObserver(sessionUser);  // imposto l'osservatore
-
+                    socialNetwork.updateUserandEventsListFile();
                     subScribeBtn.setDisable(true);
                     int postiDisponibili = (int) eventSoccerSelected.getNumOfParticipants().getValue() - eventSoccerSelected.getParticipants().size();
                     placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);

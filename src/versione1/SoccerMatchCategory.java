@@ -16,6 +16,8 @@ public class SoccerMatchCategory extends Category<SoccerMatchEvent> {
 		super(SOCCER_NAME, SOCCER_DESCRIPTION);
 	}
 
+
+
 	@Override
 	public List<SoccerMatchEvent> getEvents() {
 		return super.getEvents();

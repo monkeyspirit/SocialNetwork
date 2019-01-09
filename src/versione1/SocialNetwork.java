@@ -15,7 +15,6 @@ public class SocialNetwork {
 	private FileUtility fileUtility;
 //	private NotificationsBuilder notificationsHandler;
 
-	
 	/**
 	 * Costruttore SocialNetwork
 	 */
@@ -113,6 +112,8 @@ public class SocialNetwork {
 		updateUsersListFile(); //aggiorno il file degli utenti
 	}
 
+
+
 	/**
 	 * Effettua il login dell'utente aggiornando loggedUser come l'utente corrente
 	 * @param loggedUser l'utente da loggare
@@ -136,11 +137,19 @@ public class SocialNetwork {
 	 * Aggiorna il file contenente la lista degli utenti scrivendo al suo interno
 	 * il contenuto attuale della lista di utenti dell'applicazione.
 	 */
-	private void updateUsersListFile () {
+	public void updateUsersListFile () {
 		System.out.println("Aggiorno il file della lista di utenti");
 		fileUtility.writeUsersList(this.users);
 	}
 
+	/**
+	 *  Aggiorna tutto utenti e eventi
+	 */
+
+	public void updateUserandEventsListFile(){
+		fileUtility.writeUsersList(this.users);
+		fileUtility.writeSoccerMatchEvents(soccerMatchCategory.getEvents());
+	}
 	/**
 	 * legge il file contenente la lista di EventSoccerMatch lo carica all'interno della lista di eventi della categoria corrispondente
 	 */

@@ -8,11 +8,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import static versione2.StateValue.*;
 
-public abstract class Event extends Observable {
+public abstract class Event  {
 
     //Costanti della classe Event
 	public static final String TITLE_NAME = "Titolo";
@@ -64,6 +63,8 @@ public abstract class Event extends Observable {
     private List<String> participants;
 
 
+    private String notificationToSend;
+
     /**
      * Costruttore vuoto: viene inizializzato la lista di campi, ciascuno dei quali con
      * nome e descrizione ma senza valore.
@@ -88,7 +89,7 @@ public abstract class Event extends Observable {
      * @param noteIns
      * @param creator
      */
-    public Event(String type, String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String noteIns,  String creator) {
+    public Event(String type, String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, StateValue stateValue, LocalDate stateSwitch, String noteIns,  String creator) {
         this.type = type;
 	    this.title.setValue(titleIns);
         this.numOfParticipants.setValue(numParIns);
@@ -105,32 +106,13 @@ public abstract class Event extends Observable {
         this.note.setValue(noteIns);
         this.creator = creator;
         this.state = new ArrayList<>();
-        this.state.add(new State(Aperta, LocalDate.now()));  // Appena costruisco l'evento il suo stato e' attivo
-        //this.state.setSwitchDate(deadLineIns.plusDays(1));
-        this.participants = new ArrayList<>();
-    }
-
-    /**
-     * Costruttore di Event che uso nel Main per velocizzare il processo e avere gia' eventi
-     * @param type
-     * @param name
-     * @param numOfParticipants
-     * @param creator
-     */
-    public Event(String type, String name, int numOfParticipants, String creator){
-        this.type = type;
-        this.title.setValue(name);
-        this.numOfParticipants.setValue(numOfParticipants);
-        this.state = new ArrayList<>();
-        this.state.add(new State(Aperta, LocalDate.now()));  // Appena costruisco l'evento il suo stato e' attivo
-        this.creator = creator;
+        State stateEvent = new State(stateValue, stateSwitch);
+        this.state.add(stateEvent);
         this.participants = new ArrayList<>();
     }
 
 
     //Setter e Getter
-
-
     public Field getTitle() {
         return title;
     }
@@ -178,6 +160,8 @@ public abstract class Event extends Observable {
     }
 
     public String getCreator() { return creator; }
+
+    public String getNotificationToSend() { return notificationToSend; }
 
     public List<String> getParticipants() { return participants; }
 
@@ -238,85 +222,58 @@ public abstract class Event extends Observable {
 
 
     /**
-     * Controlla e modifica lo stato degli eventi (spostiamo i sendNotification all'interno
-     * dei setStateValue ? )
+     * Controlla e modifica lo stato degli eventi
      */
-    public void controlState(){
+    public boolean controlState(){
+
+        boolean isChanged = false;
 
         // Per gli eventi aperti:
         switch (state.get(state.size()-1).getStateValue()) {
+
+
             case Aperta:
-                // se la data di cambio stato non e' nulla ed e' uguale ad oggi fai:
-                if(state.get(state.size()-1).getSwitchDate() != null && LocalDate.now().equals(state.get(state.size()-1).getSwitchDate())){
-                    // se il numero di partecipanti e' uguale al numero richiesto e' chiusa
-                    if(numberOfPartecipantsIsMaximum()){
-                        state.add(new State(StateValue.Chiusa, LocalDate.now()));
-                        sendNotification(this.title.getValue() +" e' stata chiusa.");
-                    }
-                    // se il numero di partecipanti e' minore al numero richiesto e' fallita
-                    else {
-                        state.add(new State(Fallita, LocalDate.now()));
-                        sendNotification(this.title.getValue() +" e' fallita.");
-                    }
-                    break;
+
+                // se il numero di partecipanti e' uguale al numero richiesto e' chiusa
+                if(numberOfPartecipantsIsMaximum()){
+                    state.add(new State(StateValue.Chiusa, LocalDate.now()));
+
+                    isChanged = true;
+
+                    notificationToSend = NotificationsBuilder.buildNotificationClosed(this.title.getValue());
                 }
-                // Questo else if  lo usano gli eventi di sistema
-                else if(state.get(state.size()-1).getSwitchDate() == null){
-                    // se il numero di partecipanti e' uguale al numero richiesto e' chiusa
-                    if(participants.size() == (int) numOfParticipants.getValue()){ //getValue ritorna un double... come mai?
-                        state.add(new State(StateValue.Chiusa, LocalDate.now()));
-                        sendNotification(this.title.getValue() +" e' stata chiusa.");
-                    }
-                    break;
+
+                // se la data di termine ed e' uguale ad oggi e non abbiamo il numero di partecipanti fallisce
+                if(LocalDate.now().equals(registrationDeadline.getValue()) && !numberOfPartecipantsIsMaximum()) {
+
+                    state.add(new State(Fallita, LocalDate.now()));
+                    isChanged = true;
+
+                    notificationToSend = NotificationsBuilder.buildNotificationFailed(this.title.getValue());
+
                 }
+
+                break;
+
+
             case Chiusa:
                 //se la data di termine equivale ad oggi
                 if(endDate.getValue() != null && LocalDate.now().equals(endDate.getValue())) {
                     state.add(new State(StateValue.Conclusa, LocalDate.now()));
-                    sendNotification(NotificationsBuilder.buildNotificationTerminated(this.title.getValue()));
+                    isChanged = true;
+
+                    notificationToSend = NotificationsBuilder.buildNotificationTerminated(this.title.getValue());
+
+
                 }
+                break;
         }
+
+        return isChanged;
     }
 
-    /*
-    public void controlState() {
-    	// Per gli eventi aperti:
-        if(state.getStateValue().equals(StateValue.Aperta)){
-        	//controllo se la data attuale coincide con quella di scadenza per le iscrizioni
-        	if(LocalDate.now().equals(registrationDeadline.getValue()) || LocalDate.now().isAfter((ChronoLocalDate) registrationDeadline.getValue())) {
-        		state.setStateValue(StateValue.Fallita);
-        		state.setSwitchDate("La proposta e' fallita il giorno:" + LocalDate.now());
-        		sendNotification(this.title.getValue() +" e' fallita.");
-        	}
-        	else {
-        		if(participants.size() == (int)numOfParticipants.getValue()) {
-        			state.setStateValue(StateValue.Chiusa);
-            		state.setSwitchDate("La proposta e' stata chiusa il giorno:" + LocalDate.now());
-            		sendNotification(this.title.getValue() +" e' chiusa.");
-        		}
-        	}
-        }
-     // Quando sono chiuse le imposto concluse quando terminano
-        else if(state.getStateValue().equals(StateValue.Chiusa)) {
-        	if(endDate != null) {
-        		if(LocalDate.now().equals(endDate.getValue())) {
-        			state.setStateValue(StateValue.Conclusa);
-            		state.setSwitchDate(state.getSwitchDate() + "\n L'evento e' concluso il giorno:" + LocalDate.now());
-            		sendNotification(this.title.getValue() +" e' conclusa.");
-        		}
-        	}
-        	else if(LocalDate.now().isAfter((ChronoLocalDate) date.getValue())){
-        		state.setStateValue(StateValue.Conclusa);
-        		state.setSwitchDate(state.getSwitchDate() + "\n L'evento e' concluso il giorno:" + LocalDate.now());
-        		sendNotification(this.title.getValue() +" e' conclusa.");
-        	}
-        }
-    }
-    */
-    private void sendNotification(String stateChange){
-        setChanged();
-        notifyObservers(stateChange);
-    }
+
+
 
     /**
      * Controlla se il numero di partecipanti ha raggiunto il massimo

@@ -5,16 +5,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import versione1.SocialNetwork;
 import versione1.User;
 
 
 public class NotificationController {
 
+    private SocialNetwork socialNetwork;
     private User sessionUser;
     private String notification;
     private int notificationIndex;
     private Stage thisStage;
     private ListView notificationListView;
+
+    public void setSocialNetwork(SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
 
     public void setThisStage(Stage thisStage) { this.thisStage = thisStage; }
 
@@ -42,6 +46,9 @@ public class NotificationController {
         notificationListView.refresh();
         notificationListView.getSelectionModel().clearSelection(); // elimino la selezione precedente che in caso rimarrebbe salvata
         //
+
+        socialNetwork.updateUsersListFile();
+
         thisStage.close();
     }
 

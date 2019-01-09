@@ -71,9 +71,5 @@ public abstract class Category <T extends Event> {
 		return false;
     }
 
-	public void controlEventState(){
-		for(int i=0; i<events.size(); i++){
-			events.get(i).controlState();
-		}
-	}
+
 }

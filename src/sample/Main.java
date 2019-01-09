@@ -50,7 +50,7 @@ public class Main extends Application {
         social.loadSoccerMatchEventListFromFile();
 
         //Il blocco seguente serve per creare un nuovo evento e scriverlo su file
-
+//
 //        SoccerMatchEvent soccerMatchEvent1 = new SoccerMatchEvent(
 //                "Finale a San Siro",
 //                10,
@@ -76,7 +76,6 @@ public class Main extends Application {
 //        social.writeSoccerMatchEventListOnFile();
 
 
-        social.getSoccerMatchCategory().controlEventState();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
         LoginController loginContr = new LoginController();
@@ -97,6 +96,7 @@ public class Main extends Application {
         primaryStage.setTitle("Accesso");
         primaryStage.setScene(scene);
         primaryStage.show();
+
 
     }
 

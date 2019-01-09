@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import versione1.*;
+import versione2.StateValue;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class CreateController {
+public class EventCreateController {
 
     public static final String SOCCER_NAME = "Partite di calcio";
 
@@ -541,13 +542,15 @@ public class CreateController {
                             }
                         }
 
-                        SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
+                        SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, StateValue.Aperta, LocalDate.now(), noteIns, creator);
                         match.addParticipant(creator);
 
-                        match.addObserver(socialNetwork.getLoggedUser()); // imposto l'osservatore
+                        //match.addObserver(socialNetwork.getLoggedUser()); // imposto l'osservatore
 
                         socialNetwork.getSoccerMatchCategory().addEvent(match);
 
+                        socialNetwork.writeSoccerMatchEventListOnFile();
+                        socialNetwork.updateUsersListFile();
 
                         thisStage.close();
 

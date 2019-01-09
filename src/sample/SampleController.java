@@ -237,6 +237,7 @@ public class SampleController {
 
         loaderNotify.setController(notificationController);
 
+        notificationController.setSocialNetwork(socialNetwork);
         notificationController.setSessionUser(sessionUser);
         notificationController.setNotification(notification);
         notificationController.setNotificationIndex(notificaitonIndex);
@@ -271,6 +272,7 @@ public class SampleController {
 
         loaderEvent.setController(eventController);
 
+        eventController.setSocialNetwork(socialNetwork);
         eventController.setEventSelected(eventSelected);
         eventController.setSessionUser(sessionUser);
         eventController.setSessionUsername(sessionUser.getUsername());
@@ -302,17 +304,17 @@ public class SampleController {
 
         FXMLLoader loaderCreate = new FXMLLoader(Main.class.getResource("createEvent.fxml"));
         //loaderCreate.setController(this);
-        CreateController createController = new CreateController();
+        EventCreateController eventCreateController = new EventCreateController();
 
-        loaderCreate.setController(createController);
+        loaderCreate.setController(eventCreateController);
 
-        createController.setSocialNetwork(socialNetwork);
-        createController.setCreator(sessionUser.getUsername());
+        eventCreateController.setSocialNetwork(socialNetwork);
+        eventCreateController.setCreator(sessionUser.getUsername());
 
 
         create = new Stage();
 
-        createController.setThisStage(create);
+        eventCreateController.setThisStage(create);
         Parent eventCreate =  (Parent) loaderCreate.load();
         Scene scene = new Scene(eventCreate, 600, 400);
 
@@ -331,6 +333,8 @@ public class SampleController {
 
 
     public void exitUser() throws IOException {
+
+        socialNetwork.updateUserandEventsListFile();
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml"));
         LoginController loginContr = new LoginController();
