@@ -1,6 +1,7 @@
 package versione2;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class State {
 
@@ -9,14 +10,15 @@ public class State {
     private LocalDate switchDate;
 
 
-    // Setter & Getter
-    public StateValue getStateValue() {
-        return state;
+    public State(StateValue state, LocalDate switchDate) {
+        this.state = state;
+        this.switchDate = switchDate;
     }
 
-    public void setStateValue(StateValue state) {
-        this.state = state;
-    }
+    // Setter & Getter
+    public StateValue getStateValue() { return state; }
+
+    public void setStateValue(StateValue state) { this.state=state; }
 
     public LocalDate getSwitchDate() {
         return switchDate;
@@ -25,6 +27,7 @@ public class State {
     public void setSwitchDate(LocalDate switchDate) {
         this.switchDate = switchDate;
     }
+
 
 
 }

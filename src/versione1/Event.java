@@ -56,7 +56,10 @@ public abstract class Event extends Observable {
 	private Field<LocalTime> endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
 	private Field<String> note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
 
-	private State state;
+
+
+
+	private ArrayList<State> state;
 	private String creator; //serve per capire chi e' il creatore dell'utente
     private List<String> participants;
 
@@ -101,9 +104,9 @@ public abstract class Event extends Observable {
         this.endTime.setValue(endTimeIns);
         this.note.setValue(noteIns);
         this.creator = creator;
-        this.state = new State();
-        this.state.setStateValue(Aperta);  // Appena costruisco l'evento il suo stato e' attivo
-        //this.state.setSwitchDate(deadLineIns.plusDays(1));  // Appena costruisco l'evento setto la switch date alla deadLine
+        this.state = new ArrayList<>();
+        this.state.add(new State(Aperta, LocalDate.now()));  // Appena costruisco l'evento il suo stato e' attivo
+        //this.state.setSwitchDate(deadLineIns.plusDays(1));
         this.participants = new ArrayList<>();
     }
 
@@ -118,9 +121,8 @@ public abstract class Event extends Observable {
         this.type = type;
         this.title.setValue(name);
         this.numOfParticipants.setValue(numOfParticipants);
-        this.state = new State();
-        this.state.setStateValue(Aperta);  // Appena costruisco l'evento il suo stato e' attivo
-        this.state.setSwitchDate(null);  // Appena costruisco l'evento setto la switch date alla deadLine
+        this.state = new ArrayList<>();
+        this.state.add(new State(Aperta, LocalDate.now()));  // Appena costruisco l'evento il suo stato e' attivo
         this.creator = creator;
         this.participants = new ArrayList<>();
     }
@@ -179,7 +181,19 @@ public abstract class Event extends Observable {
 
     public List<String> getParticipants() { return participants; }
 
-    public State getState() { return state; }
+    public String getStateValueAndSwitchDate() {
+        String stateAndDate = "";
+
+        for (State stateSel: state ) {
+            stateAndDate = stateAndDate + stateSel.getStateValue()+"-"+stateSel.getSwitchDate()+", ";
+        }
+
+        return  stateAndDate;
+    }
+
+    public StateValue getStateValue() { return state.get(state.size()-1).getStateValue(); }
+
+    public LocalDate getStateSwitchDate() { return state.get(state.size()-1).getSwitchDate(); }
 
     public String getType() { return type; }
 
@@ -230,27 +244,27 @@ public abstract class Event extends Observable {
     public void controlState(){
 
         // Per gli eventi aperti:
-        switch (state.getStateValue()) {
+        switch (state.get(state.size()-1).getStateValue()) {
             case Aperta:
                 // se la data di cambio stato non e' nulla ed e' uguale ad oggi fai:
-                if(state.getSwitchDate() != null && LocalDate.now().equals(state.getSwitchDate())){
+                if(state.get(state.size()-1).getSwitchDate() != null && LocalDate.now().equals(state.get(state.size()-1).getSwitchDate())){
                     // se il numero di partecipanti e' uguale al numero richiesto e' chiusa
                     if(numberOfPartecipantsIsMaximum()){
-                        state.setStateValue(Chiusa);
+                        state.add(new State(StateValue.Chiusa, LocalDate.now()));
                         sendNotification(this.title.getValue() +" e' stata chiusa.");
                     }
                     // se il numero di partecipanti e' minore al numero richiesto e' fallita
                     else {
-                        state.setStateValue(Fallita);
+                        state.add(new State(Fallita, LocalDate.now()));
                         sendNotification(this.title.getValue() +" e' fallita.");
                     }
                     break;
                 }
                 // Questo else if  lo usano gli eventi di sistema
-                else if(state.getSwitchDate() == null){
+                else if(state.get(state.size()-1).getSwitchDate() == null){
                     // se il numero di partecipanti e' uguale al numero richiesto e' chiusa
                     if(participants.size() == (int) numOfParticipants.getValue()){ //getValue ritorna un double... come mai?
-                        state.setStateValue(Chiusa);
+                        state.add(new State(StateValue.Chiusa, LocalDate.now()));
                         sendNotification(this.title.getValue() +" e' stata chiusa.");
                     }
                     break;
@@ -258,7 +272,7 @@ public abstract class Event extends Observable {
             case Chiusa:
                 //se la data di termine equivale ad oggi
                 if(endDate.getValue() != null && LocalDate.now().equals(endDate.getValue())) {
-                    state.setStateValue(StateValue.Conclusa);
+                    state.add(new State(StateValue.Conclusa, LocalDate.now()));
                     sendNotification(NotificationsBuilder.buildNotificationTerminated(this.title.getValue()));
                 }
         }

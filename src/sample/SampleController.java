@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
@@ -97,9 +96,7 @@ public class SampleController {
             catName.add(category.getName());
         }
 
-        obsCatName = FXCollections.observableList(catName);
-
-        categoryListView.setItems(obsCatName);
+        categoryListView.setItems(FXCollections.observableList(catName));
 
 
 
@@ -108,6 +105,17 @@ public class SampleController {
             public void handle(MouseEvent event) {
 
                 if (!categoryListView.getSelectionModel().isEmpty()) {
+
+                    catSelected = socialNetwork.findCategoryByName((String) categoryListView.getSelectionModel().getSelectedItem());
+                    eventName = new ArrayList<>();
+                    for (Event match : catSelected.getEvents()) {
+                        if (match.getStateValue().toString().equals("Aperta")) {
+                            eventName.add((String) match.getTitle().getValue());
+                        }
+
+                    }
+
+                    eventListView.setItems(FXCollections.observableList(eventName));
 
                     eventListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
@@ -195,7 +203,7 @@ public class SampleController {
 
                     eventName = new ArrayList<>();
                     for (Event match : catSelected.getEvents()) {
-                        if (match.getState().getStateValue().toString().equals("Aperta")) {
+                        if (match.getStateValue().toString().equals("Aperta")) {
                             eventName.add((String) match.getTitle().getValue());
                         }
 

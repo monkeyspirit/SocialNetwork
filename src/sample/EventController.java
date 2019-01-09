@@ -40,11 +40,11 @@ public class EventController {
      */
     private void initialize(){
 
-        subScribeBtn.setDisable(eventSoccerSelected.isUserAlreadyRegistered(sessionUsername) ||eventSoccerSelected.getState().getStateValue().equals(StateValue.Chiusa) == true);
+        subScribeBtn.setDisable(eventSoccerSelected.isUserAlreadyRegistered(sessionUsername) ||eventSoccerSelected.getStateValue().equals(StateValue.Chiusa) == true);
 
         creatorLblEvent.setText(eventSoccerSelected.getCreator());
 
-        stateLblEvent.setText(String.valueOf(eventSoccerSelected.getState().getStateValue()));
+        stateLblEvent.setText(String.valueOf(eventSoccerSelected.getStateValue()));
 
         if(eventSoccerSelected.getTitle().getValue() != null){
             titleLblEvent.setText((String) eventSoccerSelected.getTitle().getValue());
