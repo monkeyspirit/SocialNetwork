@@ -41,10 +41,6 @@ public class Main extends Application {
         SocialNetwork social = new SocialNetwork();
         social.loadUsersListFromFile(); //NUOVO: carico la lista di utenti da file
 
-//       Questa parte è inutile
-//       social.addCategory(new SoccerMatchCategory());
-//       Penso che quando
-
         User system = social.getUsers().get(0); //prendo il primo utente di quella lista
 
         social.loadSoccerMatchEventListFromFile();

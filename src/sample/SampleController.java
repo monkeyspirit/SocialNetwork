@@ -37,14 +37,6 @@ public class SampleController {
     @FXML
     private ListView notificationListView,categoryListView, eventListView, userEventListView;
 
-    public ListView getNotificationListView() { return notificationListView; }
-
-    public ListView getCategoryListView() { return categoryListView; }
-
-    public ListView getEventListView() { return eventListView; }
-
-    public ListView getUserEventListView() { return userEventListView; }
-
     @FXML
     private Tab userTb;
 
@@ -65,7 +57,6 @@ public class SampleController {
     private List<String> eventName;
     private List<String> userEventName;
     private List<String> notifyName;
-    private ObservableList<String> obsCatName;
 
     private String notification;
 
@@ -78,11 +69,9 @@ public class SampleController {
 
     public void setSocialNetwork(SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
 
-    public SocialNetwork getSocialNetwork() { return socialNetwork;}
-
-    public User getSessionUserUser() { return sessionUser; }
-
     public void setSessionUser(User sessionUser) { this.sessionUser = sessionUser; }
+
+
 
     @FXML
     private void initialize() throws IOException {
@@ -328,10 +317,10 @@ public class SampleController {
     }
 
 
-
-
-
-
+    /**
+     * Il metodo si occupa di ricaricare la schermata di login e di salvare tutto,
+     * @throws IOException
+     */
     public void exitUser() throws IOException {
 
         socialNetwork.updateUserandEventsListFile();

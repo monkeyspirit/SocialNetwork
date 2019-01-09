@@ -36,6 +36,8 @@ public class EventController {
 
     public void setSessionUser(User sessionUser) { this.sessionUser = sessionUser; }
 
+
+
     @FXML
     /**
      * Inizializzo tutti i parametri realtivi ai campi degli eventi
@@ -145,6 +147,10 @@ public class EventController {
 
     }
 
+
+    /**
+     * Il metodo viene associato al pulsante iscrivi ed iscrive l'utente all'evento
+     */
     public void subScribe(){
 
             if (!eventSoccerSelected.isUserAlreadyRegistered(sessionUsername)) {

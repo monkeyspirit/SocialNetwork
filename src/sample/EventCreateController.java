@@ -545,8 +545,6 @@ public class EventCreateController {
                         SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, StateValue.Aperta, LocalDate.now(), noteIns, creator);
                         match.addParticipant(creator);
 
-                        //match.addObserver(socialNetwork.getLoggedUser()); // imposto l'osservatore
-
                         socialNetwork.getSoccerMatchCategory().addEvent(match);
 
                         socialNetwork.writeSoccerMatchEventListOnFile();
