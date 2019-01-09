@@ -56,7 +56,7 @@ public class GraphicThread extends Thread {
      * NON FUNZIONA... HELP, COME SI FERMAVANO I THREAD ?
      */
     public void deleteThread(){
-        Thread.currentThread().interrupt();
+        Thread.currentThread().interrupt(); // il thread continua .... ma non dovrebbe
     }
 
 }
