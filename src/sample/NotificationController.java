@@ -43,10 +43,8 @@ public class NotificationController {
         messageLbl.setText(notification.getNotificationMessage());
 
         if (notification.getNotificationType().equals(NotificationType.Allert)) {
-            System.out.println("Allert");
         }
         else if(notification.getNotificationType().equals(NotificationType.Reminder)){
-            System.out.println("Reminder");
         }
 
     }
