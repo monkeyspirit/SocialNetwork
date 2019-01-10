@@ -33,6 +33,7 @@ public class User{
 
     public void addNotification(String notificationToAdd){ notifications.add(notificationToAdd); }
 
+
     public void removeNotification(int notificationRemove){
             notifications.remove(notificationRemove);
     }

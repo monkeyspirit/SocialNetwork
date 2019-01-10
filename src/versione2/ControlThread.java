@@ -34,9 +34,11 @@ public class ControlThread extends Thread {
         		             for(int i=0; i<destinationUser.size(); i++){
         		                 sendTo = socialNetwork.findUserByName(destinationUser.get(i));
         		                 sendTo.addNotification(notificationToSend);
-        		                 if(!reminder.isEmpty()){
-        		                     sendTo.addNotification(reminder);
+        		                 if(!reminder.equals(null)){
+                                     sendTo.addNotification(reminder);
                                  }
+
+
 
 
                              }
