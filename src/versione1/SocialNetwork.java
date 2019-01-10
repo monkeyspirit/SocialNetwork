@@ -138,7 +138,7 @@ public class SocialNetwork {
 	 * il contenuto attuale della lista di utenti dell'applicazione.
 	 */
 	public void updateUsersListFile () {
-		System.out.println("Aggiorno il file della lista di utenti");
+//		System.out.println("Aggiorno il file della lista di utenti");
 		fileUtility.writeUsersList(this.users);
 	}
 
@@ -158,7 +158,7 @@ public class SocialNetwork {
 	}
 
 	public void writeSoccerMatchEventListOnFile() {
-        System.out.println("Aggiorno il file della lista di EventSoccerMatch");
+//        System.out.println("Aggiorno il file della lista di EventSoccerMatch");
         fileUtility.writeSoccerMatchEvents(soccerMatchCategory.getEvents());
     }
 

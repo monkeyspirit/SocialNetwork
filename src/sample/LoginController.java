@@ -63,10 +63,6 @@ public class LoginController {
             }
         });
 
-
-        System.out.println("Carico la View login...");
-
-
     }
 
 
@@ -87,7 +83,6 @@ public class LoginController {
                     social.registerNewUser(sessionUser); //registro un nuovo utente
                     social.loginUser(sessionUser); //loggo l'utente creato (potremmo accorpare i due metodi in uno)
                     loadSecond();
-                    System.out.println("Utente creato: " + social.getLoggedUser().getUsername());
                 }
                 else{
                     errorLbl.setTextFill(Color.RED);
@@ -103,7 +98,6 @@ public class LoginController {
                     sessionUser = social.findUserByName(accessName);
                     social.loginUser(sessionUser); //imposto l'utente attualmente loggato
                     loadSecond();
-                    System.out.println("Utente loggato: " + social.getLoggedUser().getUsername());
 
                 }
 

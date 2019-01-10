@@ -8,13 +8,15 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import versione1.SocialNetwork;
 import versione1.User;
+import versione2.notifications.Notification;
+import versione2.notifications.NotificationType;
 
 
 public class NotificationController {
 
     private SocialNetwork socialNetwork;
     private User sessionUser;
-    private String notification;
+    private Notification notification;
     private int notificationIndex;
     private Stage thisStage;
     private ListView notificationListView;
@@ -23,7 +25,7 @@ public class NotificationController {
 
     public void setThisStage(Stage thisStage) { this.thisStage = thisStage; }
 
-    public void setNotification(String notification) { this.notification = notification; }
+    public void setNotification(Notification notification) { this.notification = notification; }
 
     public void setSessionUser(User sessionUser) { this.sessionUser = sessionUser; }
 
@@ -38,7 +40,15 @@ public class NotificationController {
 
     @FXML
     private void initialize(){
-        messageLbl.setText(notification);
+        messageLbl.setText(notification.getNotificationMessage());
+
+        if (notification.getNotificationType().equals(NotificationType.Allert)) {
+            System.out.println("Allert");
+        }
+        else if(notification.getNotificationType().equals(NotificationType.Reminder)){
+            System.out.println("Reminder");
+        }
+
     }
 
     public void removeNotification(){

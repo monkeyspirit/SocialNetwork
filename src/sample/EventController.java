@@ -130,7 +130,7 @@ public class EventController {
             noteLblEvent.setText(" ");
         }
 
-        System.out.println(eventSoccerSelected.getType());
+
         if(eventSoccerSelected.getType().equals(SOCCER_NAME)) {
             ageLbl.setText("Fascia d'età");
             genderLbl.setText("Genere");
@@ -164,10 +164,6 @@ public class EventController {
             }
             else {
                 JOptionPane.showMessageDialog(null, "Attenzione: risulti precedentemente iscritto");
-            }
-
-            for (int i = 0; i < eventSoccerSelected.getParticipants().size(); i++) {
-                System.out.println(eventSoccerSelected.getParticipants().get(i));
             }
 
     }

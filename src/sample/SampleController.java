@@ -79,7 +79,6 @@ public class SampleController {
         userTb.setText(sessionUser.getUsername());
 
 
-        System.out.println("Carico la View Utente di: "+sessionUser.getUsername());
         catName = new ArrayList<>();
         for(Category category : socialNetwork.getCategories()){
             catName.add(category.getName());
@@ -228,7 +227,7 @@ public class SampleController {
 
         notificationController.setSocialNetwork(socialNetwork);
         notificationController.setSessionUser(sessionUser);
-        notificationController.setNotification(notification);
+        notificationController.setNotification(sessionUser.getNotifications().get(notificaitonIndex));
         notificationController.setNotificationIndex(notificaitonIndex);
         notificationController.setNotificationListView(notificationListView);
 
@@ -292,7 +291,6 @@ public class SampleController {
     public void openEventEditor(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader loaderCreate = new FXMLLoader(Main.class.getResource("createEvent.fxml"));
-        //loaderCreate.setController(this);
         EventCreateController eventCreateController = new EventCreateController();
 
         loaderCreate.setController(eventCreateController);
