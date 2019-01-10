@@ -2,6 +2,7 @@ package versione1;
 
 import versione2.State;
 import versione2.StateValue;
+import versione2.notifications.Notification;
 import versione2.notifications.NotificationsBuilder;
 
 import java.time.LocalDate;
@@ -63,8 +64,8 @@ public abstract class Event  {
     private List<String> participants;
 
 
-    private String notificationToSend;
-    private String reminder;
+    private Notification notificationToSend;
+    private Notification reminder;
 
 
 
@@ -164,9 +165,9 @@ public abstract class Event  {
 
     public String getCreator() { return creator; }
 
-    public String getNotificationToSend() { return notificationToSend; }
+    public Notification getNotificationToSend() { return notificationToSend; }
 
-    public String getReminder() { return reminder; }
+    public Notification getReminder() { return reminder; }
 
     public List<String> getParticipants() { return participants; }
 

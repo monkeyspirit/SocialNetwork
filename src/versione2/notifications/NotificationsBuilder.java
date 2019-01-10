@@ -32,13 +32,14 @@ public class NotificationsBuilder {
 
 
 
-    public static String buildReminder(String title, LocalDate date, LocalTime time, String place, Float tee){
-        String reminder = "Ricordati che hai l'evento: "+title+" che si terra' "+date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ITALY)+" "+date.getDayOfMonth()+" "+date.getMonth().getDisplayName(TextStyle.FULL, Locale.ITALY)+ " del "+date.getYear()+" alle ore "+time.getHour()+":"+time.getMinute()+".\n";
-        reminder+="Il luogo di ritrovo e': "+place+".\n";
+    public static Notification buildReminder(String title, LocalDate date, LocalTime time, String place, Float tee){
+        String reminderString = "Ricordati che hai l'evento: "+title+" che si terra' "+date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ITALY)+" "+date.getDayOfMonth()+" "+date.getMonth().getDisplayName(TextStyle.FULL, Locale.ITALY)+ " del "+date.getYear()+" alle ore "+time.getHour()+":"+time.getMinute()+".\n";
+        reminderString+="Il luogo di ritrovo e': "+place+".\n";
         if(tee!=0){
-            reminder+="Ricordati di pagare: "+tee+" €.\n";
+            reminderString+="Ricordati di pagare: "+tee+" €.\n";
         }
 
+        Notification reminder = new Notification(NotificationType.Reminder, reminderString);
         return reminder;
     }
 
@@ -46,42 +47,45 @@ public class NotificationsBuilder {
      * Costruisce il messaggio della notifica per un evento nuovo
      * @param eventName nome dell'evento
      */
-    public static String buildNotificationNewEvent (String eventName) {
+    public static Notification buildNotificationNewEvent (String eventName) {
         String message = eventName + MSG_NEW;
-        return message;
+
+        Notification aller = new Notification(NotificationType.Allert, message);
+        return aller;
     }
 
     /**
      * Costruisce il messaggio della notifica per un evento confermato le cui iscrizioni si sono chiuse
      * @param eventName nome dell'evento
-     * @param startDate data d'inizio dell'evento
      */
-    public static String buildNotificationClosed (String eventName, Date startDate) {
-        String message = eventName + MSG_CLOSED + startDate;
-        return message;
-    }
 
-    public static String buildNotificationClosed (String eventName) {
+    public static Notification buildNotificationClosed (String eventName) {
         String message = eventName + MSG_CLOSED_NO_DATE;
-        return message;
+
+        Notification aller = new Notification(NotificationType.Allert, message);
+        return aller;
     }
 
     /**
      * Costruisce il messaggio della notifica per un evento fallito
      * @param eventName nome dell'evento
      */
-    public static String buildNotificationFailed (String eventName) {
+    public static Notification buildNotificationFailed (String eventName) {
         String message = eventName + MSG_FAILED;
-        return message;
+
+        Notification aller = new Notification(NotificationType.Allert, message);
+        return aller;
     }
 
     /**
      * Costruisce il messaggio della notifica per un evento terminato
      * @param eventName nome dell'evento
      */
-    public static String buildNotificationTerminated (String eventName) {
+    public static Notification buildNotificationTerminated (String eventName) {
         String message = eventName + MSG_TERMINATED;
-        return message;
+
+        Notification aller = new Notification(NotificationType.Allert, message);
+        return aller;
     }
 
 

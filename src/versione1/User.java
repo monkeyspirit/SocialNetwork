@@ -1,6 +1,7 @@
 package versione1;
 
 import sample.NotificationController;
+import versione2.notifications.Notification;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -10,7 +11,7 @@ public class User{
 
     //Attributi
     private String username;
-    private ArrayList<String> notifications;
+    private ArrayList<Notification> notifications;
 
     public User(){
     }
@@ -29,10 +30,17 @@ public class User{
         return username;
     }
 
-    public ArrayList<String> getNotifications() { return notifications; }
+    public ArrayList<Notification> getNotifications() { return notifications; }
 
-    public void addNotification(String notificationToAdd){ notifications.add(notificationToAdd); }
+    public void addNotification(Notification notificationToAdd){ notifications.add(notificationToAdd); }
 
+    public ArrayList<String> getNotificationsMessages() {
+        ArrayList<String> notificationsMessages = new ArrayList<>();
+        for(Notification notification: notifications){
+            notificationsMessages.add(notification.getNotificationMessage());
+        }
+        return notificationsMessages;
+    }
 
     public void removeNotification(int notificationRemove){
             notifications.remove(notificationRemove);

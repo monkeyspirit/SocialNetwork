@@ -3,6 +3,7 @@ import versione1.Category;
 import versione1.Event;
 import versione1.SocialNetwork;
 import versione1.User;
+import versione2.notifications.Notification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +27,8 @@ public class ControlThread extends Thread {
         		for (Category cat : socialNetwork.getCategories()) {
         		     for(Event event : (ArrayList<Event>) cat.getEvents()){
         		         if(event.controlState()){
-        		             String notificationToSend = event.getNotificationToSend();
-        		             String reminder = event.getReminder();
+                             Notification notificationToSend = event.getNotificationToSend();
+                             Notification reminder = event.getReminder();
         		             List<String> destinationUser = event.getParticipants();
         		             User sendTo;
 

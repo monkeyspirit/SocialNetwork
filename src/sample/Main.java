@@ -1,14 +1,21 @@
 package sample;
 
+import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utilities.FileUtility;
 import versione1.*;
 import versione2.ControlThread;
 import versione2.GraphicThread;
+import versione2.notifications.Notification;
+import versione2.notifications.NotificationType;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -32,7 +39,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         guiStage = primaryStage;
-
 
         // Creo le istanze principali del mio programma --> quando inseriremo il metodo di lettura
         // e scrittura da file qui ci vorra una struttura di controllo come un case o un if

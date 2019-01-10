@@ -148,7 +148,7 @@ public class SampleController {
         });
 
 
-        notifyName = sessionUser.getNotifications();
+        notifyName = sessionUser.getNotificationsMessages();
         notificationListView.setItems(FXCollections.observableList(notifyName));
 
 
@@ -204,7 +204,7 @@ public class SampleController {
                 userEventName = socialNetwork.findEventByUserNameS(sessionUser.getUsername());
                 userEventListView.setItems(FXCollections.observableList(userEventName));
 
-                notifyName = sessionUser.getNotifications();
+                notifyName = sessionUser.getNotificationsMessages();
                 notificationListView.setItems(FXCollections.observableList(notifyName));
 
 

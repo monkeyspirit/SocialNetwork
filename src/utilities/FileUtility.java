@@ -91,6 +91,9 @@ public class FileUtility {
         writeUsersListToJsonFile(users, USERS_LIST_FILE_PATH);
     }
 
+
+
+
     /**
      * Legge da un file e deserializza la lista degli utenti registrati
      * @return la lista degli utenti registrati
