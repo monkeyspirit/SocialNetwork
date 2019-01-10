@@ -66,7 +66,6 @@ public abstract class Event  {
     private String notificationToSend;
     private String reminder;
 
-    private boolean isThereReminder = false;
 
 
     /**
@@ -169,8 +168,6 @@ public abstract class Event  {
 
     public String getReminder() { return reminder; }
 
-    public boolean isThereReminder() { return isThereReminder; }
-
     public List<String> getParticipants() { return participants; }
 
     public String getStateValueAndSwitchDate() {
@@ -235,7 +232,7 @@ public abstract class Event  {
     public boolean controlState(){
 
         boolean isChanged = false;
-        isThereReminder=false;
+
 
         // Per gli eventi aperti:
         switch (state.get(state.size()-1).getStateValue()) {
@@ -247,7 +244,6 @@ public abstract class Event  {
                     state.add(new State(StateValue.Chiusa, LocalDate.now()));
 
                     isChanged = true;
-                    isThereReminder=true;
                     notificationToSend = NotificationsBuilder.buildNotificationClosed(this.title.getValue());
                     reminder = NotificationsBuilder.buildReminder(this.title.getValue(), this.date.getValue(), this.time.getValue(), this.place.getValue(), this.indTee.getValue());
 
@@ -261,7 +257,7 @@ public abstract class Event  {
                     isChanged = true;
 
                     notificationToSend = NotificationsBuilder.buildNotificationFailed(this.title.getValue());
-                    isThereReminder=false;
+
                 }
 
                 break;
@@ -274,7 +270,6 @@ public abstract class Event  {
                     isChanged = true;
 
                     notificationToSend = NotificationsBuilder.buildNotificationTerminated(this.title.getValue());
-                    isThereReminder=false;
 
                 }
                 break;
