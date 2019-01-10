@@ -129,7 +129,7 @@ public class FileUtility {
         //serializzo
         try {
             Writer writer = new FileWriter(filePath);
-            System.out.println("Scrivo il file: " + filePath);
+//            System.out.println("Scrivo il file: " + filePath);
             gson.toJson(eventList, writer);
             writer.flush();
             writer.close();
@@ -165,7 +165,7 @@ public class FileUtility {
         //serializzo
         try {
             Writer writer = new FileWriter(filePath);
-            System.out.println("Scrivo il file: " + filePath);
+//            System.out.println("Scrivo il file: " + filePath);
             gson.toJson(users, writer);
             writer.flush();
             writer.close();
