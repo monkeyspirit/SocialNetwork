@@ -13,7 +13,7 @@ import javax.swing.*;
 
 public class EventController {
 
-    public static final String SOCCER_NAME = "Partite di calcio";
+    public static final String SOCCER_NAME = "SoccerMatchEvent";
 
     @FXML
     private Label placesAvbLbl, stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
@@ -130,6 +130,7 @@ public class EventController {
             noteLblEvent.setText(" ");
         }
 
+        System.out.println(eventSoccerSelected.getType());
         if(eventSoccerSelected.getType().equals(SOCCER_NAME)) {
             ageLbl.setText("Fascia d'età");
             genderLbl.setText("Genere");
