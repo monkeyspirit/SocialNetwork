@@ -22,23 +22,23 @@ public class EventCreateController {
     public static final String SOCCER_NAME = "Partite di calcio";
 
     // Messaggi di errore
-    public static final String MISSCATEGORY =  "Inserire una categoria";
-    public static final String MISSNUMPAR = "Inserire numero partecipanti";
-    public static final String MISSDEADLINE = "Inserire la data di termine";
-    public static final String ERRDEADLINE = "La data di termine indicata non risulta valida in quanto precedente al giorno corrente";
-    public static final String MISSPLACE = "Inserire il luogo";
-    public static final String MISSDATE = "Inserire la data in cui si tiene l'evento";
-    public static final String ERRDATEBFDEADLINE = "La data inserita non risulta valida in quando risulta precedente alla data di termine";
-    public static final String ERRDATEMISSDEAD = "La data inserita non risulta valida in quando manca la data di termine";
-    public static final String MISSTIME = "Inserire l'orario";
-    public static final String ERRTIMEERRDATE = "L'orario inserito non risulta valido in quanto la data inserita non risulta valida";
-    public static final String MISSTEE = "Inserire la quota individuale";
-    public static final String ERRENDDBFDATE = "La data di conclusione non risulta valida in quanto precedente alla data dell'evento";
-    public static final String ERRENDTBFTIMEEQDT = "L'orario di conclusione non risulta valido in quanto precedente all'orario di inizio";
-    public static final String MISSAGE = "Inserire la fascia di eta'";
-    public static final String MISSGENDER = "Inserire il genere";
-    public static final String MISSDURDATE = "Inserire o la durata o il giorno e l'ora di termine";
-    public static final String ALREXISTTIT = "Esiste gia' un evento con quest titolo";
+    public static final String MISS_CATEGORY_MSG =  "Inserire una categoria";
+    public static final String MISS_NUMBER_OF_PARTECIPANTS_MSG = "Inserire numero partecipanti";
+    public static final String MISS_DEADLINE_MSG = "Inserire la data di termine";
+    public static final String ERROR_DEADLINE_MSG = "La data di termine indicata non risulta valida in quanto precedente al giorno corrente";
+    public static final String MISS_PLACE_MSG = "Inserire il luogo";
+    public static final String MISS_DATE_MSG = "Inserire la data in cui si tiene l'evento";
+    public static final String ERROR_DATE_IS_BEFORE_DEADLINE_MSG = "La data inserita non risulta valida in quando risulta precedente alla data di termine";
+    public static final String ERROR_DATE_BECAUSE_MISS_DEADLINE_MSG = "La data inserita non risulta valida in quando manca la data di termine";
+    public static final String MISS_TIME_MSG = "Inserire l'orario";
+    public static final String ERROR_TIME_BECAUSE_ERROR_DATE_MSG = "L'orario inserito non risulta valido in quanto la data inserita non risulta valida";
+    public static final String MISS_INDIVIDUAL_TEE_MSG = "Inserire la quota individuale";
+    public static final String ERROR_ENDDATE_BEFORE_DATE_MSG = "La data di conclusione non risulta valida in quanto precedente alla data dell'evento";
+    public static final String ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG = "L'orario di conclusione non risulta valido in quanto precedente all'orario di inizio";
+    public static final String MISS_AGE_MSG = "Inserire la fascia di eta'";
+    public static final String MISS_GENDER_MSG = "Inserire il genere";
+    public static final String MISS_DURATION_OR_ENDDATE_MSG = "Inserire o la durata o il giorno e l'ora di termine";
+    public static final String ALREADY_EXIST_EVENT_WITH_THIS_TITLE_MSG = "Esiste gia' un evento con quest titolo";
 
 
 
@@ -63,6 +63,8 @@ public class EventCreateController {
     private JFXTimePicker endTimeTP, timeTP;
     @FXML
     private TextArea noteTxtA, totTeeTxtA;
+    @FXML
+    private CheckBox isTeeActiveCkB;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private AgeGroup ageGroup;
@@ -111,7 +113,6 @@ public class EventCreateController {
     private boolean genderIsVal = false;
     private boolean durIsVal = false;
 
-
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -132,10 +133,13 @@ public class EventCreateController {
     /**
      * Il metodo serve per inizializzare la finestra, in particolare per impostare gli observable list nei
      * choiceBox e per rendere determinati choiceBox abilitati o meno in base alla scelta della categoria.
-     * Se si seleziona Partita di Calcio viene abilitata la selezione della fascia di età e del genere,
-     * poichè non ci deve essere inconsistenza tra fascia di età minima e massima il choiceBox della massima
+     * Se si seleziona Partita di Calcio viene abilitata:
+     * - la selezione della fascia di età
+     * - la sezione del genere
+     *
+     * Poichè non ci deve essere inconsistenza tra fascia di età minima e massima il choiceBox della massima
      * viene abilitato solo dopo aver selezionato la minima e con valori suoeriori (maggiore stretto) dalla
-     * minima selezionata
+     * minima selezionata.
      *
      * @throws IOException
      */
@@ -225,6 +229,23 @@ public class EventCreateController {
             }
         });
 
+
+        isTeeActiveCkB.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(isTeeActiveCkB.isSelected()){
+                    indTeeIns=0;
+                    indTeeTxtF.setDisable(true);
+                    indTeeIsVal=true;
+                }
+                else{
+                    indTeeTxtF.setDisable(false);
+                    indTeeIsVal=false;
+
+                }
+            }
+        });
+
         //Aggiungo gli elementi dell'Enum <Gender> al Choice Box del genere
         genderCB.setItems(FXCollections.observableArrayList(Gender.Maschile, Gender.Femminile));
 
@@ -243,7 +264,10 @@ public class EventCreateController {
      * Gli altri campi sono facolatitivi e quindi possono anche essere omessi.
      * In oltre si ha l'obbligo prima di creare l'evento selezionare a quale categoria appartenga.
      * Ogni volta che viene selezionato qualcosa che non va bene o si commettono erroi viene stampato un msg
-     * errore relativo a cosa succede e diventa rossa la label
+     * errore relativo a cosa succede e diventa rossa la label.
+     *
+     * Un'aggiunta e' relativa alla durata e alla data di termine, poiche' non puo' esistere un evento
+     * che inizia ma non finisce l'utente e' pregato di inserire almeno uno dei due.
      *
      * @param actionEvent
      * @throws IOException
@@ -259,7 +283,7 @@ public class EventCreateController {
         if (catCB.getSelectionModel().getSelectedItem() == null) {
             catLbl.setTextFill(Color.RED);
             catIsVal = false;
-            JOptionPane.showMessageDialog(null, MISSCATEGORY);
+            JOptionPane.showMessageDialog(null, MISS_CATEGORY_MSG);
         } else {
             categoryIns = catCB.getSelectionModel().getSelectedItem();
             catLbl.setTextFill(Color.BLACK);
@@ -270,7 +294,7 @@ public class EventCreateController {
             // FACOLTATIVO
             //titolo
             if(titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).doesEventAlreadyExist(titleTxtF.getText()) == true){
-                errorMsg[12] = ALREXISTTIT;
+                errorMsg[12] = ALREADY_EXIST_EVENT_WITH_THIS_TITLE_MSG;
                 titleLbl.setTextFill(Color.RED);
                 titIsVal = false;
             }
@@ -290,7 +314,7 @@ public class EventCreateController {
             if (numPTxtF.getText().isEmpty() || !MyUtil.checkInteger(numPTxtF.getText())) {
                 numPLbl.setTextFill(Color.RED);
                 numIsVal = false;
-                errorMsg[1] = MISSNUMPAR;
+                errorMsg[1] = MISS_NUMBER_OF_PARTECIPANTS_MSG;
             } else {
                 String numPS = numPTxtF.getText();
                 numPLbl.setTextFill(Color.BLACK);
@@ -309,10 +333,10 @@ public class EventCreateController {
                 deadLineIsVal = false;
 
                 if(deadLineDP.getValue() == null){
-                    errorMsg[2] = MISSDEADLINE;
+                    errorMsg[2] = MISS_DEADLINE_MSG;
                 }
                 else {
-                    errorMsg[2] = ERRDEADLINE;
+                    errorMsg[2] = ERROR_DEADLINE_MSG;
                 }
 
             } else {
@@ -329,7 +353,7 @@ public class EventCreateController {
             if (placeTxtF.getText().isEmpty() || !MyUtil.checkString(placeTxtF.getText())) {
                 placeLbl.setTextFill(Color.RED);
                 placeIsVal = false;
-                errorMsg[3] = MISSPLACE;
+                errorMsg[3] = MISS_PLACE_MSG;
             } else {
                 placeIns = placeTxtF.getText();
                 placeLbl.setTextFill(Color.BLACK);
@@ -346,13 +370,13 @@ public class EventCreateController {
                 dateIsVal = false;
 
                 if(dateDP.getValue() == null){
-                    errorMsg[4] = MISSDATE;
+                    errorMsg[4] = MISS_DATE_MSG;
                 }
                 else if (deadLineIsVal == false ) {
-                    errorMsg[4] = ERRDATEMISSDEAD;
+                    errorMsg[4] = ERROR_DATE_BECAUSE_MISS_DEADLINE_MSG;
                 }
                 else {
-                    errorMsg[4] = ERRDATEBFDEADLINE;
+                    errorMsg[4] = ERROR_DATE_IS_BEFORE_DEADLINE_MSG;
                 }
 
             } else {
@@ -371,10 +395,10 @@ public class EventCreateController {
                 timeIsVal = false;
 
                 if(timeTP.getValue() == null){
-                    errorMsg[5] = MISSTIME;
+                    errorMsg[5] = MISS_TIME_MSG;
                 }
                 else {
-                    errorMsg[5] = ERRTIMEERRDATE;
+                    errorMsg[5] = ERROR_TIME_BECAUSE_ERROR_DATE_MSG;
                 }
 
             } else {
@@ -384,21 +408,30 @@ public class EventCreateController {
                 errorMsg[5] = null;
             }
 
-            // Acquisisco la quota individuale e controllo non sia vuota, in caso la converto in decimale
+            // Acquisisco la quota individuale e controllo non sia vuota, in caso la converto in decimale, ma prima controllo
+            // che il CheckBox sia selezionato o meno
             // OBBLIGATORIO
             //quota individuale
 
-            if (indTeeTxtF.getText().isEmpty() || !MyUtil.checkFloat(indTeeTxtF.getText())) {
-                indTeeLbl.setTextFill(Color.RED);
-                indTeeIsVal = false;
-                errorMsg[6] = MISSTEE;
-            } else {
-                String indTeeS = indTeeTxtF.getText();
-                indTeeLbl.setTextFill(Color.BLACK);
-                indTeeIns = Float.parseFloat(indTeeS);
-                indTeeIsVal = true;
-                errorMsg[6] = null;
+            if(!isTeeActiveCkB.isSelected()){
+                if (indTeeTxtF.getText().isEmpty() || !MyUtil.checkFloat(indTeeTxtF.getText())) {
+                    indTeeLbl.setTextFill(Color.RED);
+                    indTeeIsVal = false;
+                    errorMsg[6] = MISS_INDIVIDUAL_TEE_MSG;
+                } else {
+                    String indTeeS = indTeeTxtF.getText();
+                    indTeeLbl.setTextFill(Color.BLACK);
+                    if(indTeeS.equals("0")){
+                        indTeeIns=0;
+                    }
+                    else{
+                        indTeeIns = Float.parseFloat(indTeeS);
+                    }
+                    indTeeIsVal = true;
+                    errorMsg[6] = null;
+                }
             }
+
 
             // Indicala voci di spesa
             // FACOLTATIVO
@@ -414,7 +447,7 @@ public class EventCreateController {
                 if (endDateDP.getValue().isBefore(dateIns)) {
                     endDateLbl.setTextFill(Color.RED);
                     endDateIsVal = false;
-                    errorMsg[7] = ERRENDDBFDATE;
+                    errorMsg[7] = ERROR_ENDDATE_BEFORE_DATE_MSG;
                 } else {
                     endDateIns = endDateDP.getValue();
                     endDateLbl.setTextFill(Color.BLACK);
@@ -443,7 +476,7 @@ public class EventCreateController {
 
                     endTimeLbl.setTextFill(Color.RED);
                     endTimeIsVal = false;
-                    errorMsg[8] = ERRENDTBFTIMEEQDT;
+                    errorMsg[8] = ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG;
 
                 } else {
 
@@ -489,7 +522,7 @@ public class EventCreateController {
                 } else {
                     ageLbl.setTextFill(Color.RED);
                     ageIsVal = false;
-                    errorMsg[9] = MISSAGE;
+                    errorMsg[9] = MISS_AGE_MSG;
                 }
 
 
@@ -497,7 +530,7 @@ public class EventCreateController {
                 if (genderCB.getSelectionModel().getSelectedItem() == null) {
                     genderLbl.setTextFill(Color.RED);
                     genderIsVal = false;
-                    errorMsg[10] = MISSGENDER;
+                    errorMsg[10] = MISS_GENDER_MSG;
                 } else {
                     genderLbl.setTextFill(Color.BLACK);
                     genderIsVal = true;
@@ -508,7 +541,7 @@ public class EventCreateController {
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // durata --> guardare end time e end date
             if( (endDateDP.getValue() != null && endTimeTP.getValue() == null ) && durationIns == null ){
-                errorMsg[11] = MISSDURDATE;
+                errorMsg[11] = MISS_DURATION_OR_ENDDATE_MSG;
                 durLbl.setTextFill(Color.RED);
                 durIsVal = false;
             }
