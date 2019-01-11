@@ -28,14 +28,15 @@ public class ControlThread extends Thread {
         		     for(Event event : (ArrayList<Event>) cat.getEvents()){
         		         if(event.controlState()){
                              Notification notificationToSend = event.getNotificationToSend();
-                             Notification reminder = event.getReminder();
+
         		             List<String> destinationUser = event.getParticipants();
         		             User sendTo;
 
         		             for(int i=0; i<destinationUser.size(); i++){
         		                 sendTo = socialNetwork.findUserByName(destinationUser.get(i));
         		                 sendTo.addNotification(notificationToSend);
-        		                 if(!reminder.equals(null)){
+        		                 if(event.isThereIsReminder()){
+                                     Notification reminder = event.getReminder();
                                      sendTo.addNotification(reminder);
                                  }
 

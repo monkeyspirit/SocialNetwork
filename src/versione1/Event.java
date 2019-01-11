@@ -66,8 +66,9 @@ public abstract class Event  {
 
     private Notification notificationToSend;
     private Notification reminder;
+    private boolean thereIsReminder;
 
-
+    public boolean isThereIsReminder() { return thereIsReminder; }
 
     /**
      * Costruttore vuoto: viene inizializzato la lista di campi, ciascuno dei quali con
@@ -233,6 +234,7 @@ public abstract class Event  {
     public boolean controlState(){
 
         boolean isChanged = false;
+        thereIsReminder=false;
 
 
         // Per gli eventi aperti:
@@ -247,7 +249,7 @@ public abstract class Event  {
                     isChanged = true;
                     notificationToSend = NotificationsBuilder.buildNotificationClosed(this.title.getValue());
                     reminder = NotificationsBuilder.buildReminder(this.title.getValue(), this.date.getValue(), this.time.getValue(), this.place.getValue(), this.indTee.getValue());
-
+                    thereIsReminder=true;
 
                 }
 
@@ -258,7 +260,7 @@ public abstract class Event  {
                     isChanged = true;
 
                     notificationToSend = NotificationsBuilder.buildNotificationFailed(this.title.getValue());
-
+                    thereIsReminder=false;
                 }
 
                 break;
@@ -269,7 +271,7 @@ public abstract class Event  {
                 if(endDate.getValue() != null && LocalDate.now().equals(endDate.getValue())) {
                     state.add(new State(StateValue.Conclusa, LocalDate.now()));
                     isChanged = true;
-
+                    thereIsReminder=false;
                     notificationToSend = NotificationsBuilder.buildNotificationTerminated(this.title.getValue());
 
                 }
