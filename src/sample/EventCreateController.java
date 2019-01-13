@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import versione1.*;
 import versione2.StateValue;
 
@@ -25,15 +26,11 @@ public class EventCreateController {
     public static final String MISS_CATEGORY_MSG =  "Inserire una categoria";
     public static final String MISS_NUMBER_OF_PARTECIPANTS_MSG = "Inserire numero partecipanti";
     public static final String MISS_DEADLINE_MSG = "Inserire la data di termine";
-    public static final String ERROR_DEADLINE_MSG = "La data di termine indicata non risulta valida in quanto precedente al giorno corrente";
     public static final String MISS_PLACE_MSG = "Inserire il luogo";
     public static final String MISS_DATE_MSG = "Inserire la data in cui si tiene l'evento";
-    public static final String ERROR_DATE_IS_BEFORE_DEADLINE_MSG = "La data inserita non risulta valida in quando risulta precedente alla data di termine";
-    public static final String ERROR_DATE_BECAUSE_MISS_DEADLINE_MSG = "La data inserita non risulta valida in quando manca la data di termine";
     public static final String MISS_TIME_MSG = "Inserire l'orario";
     public static final String ERROR_TIME_BECAUSE_ERROR_DATE_MSG = "L'orario inserito non risulta valido in quanto la data inserita non risulta valida";
     public static final String MISS_INDIVIDUAL_TEE_MSG = "Inserire la quota individuale";
-    public static final String ERROR_ENDDATE_BEFORE_DATE_MSG = "La data di conclusione non risulta valida in quanto precedente alla data dell'evento";
     public static final String ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG = "L'orario di conclusione non risulta valido in quanto precedente all'orario di inizio";
     public static final String MISS_AGE_MSG = "Inserire la fascia di eta'";
     public static final String MISS_GENDER_MSG = "Inserire il genere";
@@ -150,6 +147,54 @@ public class EventCreateController {
         ageRangeMin = ageGroup.getNumeri();
 
         catCB.setItems(FXCollections.observableArrayList(SOCCER_NAME));
+
+        // Imposto i giorni precedenti ad oggi non selezionabili su datePicker
+
+        deadLineDP.setDayCellFactory(picker-> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty){
+                super.updateItem(date, empty);
+                setDisable(empty || date.isBefore(LocalDate.now().plusDays(1)));
+            }
+        });
+
+        deadLineDP.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                dateDP.setDisable(false);
+                timeTP.setDisable(false);
+
+
+                dateDP.setDayCellFactory(picker-> new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate date, boolean empty){
+                        super.updateItem(date, empty);
+                        setDisable(empty || date.isBefore(deadLineDP.getValue().plusDays(1)));
+                    }
+                });
+
+                dateDP.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+
+                        endDateDP.setDisable(false);
+                        endTimeTP.setDisable(false);
+
+                        endDateDP.setDayCellFactory(picker-> new DateCell() {
+                            @Override
+                            public void updateItem(LocalDate date, boolean empty){
+                                super.updateItem(date, empty);
+                                setDisable(empty || date.isBefore(dateDP.getValue()));
+                            }
+                        });
+                    }
+                });
+
+
+            }
+        });
+
 
         /**
          * ActionListeren che permette di ottenere la lista degli eventi della categoria selezionata sulla
@@ -327,18 +372,10 @@ public class EventCreateController {
             // OBBLIGATORIO
             // termine ultimo iscrizione
 
-            //deadLineDP.getValue().isBefore(LocalDate.now().plusDays(1) --> evita che il giorno di termine sia oggi
-            if ((deadLineDP.getValue() == null) || deadLineDP.getValue().isBefore(LocalDate.now())) {
+            if ((deadLineDP.getValue() == null)) {
                 deadLLbl.setTextFill(Color.RED);
                 deadLineIsVal = false;
-
-                if(deadLineDP.getValue() == null){
-                    errorMsg[2] = MISS_DEADLINE_MSG;
-                }
-                else {
-                    errorMsg[2] = ERROR_DEADLINE_MSG;
-                }
-
+                errorMsg[2] = MISS_DEADLINE_MSG;
             } else {
                 deadLineIns = deadLineDP.getValue();
                 deadLLbl.setTextFill(Color.BLACK);
@@ -365,20 +402,10 @@ public class EventCreateController {
             // OBBLIGATORIO
             //data
 
-            if ((dateDP.getValue() == null) || deadLineIsVal == false || dateDP.getValue().isBefore(deadLineIns.plusDays(1))) {
+            if ((dateDP.getValue() == null)) {
                 dateLbl.setTextFill(Color.RED);
                 dateIsVal = false;
-
-                if(dateDP.getValue() == null){
-                    errorMsg[4] = MISS_DATE_MSG;
-                }
-                else if (deadLineIsVal == false ) {
-                    errorMsg[4] = ERROR_DATE_BECAUSE_MISS_DEADLINE_MSG;
-                }
-                else {
-                    errorMsg[4] = ERROR_DATE_IS_BEFORE_DEADLINE_MSG;
-                }
-
+                errorMsg[4] = MISS_DATE_MSG;
             } else {
                 dateIns = dateDP.getValue();
                 dateLbl.setTextFill(Color.BLACK);
@@ -420,16 +447,17 @@ public class EventCreateController {
                     errorMsg[6] = MISS_INDIVIDUAL_TEE_MSG;
                 } else {
                     String indTeeS = indTeeTxtF.getText();
+
+                    indTeeIns = Float.parseFloat(indTeeS);
                     indTeeLbl.setTextFill(Color.BLACK);
-                    if(indTeeS.equals("0")){
-                        indTeeIns=0;
-                    }
-                    else{
-                        indTeeIns = Float.parseFloat(indTeeS);
-                    }
                     indTeeIsVal = true;
                     errorMsg[6] = null;
                 }
+            }
+            else{
+                indTeeIns=0;
+                indTeeIsVal = true;
+                errorMsg[6] = null;
             }
 
 
@@ -444,19 +472,12 @@ public class EventCreateController {
             // data conclusiva
 
             if (endDateDP.getValue() != null && dateIsVal == true) {
-                if (endDateDP.getValue().isBefore(dateIns)) {
-                    endDateLbl.setTextFill(Color.RED);
-                    endDateIsVal = false;
-                    errorMsg[7] = ERROR_ENDDATE_BEFORE_DATE_MSG;
-                } else {
                     endDateIns = endDateDP.getValue();
                     endDateLbl.setTextFill(Color.BLACK);
                     endDateIsVal = true;
                     errorMsg[7] = null;
-                }
             }
             else {
-
                 endDateIsVal = true;
                 if(durBigCB.getValue() != null){
                     durD = durBigCB.getValue();

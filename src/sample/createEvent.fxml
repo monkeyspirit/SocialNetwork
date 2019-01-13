@@ -37,9 +37,9 @@
             <Label fx:id="numPLbl" layoutX="70.0" layoutY="104.0" text="Numero partecipanti" />
             <Label fx:id="deadLLbl" layoutX="70.0" layoutY="143.0" prefHeight="18.0" prefWidth="197.0" text="Termine ultimo di iscrizione" />
             <Label fx:id="placeLbl" layoutX="70.0" layoutY="178.0" prefHeight="18.0" prefWidth="57.0" text="Luogo" />
-            <Label fx:id="dateLbl" layoutX="70.0" layoutY="214.0" prefHeight="18.0" prefWidth="47.0" text="Data" />
+            <Label fx:id="dateLbl"  layoutX="70.0" layoutY="214.0" prefHeight="18.0" prefWidth="47.0" text="Data" />
             <Label fx:id="timeLbl" layoutX="70.0" layoutY="249.0" prefHeight="18.0" prefWidth="87.0" text="Ora" />
-            <Label fx:id="durLbl" layoutX="70.0" layoutY="282.0" prefHeight="18.0" prefWidth="69.0" text="Durata" />
+            <Label fx:id="durLbl"  layoutX="70.0" layoutY="282.0" prefHeight="18.0" prefWidth="69.0" text="Durata" />
             <Label fx:id="indTeeLbl" layoutX="70.0" layoutY="315.0" prefHeight="18.0" prefWidth="126.0" text="Quota individuale" />
             <Label fx:id="totTeLbl" layoutX="70.0" layoutY="345.0" prefHeight="18.0" prefWidth="165.0" text="Compreso nella quota" />
             <Label fx:id="endDateLbl" layoutX="70.0" layoutY="413.0" prefHeight="18.0" prefWidth="104.0" text="Data conclusiva" />
@@ -51,11 +51,11 @@
             <Label fx:id="durUnitLbl" layoutX="280.0" layoutY="283.0" prefHeight="16.0" prefWidth="73.0" wrapText="true" />
 
             <DatePicker fx:id="deadLineDP" layoutX="355.0" layoutY="139.0" prefHeight="26.0" prefWidth="150.0" />
-            <DatePicker fx:id="dateDP" layoutX="355.0" layoutY="210.0" prefHeight="26.0" prefWidth="150.0" />
-            <DatePicker fx:id="endDateDP" layoutX="355.0" layoutY="409.0" prefHeight="26.0" prefWidth="150.0" />
+            <DatePicker fx:id="dateDP" disable="true" layoutX="355.0" layoutY="210.0" prefHeight="26.0" prefWidth="150.0" />
+            <DatePicker fx:id="endDateDP" disable="true" layoutX="355.0" layoutY="409.0" prefHeight="26.0" prefWidth="150.0" />
 
             <JFXTimePicker fx:id="endTimeTP" disable="true" layoutX="355.0" layoutY="440.0" prefHeight="26.0" prefWidth="150.0" />
-            <JFXTimePicker fx:id="timeTP" layoutX="355.0" layoutY="245.0" prefHeight="26.0" prefWidth="150.0" />
+            <JFXTimePicker fx:id="timeTP" disable="true" layoutX="355.0" layoutY="245.0" prefHeight="26.0" prefWidth="150.0" />
 
             <TextArea fx:id="totTeeTxtA" layoutX="355.0" layoutY="341.0" prefHeight="59.0" prefWidth="150.0" />
             <TextArea fx:id="noteTxtA" layoutX="182.0" layoutY="553.0" prefHeight="47.0" prefWidth="320.0" />

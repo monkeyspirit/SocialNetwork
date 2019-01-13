@@ -67,13 +67,13 @@ public class MyUtil {
 	public static boolean checkFloat(String s) {
 		try {
 			float val = Float.parseFloat(s);
-			if (val<=0)
+			if (val<0)
 				return false;
 		}
 		catch(NumberFormatException e) {
 			if(checkWeirdFloat(s) == true) {
 				s = s.replace(',', '.');
-				if(checkFloat(s) == true && Float.parseFloat(s)>0) {
+				if(checkFloat(s) == true && Float.parseFloat(s)>=0) {
 					return true;
 				}
 			}
