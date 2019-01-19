@@ -15,8 +15,8 @@ public class SoccerMatchEvent extends Event{
     public static final String AGERANGE_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
 
     //Attributi della classe SoccerMatchEvent
-    private Field gender = new Field(GENDER_NAME, GENDER_DESCRIPTION);
-    private Field ageRange = new Field(AGERANGE_NAME, AGERANGE_DESCRIPTION);
+    private Field<Gender> gender = new Field(GENDER_NAME, GENDER_DESCRIPTION);
+    private Field<String> ageRange = new Field(AGERANGE_NAME, AGERANGE_DESCRIPTION);
 
 
     /**
@@ -38,7 +38,7 @@ public class SoccerMatchEvent extends Event{
      * @param noteIns
      * @param creatorIns
      */
-    public SoccerMatchEvent(String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Enum<Gender> genderIns, StateValue stateValue, LocalDate stateSwitch, String noteIns, String creatorIns) {
+    public SoccerMatchEvent(String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Gender genderIns, StateValue stateValue, LocalDate stateSwitch, String noteIns, String creatorIns) {
         super(TYPE, titleIns,  numParIns,  deadLineIns,  placeIns,  dateIns,  timeIns,  durationIns,  indTeeIns,  totTeeIns,  endDateIns,  endTimeIns,stateValue, stateSwitch, noteIns, creatorIns);
         this.gender.setValue(genderIns);
         this.ageRange.setValue(ageRangeIns);

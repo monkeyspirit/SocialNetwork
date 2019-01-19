@@ -49,7 +49,7 @@ public class Main extends Application {
 
         User system = social.getUsers().get(0); //prendo il primo utente di quella lista
 
-        social.loadSoccerMatchEventListFromFile();
+//        social.loadSoccerMatchEventListFromFile();
 
         //Il blocco seguente serve per creare un nuovo evento e scriverlo su file
 //

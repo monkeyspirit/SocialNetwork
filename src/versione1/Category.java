@@ -56,6 +56,7 @@ public abstract class Category <T extends Event> {
 		}
 	    return null;
     }
+    //----------Sostituiscilo ai metodi in social Network
 
 	/**
 	 * Controlla se un evento con un certo nome è già presente nella lista degli eventi

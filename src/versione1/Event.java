@@ -64,16 +64,13 @@ public abstract class Event  {
     private List<String> participants;
 
 
-    private Notification notificationToSend;
-    private Notification reminder;
-    private boolean thereIsReminder;
-
-    public boolean isThereIsReminder() { return thereIsReminder; }
 
     /**
      * Costruttore vuoto: viene inizializzato la lista di campi, ciascuno dei quali con
      * nome e descrizione ma senza valore.
      */
+
+
 	public Event() {
 	}
 
@@ -166,10 +163,6 @@ public abstract class Event  {
 
     public String getCreator() { return creator; }
 
-    public Notification getNotificationToSend() { return notificationToSend; }
-
-    public Notification getReminder() { return reminder; }
-
     public List<String> getParticipants() { return participants; }
 
     public String getStateValueAndSwitchDate() {
@@ -183,6 +176,8 @@ public abstract class Event  {
     }
 
     public StateValue getStateValue() { return state.get(state.size()-1).getStateValue(); }
+
+    public ArrayList<State> getState() {  return state; }
 
     public LocalDate getStateSwitchDate() { return state.get(state.size()-1).getSwitchDate(); }
 
@@ -226,62 +221,6 @@ public abstract class Event  {
             return true;
         return false;
     }
-
-
-    /**
-     * Controlla e modifica lo stato degli eventi
-     */
-    public boolean controlState(){
-
-        boolean isChanged = false;
-        thereIsReminder=false;
-
-
-        // Per gli eventi aperti:
-        switch (state.get(state.size()-1).getStateValue()) {
-
-            case Aperta:
-
-                // se il numero di partecipanti e' uguale al numero richiesto e' chiusa
-                if(numberOfPartecipantsIsMaximum()){
-                    state.add(new State(StateValue.Chiusa, LocalDate.now()));
-
-                    isChanged = true;
-                    notificationToSend = NotificationsBuilder.buildNotificationClosed(this.title.getValue());
-                    reminder = NotificationsBuilder.buildReminder(this.title.getValue(), this.date.getValue(), this.time.getValue(), this.place.getValue(), this.indTee.getValue());
-                    thereIsReminder=true;
-
-                }
-
-                // se la data di termine ed e' uguale ad oggi e non abbiamo il numero di partecipanti fallisce
-                if(LocalDate.now().equals(registrationDeadline.getValue()) && !numberOfPartecipantsIsMaximum()) {
-
-                    state.add(new State(Fallita, LocalDate.now()));
-                    isChanged = true;
-
-                    notificationToSend = NotificationsBuilder.buildNotificationFailed(this.title.getValue());
-                    thereIsReminder=false;
-                }
-
-                break;
-
-
-            case Chiusa:
-                //se la data di termine equivale ad oggi
-                if(endDate.getValue() != null && LocalDate.now().equals(endDate.getValue())) {
-                    state.add(new State(StateValue.Conclusa, LocalDate.now()));
-                    isChanged = true;
-                    thereIsReminder=false;
-                    notificationToSend = NotificationsBuilder.buildNotificationTerminated(this.title.getValue());
-
-                }
-                break;
-        }
-
-        return isChanged;
-    }
-
-
 
 
     /**

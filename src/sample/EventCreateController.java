@@ -95,7 +95,7 @@ public class EventCreateController {
     private float indTeeIns;
     private int minAge, maxAge;
     private String ageRangeIns;
-    private Enum<Gender> genderIns;
+    private Gender genderIns;
 
 
     private boolean catIsVal = false;
