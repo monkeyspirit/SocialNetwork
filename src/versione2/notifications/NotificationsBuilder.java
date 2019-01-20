@@ -24,7 +24,7 @@ import java.util.Locale;
  */
 public class NotificationsBuilder {
 
-    public static final String MSG_CLOSED = " è ufficialmente chiusa e inizierà il giorno: ";
+    public static final String MSG_RETIRED = " è stata ritirata dal suo creatore.";
     public static final String MSG_CLOSED_NO_DATE = " è ufficialmente chiusa.";
     public static final String MSG_FAILED = " è fallita in quanto non è stato raggiunto il numero minimo di partecipanti.";
     public static final String MSG_TERMINATED = " si è conclusa con successo.";
@@ -49,6 +49,19 @@ public class NotificationsBuilder {
      */
     public static Notification buildNotificationNewEvent (String eventName) {
         String message = eventName + MSG_NEW;
+
+        Notification aller = new Notification(NotificationType.Allert, message);
+        return aller;
+    }
+
+
+
+    /**
+     * Costruisce il messaggio della notifica per un evento ritirato
+     * @param eventName nome dell'evento
+     */
+    public static Notification buildNotificationRetiredEvent (String eventName) {
+        String message = eventName + MSG_RETIRED;
 
         Notification aller = new Notification(NotificationType.Allert, message);
         return aller;

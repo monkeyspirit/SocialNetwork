@@ -19,8 +19,12 @@ public abstract class Event  {
     public static final String TITLE_DESCRIPTION = "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento";
     public static final String NUMPLAY_NAME = "Numero di partecipanti";
     public static final String NUMPLAY_DESCRIPTION = "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento";
+    public static final String EXTRA_PARTECIPANTS_NAME= "Tolleranza numero di partecipanti";
+    public static final String EXTRA_PARTECIPANTS_DESCRIPTION ="Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"";
     public static final String REGDEADLINE_NAME = "Termine ultimo iscrizione";
     public static final String REGDEADLINE_DESCRIPTION = "Campo obbligatorio che inidica l'ultima data possibile per iscriversi";
+    public static final String RETIRED_DEADLINE_NAME ="Termine ultimo di ritiro iscrizione";
+    public static final String RETIRED_DEADLINE_DESCRIPTION ="Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta";
     public static final String PLACE_NAME = "Luogo";
     public static final String PLACE_DESCRIPTION = "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti";
     public static final String DATE_NAME = "Data";
@@ -45,7 +49,9 @@ public abstract class Event  {
     private String type; //serve per la serializzazione/deserializzazione in modo da poter distinguere il tipo specifico di Event
 	private Field<String> title = new Field(TITLE_NAME,TITLE_DESCRIPTION);
 	private Field<Integer> numOfParticipants = new Field(NUMPLAY_NAME, NUMPLAY_DESCRIPTION);
+	private Field<Integer> extraParticipants = new Field(EXTRA_PARTECIPANTS_NAME, EXTRA_PARTECIPANTS_DESCRIPTION);
 	private Field<LocalDate> registrationDeadline = new Field(REGDEADLINE_NAME, REGDEADLINE_DESCRIPTION);
+    private Field<LocalDate> retireDeadline =  new Field(RETIRED_DEADLINE_NAME, RETIRED_DEADLINE_DESCRIPTION);
 	private Field<String> place = new Field(PLACE_NAME, PLACE_DESCRIPTION);
 	private Field<LocalDate> date = new Field(DATE_NAME,DATE_DESCRIPTION);
 	private Field<LocalTime> time = new Field(TIME_NAME, TIME_DESCRIPTION);
@@ -75,11 +81,13 @@ public abstract class Event  {
 	}
 
     /**
-     * Costruttore degli eventi, vengono settati tutti i valori dei cmapi e quello dell'utente creatore
+     * Costruttore degli eventi, vengono settati tutti i valori dei campi e quello dell'utente creatore
      * @param type
      * @param titleIns
      * @param numParIns
+     * @param extraParIns
      * @param deadLineIns
+     * @param retiredDeadLineIns
      * @param placeIns
      * @param dateIns
      * @param timeIns
@@ -91,11 +99,13 @@ public abstract class Event  {
      * @param noteIns
      * @param creator
      */
-    public Event(String type, String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, StateValue stateValue, LocalDate stateSwitch, String noteIns,  String creator) {
+    public Event(String type, String titleIns, int numParIns, int extraParIns,  LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, StateValue stateValue, LocalDate stateSwitch, String noteIns,  String creator) {
         this.type = type;
 	    this.title.setValue(titleIns);
         this.numOfParticipants.setValue(numParIns);
+        this.extraParticipants.setValue(extraParIns);
         this.registrationDeadline.setValue(deadLineIns);
+        this.retireDeadline.setValue(retiredDeadLineIns);
         this.place.setValue(placeIns);
         this.date.setValue(dateIns);
         this.time.setValue(timeIns);
@@ -115,49 +125,53 @@ public abstract class Event  {
 
 
     //Setter e Getter
-    public Field getTitle() {
+    public Field<String> getTitle() {
         return title;
     }
 
-    public Field getNumOfParticipants() {
+    public Field<Integer> getNumOfParticipants() {
         return numOfParticipants;
     }
 
-    public Field getRegistrationDeadline() { return registrationDeadline; }
+    public Field<Integer> getExtraParticipants() { return extraParticipants; }
 
-    public Field getPlace() {
+    public Field<LocalDate> getRegistrationDeadline() { return registrationDeadline; }
+
+    public Field<LocalDate> getRetireDeadline() { return retireDeadline; }
+
+    public Field<String> getPlace() {
         return place;
     }
 
-    public Field getDate() {
+    public Field<LocalDate> getDate() {
         return date;
     }
 
-    public Field getTime() {
+    public Field<LocalTime> getTime() {
         return time;
     }
 
-    public Field getDuration() {
+    public Field<String> getDuration() {
         return duration;
     }
 
-    public Field getIndTee() {
+    public Field<Float> getIndTee() {
         return indTee;
     }
 
-    public Field getTeeInclude() {
+    public Field<String> getTeeInclude() {
         return teeInclude;
     }
 
-    public Field getEndDate() {
+    public Field<LocalDate> getEndDate() {
         return endDate;
     }
 
-    public Field getEndTime() {
+    public Field<LocalTime> getEndTime() {
         return endTime;
     }
 
-    public Field getNote() {
+    public Field<String> getNote() {
         return note;
     }
 
@@ -165,6 +179,29 @@ public abstract class Event  {
 
     public List<String> getParticipants() { return participants; }
 
+    public StateValue getStateValue() { return state.get(state.size()-1).getStateValue(); }
+
+    public void setState(State stateAdd) { this.state.add(stateAdd); }
+
+    public ArrayList<State> getState() {  return state; }
+
+    public LocalDate getStateSwitchDate() { return state.get(state.size()-1).getSwitchDate(); }
+
+    public String getType() { return type; }
+
+
+
+
+    // METODI
+
+    public boolean isUserCreator(String user){
+        if(user.equalsIgnoreCase(this.creator)){
+            return true;
+        }
+        return false;
+    }
+
+    // Usato nella grafica torna una stringa con valore dello stato e data
     public String getStateValueAndSwitchDate() {
         String stateAndDate = "";
 
@@ -175,17 +212,12 @@ public abstract class Event  {
         return  stateAndDate;
     }
 
-    public StateValue getStateValue() { return state.get(state.size()-1).getStateValue(); }
-
-    public ArrayList<State> getState() {  return state; }
-
-    public LocalDate getStateSwitchDate() { return state.get(state.size()-1).getSwitchDate(); }
-
-    public String getType() { return type; }
 
     public void addParticipant(String participantUsername){
         participants.add(participantUsername);
     }
+
+    public void removeParticipant(String participantRemove){participants.remove(participantRemove); }
 
     /**
      * Controlla se un utente e' gia' registrato nella lista partecipanti
@@ -201,34 +233,24 @@ public abstract class Event  {
     }
 
     /**
+     * Controlla se il numero di utenti e' uguale al massimo più la tolleranza
+     * @return true se il numero di partecipanti ha raggiunto il massimo, false altrimenti
+     */
+    public boolean isNumOfTotalParticipantsEqualsMaxPlusTolerance(){
+        if(participants.size() >= ( numOfParticipants.getValue() + extraParticipants.getValue()))
+            return true;
+        return false;
+    }
+
+    /**
      * Controlla se il numero di utenti e' uguale al massimo
      * @return true se il numero di partecipanti ha raggiunto il massimo, false altrimenti
      */
-    public boolean isNumOfParticipantsEqualsMax(){
-        if(participants.size() == (int) numOfParticipants.getValue())
-            return true;
-        return false;
-    }
-
-    /**
-     * Controlla se siamo oltre la data di termine iscrizione
-     * @return true se il termine ultimo iscrizione e' stato superato, false altrimenti
-     */
-    public boolean isDeadlineAfter(){
-        LocalDate deadLineReg = (LocalDate) registrationDeadline.getValue();
-
-        if(deadLineReg.isAfter(LocalDate.now()))
+    public boolean isNumOfParticipantsMore(){
+        if(participants.size() >=  numOfParticipants.getValue())
             return true;
         return false;
     }
 
 
-    /**
-     * Controlla se il numero di partecipanti ha raggiunto il massimo
-     */
-    private boolean numberOfPartecipantsIsMaximum() {
-        if(participants.size() >= (int) numOfParticipants.getValue())
-            return true;
-        return false;
-    }
 }

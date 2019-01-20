@@ -11,55 +11,62 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="751.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="687.0" prefWidth="569.0">
+    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="568.0">
          <children>
 
-            <TextField fx:id="titleTxtF" layoutX="355.0" layoutY="68.0" prefHeight="26.0" prefWidth="149.0" />
-            <TextField fx:id="numPTxtF" layoutX="355.0" layoutY="100.0" prefHeight="26.0" prefWidth="148.0" />
-            <TextField fx:id="placeTxtF" layoutX="355.0" layoutY="174.0" prefHeight="26.0" prefWidth="150.0" />
-            <TextField fx:id="indTeeTxtF" layoutX="355.0" layoutY="311.0" prefHeight="26.0" prefWidth="150.0" />
+             <TextField fx:id="titleTxtF" layoutX="355.0" layoutY="68.0" prefHeight="26.0" prefWidth="149.0" />
+             <TextField fx:id="numPTxtF" layoutX="355.0" layoutY="100.0" prefHeight="26.0" prefWidth="148.0" />
+             <TextField fx:id="placeTxtF" layoutX="356.0" layoutY="242.0" prefHeight="26.0" prefWidth="150.0" />
+             <TextField fx:id="indTeeTxtF" disable="true" layoutX="356.0" layoutY="379.0" prefHeight="26.0" prefWidth="150.0" />
+             <TextField fx:id="extraNumParTxt" layoutX="355.0" layoutY="135.0" prefHeight="26.0" prefWidth="148.0" />
+
+             <Button fx:id="createBtn" layoutX="228.0" layoutY="681.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="40.0" prefWidth="115.0" text="Crea" />
+
+             <ChoiceBox fx:id="catCB" layoutX="355.0" layoutY="31.0" prefHeight="28.0" prefWidth="148.0" />
+             <ChoiceBox fx:id="durBigCB" layoutX="356.0" layoutY="346.0" prefHeight="26.0" prefWidth="70.0" />
+             <ChoiceBox fx:id="durLitCB" layoutX="438.0" layoutY="346.0" prefHeight="26.0" prefWidth="70.0" />
+
+             <ChoiceBox fx:id="minAgeCB" disable="true" layoutX="356.0" layoutY="541.0" prefHeight="28.0" prefWidth="67.0" />
+             <ChoiceBox fx:id="genderCB" disable="true" layoutX="356.0" layoutY="576.0" prefHeight="26.0" prefWidth="147.0" />
+             <ChoiceBox fx:id="maxAgeCB" disable="true" layoutX="436.0" layoutY="541.0" prefHeight="28.0" prefWidth="67.0" />
+
+             <Label fx:id="catLbl" layoutX="70.0" layoutY="36.0" text="Categoria" />
+             <Label fx:id="titleLbl" layoutX="70.0" layoutY="71.0" prefHeight="20.0" prefWidth="49.0" text="Titolo" />
+             <Label fx:id="numPLbl" layoutX="70.0" layoutY="104.0" text="Numero partecipanti" />
+             <Label fx:id="extraParLbl" layoutX="70.0" layoutY="140.0" text="Tolleranza partecipanti" />
+             <Label fx:id="deadLLbl" layoutX="70.0" layoutY="177.0" prefHeight="18.0" prefWidth="197.0" text="Termine ultimo di iscrizione" />
+             <Label fx:id="retiredDeadLLbl" layoutX="70.0" layoutY="211.0" prefHeight="18.0" prefWidth="246.0" text="Termine ultimo di ritiro iscrizione" />
+             <Label fx:id="placeLbl" layoutX="71.0" layoutY="246.0" prefHeight="18.0" prefWidth="57.0" text="Luogo" />
+             <Label fx:id="dateLbl" layoutX="71.0" layoutY="282.0" prefHeight="18.0" prefWidth="47.0" text="Data" />
+             <Label fx:id="timeLbl" layoutX="71.0" layoutY="317.0" prefHeight="18.0" prefWidth="87.0" text="Ora" />
+             <Label fx:id="durLbl" layoutX="71.0" layoutY="350.0" prefHeight="18.0" prefWidth="69.0" text="Durata" />
+             <Label fx:id="indTeeLbl" layoutX="71.0" layoutY="383.0" prefHeight="18.0" prefWidth="126.0" text="Quota individuale" />
+             <Label fx:id="totTeLbl" layoutX="71.0" layoutY="413.0" prefHeight="18.0" prefWidth="165.0" text="Compreso nella quota" />
+             <Label fx:id="endDateLbl" layoutX="71.0" layoutY="481.0" prefHeight="18.0" prefWidth="104.0" text="Data conclusiva" />
+             <Label fx:id="endTimeLbl" layoutX="71.0" layoutY="513.0" text="Ora conclusiva" />
+             <Label fx:id="noteLbl" layoutX="71.0" layoutY="637.0" text="Note" />
+             <Label fx:id="ageLbl" layoutX="71.0" layoutY="546.0" text="Fascia d'età" />
+             <Label fx:id="genderLbl" layoutX="71.0" layoutY="581.0" text="Genere" />
+             <Label layoutX="426.0" layoutY="546.0" text="-" />
+             <Label fx:id="durUnitLbl" layoutX="281.0" layoutY="351.0" prefHeight="16.0" prefWidth="73.0" wrapText="true" />
+
+             <DatePicker fx:id="deadLineDP" layoutX="355.0" layoutY="173.0" prefHeight="26.0" prefWidth="150.0" />
+             <DatePicker fx:id="dateDP" disable="true" layoutX="356.0" layoutY="278.0" prefHeight="26.0" prefWidth="150.0" />
+             <DatePicker fx:id="endDateDP" disable="true" layoutX="356.0" layoutY="477.0" prefHeight="26.0" prefWidth="150.0" />
+             <DatePicker fx:id="retiredDeadLineDP" disable="true" layoutX="355.0" layoutY="207.0" prefHeight="26.0" prefWidth="150.0" />
+
+             <JFXTimePicker fx:id="endTimeTP" disable="true" layoutX="356.0" layoutY="508.0" prefHeight="26.0" prefWidth="150.0" />
+             <JFXTimePicker fx:id="timeTP" disable="true" layoutX="356.0" layoutY="313.0" prefHeight="26.0" prefWidth="150.0" />
+
+             <TextArea fx:id="totTeeTxtA" layoutX="356.0" layoutY="409.0" prefHeight="59.0" prefWidth="150.0" />
+             <TextArea fx:id="noteTxtA" layoutX="183.0" layoutY="621.0" prefHeight="47.0" prefWidth="320.0" />
+
+             <CheckBox fx:id="isTeeActiveCkB" layoutX="334.0" layoutY="383.0" mnemonicParsing="false" />
 
 
-            <Button fx:id="createBtn" layoutX="227.0" layoutY="613.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="40.0" prefWidth="115.0" text="Crea" />
 
-            <ChoiceBox fx:id="catCB" layoutX="355.0" layoutY="31.0" prefHeight="28.0" prefWidth="148.0" />
-            <ChoiceBox fx:id="durBigCB" layoutX="355.0" layoutY="278.0" prefHeight="26.0" prefWidth="70.0" />
-            <ChoiceBox fx:id="durLitCB" layoutX="437.0" layoutY="278.0" prefHeight="26.0" prefWidth="70.0" />
-
-            <ChoiceBox fx:id="minAgeCB" disable="true" layoutX="355.0" layoutY="473.0" prefHeight="28.0" prefWidth="67.0" />
-            <ChoiceBox fx:id="genderCB" disable="true" layoutX="355.0" layoutY="508.0" prefHeight="26.0" prefWidth="147.0" />
-            <ChoiceBox fx:id="maxAgeCB" disable="true" layoutX="435.0" layoutY="473.0" prefHeight="28.0" prefWidth="67.0" />
-
-            <Label fx:id="catLbl" layoutX="70.0" layoutY="36.0" text="Categoria" />
-            <Label fx:id="titleLbl" layoutX="70.0" layoutY="71.0" prefHeight="20.0" prefWidth="49.0" text="Titolo" />
-            <Label fx:id="numPLbl" layoutX="70.0" layoutY="104.0" text="Numero partecipanti" />
-            <Label fx:id="deadLLbl" layoutX="70.0" layoutY="143.0" prefHeight="18.0" prefWidth="197.0" text="Termine ultimo di iscrizione" />
-            <Label fx:id="placeLbl" layoutX="70.0" layoutY="178.0" prefHeight="18.0" prefWidth="57.0" text="Luogo" />
-            <Label fx:id="dateLbl"  layoutX="70.0" layoutY="214.0" prefHeight="18.0" prefWidth="47.0" text="Data" />
-            <Label fx:id="timeLbl" layoutX="70.0" layoutY="249.0" prefHeight="18.0" prefWidth="87.0" text="Ora" />
-            <Label fx:id="durLbl"  layoutX="70.0" layoutY="282.0" prefHeight="18.0" prefWidth="69.0" text="Durata" />
-            <Label fx:id="indTeeLbl" layoutX="70.0" layoutY="315.0" prefHeight="18.0" prefWidth="126.0" text="Quota individuale" />
-            <Label fx:id="totTeLbl" layoutX="70.0" layoutY="345.0" prefHeight="18.0" prefWidth="165.0" text="Compreso nella quota" />
-            <Label fx:id="endDateLbl" layoutX="70.0" layoutY="413.0" prefHeight="18.0" prefWidth="104.0" text="Data conclusiva" />
-            <Label fx:id="endTimeLbl" layoutX="70.0" layoutY="445.0" text="Ora conclusiva" />
-            <Label fx:id="noteLbl" layoutX="70.0" layoutY="569.0" text="Note" />
-            <Label fx:id="ageLbl" layoutX="70.0" layoutY="478.0" text="Fascia d'età" />
-            <Label fx:id="genderLbl" layoutX="70.0" layoutY="513.0" text="Genere" />
-            <Label layoutX="425.0" layoutY="478.0" text="-" />
-            <Label fx:id="durUnitLbl" layoutX="280.0" layoutY="283.0" prefHeight="16.0" prefWidth="73.0" wrapText="true" />
-
-            <DatePicker fx:id="deadLineDP" layoutX="355.0" layoutY="139.0" prefHeight="26.0" prefWidth="150.0" />
-            <DatePicker fx:id="dateDP" disable="true" layoutX="355.0" layoutY="210.0" prefHeight="26.0" prefWidth="150.0" />
-            <DatePicker fx:id="endDateDP" disable="true" layoutX="355.0" layoutY="409.0" prefHeight="26.0" prefWidth="150.0" />
-
-            <JFXTimePicker fx:id="endTimeTP" disable="true" layoutX="355.0" layoutY="440.0" prefHeight="26.0" prefWidth="150.0" />
-            <JFXTimePicker fx:id="timeTP" disable="true" layoutX="355.0" layoutY="245.0" prefHeight="26.0" prefWidth="150.0" />
-
-            <TextArea fx:id="totTeeTxtA" layoutX="355.0" layoutY="341.0" prefHeight="59.0" prefWidth="150.0" />
-            <TextArea fx:id="noteTxtA" layoutX="182.0" layoutY="553.0" prefHeight="47.0" prefWidth="320.0" />
-            <CheckBox fx:id="isTeeActiveCkB" layoutX="333.0" layoutY="315.0" mnemonicParsing="false" />
 
          </children></AnchorPane>
   </content>

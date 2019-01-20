@@ -8,17 +8,21 @@ import versione1.SoccerMatchEvent;
 import versione1.SocialNetwork;
 import versione1.User;
 import versione2.StateValue;
+import versione2.notifications.Notification;
+import versione2.notifications.NotificationsBuilder;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.util.List;
 
 public class EventController {
 
     public static final String SOCCER_NAME = "SoccerMatchEvent";
 
     @FXML
-    private Label placesAvbLbl, stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
+    private Label extranumPLblEvent,retiredDeadLLblEvent, placesAvbLbl, stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
     @FXML
-    private Button subScribeBtn;
+    private Button subScribeBtn, retiredParBtn, retiredEventBtn;
     private SocialNetwork socialNetwork;
     private SoccerMatchEvent eventSoccerSelected;
     private String sessionUsername;
@@ -45,7 +49,25 @@ public class EventController {
      */
     private void initialize(){
 
-        subScribeBtn.setDisable(eventSoccerSelected.isUserAlreadyRegistered(sessionUsername) ||eventSoccerSelected.getStateValue().equals(StateValue.Chiusa) == true);
+        if(eventSoccerSelected.getStateValue().equals(StateValue.Aperta)){
+            subScribeBtn.setDisable(eventSoccerSelected.isUserAlreadyRegistered(sessionUsername) ||eventSoccerSelected.getStateValue().equals(StateValue.Chiusa) == true);
+
+            retiredParBtn.setDisable(!subScribeBtn.isDisable());
+
+            if(eventSoccerSelected.isUserCreator(sessionUsername)){
+                retiredParBtn.setDisable(true);
+                retiredEventBtn.setVisible(true);
+                retiredEventBtn.setDisable(false);
+            }
+        }
+        else {
+            subScribeBtn.setDisable(true);
+            retiredEventBtn.setDisable(true);
+            retiredParBtn.setDisable(true);
+        }
+
+
+
 
         creatorLblEvent.setText(eventSoccerSelected.getCreator());
 
@@ -58,35 +80,21 @@ public class EventController {
             titleLblEvent.setText(" ");
         }
 
+
+
         numPLblEvent.setText(String.valueOf(eventSoccerSelected.getNumOfParticipants().getValue()));
 
-        if(eventSoccerSelected.getRegistrationDeadline().getValue() != null){
-            deadLLblEvent.setText(String.valueOf(eventSoccerSelected.getRegistrationDeadline().getValue()));
-        }
-        else{
-            deadLLblEvent.setText(" ");
-        }
+        extranumPLblEvent.setText(String.valueOf(eventSoccerSelected.getExtraParticipants().getValue()));
 
-        if(eventSoccerSelected.getPlace().getValue() != null){
-            placeLblEvent.setText((String) eventSoccerSelected.getPlace().getValue());
-        }
-        else{
-            placeLblEvent.setText(" ");
-        }
+        deadLLblEvent.setText(String.valueOf(eventSoccerSelected.getRegistrationDeadline().getValue()));
 
-        if(eventSoccerSelected.getDate().getValue()!= null){
-            dateLblEvent.setText(String.valueOf(eventSoccerSelected.getDate().getValue()));
-        }
-        else{
-            dateLblEvent.setText(" ");
-        }
+        retiredDeadLLblEvent.setText(String.valueOf(eventSoccerSelected.getRetireDeadline().getValue()));
 
-        if(eventSoccerSelected.getTime().getValue() != null){
-            timeLblEvent.setText(String.valueOf(eventSoccerSelected.getTime().getValue()));
-        }
-        else{
-            timeLblEvent.setText(" ");
-        }
+        placeLblEvent.setText((String) eventSoccerSelected.getPlace().getValue());
+
+        dateLblEvent.setText(String.valueOf(eventSoccerSelected.getDate().getValue()));
+
+        timeLblEvent.setText(String.valueOf(eventSoccerSelected.getTime().getValue()));
 
         if(eventSoccerSelected.getDuration().getValue() != null){
             durLblEvent.setText(String.valueOf(eventSoccerSelected.getDuration().getValue()));
@@ -95,12 +103,7 @@ public class EventController {
             durLblEvent.setText(" ");
         }
 
-        if(eventSoccerSelected.getIndTee().getValue() != null){
-            indTeeLblEvent.setText(String.valueOf(eventSoccerSelected.getIndTee().getValue()));
-        }
-        else{
-            indTeeLblEvent.setText(" ");
-        }
+        indTeeLblEvent.setText(String.valueOf(eventSoccerSelected.getIndTee().getValue()));
 
         if(eventSoccerSelected.getTeeInclude().getValue() != null){
             totTeLblEvent.setText(String.valueOf(eventSoccerSelected.getTeeInclude().getValue()));
@@ -143,30 +146,57 @@ public class EventController {
             }
         }
 
-        int postiDisponibili = (int) eventSoccerSelected.getNumOfParticipants().getValue() - eventSoccerSelected.getParticipants().size();
+        int postiDisponibili = (eventSoccerSelected.getNumOfParticipants().getValue() + eventSoccerSelected.getExtraParticipants().getValue() )- eventSoccerSelected.getParticipants().size();
         placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
 
     }
 
 
     /**
-     * Il metodo viene associato al pulsante iscrivi ed iscrive l'utente all'evento
+     * Il metodo viene associato al pulsante iscrivi ed iscrive l'utente all'evento se ci sono posti disponibili
      */
     public void subScribe(){
 
-            if (!eventSoccerSelected.isUserAlreadyRegistered(sessionUsername)) {
-                    eventSoccerSelected.addParticipant(sessionUsername);
+        eventSoccerSelected.addParticipant(sessionUsername);
 
-                    socialNetwork.updateUserandEventsListFile();
-                    subScribeBtn.setDisable(true);
-                    int postiDisponibili = (int) eventSoccerSelected.getNumOfParticipants().getValue() - eventSoccerSelected.getParticipants().size();
-                    placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Attenzione: risulti precedentemente iscritto");
-            }
+        socialNetwork.updateUserandEventsListFile();
+        subScribeBtn.setDisable(true);
+        retiredParBtn.setDisable(false);
+        int postiDisponibili = (eventSoccerSelected.getNumOfParticipants().getValue() + eventSoccerSelected.getExtraParticipants().getValue() )- eventSoccerSelected.getParticipants().size();
+        placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
+
 
     }
+
+
+    /**
+     * Il metodo viene associato al pulsante DISiscrivi ed DISiscrive l'utente all'evento
+     */
+    public void disScribe(){
+
+            eventSoccerSelected.removeParticipant(sessionUsername);
+            socialNetwork.updateUserandEventsListFile();
+            subScribeBtn.setDisable(false);
+            retiredParBtn.setDisable(true);
+            int postiDisponibili = (eventSoccerSelected.getNumOfParticipants().getValue() + eventSoccerSelected.getExtraParticipants().getValue() )- eventSoccerSelected.getParticipants().size();
+            placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
+
+
+    }
+
+
+    /**
+     * Il metodo viene associato al pulsante ritira evento e ritira l'evento dalla bacheca
+     */
+    public void retiredEvent(){
+
+        eventSoccerSelected.setState(new versione2.State(StateValue.DaRitirare, LocalDate.now()));
+        subScribeBtn.setDisable(true);
+        retiredEventBtn.setDisable(true);
+        retiredParBtn.setDisable(true);
+    }
+
+
 
 
 }

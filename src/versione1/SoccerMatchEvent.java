@@ -38,8 +38,8 @@ public class SoccerMatchEvent extends Event{
      * @param noteIns
      * @param creatorIns
      */
-    public SoccerMatchEvent(String titleIns, int numParIns, LocalDate deadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Gender genderIns, StateValue stateValue, LocalDate stateSwitch, String noteIns, String creatorIns) {
-        super(TYPE, titleIns,  numParIns,  deadLineIns,  placeIns,  dateIns,  timeIns,  durationIns,  indTeeIns,  totTeeIns,  endDateIns,  endTimeIns,stateValue, stateSwitch, noteIns, creatorIns);
+    public SoccerMatchEvent(String titleIns, int numParIns, int extraParIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Gender genderIns, StateValue stateValue, LocalDate stateSwitch, String noteIns, String creatorIns) {
+        super(TYPE, titleIns,  numParIns, extraParIns  ,  deadLineIns, retiredDeadLineIns,  placeIns,  dateIns,  timeIns,  durationIns,  indTeeIns,  totTeeIns,  endDateIns,  endTimeIns,stateValue, stateSwitch, noteIns, creatorIns);
         this.gender.setValue(genderIns);
         this.ageRange.setValue(ageRangeIns);
     }

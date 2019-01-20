@@ -10,44 +10,50 @@
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="775.0" prefWidth="572.0">
          <children>
             <Label fx:id="titleLbl" layoutX="70.0" layoutY="119.0" prefHeight="20.0" prefWidth="49.0" text="Titolo" />
-            <Label fx:id="numPLbl" layoutX="70.0" layoutY="152.0" text="Numero partecipanti" />
-            <Label fx:id="deadLLbl" layoutX="70.0" layoutY="191.0" prefHeight="18.0" prefWidth="197.0" text="Termine ultimo di iscrizione" />
-            <Label fx:id="placeLbl" layoutX="70.0" layoutY="226.0" prefHeight="18.0" prefWidth="57.0" text="Luogo" />
-            <Label fx:id="dateLbl" layoutX="70.0" layoutY="262.0" prefHeight="18.0" prefWidth="47.0" text="Data" />
-            <Label fx:id="timeLbl" layoutX="70.0" layoutY="297.0" prefHeight="18.0" prefWidth="87.0" text="Ora" />
-            <Label fx:id="durLbl" layoutX="70.0" layoutY="330.0" prefHeight="18.0" prefWidth="69.0" text="Durata" />
-            <Label fx:id="indTeeLbl" layoutX="70.0" layoutY="363.0" prefHeight="18.0" prefWidth="126.0" text="Quota individuale" />
-            <Label fx:id="totTeLbl" layoutX="70.0" layoutY="393.0" prefHeight="18.0" prefWidth="165.0" text="Compreso nella quota" />
-            <Label fx:id="endDateLbl" layoutX="68.0" layoutY="426.0" prefHeight="18.0" prefWidth="104.0" text="Data conclusiva" />
-            <Label fx:id="endTimeLbl" layoutX="68.0" layoutY="458.0" text="Ora conclusiva" />
-            <Label fx:id="noteLbl" layoutX="68.0" layoutY="582.0" text="Note" />
-            <Label fx:id="ageLbl" layoutX="68.0" layoutY="491.0" />
-            <Label fx:id="genderLbl" layoutX="68.0" layoutY="526.0" />
-            <Label fx:id="creatorLbl" layoutX="70.0" layoutY="46.0" text="Creatore" />
-            <Label layoutX="67.0" layoutY="82.0" text="Stato" />
+            <Label fx:id="numPLbl" layoutX="70.0" layoutY="155.0" text="Numero partecipanti" />
+            <Label fx:id="extraNumPLbl" layoutX="70.0" layoutY="184.0" text="Tolleranza partecipanti" />
+            <Label fx:id="deadLLbl" layoutX="70.0" layoutY="224.0" prefHeight="18.0" prefWidth="197.0" text="Termine ultimo di iscrizione" />
+            <Label fx:id="retiredDeadLLbl" layoutX="70.0" layoutY="257.0" prefHeight="18.0" prefWidth="232.0" text="Termine ultimo di ritiro iscrizione" />
+            <Label fx:id="placeLbl" layoutX="70.0" layoutY="296.0" prefHeight="18.0" prefWidth="57.0" text="Luogo" />
+            <Label fx:id="dateLbl" layoutX="70.0" layoutY="332.0" prefHeight="18.0" prefWidth="47.0" text="Data" />
+            <Label fx:id="timeLbl" layoutX="70.0" layoutY="367.0" prefHeight="18.0" prefWidth="87.0" text="Ora" />
+            <Label fx:id="durLbl" layoutX="70.0" layoutY="400.0" prefHeight="18.0" prefWidth="69.0" text="Durata" />
+            <Label fx:id="indTeeLbl" layoutX="70.0" layoutY="433.0" prefHeight="18.0" prefWidth="126.0" text="Quota individuale" />
+            <Label fx:id="totTeLbl" layoutX="70.0" layoutY="463.0" prefHeight="18.0" prefWidth="165.0" text="Compreso nella quota" />
+            <Label fx:id="endDateLbl" layoutX="70.0" layoutY="496.0" prefHeight="18.0" prefWidth="104.0" text="Data conclusiva" />
+            <Label fx:id="endTimeLbl" layoutX="70.0" layoutY="528.0" text="Ora conclusiva" />
+            <Label fx:id="noteLbl" layoutX="70.0" layoutY="652.0" text="Note" />
+            <Label fx:id="ageLbl" layoutX="70.0" layoutY="561.0" />
+            <Label fx:id="genderLbl" layoutX="70.0" layoutY="596.0" />
+            <Label fx:id="creatorLbl" layoutX="70.0" layoutY="49.0" text="Creatore" />
+            <Label fx:id="stateLbl" layoutX="68.0" layoutY="84.0" text="Stato" />
 
 
 
             <Label fx:id="titleLblEvent" layoutX="300.0" layoutY="119.0" prefHeight="21.0" prefWidth="197.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="numPLblEvent" layoutX="300.0" layoutY="152.0" prefHeight="21.0" prefWidth="179.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="deadLLblEvent" layoutX="300.0" layoutY="191.0" prefHeight="18.0" prefWidth="197.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="placeLblEvent" layoutX="300.0" layoutY="226.0" prefHeight="21.0" prefWidth="202.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="dateLblEvent" layoutX="300.0" layoutY="262.0" prefHeight="21.0" prefWidth="186.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="timeLblEvent" layoutX="300.0" layoutY="297.0" prefHeight="21.0" prefWidth="227.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="durLblEvent" layoutX="300.0" layoutY="330.0" prefHeight="21.0" prefWidth="201.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="indTeeLblEvent" layoutX="300.0" layoutY="363.0" prefHeight="21.0" prefWidth="214.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="totTeLblEvent" layoutX="300.0" layoutY="393.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="endDateLblEvent" layoutX="300.0" layoutY="426.0" prefHeight="21.0" prefWidth="228.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="endTimeLblEvent" layoutX="300.0" layoutY="458.0" prefHeight="21.0" prefWidth="202.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="noteLblEvent" layoutX="300.0" layoutY="582.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="ageLblEvent" layoutX="300.0" layoutY="491.0" prefHeight="21.0" prefWidth="195.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="genderLblEvent" layoutX="300.0" layoutY="526.0" prefHeight="21.0" prefWidth="203.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="extranumPLblEvent" layoutX="300.0" layoutY="182.0" prefHeight="21.0" prefWidth="179.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="deadLLblEvent" layoutX="300.0" layoutY="224.0" prefHeight="18.0" prefWidth="197.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="retiredDeadLLblEvent" layoutX="300.0" layoutY="257.0" prefHeight="18.0" prefWidth="197.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="placeLblEvent" layoutX="300.0" layoutY="296.0" prefHeight="21.0" prefWidth="202.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="dateLblEvent" layoutX="300.0" layoutY="332.0" prefHeight="21.0" prefWidth="186.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="timeLblEvent" layoutX="300.0" layoutY="367.0" prefHeight="21.0" prefWidth="227.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="durLblEvent" layoutX="300.0" layoutY="400.0" prefHeight="21.0" prefWidth="201.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="indTeeLblEvent" layoutX="300.0" layoutY="433.0" prefHeight="21.0" prefWidth="214.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="totTeLblEvent" layoutX="300.0" layoutY="463.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="endDateLblEvent" layoutX="300.0" layoutY="496.0" prefHeight="21.0" prefWidth="228.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="endTimeLblEvent" layoutX="300.0" layoutY="528.0" prefHeight="21.0" prefWidth="202.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="noteLblEvent" layoutX="300.0" layoutY="652.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="ageLblEvent" layoutX="300.0" layoutY="561.0" prefHeight="21.0" prefWidth="195.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="genderLblEvent" layoutX="300.0" layoutY="596.0" prefHeight="21.0" prefWidth="203.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="creatorLblEvent" layoutX="300.0" layoutY="46.0" prefHeight="21.0" prefWidth="129.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="stateLblEvent" layoutX="300.0" layoutY="82.0" prefHeight="21.0" prefWidth="155.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="placesAvbLbl" layoutX="76.0" layoutY="723.0" prefHeight="21.0" prefWidth="183.0" textAlignment="JUSTIFY" wrapText="true" />
 
-            <Button fx:id="subScribeBtn" layoutX="140.0" layoutY="628.0" mnemonicParsing="false" onAction="#subScribe" text="Iscriviti" />
-            <Label fx:id="placesAvbLbl" layoutX="120.0" layoutY="666.0" prefHeight="21.0" prefWidth="183.0" textAlignment="JUSTIFY" wrapText="true" />
 
+            <Button fx:id="subScribeBtn" layoutX="138.0" layoutY="697.0" mnemonicParsing="false" onAction="#subScribe" text="Iscriviti" />
+            <Button fx:id="retiredParBtn" disable="true" layoutX="248.0" layoutY="697.0" onAction="#disScribe" mnemonicParsing="false" text="Disiscriviti" />
+            <Button fx:id="retiredEventBtn" disable="true" visible="false" layoutX="372.0" onAction="#retiredEvent" layoutY="697.0" mnemonicParsing="false" text="Ritira proposta" />
 
          </children></AnchorPane>
   </content>

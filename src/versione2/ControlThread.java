@@ -15,7 +15,7 @@ import static versione2.StateValue.Fallita;
 
 public class ControlThread extends Thread {
 
-    int i;
+
     SocialNetwork socialNetwork;
     private Notification notificationToSend;
     private Notification reminder;
@@ -72,42 +72,63 @@ public class ControlThread extends Thread {
         // Per gli eventi aperti:
         switch (event.getState().get(event.getState().size()-1).getStateValue()) {
 
-            case Aperta:
+            case Aperta: {
 
-                // se il numero di partecipanti e' uguale al numero richiesto e' chiusa
-                if(event.isNumOfParticipantsEqualsMax()){
+                // se il numero di partecipanti e' uguale al numero massimo e non ci si può più ritirare --> CHIUSA
+                if (event.isNumOfTotalParticipantsEqualsMaxPlusTolerance() && LocalDate.now().isAfter(event.getRetireDeadline().getValue())) {
                     event.getState().add(new versione2.State(StateValue.Chiusa, LocalDate.now()));
 
                     isChanged = true;
                     notificationToSend = NotificationsBuilder.buildNotificationClosed((String) event.getTitle().getValue());
                     reminder = NotificationsBuilder.buildReminder((String) event.getTitle().getValue(), (LocalDate) event.getDate().getValue(), (LocalTime) event.getTime().getValue(), (String) event.getPlace().getValue(), (Float) event.getIndTee().getValue());
-                    thereIsReminder=true;
+                    thereIsReminder = true;
 
                 }
 
-                // se la data di termine ed e' uguale ad oggi e non abbiamo il numero di partecipanti fallisce
-                if(LocalDate.now().equals(event.getRegistrationDeadline().getValue()) && !event.isNumOfParticipantsEqualsMax()) {
+                // se il numero dei partecipanti è tra il numero minimo e la tolleranza e siamo oltre alla data di termine iscrizione --> CHIUSA
+                if (event.isNumOfParticipantsMore() && LocalDate.now().isAfter(event.getRegistrationDeadline().getValue())) {
+                    event.getState().add(new versione2.State(StateValue.Chiusa, LocalDate.now()));
+
+                    isChanged = true;
+                    notificationToSend = NotificationsBuilder.buildNotificationClosed((String) event.getTitle().getValue());
+                    reminder = NotificationsBuilder.buildReminder((String) event.getTitle().getValue(), (LocalDate) event.getDate().getValue(), (LocalTime) event.getTime().getValue(), (String) event.getPlace().getValue(), (Float) event.getIndTee().getValue());
+                    thereIsReminder = true;
+                }
+
+                // se la data di termine e' oltre oggi e non abbiamo il numero di partecipanti --> FALLITA
+                if (LocalDate.now().isAfter(event.getRegistrationDeadline().getValue()) && !event.isNumOfParticipantsMore()) {
 
                     event.getState().add(new versione2.State(Fallita, LocalDate.now()));
                     isChanged = true;
 
                     notificationToSend = NotificationsBuilder.buildNotificationFailed((String) event.getTitle().getValue());
-                    thereIsReminder=false;
-                }
+                    thereIsReminder = false;
+                }break;
+            }
 
-                break;
 
-
-            case Chiusa:
-                //se la data di termine equivale ad oggi
-                if(event.getEndDate().getValue() != null && LocalDate.now().equals(event.getEndDate().getValue())) {
+            case Chiusa: {
+                //se la data di termine è oltre oggi --> CONCLUSA
+                if (event.getEndDate().getValue() != null && LocalDate.now().isAfter(event.getEndDate().getValue())) {
                     event.getState().add(new versione2.State(StateValue.Conclusa, LocalDate.now()));
                     isChanged = true;
-                    thereIsReminder=false;
-                    notificationToSend = NotificationsBuilder.buildNotificationTerminated((String)event.getTitle().getValue());
+                    thereIsReminder = false;
+                    notificationToSend = NotificationsBuilder.buildNotificationTerminated((String) event.getTitle().getValue());
 
                 }
                 break;
+            }
+
+            case DaRitirare: {
+                event.getState().add(new versione2.State(StateValue.Ritirata, LocalDate.now()));
+                isChanged = true;
+                thereIsReminder = false;
+                notificationToSend = NotificationsBuilder.buildNotificationRetiredEvent((String) event.getTitle().getValue());
+
+                break;
+            }
+
+
         }
 
         return isChanged;

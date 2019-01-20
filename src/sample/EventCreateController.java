@@ -25,6 +25,7 @@ public class EventCreateController {
     // Messaggi di errore
     public static final String MISS_CATEGORY_MSG =  "Inserire una categoria";
     public static final String MISS_NUMBER_OF_PARTECIPANTS_MSG = "Inserire numero partecipanti";
+    public static final String ERROR_NUMBER_REQUIRED = "Inserire un numero";
     public static final String MISS_DEADLINE_MSG = "Inserire la data di termine";
     public static final String MISS_PLACE_MSG = "Inserire il luogo";
     public static final String MISS_DATE_MSG = "Inserire la data in cui si tiene l'evento";
@@ -43,15 +44,15 @@ public class EventCreateController {
     // ~~~~~ newEvent Stage ~~~~~~~~~~~
 
     @FXML
-    private Label titleLbl,durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
+    private Label retiredDeadLLbl, extraParLbl, titleLbl,durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
     @FXML
-    private TextField titleTxtF, numPTxtF, placeTxtF, indTeeTxtF;
+    private TextField titleTxtF, numPTxtF, placeTxtF, indTeeTxtF, extraNumParTxt;
     @FXML
     private Button createBtn;
     @FXML
     private ChoiceBox<String> catCB;
     @FXML
-    private DatePicker deadLineDP, dateDP,endDateDP;
+    private DatePicker deadLineDP, dateDP,endDateDP, retiredDeadLineDP;
     @FXML
     private ChoiceBox<Integer> minAgeCB, maxAgeCB, durBigCB,durLitCB;
     @FXML
@@ -72,13 +73,16 @@ public class EventCreateController {
     // ~~~~~~ Campi FACOLTATIVI ~~~~~~~~
 
     private String titleIns;
+    private int extraNumIns;
     private String totTeeIns;
+    private LocalDate retiredDeadLineIns;
     private LocalDate endDateIns;
     private LocalTime endTimeIns;
     private String noteIns;
     private int durH, durM, durD;
     private String durationIns;
 
+    private boolean extraNumIsVal = false;
     private boolean endDateIsVal = false;
     private boolean endTimeIsVal = false;
 
@@ -162,8 +166,18 @@ public class EventCreateController {
             @Override
             public void handle(ActionEvent event) {
 
+                retiredDeadLineDP.setDisable(false);
                 dateDP.setDisable(false);
                 timeTP.setDisable(false);
+
+                retiredDeadLineDP.setDayCellFactory(picker-> new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate date, boolean empty){
+                        super.updateItem(date, empty);
+                        setDisable(empty || (date.isBefore(LocalDate.now().plusDays(1)) || date.isAfter(deadLineDP.getValue())));
+                    }
+                });
+
 
 
                 dateDP.setDayCellFactory(picker-> new DateCell() {
@@ -194,6 +208,8 @@ public class EventCreateController {
 
             }
         });
+
+
 
 
         /**
@@ -279,14 +295,13 @@ public class EventCreateController {
             @Override
             public void handle(ActionEvent event) {
                 if(isTeeActiveCkB.isSelected()){
+                    indTeeTxtF.setDisable(false);
+                    indTeeIsVal=false;
+                }
+                else{
                     indTeeIns=0;
                     indTeeTxtF.setDisable(true);
                     indTeeIsVal=true;
-                }
-                else{
-                    indTeeTxtF.setDisable(false);
-                    indTeeIsVal=false;
-
                 }
             }
         });
@@ -339,13 +354,13 @@ public class EventCreateController {
             // FACOLTATIVO
             //titolo
             if(titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).doesEventAlreadyExist(titleTxtF.getText()) == true){
-                errorMsg[12] = ALREADY_EXIST_EVENT_WITH_THIS_TITLE_MSG;
+                errorMsg[0] = ALREADY_EXIST_EVENT_WITH_THIS_TITLE_MSG;
                 titleLbl.setTextFill(Color.RED);
                 titIsVal = false;
             }
             else if (titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).doesEventAlreadyExist(titleTxtF.getText()) == false){
                 titleIns = titleTxtF.getText();
-                errorMsg[12] = null;
+                errorMsg[0] = null;
                 titleLbl.setTextFill(Color.BLACK);
                 titIsVal = true;
 
@@ -368,6 +383,30 @@ public class EventCreateController {
                 errorMsg[1] = null;
             }
 
+            // Acquisisco il numero di partecipanti tollerati in più
+            // FACOLTATIVO
+            // tolleranza partecipanti
+            if(extraNumParTxt.getText().isEmpty()){
+                extraParLbl.setTextFill(Color.BLACK);
+                extraNumIns = 0;
+                extraNumIsVal = true;
+                errorMsg[11]= null;
+            }
+            else{
+                if(!MyUtil.checkInteger(extraNumParTxt.getText())){
+                    extraParLbl.setTextFill(Color.RED);
+                    extraNumIsVal = false;
+                    errorMsg[11] = ERROR_NUMBER_REQUIRED;
+                }
+                else {
+                    extraParLbl.setTextFill(Color.BLACK);
+                    extraNumIns = Integer.parseInt(extraNumParTxt.getText());
+                    extraNumIsVal = true;
+                    errorMsg[11]= null;
+                }
+            }
+
+
             // Acquisco il campo data e controllo che non sia una data precedente ad oggi e vuota
             // OBBLIGATORIO
             // termine ultimo iscrizione
@@ -381,6 +420,17 @@ public class EventCreateController {
                 deadLLbl.setTextFill(Color.BLACK);
                 deadLineIsVal = true;
                 errorMsg[2] = null;
+            }
+
+            // Acquisisco il termine di ritiro iscrizione
+            // FACOLTATIVO
+            // termine ultimo ritiro iscrizione
+
+            if(retiredDeadLineDP.getValue()==null){
+                retiredDeadLineIns = deadLineIns;
+            }
+            else{
+                retiredDeadLineIns = retiredDeadLineDP.getValue();
             }
 
             // Acquisisco il luogo controllando che sia inserito e che sia una stringa
@@ -440,7 +490,7 @@ public class EventCreateController {
             // OBBLIGATORIO
             //quota individuale
 
-            if(!isTeeActiveCkB.isSelected()){
+            if(isTeeActiveCkB.isSelected()){
                 if (indTeeTxtF.getText().isEmpty() || !MyUtil.checkFloat(indTeeTxtF.getText())) {
                     indTeeLbl.setTextFill(Color.RED);
                     indTeeIsVal = false;
@@ -475,7 +525,6 @@ public class EventCreateController {
                     endDateIns = endDateDP.getValue();
                     endDateLbl.setTextFill(Color.BLACK);
                     endDateIsVal = true;
-                    errorMsg[7] = null;
             }
             else {
                 endDateIsVal = true;
@@ -497,14 +546,14 @@ public class EventCreateController {
 
                     endTimeLbl.setTextFill(Color.RED);
                     endTimeIsVal = false;
-                    errorMsg[8] = ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG;
+                    errorMsg[7] = ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG;
 
                 } else {
 
                     endTimeIns = endTimeTP.getValue();
                     endTimeLbl.setTextFill(Color.BLACK);
                     endTimeIsVal = true;
-                    errorMsg[8] = null;
+                    errorMsg[7] = null;
 
                 }
             }
@@ -539,11 +588,11 @@ public class EventCreateController {
                     ageRangeIns = ageGroup.getRange();
                     ageLbl.setTextFill(Color.BLACK);
                     ageIsVal = true;
-                    errorMsg[9] = null;
+                    errorMsg[8] = null;
                 } else {
                     ageLbl.setTextFill(Color.RED);
                     ageIsVal = false;
-                    errorMsg[9] = MISS_AGE_MSG;
+                    errorMsg[8] = MISS_AGE_MSG;
                 }
 
 
@@ -551,23 +600,23 @@ public class EventCreateController {
                 if (genderCB.getSelectionModel().getSelectedItem() == null) {
                     genderLbl.setTextFill(Color.RED);
                     genderIsVal = false;
-                    errorMsg[10] = MISS_GENDER_MSG;
+                    errorMsg[9] = MISS_GENDER_MSG;
                 } else {
                     genderLbl.setTextFill(Color.BLACK);
                     genderIsVal = true;
-                    errorMsg[10] = null;
+                    errorMsg[9] = null;
                 }
             }
 
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // durata --> guardare end time e end date
             if( (endDateDP.getValue() != null && endTimeTP.getValue() == null ) && durationIns == null ){
-                errorMsg[11] = MISS_DURATION_OR_ENDDATE_MSG;
+                errorMsg[10] = MISS_DURATION_OR_ENDDATE_MSG;
                 durLbl.setTextFill(Color.RED);
                 durIsVal = false;
             }
             else {
-                errorMsg[11] = null;
+                errorMsg[10] = null;
                 durLbl.setTextFill(Color.BLACK);
                 durIsVal = true;
             }
@@ -581,7 +630,7 @@ public class EventCreateController {
 
             switch (categoryIns) {
                 case SOCCER_NAME: {
-                    if (catIsVal && titIsVal && numIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && ageIsVal && genderIsVal && durIsVal) {
+                    if (catIsVal && titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && ageIsVal && genderIsVal && durIsVal) {
 
                         if(endDateIns == null &&  durationIns !=null) {
                             endDateIns = dateIns.plusDays(Integer.parseInt(durationIns));
@@ -596,7 +645,7 @@ public class EventCreateController {
                             }
                         }
 
-                        SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, deadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, StateValue.Aperta, LocalDate.now(), noteIns, creator);
+                        SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, extraNumIns, deadLineIns, deadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, StateValue.Aperta, LocalDate.now(), noteIns, creator);
                         match.addParticipant(creator);
 
                         socialNetwork.getSoccerMatchCategory().addEvent(match);
