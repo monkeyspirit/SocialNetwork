@@ -52,18 +52,19 @@ public class EventController {
 
         if(eventSoccerSelected.getStateValue().equals(StateValue.Aperta)){
 
-            if(eventSoccerSelected.isUserCreator(sessionUsername)){
-                retiredParBtn.setDisable(true);
-                subScribeBtn.setDisable(true);
-                retiredEventBtn.setVisible(true);
-                retiredEventBtn.setDisable(false);
-
+            if(eventSoccerSelected.isUserAlreadyRegistered(sessionUsername)){
+                if(eventSoccerSelected.isUserCreator(sessionUsername)){
+                    retiredParBtn.setDisable(true);
+                    subScribeBtn.setDisable(true);
+                    retiredEventBtn.setVisible(true);
+                    retiredEventBtn.setDisable(false);
+                }
+                else{
+                    subScribeBtn.setDisable(true);
+                    retiredParBtn.setDisable(false);
+                }
             }
-            else if(eventSoccerSelected.isUserAlreadyRegistered(sessionUsername) && !eventSoccerSelected.isUserCreator(sessionUsername)){
-                subScribeBtn.setDisable(true);
-                retiredParBtn.setDisable(false);
-            }
-            else if(!eventSoccerSelected.isUserAlreadyRegistered(sessionUsername)){
+            else {
                 if(eventSoccerSelected.isNumOfTotalParticipantsEqualsMaxPlusTolerance()){
                     retiredEventBtn.setDisable(true);
                     subScribeBtn.setDisable(true);
