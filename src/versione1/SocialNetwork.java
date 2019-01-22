@@ -112,8 +112,6 @@ public class SocialNetwork {
 		updateUsersListFile(); //aggiorno il file degli utenti
 	}
 
-
-
 	/**
 	 * Effettua il login dell'utente aggiornando loggedUser come l'utente corrente
 	 * @param loggedUser l'utente da loggare
@@ -138,18 +136,17 @@ public class SocialNetwork {
 	 * il contenuto attuale della lista di utenti dell'applicazione.
 	 */
 	public void updateUsersListFile () {
-//		System.out.println("Aggiorno il file della lista di utenti");
 		fileUtility.writeUsersList(this.users);
 	}
 
 	/**
-	 *  Aggiorna tutto utenti e eventi
+	 *  Salva su file la lista aggiornata di utenti e quella di eventi di tipo Soccer Match
 	 */
-
-	public void updateUserandEventsListFile(){
+	public void updateUserAndEventsListFile(){
 		fileUtility.writeUsersList(this.users);
 		fileUtility.writeSoccerMatchEvents(soccerMatchCategory.getEvents());
 	}
+
 	/**
 	 * legge il file contenente la lista di EventSoccerMatch lo carica all'interno della lista di eventi della categoria corrispondente
 	 */
@@ -158,7 +155,6 @@ public class SocialNetwork {
 	}
 
 	public void writeSoccerMatchEventListOnFile() {
-//        System.out.println("Aggiorno il file della lista di EventSoccerMatch");
         fileUtility.writeSoccerMatchEvents(soccerMatchCategory.getEvents());
     }
 
@@ -201,14 +197,14 @@ public class SocialNetwork {
 	}
 
 	/**
-	 * Cerca un evento a partire dal suo nome
+	 * Cerca un evento a partire dal suo nome tra tutte le categorie
 	 * @param eventName il nome dell'evento da cercare
 	 * @return il riferimento all'evento nel caso in cui sia stato trovato
 	 */
 	public Event findEventByEventName(String eventName){
 		for (Category<? extends Event> category : categories) {
 			for (Event event : category.getEvents()) {
-				if(eventName.equalsIgnoreCase((String) event.getTitle().getValue()))
+				if(eventName.equalsIgnoreCase(event.getTitle().getValue()))
 					return event;
 			}
 		}

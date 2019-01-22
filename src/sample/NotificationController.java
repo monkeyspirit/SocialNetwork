@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import versione1.SocialNetwork;
 import versione1.User;
@@ -42,7 +41,7 @@ public class NotificationController {
     private void initialize(){
         messageLbl.setText(notification.getNotificationMessage());
 
-        if (notification.getNotificationType().equals(NotificationType.Allert)) {
+        if (notification.getNotificationType().equals(NotificationType.Alert)) {
         }
         else if(notification.getNotificationType().equals(NotificationType.Reminder)){
         }

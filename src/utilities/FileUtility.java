@@ -13,12 +13,9 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 /**
- * Questa classe serve per leggere/scrivere da/su file liste di oggetti di un certo tipo.
- *
- * ### DISTINZIONE TRA FILE LOCALI E GLOBALI ###
- * il motivo principale e' di poter distinguere il file globale che contiene lo stato piu'
- * aggiornato dell'applicazione, dal file locale che contiene lo stato locale al momento
- * del logout di un certo utente (meccanismo che sfrutteremo per generare le notifiche)
+ * Questa classe ha lo scopo di serializzare/deserializzare oggetti su/da file.
+ * Può essere utilizzata per salvare collezioni di oggetti e quindi poter
+ * ripristinare lo stato dell'applicazione in un secondo momento. *
  */
 public class FileUtility {
 
@@ -47,6 +44,7 @@ public class FileUtility {
 
     /**
      * Serializza la lista di eventSoccerMatch e la scrive in un file .json
+     *
      * @param soccerMatchEvents La lista di eventi che si vuole serializzare
      */
     public void writeSoccerMatchEvents(List<SoccerMatchEvent> soccerMatchEvents) {
@@ -56,6 +54,7 @@ public class FileUtility {
 
     /**
      * Legge il file SoccerMatchEvents.json ed effettua la deserializzazione degli SoccerMatchEvent
+     *
      * @return lista di SoccerMatchEvent
      */
     public List<SoccerMatchEvent> readSoccerMatchEvents() {
@@ -65,9 +64,12 @@ public class FileUtility {
 
     /**
      * Serializza la lista di eventSoccerMatch dell'utente e la scrive in un file .json
-     * @param user l'utente attualmente loggato
+     *
+     * @param user              l'utente attualmente loggato
      * @param soccerMatchEvents La lista di eventi che si vuole serializzare
+     * @deprecated si è scelto di utilizzare un approccio migliore
      */
+    @Deprecated
     public void writeUserLocalSoccerMatchEvents(User user, List<SoccerMatchEvent> soccerMatchEvents) {
         String fileName = PathBuilder.buildJsonFilePath(SOCCER_MATCH_EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE, user.getUsername());
         writeEventListToJsonFile(soccerMatchEvents, fileName);
@@ -75,9 +77,12 @@ public class FileUtility {
 
     /**
      * Legge il file SoccerMatchEvents di uno specifico utente ed effettua la deserializzazione degli SoccerMatchEvent
+     *
      * @param user utente del quale si vuole ottenere la lista di eventSoccerMatch corrispondente
      * @return lista di SoccerMatchEvent
+     * @deprecated si è scelto di utilizzare un approccio migliore
      */
+    @Deprecated
     public List<SoccerMatchEvent> readUserLocalSoccerMatchEvents(User user) {
         String filePath = PathBuilder.buildJsonFilePath(SOCCER_MATCH_EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE, user.getUsername());
         return readSoccerMatchEventsFromJsonFile(filePath);
@@ -85,17 +90,16 @@ public class FileUtility {
 
     /**
      * Serializza e scrive in un file la lista degli utenti registrati
+     *
      * @param users lista degli utenti
      */
     public void writeUsersList(List<User> users) {
         writeUsersListToJsonFile(users, USERS_LIST_FILE_PATH);
     }
 
-
-
-
     /**
      * Legge da un file e deserializza la lista degli utenti registrati
+     *
      * @return la lista degli utenti registrati
      */
     public List<User> readUsersList() {
@@ -103,12 +107,14 @@ public class FileUtility {
     }
 
     /**
-     * Deserializza un file json conenente una lista di SoccerMatchEvent
+     * Deserializza un file json contenente una lista di SoccerMatchEvent
+     *
      * @param filePath percorso del file json
      * @return lista di SoccerMatchEvent
      */
     private List<SoccerMatchEvent> readSoccerMatchEventsFromJsonFile(String filePath) {
-        Type listType = new TypeToken<List<SoccerMatchEvent>>() {}.getType(); //listType contiene il tipo di elemento che si vuole deserializzare ossia <List<SoccerMatchEvent>>
+        Type listType = new TypeToken<List<SoccerMatchEvent>>() {
+        }.getType(); //listType contiene il tipo di elemento che si vuole deserializzare ossia <List<SoccerMatchEvent>>
 
         List<SoccerMatchEvent> soccerMatchEventsDeserialized = null;
         try {
@@ -122,8 +128,9 @@ public class FileUtility {
 
     /**
      * Scrive una lista di eventi nel file .json specificato
+     *
      * @param eventList lista di eventi
-     * @param filePath nome del file
+     * @param filePath  nome del file
      */
     private void writeEventListToJsonFile(List<? extends Event> eventList, String filePath) {
         //serializzo
@@ -140,11 +147,13 @@ public class FileUtility {
 
     /**
      * Deserializza un file json conenente una lista di utenti registrati
+     *
      * @param filePath percorso del file json
      * @return lista di utenti registrati
      */
     private List<User> readUsersListFromJsonFile(String filePath) {
-        Type listType = new TypeToken<List<User>>() {}.getType(); //listType contiene il tipo di elemento che si vuole deserializzare ossia <List<User>>
+        Type listType = new TypeToken<List<User>>() {
+        }.getType(); //listType contiene il tipo di elemento che si vuole deserializzare ossia <List<User>>
 
         List<User> usersListDeserialized = null;
         try {
@@ -158,7 +167,8 @@ public class FileUtility {
 
     /**
      * Scrive una lista di utenti nel file .json specificato
-     * @param users lista di utenti
+     *
+     * @param users    lista di utenti
      * @param filePath nome del file
      */
     private void writeUsersListToJsonFile(List<User> users, String filePath) {

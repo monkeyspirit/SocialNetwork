@@ -8,12 +8,8 @@ import versione1.SoccerMatchEvent;
 import versione1.SocialNetwork;
 import versione1.User;
 import versione2.StateValue;
-import versione2.notifications.Notification;
-import versione2.notifications.NotificationsBuilder;
 
-import javax.swing.*;
 import java.time.LocalDate;
-import java.util.List;
 
 public class EventController {
 
@@ -178,7 +174,7 @@ public class EventController {
 
         eventSoccerSelected.addParticipant(sessionUsername);
 
-        socialNetwork.updateUserandEventsListFile();
+        socialNetwork.updateUserAndEventsListFile();
         subScribeBtn.setDisable(true);
         retiredParBtn.setDisable(false);
         int postiDisponibili = (eventSoccerSelected.getNumOfParticipants().getValue() + eventSoccerSelected.getExtraParticipants().getValue() )- eventSoccerSelected.getParticipants().size();
@@ -194,7 +190,7 @@ public class EventController {
     public void disScribe(){
 
             eventSoccerSelected.removeParticipant(sessionUsername);
-            socialNetwork.updateUserandEventsListFile();
+            socialNetwork.updateUserAndEventsListFile();
             subScribeBtn.setDisable(false);
             retiredParBtn.setDisable(true);
             int postiDisponibili = (eventSoccerSelected.getNumOfParticipants().getValue() + eventSoccerSelected.getExtraParticipants().getValue() )- eventSoccerSelected.getParticipants().size();

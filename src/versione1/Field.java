@@ -1,5 +1,9 @@
 package versione1;
 
+/**
+ * La classe Field rappresenta un campo di un evento. Esso è dotato di un nome, una descrizione, e un valore.
+ * @param <T> il tipo dell'attributo value
+ */
 public class Field<T> {
 
     private String name;
