@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
@@ -35,12 +36,13 @@ public class SampleController {
     // ~~~~~ Sample Stage ~~~~~~~~~~~~~
 
     @FXML
-    private ListView notificationListView,categoryListView, eventListView, userEventListView;
+    private ListView categoryPreferenceListView, notificationListView,categoryListView, eventListView, userEventListView;
 
     @FXML
     private Tab userTb;
 
-
+    @FXML
+    private Label ageRangeLbl;
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -53,7 +55,7 @@ public class SampleController {
     private SocialNetwork socialNetwork;
     private User sessionUser;
 
-    private List<String> catName;
+    private List<String> catName, catPreferenceName;
     private List<String> eventName;
     private List<String> userEventName;
     private List<String> notifyName;
@@ -61,7 +63,7 @@ public class SampleController {
     private String notification;
 
 
-    private Stage view, create, notify;
+    private Stage view, create, notify, settings;
 
 
 
@@ -77,6 +79,14 @@ public class SampleController {
     private void initialize() throws IOException {
 
         userTb.setText(sessionUser.getUsername());
+        ageRangeLbl.setText(sessionUser.getAgeRange());
+
+        catPreferenceName = new ArrayList<>();
+        for(String categoryPreference : sessionUser.getCategoryPref()){
+            catPreferenceName.add(categoryPreference);
+        }
+
+        categoryPreferenceListView.setItems(FXCollections.observableList(catPreferenceName));
 
 
         catName = new ArrayList<>();
@@ -205,6 +215,16 @@ public class SampleController {
 
                 notifyName = sessionUser.getNotificationsMessages();
                 notificationListView.setItems(FXCollections.observableList(notifyName));
+
+
+                ageRangeLbl.setText(sessionUser.getAgeRange());
+
+                catPreferenceName = new ArrayList<>();
+                for(String categoryPreference : sessionUser.getCategoryPref()){
+                    catPreferenceName.add(categoryPreference);
+                }
+
+                categoryPreferenceListView.setItems(FXCollections.observableList(catPreferenceName));
 
 
 
@@ -351,6 +371,31 @@ public class SampleController {
         newLogin.show();
     }
 
+    /**
+     * Metodo per aprire la finestra dei settaggi del profilo utente
+     */
+    public void openSettings() throws IOException {
+
+        FXMLLoader loaderSettings = new FXMLLoader(Main.class.getResource("settings.fxml"));
+        SettingsController settingsController = new SettingsController();
+
+        loaderSettings.setController(settingsController);
+
+        settingsController.setSocialNetwork(socialNetwork);
+        settingsController.setSessionUser(sessionUser);
+
+
+        settings = new Stage();
+
+        settingsController.setThisStage(settings);
+        Parent settingStage =  (Parent) loaderSettings.load();
+        Scene scene = new Scene(settingStage, 600, 250);
+
+        settings.setX(200); // In questo modo non è sovrapposto ad altri
+        settings.setTitle("Impostazioni");
+        settings.setScene(scene);
+        settings.show();
+    }
 
 
 

@@ -177,7 +177,6 @@ public class EventController {
     public void subScribe(){
 
         eventSoccerSelected.addParticipant(sessionUsername);
-
         socialNetwork.updateUserandEventsListFile();
         subScribeBtn.setDisable(true);
         retiredParBtn.setDisable(false);

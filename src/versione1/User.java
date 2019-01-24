@@ -12,6 +12,8 @@ public class User{
     //Attributi
     private String username;
     private ArrayList<Notification> notifications;
+    private String ageRange;
+    private ArrayList<String> categoryPref;
 
     public User(){
     }
@@ -46,6 +48,13 @@ public class User{
             notifications.remove(notificationRemove);
     }
 
+    public String getAgeRange() { return ageRange; }
+
+    public void setAgeRange(String ageRange) { this.ageRange = ageRange; }
+
+    public ArrayList<String> getCategoryPref() { return categoryPref; }
+
+    public void setCategoryPref(ArrayList<String> categoryPref) { this.categoryPref = categoryPref; }
 
 
 }
