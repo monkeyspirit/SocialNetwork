@@ -1,5 +1,10 @@
 package sample;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,12 +15,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import utilities.FileUtility;
+import versione1.AgeGroup;
+import versione1.Category;
 import versione1.SocialNetwork;
 import versione1.User;
 import versione2.GraphicThread;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginController {
 
@@ -26,19 +36,29 @@ public class LoginController {
     @FXML
     private CheckBox checkRgCB;
     @FXML
+    private ChoiceBox<Integer> minAgeCB, maxAgeCB;
+    @FXML
     private TextField usrnameTF;
     @FXML
-    private Label errorLbl;
+    private Label errorLbl, preferenceCatLbl, ageRangeLbl;
+    @FXML
+    private ListView preferenceCategoryListView;
+    @FXML
+    private ScrollPane scrollCategory;
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
+    private AgeGroup ageGroup;
+    private ArrayList<Integer> ageRangeMin;
     public static final String MISSUSERNAME = "Attenzione: inserire un nome utente";
     public static final String ERRALREADYUSE = "Attenzione: il nome utente esiste";
     public static final String ERRNORUSE = "Attenzione: il nome utente non esiste";
     private SocialNetwork social;
     private User sessionUser;
     public void setSocialNetwork(SocialNetwork social) { this.social = social; }
+    private List<String> catName;
+    private ArrayList<String> selectedCategory;
+
 
 
     /**
@@ -55,8 +75,65 @@ public class LoginController {
 
                if(checkRgCB.isSelected()){
                    loginBtn.setText("Registrati");
+                   ageRangeLbl.setVisible(true);
+                   scrollCategory.setVisible(true);
+                   preferenceCategoryListView.setVisible(true);
+                   preferenceCatLbl.setVisible(true);
+                   minAgeCB.setVisible(true);
+                   maxAgeCB.setVisible(true);
+
+                   ageGroup = new AgeGroup();
+                   ageRangeMin = ageGroup.getNumeri();
+
+                   minAgeCB.setItems(FXCollections.observableArrayList(ageRangeMin));
+
+                   /**
+                    * ActionListeren che permette una volta selezionato il minimo dell'età di selezionare il max, in questo modo lo popolo con i
+                    * numeri maggiorni stretti del minimo, dopo i 20 anni si va di decina in decina per facilitare
+                    * la scelta all'utente
+                    */
+                   minAgeCB.setOnAction(new EventHandler<ActionEvent>() {
+                       @Override
+                       public void handle(ActionEvent event) {
+                           maxAgeCB.setDisable(false);
+                           ArrayList<Integer> ageRangeMax = ageGroup.getMinOf(minAgeCB.getSelectionModel().getSelectedItem());
+                           maxAgeCB.setItems(FXCollections.observableArrayList(ageRangeMax));
+                       }
+                   });
+
+                   catName = new ArrayList<>();
+                   for(Category category : social.getCategories()){
+                       catName.add(category.getName());
+                   }
+
+                   // Questa parte serve per creare il check box nella list view
+
+                   preferenceCategoryListView.setItems(FXCollections.observableList(catName));
+
+                   selectedCategory = new ArrayList<>(); // array di stringhe delle categorie preferite
+                   preferenceCategoryListView.setCellFactory(CheckBoxListCell.forListView(new Callback<String, ObservableValue<Boolean>>() {
+                       @Override
+                       public ObservableValue<Boolean> call(String item) {
+                           BooleanProperty observable = new SimpleBooleanProperty();
+                           observable.addListener((obs, wasSelected, isNowSelected) -> {
+                               if (isNowSelected) {
+                                   selectedCategory.add(item);
+                               } else {
+                                   selectedCategory.remove(item);
+                               }
+                           });
+                           return observable;
+                       }
+                   }));
+
                }
                else {
+                   ageRangeLbl.setVisible(false);
+                   preferenceCatLbl.setVisible(false);
+                   preferenceCategoryListView.setVisible(false);
+                   scrollCategory.setVisible(false);
+                   minAgeCB.setVisible(false);
+                   maxAgeCB.setVisible(false);
                    loginBtn.setText("Accedi");
                }
 
@@ -78,8 +155,20 @@ public class LoginController {
 
             //Se checkRGCB è selezionato vuol dire che sto inserendo un nuovo utente
             if(checkRgCB.isSelected()){
+                sessionUser = new User(accessName);
+
                 if(social.doesUserExist(accessName) == false){
-                    sessionUser = new User(accessName);
+
+                    //controllo che ci sia la fascia di età altrimenti non la setto
+                    if (minAgeCB.getValue() != null && maxAgeCB.getValue() != null) {
+                        ageGroup.setRange(minAgeCB.getValue(), maxAgeCB.getValue());
+                        String ageRangeIns = ageGroup.getRange();
+                        sessionUser.setAgeRange(ageRangeIns);
+                    }
+
+                    sessionUser.setCategoryPref(selectedCategory);
+
+
                     social.registerNewUser(sessionUser); //registro un nuovo utente
                     social.loginUser(sessionUser); //loggo l'utente creato (potremmo accorpare i due metodi in uno)
                     loadSecond();

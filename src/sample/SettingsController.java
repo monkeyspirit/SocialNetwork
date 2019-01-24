@@ -41,6 +41,7 @@ public class SettingsController {
     private List<String> catName;
     private ArrayList<String> selectedCategory;
 
+
     // ~~~~~~~~ Metodi ~~~~~~~~~~~~~
 
     public void setSocialNetwork(SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
