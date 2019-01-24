@@ -4,6 +4,7 @@ import sample.NotificationController;
 import versione2.notifications.Notification;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -11,9 +12,9 @@ public class User{
 
     //Attributi
     private String username;
-    private ArrayList<Notification> notifications;
+    private List<Notification> notifications;
     private String ageRange;
-    private ArrayList<String> categoryPref;
+    private List<String> categoryPref;
 
     public User(){
     }
@@ -24,7 +25,9 @@ public class User{
      */
     public User(String username) {
         this.username = username;
-        notifications = new ArrayList<>();
+        this.notifications = new ArrayList<>();
+        this.categoryPref = new ArrayList<>();
+        this.ageRange = "";
     }
 
     //Metodi
@@ -32,12 +35,12 @@ public class User{
         return username;
     }
 
-    public ArrayList<Notification> getNotifications() { return notifications; }
+    public List<Notification> getNotifications() { return notifications; }
 
     public void addNotification(Notification notificationToAdd){ notifications.add(notificationToAdd); }
 
-    public ArrayList<String> getNotificationsMessages() {
-        ArrayList<String> notificationsMessages = new ArrayList<>();
+    public List<String> getNotificationsMessages() {
+        List<String> notificationsMessages = new ArrayList<>();
         for(Notification notification: notifications){
             notificationsMessages.add(notification.getNotificationMessage());
         }
@@ -52,9 +55,15 @@ public class User{
 
     public void setAgeRange(String ageRange) { this.ageRange = ageRange; }
 
-    public ArrayList<String> getCategoryPref() { return categoryPref; }
+    public List<String> getCategoryPref() { return categoryPref; }
 
-    public void setCategoryPref(ArrayList<String> categoryPref) { this.categoryPref = categoryPref; }
+    public void setCategoryPref(List<String> categoryPref) {
+        this.categoryPref = categoryPref;
+    }
+
+    public void addCategoryPref(String categoryName) {
+        this.categoryPref.add(categoryName);
+    }
 
 
 }
