@@ -177,7 +177,7 @@ public class EventController {
     public void subScribe(){
 
         eventSoccerSelected.addParticipant(sessionUsername);
-        socialNetwork.updateUserandEventsListFile();
+        socialNetwork.updateUserAndEventsListFile();
         subScribeBtn.setDisable(true);
         retiredParBtn.setDisable(false);
         int postiDisponibili = (eventSoccerSelected.getNumOfParticipants().getValue() + eventSoccerSelected.getExtraParticipants().getValue() )- eventSoccerSelected.getParticipants().size();
@@ -192,12 +192,12 @@ public class EventController {
      */
     public void disScribe(){
 
-            eventSoccerSelected.removeParticipant(sessionUsername);
-            socialNetwork.updateUserandEventsListFile();
-            subScribeBtn.setDisable(false);
-            retiredParBtn.setDisable(true);
-            int postiDisponibili = (eventSoccerSelected.getNumOfParticipants().getValue() + eventSoccerSelected.getExtraParticipants().getValue() )- eventSoccerSelected.getParticipants().size();
-            placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
+        eventSoccerSelected.removeParticipant(sessionUsername);
+        socialNetwork.updateUserAndEventsListFile();
+        subScribeBtn.setDisable(false);
+        retiredParBtn.setDisable(true);
+        int postiDisponibili = (eventSoccerSelected.getNumOfParticipants().getValue() + eventSoccerSelected.getExtraParticipants().getValue() )- eventSoccerSelected.getParticipants().size();
+        placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
 
 
     }
