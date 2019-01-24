@@ -55,49 +55,44 @@ public abstract class Event  {
 	private Field<String> place = new Field(PLACE_NAME, PLACE_DESCRIPTION);
 	private Field<LocalDate> date = new Field(DATE_NAME,DATE_DESCRIPTION);
 	private Field<LocalTime> time = new Field(TIME_NAME, TIME_DESCRIPTION);
-	private Field<String> duration = new Field(DURATION_NAME, DURATION_DESCRIPTION); //perché string?
-	private Field<Float> indTee = new Field(INDTEE_NAME,INDTEE_DESCRIPTION); //float ?
+	private Field<String> duration = new Field(DURATION_NAME, DURATION_DESCRIPTION);
+	private Field<Float> indTee = new Field(INDTEE_NAME,INDTEE_DESCRIPTION);
 	private Field<String> teeInclude = new Field(TEEINC_NAME, TEEINC_DESCRIPTION);
 	private Field<LocalDate> endDate = new Field(ENDDATE_NAME,ENDDATE_DESCRIPTION);
 	private Field<LocalTime> endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
 	private Field<String> note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
 
-
-
-
-	private ArrayList<State> state;
+	private List<State> state;
 	private String creator; //serve per capire chi e' il creatore dell'utente
     private List<String> participants;
 
-
-
     /**
-     * Costruttore vuoto: viene inizializzato la lista di campi, ciascuno dei quali con
+     * Costruttore vuoto: viene inizializzata la lista di campi, ciascuno dei quali con
      * nome e descrizione ma senza valore.
      */
-
-
 	public Event() {
 	}
 
     /**
      * Costruttore degli eventi, vengono settati tutti i valori dei campi e quello dell'utente creatore
-     * @param type
-     * @param titleIns
-     * @param numParIns
-     * @param extraParIns
-     * @param deadLineIns
-     * @param retiredDeadLineIns
-     * @param placeIns
-     * @param dateIns
-     * @param timeIns
-     * @param durationIns
-     * @param indTeeIns
-     * @param totTeeIns
-     * @param endDateIns
-     * @param endTimeIns
-     * @param noteIns
-     * @param creator
+     * @param type tipo dell'evento, uguale al nome della classe
+     * @param titleIns titolo dell'evento
+     * @param numParIns numero di partecipanti
+     * @param extraParIns numero di partecipanti extra tollerati
+     * @param deadLineIns termine ultimo iscrizione
+     * @param retiredDeadLineIns termine ultimo per ritirare l'iscrizione
+     * @param placeIns luogo dell'evento
+     * @param dateIns data di inizio dell'evento
+     * @param timeIns ora di inizio dell'evento
+     * @param durationIns durata dell'evento
+     * @param indTeeIns quota individuale
+     * @param totTeeIns spese comprese nella quota individuale
+     * @param endDateIns data di termine dell'evento
+     * @param endTimeIns ora di termine dell'evento
+     * @param stateValue stato dell'evento
+     * @param stateSwitch data del cambio dello stato dell'evento
+     * @param noteIns note aggiuntive riguardanti l'evento
+     * @param creator username del creatore dell'evento
      */
     public Event(String type, String titleIns, int numParIns, int extraParIns,  LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, StateValue stateValue, LocalDate stateSwitch, String noteIns,  String creator) {
         this.type = type;
@@ -118,8 +113,7 @@ public abstract class Event  {
         this.note.setValue(noteIns);
         this.creator = creator;
         this.state = new ArrayList<>();
-        State stateEvent = new State(stateValue, stateSwitch);
-        this.state.add(stateEvent);
+        this.state.add(new State(stateValue, stateSwitch));
         this.participants = new ArrayList<>();
     }
 
@@ -183,7 +177,7 @@ public abstract class Event  {
 
     public void setState(State stateAdd) { this.state.add(stateAdd); }
 
-    public ArrayList<State> getState() {  return state; }
+    public List<State> getState() {  return state; }
 
     public LocalDate getStateSwitchDate() { return state.get(state.size()-1).getSwitchDate(); }
 
@@ -212,12 +206,21 @@ public abstract class Event  {
         return  stateAndDate;
     }
 
-
+    /**
+     * Aggiunge il partecipante specificato alla lista di partecipanti
+     * @param participantUsername username del partecipante
+     */
     public void addParticipant(String participantUsername){
         participants.add(participantUsername);
     }
 
-    public void removeParticipant(String participantRemove){participants.remove(participantRemove); }
+    /**
+     * Aggiunge il partecipante specificato alla lista di partecipanti
+     * @param participantRemove username del partecipante
+     */
+    public void removeParticipant(String participantRemove){
+        participants.remove(participantRemove);
+    }
 
     /**
      * Controlla se un utente e' gia' registrato nella lista partecipanti

@@ -10,13 +10,10 @@ public class SoccerMatchCategory extends Category<SoccerMatchEvent> {
 	/**
 	 * Costruttore SoccerMatchCategory: invoca il costruttore di Category passando come parametri
 	 * il nome della categoria e la sua descrizione
-	 *
 	 */
 	public SoccerMatchCategory() {
 		super(SOCCER_NAME, SOCCER_DESCRIPTION);
 	}
-
-
 
 	@Override
 	public List<SoccerMatchEvent> getEvents() {
@@ -29,8 +26,8 @@ public class SoccerMatchCategory extends Category<SoccerMatchEvent> {
 	}
 
 	/**
-	 * Metodo per l'aggiunta di un nuovo evento alla list di eventi
-	 * @param event
+	 * Aggiunge un nuovo evento alla list di eventi
+	 * @param event l'evento da aggiungere
 	 */
 	@Override
     public void addEvent(SoccerMatchEvent event) {

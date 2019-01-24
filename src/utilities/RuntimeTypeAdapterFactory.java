@@ -33,6 +33,14 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 /**
+ * Questa classe ha lo scopo di permettere la deserializzazione di una collezione
+ * di oggetti di sottoclassi differenti che estendono la medesima superclasse.
+ * Richiede che ciascuna sottoclasse abbia un attributo type che viene associato
+ * al tipo della classe stessa. In questo modo al momento della deserializzazione
+ * si basa sul valore dell'attributo type per capire di che tipo (sottoclasse) sia l'oggetto
+ */
+
+/**
  * Adapts values whose runtime type may differ from their declaration type. This
  * is necessary when a field's type is not the same type that GSON should create
  * when deserializing that field. For example, consider these types:

@@ -2,7 +2,6 @@ package sample;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -341,7 +340,7 @@ public class SampleController {
      */
     public void exitUser() throws IOException {
 
-        socialNetwork.updateUserandEventsListFile();
+        socialNetwork.updateUserAndEventsListFile();
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml"));
         LoginController loginContr = new LoginController();
