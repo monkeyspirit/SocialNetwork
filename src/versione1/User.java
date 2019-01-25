@@ -1,13 +1,8 @@
 package versione1;
-
-import sample.NotificationController;
 import versione2.notifications.Notification;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-
 public class User{
 
     //Attributi

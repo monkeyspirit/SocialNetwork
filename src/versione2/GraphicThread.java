@@ -2,7 +2,7 @@ package versione2;
 
 
 import javafx.scene.control.ListView;
-import sample.SampleController;
+import sample.controller.SampleController;
 
 
 public class GraphicThread extends Thread {
@@ -26,37 +26,28 @@ public class GraphicThread extends Thread {
     public void run() {
 
 
-            while (true) {
+        while (true) {
 
-                    sampleController.refreshListView();
+            sampleController.refreshListView();
 
-                    categoryListView.refresh();
-                    if(!categoryListView.getSelectionModel().isEmpty()){
-                        eventListView.refresh();
-                    }
-
-                    userEventListView.refresh();
-
-                    notificationListView.refresh();
-
-
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
+            categoryListView.refresh();
+            if(!categoryListView.getSelectionModel().isEmpty()){
+                eventListView.refresh();
             }
 
+            userEventListView.refresh();
+
+            notificationListView.refresh();
 
 
-    }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-    /**
-     * NON FUNZIONA... HELP, COME SI FERMAVANO I THREAD ?
-     */
-    public void deleteThread(){
-        Thread.currentThread().interrupt(); // il thread continua .... ma non dovrebbe
+        }
+
     }
 
 }

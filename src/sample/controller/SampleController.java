@@ -1,4 +1,4 @@
-package sample;
+package sample.controller;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -13,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import sample.Main;
 import versione1.Category;
 import versione1.Event;
 import versione1.SocialNetwork;
@@ -239,7 +240,7 @@ public class SampleController {
 
     public void openNotificationView(int notificaitonIndex) throws IOException {
 
-        FXMLLoader loaderNotify = new FXMLLoader(Main.class.getResource("viewNotify.fxml"));
+        FXMLLoader loaderNotify = new FXMLLoader(Main.class.getResource("fxml/viewNotify.fxml"));
         NotificationController notificationController = new NotificationController();
 
         loaderNotify.setController(notificationController);
@@ -274,7 +275,7 @@ public class SampleController {
      */
     public void openEventView() throws IOException {
 
-        FXMLLoader loaderEvent = new FXMLLoader(Main.class.getResource("viewEvent.fxml"));
+        FXMLLoader loaderEvent = new FXMLLoader(Main.class.getResource("fxml/viewEvent.fxml"));
         EventController eventController = new EventController();
 
         loaderEvent.setController(eventController);
@@ -290,6 +291,8 @@ public class SampleController {
 
         Parent eventView = loaderEvent.load();
         Scene sceneEvent = new Scene(eventView, 600, 400);
+        view.setX(600); // In questo modo non è sovrapposto a quello degli eventi
+        view.setY(200);
         view.setTitle((String)eventSelected.getTitle().getValue());
         view.setScene(sceneEvent);
         view.show();
@@ -309,7 +312,7 @@ public class SampleController {
      */
     public void openEventEditor(ActionEvent actionEvent) throws IOException {
 
-        FXMLLoader loaderCreate = new FXMLLoader(Main.class.getResource("createEvent.fxml"));
+        FXMLLoader loaderCreate = new FXMLLoader(Main.class.getResource("fxml/createEvent.fxml"));
         EventCreateController eventCreateController = new EventCreateController();
 
         loaderCreate.setController(eventCreateController);
@@ -324,6 +327,7 @@ public class SampleController {
         Parent eventCreate =  (Parent) loaderCreate.load();
         Scene scene = new Scene(eventCreate, 600, 400);
 
+        create.setY(200);
         create.setX(400); // In questo modo non è sovrapposto a quello degli eventi
         create.setTitle("Crea");
         create.setScene(scene);
@@ -342,7 +346,7 @@ public class SampleController {
 
         socialNetwork.updateUserAndEventsListFile();
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("fxml/login.fxml"));
         LoginController loginContr = new LoginController();
 
         loader.setController(loginContr);
@@ -355,9 +359,6 @@ public class SampleController {
         if(create != null){
             create.close();
         }
-
-
-        graphicThread.deleteThread();
 
 
         Stage newLogin = Main.getStage();
@@ -375,7 +376,7 @@ public class SampleController {
      */
     public void openSettings() throws IOException {
 
-        FXMLLoader loaderSettings = new FXMLLoader(Main.class.getResource("settings.fxml"));
+        FXMLLoader loaderSettings = new FXMLLoader(Main.class.getResource("fxml/settings.fxml"));
         SettingsController settingsController = new SettingsController();
 
         loaderSettings.setController(settingsController);
@@ -390,6 +391,7 @@ public class SampleController {
         Parent settingStage =  (Parent) loaderSettings.load();
         Scene scene = new Scene(settingStage, 600, 250);
 
+        settings.setY(200);
         settings.setX(200); // In questo modo non è sovrapposto ad altri
         settings.setTitle("Impostazioni");
         settings.setScene(scene);

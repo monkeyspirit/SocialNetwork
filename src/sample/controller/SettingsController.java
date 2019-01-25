@@ -1,12 +1,14 @@
-package sample;
+package sample.controller;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -36,10 +38,11 @@ public class SettingsController {
     @FXML
     private Label usernameLbl;
     @FXML
-    private ListView catgPrefListView;
+    private ListView<CheckBox> catgPrefListView;
 
-    private List<String> catName;
+    private List<CheckBox> categoryCheck;
     private ArrayList<String> selectedCategory;
+    private List<String> categoryAlrPref;
 
 
     // ~~~~~~~~ Metodi ~~~~~~~~~~~~~
@@ -74,44 +77,45 @@ public class SettingsController {
 
         usernameLbl.setText(sessionUser.getUsername());
 
-        catName = new ArrayList<>();
+        categoryCheck = new ArrayList<>();
+
+        categoryAlrPref = sessionUser.getCategoryPref();
+
         for(Category category : socialNetwork.getCategories()){
-            catName.add(category.getName());
+
+            CheckBox catCheck = new CheckBox();
+            catCheck.setText(category.getName());
+            categoryCheck.add(catCheck);
+
+            for(String categoryPref: categoryAlrPref){
+                if(categoryPref.equals(catCheck.getText())){
+                    catCheck.setSelected(true);
+                }
+            }
         }
+
 
         // Questa parte serve per creare il check box nella list view
 
-        catgPrefListView.setItems(FXCollections.observableList(catName));
-
-        selectedCategory = new ArrayList<>(); // array di stringhe delle categorie preferite
-        catgPrefListView.setCellFactory(CheckBoxListCell.forListView(new Callback<String, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(String item) {
-                BooleanProperty observable = new SimpleBooleanProperty();
-                observable.addListener((obs, wasSelected, isNowSelected) -> {
-                    if (isNowSelected) {
-                        selectedCategory.add(item);
-                    } else {
-                        selectedCategory.remove(item);
-                    }
-                });
-                return observable;
-            }
-        }));
-
-
+        catgPrefListView.setItems(FXCollections.observableList(categoryCheck));
 
 
     }
 
     public void delete(){
         thisStage.close();
-        for (String sel : selectedCategory) {
-            System.out.println(sel);
-        }
     }
 
     public void saveExit(){
+
+        selectedCategory = new ArrayList<>(); // array di stringhe delle categorie preferite
+
+        for(CheckBox check: categoryCheck){
+            if(check.isSelected()){
+                selectedCategory.add(check.getText());
+            }
+        }
+        sessionUser.setCategoryPref(selectedCategory);
 
         if (minAgeCB.getValue() != null && maxAgeCB.getValue() != null) {
             ageGroup.setRange(minAgeCB.getValue(), maxAgeCB.getValue());
@@ -119,7 +123,6 @@ public class SettingsController {
             sessionUser.setAgeRange(ageRangeIns);
         }
 
-        sessionUser.setCategoryPref(selectedCategory);
 
 
         socialNetwork.updateUsersListFile();

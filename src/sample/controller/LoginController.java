@@ -1,4 +1,4 @@
-package sample;
+package sample.controller;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -16,7 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import utilities.FileUtility;
+import sample.Main;
 import versione1.AgeGroup;
 import versione1.Category;
 import versione1.SocialNetwork;
@@ -40,7 +40,7 @@ public class LoginController {
     @FXML
     private TextField usrnameTF;
     @FXML
-    private Label errorLbl, preferenceCatLbl, ageRangeLbl;
+    private Label errorLbl, preferenceCatLbl, ageRangeLbl, show;
     @FXML
     private ListView preferenceCategoryListView;
     @FXML
@@ -57,8 +57,9 @@ public class LoginController {
     private User sessionUser;
     public void setSocialNetwork(SocialNetwork social) { this.social = social; }
     private List<String> catName;
-    private ArrayList<String> selectedCategory;
 
+    private List<CheckBox> categoryCheck;
+    private ArrayList<String> selectedCategory;
 
 
     /**
@@ -101,30 +102,20 @@ public class LoginController {
                        }
                    });
 
-                   catName = new ArrayList<>();
-                   for(Category category : social.getCategories()){
-                       catName.add(category.getName());
-                   }
-
                    // Questa parte serve per creare il check box nella list view
 
-                   preferenceCategoryListView.setItems(FXCollections.observableList(catName));
-
                    selectedCategory = new ArrayList<>(); // array di stringhe delle categorie preferite
-                   preferenceCategoryListView.setCellFactory(CheckBoxListCell.forListView(new Callback<String, ObservableValue<Boolean>>() {
-                       @Override
-                       public ObservableValue<Boolean> call(String item) {
-                           BooleanProperty observable = new SimpleBooleanProperty();
-                           observable.addListener((obs, wasSelected, isNowSelected) -> {
-                               if (isNowSelected) {
-                                   selectedCategory.add(item);
-                               } else {
-                                   selectedCategory.remove(item);
-                               }
-                           });
-                           return observable;
-                       }
-                   }));
+                   categoryCheck = new ArrayList<>();
+
+                   for(Category category : social.getCategories()){
+                       CheckBox catCheck = new CheckBox();
+                       catCheck.setText(category.getName());
+                       categoryCheck.add(catCheck);
+
+                   }
+
+                   preferenceCategoryListView.setItems(FXCollections.observableList(categoryCheck));
+
 
                }
                else {
@@ -166,6 +157,12 @@ public class LoginController {
                         sessionUser.setAgeRange(ageRangeIns);
                     }
 
+
+                    for(CheckBox check: categoryCheck){
+                        if(check.isSelected()){
+                            selectedCategory.add(check.getText());
+                        }
+                    }
                     sessionUser.setCategoryPref(selectedCategory);
 
 
@@ -203,32 +200,31 @@ public class LoginController {
      */
     public void loadSecond() throws IOException {
 
-            // Carico il file per la grafica
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("sample.fxml"));
-            SampleController controller = new SampleController();
+        // Carico il file per la grafica
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("fxml/sample.fxml"));
+        SampleController controller = new SampleController();
 
-            // Imposto il controller
-            loader.setController(controller);
+        // Imposto il controller
+        loader.setController(controller);
 
-            // Passo a controller il riferimento a social network
-            controller.setSocialNetwork(social);
-            controller.setSessionUser(sessionUser);
+        // Passo a controller il riferimento a social network
+        controller.setSocialNetwork(social);
+        controller.setSessionUser(sessionUser);
 
-            GraphicThread graphicThread = new GraphicThread();
+        GraphicThread graphicThread = new GraphicThread();
 
-            controller.setGraphicThread(graphicThread);
-            graphicThread.setSampleController(controller);
+        controller.setGraphicThread(graphicThread);
+        graphicThread.setSampleController(controller);
 
-            Stage primaryStage = Main.getStage();
+        Stage primaryStage = Main.getStage();
 
-            // Imposto lo stage e la scene principali
-            Parent root = (Parent) loader.load();
-            Scene scene = new Scene(root, 600, 400);
-            primaryStage.setTitle("Bacheca");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        }
-
+        // Imposto lo stage e la scene principali
+        Parent root = (Parent) loader.load();
+        Scene scene = new Scene(root, 600, 400);
+        primaryStage.setTitle("Bacheca");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 
 
 }

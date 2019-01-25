@@ -1,4 +1,4 @@
-package sample;
+package sample.controller;
 
 import com.jfoenix.controls.JFXTimePicker;
 import javafx.collections.FXCollections;
