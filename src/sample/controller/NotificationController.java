@@ -22,6 +22,9 @@ public class NotificationController {
     private ListView notificationListView;
     private Event event;
 
+    public static final String MSG_INVITE ="Per iscriversi all'evento basta premere sul bottono \"Accetta invito\", nel caso non si fosse sicuri di accettare o meno basta chiudere la finstra.";
+    public static final String MSG_REMOVE ="Per rimuove la notifica dalla lista delle notifiche basta premere il pulsante \"Rimuovi\".";
+
     public void setSocialNetwork(SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
 
     public void setThisStage(Stage thisStage) { this.thisStage = thisStage; }
@@ -35,18 +38,23 @@ public class NotificationController {
 
 
     @FXML
-    private Label messageLbl;
+    private Label messageAllertLbl, inviteLbl, removeLbl, messageReminderLbl;
     @FXML
-    private Button removeBtn, backBtn, acceptBtn;
+    private Button removeBtn, acceptBtn;
 
     @FXML
     private void initialize(){
-        messageLbl.setText(notification.getNotificationMessage());
+
+        if (notification.getNotificationType().equals(NotificationType.Alert) || notification.getNotificationType().equals(NotificationType.Invite) ){
+            messageAllertLbl.setText(notification.getNotificationMessage());
+        }
+        else if(notification.getNotificationType().equals(NotificationType.Reminder)){
+            messageReminderLbl.setText(notification.getNotificationMessage());
+        }
 
         if (notification.getNotificationType().equals(NotificationType.Invite)) {
-            backBtn.setVisible(true);
             acceptBtn.setVisible(true);
-
+            inviteLbl.setText(MSG_INVITE);
             event = socialNetwork.findEventByEventName(notification.getEventName());
             if(event.isNumOfTotalParticipantsEqualsMaxPlusTolerance() || event.isUserAlreadyRegistered(sessionUser.getUsername())){
                 acceptBtn.setDisable(true);
@@ -55,6 +63,8 @@ public class NotificationController {
                 acceptBtn.setDisable(false);
             }
         }
+
+        removeLbl.setText(MSG_REMOVE);
 
 
     }
@@ -82,7 +92,4 @@ public class NotificationController {
         thisStage.close();
     }
 
-    public void returnBack(){
-        thisStage.close();
-    }
 }

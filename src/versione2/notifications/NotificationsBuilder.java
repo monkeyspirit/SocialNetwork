@@ -45,7 +45,7 @@ public class NotificationsBuilder {
      * @param eventName nome dell'evento
      */
     public static Notification buildNotificationNewEvent (String eventName) {
-        String message = eventName + MSG_NEW;
+        String message = "L'evento: " + eventName + MSG_NEW;
         return new Notification(NotificationType.Alert, message);
     }
 

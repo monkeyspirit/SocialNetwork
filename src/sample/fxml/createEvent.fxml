@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1">
   <content>
@@ -18,19 +19,19 @@
          <children>
 
              <TextField fx:id="titleTxtF" layoutX="355.0" layoutY="68.0" prefHeight="26.0" prefWidth="149.0" />
-             <TextField fx:id="numPTxtF" layoutX="355.0" layoutY="100.0" prefHeight="26.0" prefWidth="148.0" />
-             <TextField fx:id="placeTxtF" layoutX="356.0" layoutY="242.0" prefHeight="26.0" prefWidth="150.0" />
+             <TextField fx:id="numPTxtF" layoutX="355.0" layoutY="100.0" prefHeight="26.0" prefWidth="148.0" /> <Label layoutX="508.0" layoutY="100.0" text="*" textFill="#ee0202" />
+             <TextField fx:id="placeTxtF" layoutX="356.0" layoutY="242.0" prefHeight="26.0" prefWidth="150.0" /> <Label layoutX="508.0" layoutY="242.0" text="*" textFill="#ee0202" />
              <TextField fx:id="indTeeTxtF" disable="true" layoutX="356.0" layoutY="379.0" prefHeight="26.0" prefWidth="150.0" />
              <TextField fx:id="extraNumParTxt" layoutX="355.0" layoutY="135.0" prefHeight="26.0" prefWidth="148.0" />
 
              <Button fx:id="createBtn" layoutX="227.0" layoutY="918.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="40.0" prefWidth="115.0" text="Crea" />
 
-             <ChoiceBox fx:id="catCB" layoutX="355.0" layoutY="31.0" prefHeight="28.0" prefWidth="148.0" />
+             <ChoiceBox fx:id="catCB" layoutX="355.0" layoutY="31.0" prefHeight="28.0" prefWidth="148.0" /> <Label layoutX="508.0" layoutY="31.0" text="*" textFill="#f51010" />
              <ChoiceBox fx:id="durBigCB" layoutX="356.0" layoutY="346.0" prefHeight="26.0" prefWidth="70.0" />
-             <ChoiceBox fx:id="durLitCB" layoutX="438.0" layoutY="346.0" prefHeight="26.0" prefWidth="70.0" />
+             <ChoiceBox fx:id="durLitCB" layoutX="438.0" layoutY="346.0" prefHeight="26.0" prefWidth="70.0" /> <Label layoutX="508.0" layoutY="346.0" text="**" textFill="#0244eb" />
              <ChoiceBox fx:id="minAgeCB" disable="true" layoutX="356.0" layoutY="541.0" prefHeight="28.0" prefWidth="67.0" />
-             <ChoiceBox fx:id="genderCB" disable="true" layoutX="356.0" layoutY="576.0" prefHeight="26.0" prefWidth="147.0" />
-             <ChoiceBox fx:id="maxAgeCB" disable="true" layoutX="436.0" layoutY="541.0" prefHeight="28.0" prefWidth="67.0" />
+             <ChoiceBox fx:id="genderCB" disable="true" layoutX="356.0" layoutY="576.0" prefHeight="26.0" prefWidth="147.0" /> <Label layoutX="508.0" layoutY="576.0" text="*" textFill="#e80404" />
+             <ChoiceBox fx:id="maxAgeCB" disable="true" layoutX="436.0" layoutY="541.0" prefHeight="28.0" prefWidth="67.0" /> <Label layoutX="508.0" layoutY="541.0" text="*" textFill="#e80404" />
 
              <Label fx:id="catLbl" layoutX="70.0" layoutY="36.0" text="Categoria" />
              <Label fx:id="titleLbl" layoutX="70.0" layoutY="71.0" prefHeight="20.0" prefWidth="49.0" text="Titolo" />
@@ -54,13 +55,13 @@
              <Label layoutX="43.0" layoutY="697.0" prefHeight="85.0" prefWidth="231.0" text="Scegli a chi mandare l'invito tra gli utenti che hanno già partecipato a proposte create da te!" wrapText="true" />
 
 
-             <DatePicker fx:id="deadLineDP" layoutX="355.0" layoutY="173.0" prefHeight="26.0" prefWidth="150.0" />
-             <DatePicker fx:id="dateDP" disable="true" layoutX="356.0" layoutY="278.0" prefHeight="26.0" prefWidth="150.0" />
+             <DatePicker fx:id="deadLineDP" layoutX="355.0" layoutY="173.0" prefHeight="26.0" prefWidth="150.0" /> <Label layoutX="508.0" layoutY="173.0" text="*" textFill="#ee0202" />
+             <DatePicker fx:id="dateDP" disable="true" layoutX="356.0" layoutY="278.0" prefHeight="26.0" prefWidth="150.0" /> <Label layoutX="508.0" layoutY="278.0" text="*" textFill="#ee0202" />
              <DatePicker fx:id="endDateDP" disable="true" layoutX="356.0" layoutY="477.0" prefHeight="26.0" prefWidth="150.0" />
              <DatePicker fx:id="retiredDeadLineDP" disable="true" layoutX="355.0" layoutY="207.0" prefHeight="26.0" prefWidth="150.0" />
 
              <JFXTimePicker fx:id="endTimeTP" disable="true" layoutX="356.0" layoutY="508.0" prefHeight="26.0" prefWidth="150.0" />
-             <JFXTimePicker fx:id="timeTP" disable="true" layoutX="356.0" layoutY="313.0" prefHeight="26.0" prefWidth="150.0" />
+             <JFXTimePicker fx:id="timeTP" disable="true" layoutX="356.0" layoutY="313.0" prefHeight="26.0" prefWidth="150.0" /> <Label layoutX="508.0" layoutY="313.0" text="*" textFill="#ee0202" />
 
              <TextArea fx:id="totTeeTxtA" layoutX="356.0" layoutY="409.0" prefHeight="59.0" prefWidth="150.0" />
              <TextArea fx:id="noteTxtA" layoutX="183.0" layoutY="621.0" prefHeight="47.0" prefWidth="320.0" />
@@ -68,6 +69,19 @@
              <CheckBox fx:id="isTeeActiveCkB" layoutX="334.0" layoutY="383.0" mnemonicParsing="false" />
 
              <ListView fx:id="inviteParticipantsListView" layoutX="303.0" layoutY="697.0" prefHeight="200.0" prefWidth="200.0" />
+            <Label layoutX="32.0" layoutY="820.0" prefHeight="59.0" prefWidth="166.0" text="* indica i campi da inserire obbligatoriamente" wrapText="true">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="508.0" layoutY="482.0" text="**" textFill="#0244eb" />
+            <Label layoutX="30.0" layoutY="876.0" prefHeight="42.0" prefWidth="145.0" text="** indica che è richiesto di inserire o la durata o la data conclusiva" wrapText="true">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+
+
 
 
 

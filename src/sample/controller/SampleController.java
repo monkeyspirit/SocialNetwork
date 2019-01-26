@@ -256,7 +256,7 @@ public class SampleController {
         notificationController.setThisStage(notify);
 
         Parent notifyView = loaderNotify.load();
-        Scene sceneNotify = new Scene(notifyView, 500, 250);
+        Scene sceneNotify = new Scene(notifyView, 500, 300);
         notify.setTitle("Notifica");
         notify.setScene(sceneNotify);
         notify.show();
