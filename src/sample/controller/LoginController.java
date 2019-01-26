@@ -43,8 +43,7 @@ public class LoginController {
     private Label errorLbl, preferenceCatLbl, ageRangeLbl, show;
     @FXML
     private ListView preferenceCategoryListView;
-    @FXML
-    private ScrollPane scrollCategory;
+
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -77,7 +76,6 @@ public class LoginController {
                if(checkRgCB.isSelected()){
                    loginBtn.setText("Registrati");
                    ageRangeLbl.setVisible(true);
-                   scrollCategory.setVisible(true);
                    preferenceCategoryListView.setVisible(true);
                    preferenceCatLbl.setVisible(true);
                    minAgeCB.setVisible(true);
@@ -122,7 +120,6 @@ public class LoginController {
                    ageRangeLbl.setVisible(false);
                    preferenceCatLbl.setVisible(false);
                    preferenceCategoryListView.setVisible(false);
-                   scrollCategory.setVisible(false);
                    minAgeCB.setVisible(false);
                    maxAgeCB.setVisible(false);
                    loginBtn.setText("Accedi");

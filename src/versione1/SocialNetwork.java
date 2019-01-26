@@ -2,6 +2,7 @@ package versione1;
 
 import utilities.FileUtility;
 
+import javax.swing.text.html.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,4 +211,39 @@ public class SocialNetwork {
 		}
 		return null;
 	}
+
+	private List<Event> getEventsCreatedByUser(String user){
+
+		List<Event> eventsCreatedByUser = new ArrayList<>();
+
+		for(Category<? extends Event> category : categories) {
+
+			for (Event event : category.getEvents()) {
+
+				if (event.getCreator().equalsIgnoreCase(user)) {
+					eventsCreatedByUser.add(event);
+				}
+			}
+		}
+		return eventsCreatedByUser;
+	}
+
+	public List<String> getUserThatPlayOtherCreatorEvents(String user){
+
+		List<String> participantsAlreadyPlay = new ArrayList<>();
+		List<Event> eventsCreatedByUser = getEventsCreatedByUser(user);
+
+		for(Event event: eventsCreatedByUser){
+			for(String participant: event.getParticipants()){
+				if(!participantsAlreadyPlay.contains(participant) && !participant.equalsIgnoreCase(user)){
+					participantsAlreadyPlay.add(participant);
+				}
+			}
+		}
+
+		return participantsAlreadyPlay;
+
+	}
+
+
 }

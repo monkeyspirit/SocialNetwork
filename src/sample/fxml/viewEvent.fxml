@@ -9,6 +9,7 @@
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="775.0" prefWidth="572.0">
          <children>
+
             <Label fx:id="titleLbl" layoutX="70.0" layoutY="119.0" prefHeight="20.0" prefWidth="49.0" text="Titolo" />
             <Label fx:id="numPLbl" layoutX="70.0" layoutY="155.0" text="Numero partecipanti" />
             <Label fx:id="extraNumPLbl" layoutX="70.0" layoutY="184.0" text="Tolleranza partecipanti" />
@@ -27,9 +28,6 @@
             <Label fx:id="genderLbl" layoutX="70.0" layoutY="596.0" />
             <Label fx:id="creatorLbl" layoutX="70.0" layoutY="49.0" text="Creatore" />
             <Label fx:id="stateLbl" layoutX="68.0" layoutY="84.0" text="Stato" />
-
-
-
             <Label fx:id="titleLblEvent" layoutX="300.0" layoutY="119.0" prefHeight="21.0" prefWidth="197.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="numPLblEvent" layoutX="300.0" layoutY="152.0" prefHeight="21.0" prefWidth="179.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="extranumPLblEvent" layoutX="300.0" layoutY="182.0" prefHeight="21.0" prefWidth="179.0" textAlignment="JUSTIFY" wrapText="true" />

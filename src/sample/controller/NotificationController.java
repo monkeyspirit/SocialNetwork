@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import versione1.Event;
 import versione1.SocialNetwork;
 import versione1.User;
 import versione2.notifications.Notification;
@@ -19,6 +20,7 @@ public class NotificationController {
     private int notificationIndex;
     private Stage thisStage;
     private ListView notificationListView;
+    private Event event;
 
     public void setSocialNetwork(SocialNetwork socialNetwork) { this.socialNetwork = socialNetwork; }
 
@@ -35,16 +37,25 @@ public class NotificationController {
     @FXML
     private Label messageLbl;
     @FXML
-    private Button removeBtn;
+    private Button removeBtn, backBtn, acceptBtn;
 
     @FXML
     private void initialize(){
         messageLbl.setText(notification.getNotificationMessage());
 
-        if (notification.getNotificationType().equals(NotificationType.Alert)) {
+        if (notification.getNotificationType().equals(NotificationType.Invite)) {
+            backBtn.setVisible(true);
+            acceptBtn.setVisible(true);
+
+            event = socialNetwork.findEventByEventName(notification.getEventName());
+            if(event.isNumOfTotalParticipantsEqualsMaxPlusTolerance() || event.isUserAlreadyRegistered(sessionUser.getUsername())){
+                acceptBtn.setDisable(true);
+            }
+            else {
+                acceptBtn.setDisable(false);
+            }
         }
-        else if(notification.getNotificationType().equals(NotificationType.Reminder)){
-        }
+
 
     }
 
@@ -62,5 +73,16 @@ public class NotificationController {
 
     public void setNotificationListView(ListView notificationListView) {
         this.notificationListView = notificationListView;
+    }
+
+    public void subscribeUser(){
+
+        (socialNetwork.findEventByEventName(notification.getEventName())).addParticipant(sessionUser.getUsername());
+        acceptBtn.setDisable(true);
+        thisStage.close();
+    }
+
+    public void returnBack(){
+        thisStage.close();
     }
 }

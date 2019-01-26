@@ -8,15 +8,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import versione1.*;
 import versione2.StateValue;
+import versione2.notifications.NotificationsBuilder;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventCreateController {
 
@@ -63,9 +64,13 @@ public class EventCreateController {
     private TextArea noteTxtA, totTeeTxtA;
     @FXML
     private CheckBox isTeeActiveCkB;
+    @FXML
+    private ListView<CheckBox> inviteParticipantsListView;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private AgeGroup ageGroup;
+    private List<CheckBox> userCheckList;
+    private List<String> selectedUserToInvite;
     private ArrayList<Integer> ageRangeMin;
     private String[] errorMsg = new  String[13];
 
@@ -146,6 +151,21 @@ public class EventCreateController {
      */
     @FXML
     private void initialize() throws IOException {
+
+        userCheckList = new ArrayList<>();
+
+        for(String username : socialNetwork.getUserThatPlayOtherCreatorEvents(creator)){
+
+            CheckBox userCheck = new CheckBox();
+            userCheck.setText(username);
+            userCheckList.add(userCheck);
+        }
+
+
+        // Questa parte serve per creare il check box nella list view
+
+        inviteParticipantsListView.setItems(FXCollections.observableList(userCheckList));
+
 
         ageGroup = new AgeGroup();
         ageRangeMin = ageGroup.getNumeri();
@@ -647,6 +667,19 @@ public class EventCreateController {
 
                         SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, StateValue.Creata, LocalDate.now(), noteIns, creator);
                         match.addParticipant(creator);
+
+                        selectedUserToInvite = new ArrayList<>(); // array di stringhe degli utenti a cui inviare la notifica
+
+                        for(CheckBox check: userCheckList){
+                            if(check.isSelected()){
+                                selectedUserToInvite.add(check.getText());
+                            }
+                        }
+
+                        for(String username : selectedUserToInvite){
+                            User sendTo = socialNetwork.findUserByName(username);
+                            sendTo.addNotification( NotificationsBuilder.buildNotificationInvite(titleIns));
+                        }
 
                         socialNetwork.getSoccerMatchCategory().addEvent(match);
 

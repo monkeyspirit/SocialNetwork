@@ -8,23 +8,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label layoutX="393.0" layoutY="34.0" text="Categorie preferite" />
-      <ScrollPane layoutX="367.0" layoutY="60.0" prefHeight="106.0" prefWidth="200.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="111.0" prefWidth="200.0">
-               <children>
-                  <ListView fx:id="catgPrefListView" prefHeight="106.0" prefWidth="200.0" />
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
-      <Label layoutX="34.0" layoutY="34.0" text="Username:" />
-      <Label fx:id="usernameLbl" layoutX="139.0" layoutY="34.0" prefHeight="16.0" prefWidth="106.0" text="Label" />
-      <Label layoutX="34.0" layoutY="89.0" text="Fascia d'età:" />
-      <ChoiceBox fx:id="minAgeCB" layoutX="125.0" layoutY="84.0" prefHeight="26.0" prefWidth="54.0" />
-      <ChoiceBox fx:id="maxAgeCB" disable="true" layoutX="192.0" layoutY="84.0" prefHeight="26.0" prefWidth="54.0" />
-      <Button fx:id="deleteBtn" layoutX="94.0" layoutY="187.0" mnemonicParsing="false" onAction="#delete" text="Annulla" />
-      <Button fx:id="saveAexitBtn" layoutX="405.0" layoutY="187.0" mnemonicParsing="false" onAction="#saveExit" text="Salva ed esci" />
-   </children>
+    <children>
+
+
+        <ListView fx:id="catgPrefListView"  layoutX="367.0" layoutY="60.0" prefHeight="106.0" prefWidth="200.0" />
+
+        <Label layoutX="393.0" layoutY="34.0" text="Categorie preferite" />
+        <Label layoutX="34.0" layoutY="34.0" text="Username:" />
+        <Label fx:id="usernameLbl" layoutX="139.0" layoutY="34.0" prefHeight="16.0" prefWidth="106.0" text="Label" />
+        <Label layoutX="34.0" layoutY="89.0" text="Fascia d'età:" />
+
+        <ChoiceBox fx:id="minAgeCB" layoutX="125.0" layoutY="84.0" prefHeight="26.0" prefWidth="54.0" />
+        <ChoiceBox fx:id="maxAgeCB" disable="true" layoutX="192.0" layoutY="84.0" prefHeight="26.0" prefWidth="54.0" />
+
+        <Button fx:id="deleteBtn" layoutX="94.0" layoutY="187.0" mnemonicParsing="false" onAction="#delete" text="Annulla" />
+        <Button fx:id="saveAexitBtn" layoutX="405.0" layoutY="187.0" mnemonicParsing="false" onAction="#saveExit" text="Salva ed esci" />
+
+
+    </children>
 </AnchorPane>

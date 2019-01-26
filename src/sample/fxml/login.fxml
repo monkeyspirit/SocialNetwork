@@ -5,7 +5,6 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,27 +12,27 @@
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+
       <Button fx:id="loginBtn" layoutX="247.0" layoutY="301.0" mnemonicParsing="false" onAction="#checkAccess" prefHeight="26.0" prefWidth="90.0" text="Accedi" />
+
       <CheckBox fx:id="checkRgCB" layoutX="189.0" layoutY="368.0" mnemonicParsing="false" text="Nuovo utente? Registrati" />
+
       <TextField fx:id="usrnameTF" layoutX="207.0" layoutY="268.0" promptText="Username" />
+
       <ImageView fitHeight="90.0" fitWidth="199.0" layoutX="255.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../calendar_icon-icons.com_59193.png" />
          </image>
       </ImageView>
+
       <Label fx:id="errorLbl" layoutX="162.0" layoutY="343.0" prefHeight="21.0" prefWidth="276.0" textAlignment="LEFT" />
       <Label fx:id="ageRangeLbl" layoutX="172.0" layoutY="133.0" text="Fascia d'età:" visible="false" />
-      <ScrollPane fx:id="scrollCategory" layoutX="309.0" layoutY="168.0" prefHeight="72.0" prefWidth="180.0" visible="false">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ListView fx:id="preferenceCategoryListView" prefHeight="72.0" prefWidth="180.0" visible="false" />
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
       <Label fx:id="preferenceCatLbl" layoutX="172.0" layoutY="168.0" text="Categorie preferite:" visible="false" />
+
       <ChoiceBox fx:id="minAgeCB" layoutX="262.0" layoutY="128.0" prefHeight="26.0" prefWidth="51.0" visible="false" />
       <ChoiceBox fx:id="maxAgeCB" disable="true" layoutX="324.0" layoutY="128.0" prefHeight="26.0" prefWidth="51.0" visible="false" />
+
+      <ListView fx:id="preferenceCategoryListView" layoutX="313.0" layoutY="168.0" prefHeight="83.0" prefWidth="187.0" visible="false" />
+
    </children>
 </AnchorPane>

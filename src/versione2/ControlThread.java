@@ -40,7 +40,7 @@ public class ControlThread extends Thread {
 
                         if(event.getLastState().equals(StateValue.Creata) && controlState(event)) {
                             for (User user: socialNetwork.getUsers() ) {
-                                if(user.getCategoryPref().contains(cat.getName())){
+                                if(!(user.equals(socialNetwork.getLoggedUser())) && user.getCategoryPref().contains(cat.getName())){
                                     user.addNotification(notificationToSend);
                                 }
                             }

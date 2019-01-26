@@ -325,7 +325,7 @@ public class SampleController {
 
         eventCreateController.setThisStage(create);
         Parent eventCreate =  (Parent) loaderCreate.load();
-        Scene scene = new Scene(eventCreate, 600, 400);
+        Scene scene = new Scene(eventCreate, 600, 1000);
 
         create.setY(200);
         create.setX(400); // In questo modo non è sovrapposto a quello degli eventi

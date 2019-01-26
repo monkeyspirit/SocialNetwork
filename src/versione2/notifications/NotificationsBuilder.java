@@ -16,6 +16,7 @@ public class NotificationsBuilder {
     public static final String MSG_FAILED = " è fallita in quanto non è stato raggiunto il numero minimo di partecipanti.";
     public static final String MSG_TERMINATED = " si è conclusa con successo.";
     public static final String MSG_NEW = " è stato creato mentre non c'eri.";
+    public static final String MSG_INVITE = "Sei stato invitato a partecipare a ";
 
 
     public static Notification buildReminder(String title, LocalDate date, LocalTime time, String place, Float tee){
@@ -28,6 +29,16 @@ public class NotificationsBuilder {
         Notification reminder = new Notification(NotificationType.Reminder, reminderString);
         return reminder;
     }
+
+    /**
+     * Costruisce il messaggio della notifica per un evento nuovo
+     * @param eventName nome dell'evento
+     */
+    public static Notification buildNotificationInvite (String eventName) {
+        String message = MSG_INVITE+  eventName +".";
+        return new Notification(NotificationType.Invite, message, eventName);
+    }
+
 
     /**
      * Costruisce il messaggio della notifica per un evento nuovo

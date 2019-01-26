@@ -14,6 +14,7 @@ public class Notification {
     private NotificationType notificationType;
     private String notificationMessage;
     private LocalDate notificationDate;
+    private String eventName;
 
     public Notification(NotificationType type, String message){
         this.notificationType = type;
@@ -21,9 +22,20 @@ public class Notification {
         this.notificationDate = LocalDate.now();
     }
 
+    // Costruttore che è utile nel caso degli inviti
+    public Notification(NotificationType type, String message, String eventName){
+        this.notificationType = type;
+        this.notificationMessage = message;
+        this.eventName = eventName;
+        this.notificationDate = LocalDate.now();
+    }
+
+
     public NotificationType getNotificationType() { return notificationType; }
 
     public String getNotificationMessage() { return notificationMessage; }
 
     public LocalDate getNotificationDate() { return notificationDate; }
+
+    public String getEventName() { return eventName; }
 }
