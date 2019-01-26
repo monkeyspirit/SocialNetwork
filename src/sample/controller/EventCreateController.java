@@ -13,6 +13,7 @@ import versione2.StateValue;
 import versione2.notifications.NotificationsBuilder;
 
 import javax.swing.*;
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -22,6 +23,8 @@ import java.util.List;
 public class EventCreateController {
 
     public static final String SOCCER_NAME = "Partite di calcio";
+    public static final String SOCCER_DESCRIPTION = "Categoria che ha lo scopo di proporre partite di calcio di vario genere.";
+
 
     // Messaggi di errore
     public static final String MISS_CATEGORY_MSG =  "Inserire una categoria";
@@ -45,7 +48,7 @@ public class EventCreateController {
     // ~~~~~ newEvent Stage ~~~~~~~~~~~
 
     @FXML
-    private Label retiredDeadLLbl, extraParLbl, titleLbl,durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
+    private Label noteLbl, retiredDeadLLbl, extraParLbl, titleLbl,durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
     @FXML
     private TextField titleTxtF, numPTxtF, placeTxtF, indTeeTxtF, extraNumParTxt;
     @FXML
@@ -66,6 +69,12 @@ public class EventCreateController {
     private CheckBox isTeeActiveCkB;
     @FXML
     private ListView<CheckBox> inviteParticipantsListView;
+
+
+    // Asterischi campi di soccerMatch
+    @FXML
+    private Label segnoAge, segnoGen;
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private AgeGroup ageGroup;
@@ -127,6 +136,26 @@ public class EventCreateController {
     private String creator;
 
 
+    // -------- Costanti da sistemare --------
+
+    public static final String TITLE_DESCRIPTION = "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento";
+    public static final String NUMPLAY_DESCRIPTION = "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento";
+    public static final String EXTRA_PARTECIPANTS_DESCRIPTION ="Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"";
+    public static final String REGDEADLINE_DESCRIPTION = "Campo obbligatorio che inidica l'ultima data possibile per iscriversi";
+    public static final String RETIRED_DEADLINE_DESCRIPTION ="Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta";
+    public static final String PLACE_DESCRIPTION = "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti";
+    public static final String DATE_DESCRIPTION = "Campo obbligatorio che indica la data in cui l'evento proposto deve svolgersi o, nel caso l'evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell'evento";
+    public static final String TIME_DESCRIPTION = "Campo obbligatorio che indica l'ora in cui i partecipanti dovranno trovarsi nel luogo 'Luogo' in data 'Data' per dare inizio all'evento";
+    public static final String DURATION_DESCRIPTION =  "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu' giorni consecutivi";
+    public static final String INDTEE_DESCRIPTION = "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all'iniziativa dovra'  sostenere (si noti che la spesa puo' anche essere nulla)";
+    public static final String TEEINC_DESCRIPTION = "Campo facoltativo che indica tutte le voci di spesa comprese nell'ammontare indicato nella 'Quota individuale'";
+    public static final String ENDDATE_DESCRIPTION = "Campo facoltativo che fissa la data di conclusione dell'evento";
+    public static final String ENDTIME_DESCRIPTION = "Campo facoltativo che stima l'ora di conclusione dell'evento";
+    public static final String NOTE_DESCRIPTION = "Campo facoltativo contenente informazioni aggiuntive circa l'evento";
+
+    public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
+    public static final String AGERANGE_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
+
     // ~~~~~~~~ Metodi ~~~~~~~~~~~~~
 
 
@@ -151,6 +180,25 @@ public class EventCreateController {
      */
     @FXML
     private void initialize() throws IOException {
+
+
+        // Metto i tollpic sui campi sempre presenti
+
+        initializeToolPic(titleLbl, TITLE_DESCRIPTION);
+        initializeToolPic(numPLbl, NUMPLAY_DESCRIPTION);
+        initializeToolPic(extraParLbl, EXTRA_PARTECIPANTS_DESCRIPTION);
+        initializeToolPic(deadLLbl, REGDEADLINE_DESCRIPTION);
+        initializeToolPic(retiredDeadLLbl, RETIRED_DEADLINE_DESCRIPTION);
+        initializeToolPic(placeLbl, PLACE_DESCRIPTION);
+        initializeToolPic(durLbl, DURATION_DESCRIPTION);
+        initializeToolPic(dateLbl, DATE_DESCRIPTION);
+        initializeToolPic(timeLbl, TIME_DESCRIPTION);
+        initializeToolPic(indTeeLbl,TEEINC_DESCRIPTION);
+        initializeToolPic(endDateLbl, ENDDATE_DESCRIPTION);
+        initializeToolPic(endTimeLbl, ENDTIME_DESCRIPTION);
+        initializeToolPic(noteLbl, NOTE_DESCRIPTION);
+
+        //
 
         userCheckList = new ArrayList<>();
 
@@ -239,14 +287,44 @@ public class EventCreateController {
         catCB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+
+
+
                 if(catCB.getSelectionModel().getSelectedItem().equals(SOCCER_NAME)){ //Se si seleziona il vuoto così non da errore
+
+                    genderLbl.setVisible(true);
+                    ageLbl.setVisible(true);
+                    segnoAge.setVisible(true);
+                    segnoGen.setVisible(true);
+
+                    minAgeCB.setVisible(true);
+                    maxAgeCB.setVisible(true);
+
+                    genderCB.setVisible(true);
+
                     minAgeCB.setDisable(false);
                     minAgeCB.setItems(FXCollections.observableArrayList(ageRangeMin));
+
                     genderCB.setDisable(false);
+
                     durBigCB.setDisable(false);
                     durLitCB.setDisable(true);
+
                     durUnitLbl.setText("Giorno/i");
                     durBigCB.setItems(FXCollections.observableArrayList(MyUtil.getArray(1, 10)));
+
+                    Tooltip tooltipCategory = new Tooltip();
+                    tooltipCategory.setText(SOCCER_DESCRIPTION);
+                    catLbl.setTooltip(tooltipCategory);
+
+
+                    // Metto i tollpic sui campi NON sempre presenti
+
+                    initializeToolPic(ageLbl, AGERANGE_DESCRIPTION);
+                    initializeToolPic(genderLbl, GENDER_DESCRIPTION);
+
+
+                    //
 
                 }
             }
@@ -703,5 +781,14 @@ public class EventCreateController {
                 }
             }
         }
+    }
+
+
+
+    public void initializeToolPic( Label label, String DESCRIPTION){
+        Tooltip tooltip = new Tooltip();
+        tooltip.setText(DESCRIPTION);
+        label.setTooltip(tooltip);
+
     }
 }
