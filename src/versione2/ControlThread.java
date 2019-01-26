@@ -20,6 +20,8 @@ public class ControlThread extends Thread {
     private Notification notificationToSend;
     private Notification reminder;
     private boolean thereIsReminder;
+    private List<String> destinationUser;
+
 
 
     public void setSocialNetwork(SocialNetwork socialNetwork) {
@@ -31,24 +33,33 @@ public class ControlThread extends Thread {
 
         while (true) {
 
-        	if(socialNetwork != null) {
-        		for (Category cat : socialNetwork.getCategories()) {
-        		     for(Event event : (ArrayList<Event>) cat.getEvents()){
-        		         if(controlState(event)){
-                             List<String> destinationUser = event.getParticipants();
-        		             User sendTo;
+            if(socialNetwork != null) {
+                for (Category cat : socialNetwork.getCategories()) {
+                    for(Event event : (ArrayList<Event>) cat.getEvents()){
 
-        		             for(int i=0; i<destinationUser.size(); i++){
-        		                 sendTo = socialNetwork.findUserByName(destinationUser.get(i));
-        		                 sendTo.addNotification(notificationToSend);
-        		                 if(thereIsReminder){
-                                     sendTo.addNotification(reminder);
-                                 }
-                             }
-                         }
-                     }
-        		}
-        	}
+
+                        if(event.getLastState().equals(StateValue.Creata) && controlState(event)) {
+                            for (User user: socialNetwork.getUsers() ) {
+                                if(user.getCategoryPref().contains(cat.getName())){
+                                    user.addNotification(notificationToSend);
+                                }
+                            }
+                        }
+                        else if(controlState(event)){
+                            User sendTo;
+                            destinationUser = event.getParticipants();
+
+                            for(int i=0; i<destinationUser.size(); i++){
+                                sendTo = socialNetwork.findUserByName(destinationUser.get(i));
+                                sendTo.addNotification(notificationToSend);
+                                if(thereIsReminder){
+                                    sendTo.addNotification(reminder);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             try {
                 Thread.sleep(1000);
@@ -71,6 +82,17 @@ public class ControlThread extends Thread {
 
         // Per gli eventi aperti:
         switch (event.getState().get(event.getState().size()-1).getStateValue()) {
+
+
+            case Creata: {
+                event.getState().add(new versione2.State(StateValue.Aperta, LocalDate.now()));
+                isChanged = true;
+                thereIsReminder = false;
+                notificationToSend = NotificationsBuilder.buildNotificationNewEvent ((String) event.getTitle().getValue());
+
+
+                break;
+            }
 
             case Aperta: {
 

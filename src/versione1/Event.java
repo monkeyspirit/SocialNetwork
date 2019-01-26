@@ -179,6 +179,8 @@ public abstract class Event  {
 
     public List<State> getState() {  return state; }
 
+    public StateValue getLastState(){ return state.get(state.size()-1).getStateValue(); }
+
     public LocalDate getStateSwitchDate() { return state.get(state.size()-1).getSwitchDate(); }
 
     public String getType() { return type; }
