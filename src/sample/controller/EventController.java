@@ -3,6 +3,7 @@ package sample.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import versione1.Event;
 import versione1.SoccerMatchEvent;
 import versione1.SocialNetwork;
@@ -19,10 +20,31 @@ public class EventController {
 
     public static final String SOCCER_NAME = "SoccerMatchEvent";
 
+    public static final String TITLE_DESCRIPTION = "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento";
+    public static final String NUMPLAY_DESCRIPTION = "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento";
+    public static final String EXTRA_PARTECIPANTS_DESCRIPTION ="Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"";
+    public static final String REGDEADLINE_DESCRIPTION = "Campo obbligatorio che inidica l'ultima data possibile per iscriversi";
+    public static final String RETIRED_DEADLINE_DESCRIPTION ="Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta";
+    public static final String PLACE_DESCRIPTION = "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti";
+    public static final String DATE_DESCRIPTION = "Campo obbligatorio che indica la data in cui l'evento proposto deve svolgersi o, nel caso l'evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell'evento";
+    public static final String TIME_DESCRIPTION = "Campo obbligatorio che indica l'ora in cui i partecipanti dovranno trovarsi nel luogo 'Luogo' in data 'Data' per dare inizio all'evento";
+    public static final String DURATION_DESCRIPTION =  "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu' giorni consecutivi";
+    public static final String INDTEE_DESCRIPTION = "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all'iniziativa dovra'  sostenere (si noti che la spesa puo' anche essere nulla)";
+    public static final String TEEINC_DESCRIPTION = "Campo facoltativo che indica tutte le voci di spesa comprese nell'ammontare indicato nella 'Quota individuale'";
+    public static final String ENDDATE_DESCRIPTION = "Campo facoltativo che fissa la data di conclusione dell'evento";
+    public static final String ENDTIME_DESCRIPTION = "Campo facoltativo che stima l'ora di conclusione dell'evento";
+    public static final String NOTE_DESCRIPTION = "Campo facoltativo contenente informazioni aggiuntive circa l'evento";
+
+    public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
+    public static final String AGERANGE_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
+
     @FXML
     private Label extranumPLblEvent,retiredDeadLLblEvent, placesAvbLbl, stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
     @FXML
     private Button subScribeBtn, retiredParBtn, retiredEventBtn;
+    @FXML
+    private Label titleLbl, numPLbl, extraNumPLbl, deadLLbl, retiredDeadLLbl, placeLbl, dateLbl, timeLbl, durLbl, indTeeLbl, totTeLbl, endDateLbl, endTimeLbl, noteLbl;
+
     private SocialNetwork socialNetwork;
     private SoccerMatchEvent eventSoccerSelected;
     private String sessionUsername;
@@ -49,6 +71,23 @@ public class EventController {
      */
     private void initialize(){
 
+        // Metto i tollpic sui campi sempre presenti
+
+        initializeToolPic(titleLbl, TITLE_DESCRIPTION);
+        initializeToolPic(numPLbl, NUMPLAY_DESCRIPTION);
+        initializeToolPic(extraNumPLbl, EXTRA_PARTECIPANTS_DESCRIPTION);
+        initializeToolPic(deadLLbl, REGDEADLINE_DESCRIPTION);
+        initializeToolPic(retiredDeadLLbl, RETIRED_DEADLINE_DESCRIPTION);
+        initializeToolPic(placeLbl, PLACE_DESCRIPTION);
+        initializeToolPic(durLbl, DURATION_DESCRIPTION);
+        initializeToolPic(dateLbl, DATE_DESCRIPTION);
+        initializeToolPic(timeLbl, TIME_DESCRIPTION);
+        initializeToolPic(indTeeLbl,TEEINC_DESCRIPTION);
+        initializeToolPic(endDateLbl, ENDDATE_DESCRIPTION);
+        initializeToolPic(endTimeLbl, ENDTIME_DESCRIPTION);
+        initializeToolPic(noteLbl, NOTE_DESCRIPTION);
+
+        //
 
         if(eventSoccerSelected.getStateValue().equals(StateValue.Aperta)){
 
@@ -156,6 +195,10 @@ public class EventController {
         if(eventSoccerSelected.getType().equals(SOCCER_NAME)) {
             ageLbl.setText("Fascia d'età");
             genderLbl.setText("Genere");
+
+            initializeToolPic(ageLbl, AGERANGE_DESCRIPTION);
+            initializeToolPic(genderLbl, GENDER_DESCRIPTION);
+
             ageLblEvent.setText((String) eventSoccerSelected.getAgeRange().getValue());
             if(eventSoccerSelected.getGender().getValue() != null){
                 genderLblEvent.setText(String.valueOf(eventSoccerSelected.getGender().getValue()));
@@ -212,6 +255,14 @@ public class EventController {
         subScribeBtn.setDisable(true);
         retiredEventBtn.setDisable(true);
         retiredParBtn.setDisable(true);
+    }
+
+
+    public void initializeToolPic( Label label, String DESCRIPTION){
+        Tooltip tooltip = new Tooltip();
+        tooltip.setText(DESCRIPTION);
+        label.setTooltip(tooltip);
+
     }
 
 

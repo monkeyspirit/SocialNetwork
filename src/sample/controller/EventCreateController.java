@@ -193,7 +193,7 @@ public class EventCreateController {
         initializeToolPic(durLbl, DURATION_DESCRIPTION);
         initializeToolPic(dateLbl, DATE_DESCRIPTION);
         initializeToolPic(timeLbl, TIME_DESCRIPTION);
-        initializeToolPic(indTeeLbl,TEEINC_DESCRIPTION);
+        initializeToolPic(indTeeLbl,INDTEE_DESCRIPTION);
         initializeToolPic(endDateLbl, ENDDATE_DESCRIPTION);
         initializeToolPic(endTimeLbl, ENDTIME_DESCRIPTION);
         initializeToolPic(noteLbl, NOTE_DESCRIPTION);
