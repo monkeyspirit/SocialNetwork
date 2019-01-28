@@ -9,16 +9,15 @@ import versione1.SoccerMatchEvent;
 import versione1.SocialNetwork;
 import versione1.User;
 import versione2.StateValue;
-import versione2.notifications.Notification;
-import versione2.notifications.NotificationsBuilder;
+import versione5.CinemaEvent;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.util.List;
 
 public class EventController {
 
     public static final String SOCCER_NAME = "SoccerMatchEvent";
+    public static final String CINEMA_NAME = "CinemaEvent";
 
     public static final String TITLE_DESCRIPTION = "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento";
     public static final String NUMPLAY_DESCRIPTION = "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento";
@@ -38,15 +37,17 @@ public class EventController {
     public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
     public static final String AGERANGE_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
 
+    public static final String FILMTYPE_DESCRIPTION = "Indica la tipologia del film proposto, può elencare più generi";
+
     @FXML
     private Label extranumPLblEvent,retiredDeadLLblEvent, placesAvbLbl, stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
     @FXML
     private Button subScribeBtn, retiredParBtn, retiredEventBtn;
     @FXML
-    private Label titleLbl, numPLbl, extraNumPLbl, deadLLbl, retiredDeadLLbl, placeLbl, dateLbl, timeLbl, durLbl, indTeeLbl, totTeLbl, endDateLbl, endTimeLbl, noteLbl;
+    private Label titleLbl, numPLbl, extraNumPLbl, deadLLbl, retiredDeadLLbl, placeLbl, dateLbl, timeLbl, durLbl, indTeeLbl, totTeLbl, endDateLbl, endTimeLbl, noteLbl,codificaDurataLbl;
 
     private SocialNetwork socialNetwork;
-    private SoccerMatchEvent eventSoccerSelected;
+    private Event event;
     private String sessionUsername;
     private User sessionUser;
 
@@ -56,7 +57,7 @@ public class EventController {
     public void setSessionUsername(String sessionUsername) { this.sessionUsername = sessionUsername; }
 
     public void setEventSelected(Event eventSelected) {
-            this.eventSoccerSelected = (SoccerMatchEvent) eventSelected;
+            this.event = eventSelected;
 
     }
 
@@ -82,24 +83,25 @@ public class EventController {
         initializeToolPic(durLbl, DURATION_DESCRIPTION);
         initializeToolPic(dateLbl, DATE_DESCRIPTION);
         initializeToolPic(timeLbl, TIME_DESCRIPTION);
-        initializeToolPic(indTeeLbl,TEEINC_DESCRIPTION);
+        initializeToolPic(indTeeLbl,INDTEE_DESCRIPTION);
+        initializeToolPic(totTeLbl, TEEINC_DESCRIPTION);
         initializeToolPic(endDateLbl, ENDDATE_DESCRIPTION);
         initializeToolPic(endTimeLbl, ENDTIME_DESCRIPTION);
         initializeToolPic(noteLbl, NOTE_DESCRIPTION);
 
         //
 
-        if(eventSoccerSelected.getStateValue().equals(StateValue.Aperta)){
+        if(event.getStateValue().equals(StateValue.Aperta)){
 
-                if (eventSoccerSelected.isUserAlreadyRegistered(sessionUsername)) {
-                    if (eventSoccerSelected.isUserCreator(sessionUsername)) {
+                if (event.isUserAlreadyRegistered(sessionUsername)) {
+                    if (event.isUserCreator(sessionUsername)) {
                         retiredParBtn.setDisable(true);
                         subScribeBtn.setDisable(true);
                         retiredEventBtn.setVisible(true);
                         retiredEventBtn.setDisable(false);
                     } else {
                         subScribeBtn.setDisable(true);
-                        if(LocalDate.now().isAfter(eventSoccerSelected.getRetireDeadline().getValue())){
+                        if(LocalDate.now().isAfter(event.getRetireDeadline().getValue())){
                             retiredParBtn.setDisable(true);
                         }
                         else{
@@ -107,7 +109,7 @@ public class EventController {
                         }
                     }
                 } else {
-                    if (eventSoccerSelected.isNumOfTotalParticipantsEqualsMaxPlusTolerance()) {
+                    if (event.isNumOfTotalParticipantsEqualsMaxPlusTolerance()) {
                         retiredEventBtn.setDisable(true);
                         subScribeBtn.setDisable(true);
                     } else {
@@ -127,12 +129,12 @@ public class EventController {
 
 
 
-        creatorLblEvent.setText(eventSoccerSelected.getCreator());
+        creatorLblEvent.setText(event.getCreator());
 
-        stateLblEvent.setText(String.valueOf(eventSoccerSelected.getStateValue()));
+        stateLblEvent.setText(String.valueOf(event.getStateValue()));
 
-        if(eventSoccerSelected.getTitle().getValue() != null){
-            titleLblEvent.setText((String) eventSoccerSelected.getTitle().getValue());
+        if(event.getTitle().getValue() != null){
+            titleLblEvent.setText((String) event.getTitle().getValue());
         }
         else{
             titleLblEvent.setText(" ");
@@ -140,75 +142,97 @@ public class EventController {
 
 
 
-        numPLblEvent.setText(String.valueOf(eventSoccerSelected.getNumOfParticipants().getValue()));
+        numPLblEvent.setText(String.valueOf(event.getNumOfParticipants().getValue()));
 
-        extranumPLblEvent.setText(String.valueOf(eventSoccerSelected.getExtraParticipants().getValue()));
+        extranumPLblEvent.setText(String.valueOf(event.getExtraParticipants().getValue()));
 
-        deadLLblEvent.setText(String.valueOf(eventSoccerSelected.getRegistrationDeadline().getValue()));
+        deadLLblEvent.setText(String.valueOf(event.getRegistrationDeadline().getValue()));
 
-        retiredDeadLLblEvent.setText(String.valueOf(eventSoccerSelected.getRetireDeadline().getValue()));
+        retiredDeadLLblEvent.setText(String.valueOf(event.getRetireDeadline().getValue()));
 
-        placeLblEvent.setText((String) eventSoccerSelected.getPlace().getValue());
+        placeLblEvent.setText((String) event.getPlace().getValue());
 
-        dateLblEvent.setText(String.valueOf(eventSoccerSelected.getDate().getValue()));
+        dateLblEvent.setText(String.valueOf(event.getDate().getValue()));
 
-        timeLblEvent.setText(String.valueOf(eventSoccerSelected.getTime().getValue()));
+        timeLblEvent.setText(String.valueOf(event.getTime().getValue()));
 
-        if(eventSoccerSelected.getDuration().getValue() != null){
-            durLblEvent.setText(String.valueOf(eventSoccerSelected.getDuration().getValue()));
+        if(event.getDuration().getValue() != null){
+            durLblEvent.setText(String.valueOf(event.getDuration().getValue()));
+            if( String.valueOf(event.getDuration().getValue()).contains(":")){
+                codificaDurataLbl.setText("Ore:Minuti");
+            }
+            else{
+                codificaDurataLbl.setText("Giorni");
+            }
         }
         else{
             durLblEvent.setText(" ");
         }
 
-        indTeeLblEvent.setText(String.valueOf(eventSoccerSelected.getIndTee().getValue()));
+        indTeeLblEvent.setText(String.valueOf(event.getIndTee().getValue()));
 
-        if(eventSoccerSelected.getTeeInclude().getValue() != null){
-            totTeLblEvent.setText(String.valueOf(eventSoccerSelected.getTeeInclude().getValue()));
+        if(event.getTeeInclude().getValue() != null){
+            totTeLblEvent.setText(String.valueOf(event.getTeeInclude().getValue()));
         }
         else{
             totTeLblEvent.setText(" ");
         }
 
-        if(eventSoccerSelected.getEndDate().getValue() != null){
-            endDateLblEvent.setText(String.valueOf(eventSoccerSelected.getEndDate().getValue()));
+        if(event.getEndDate().getValue() != null){
+            endDateLblEvent.setText(String.valueOf(event.getEndDate().getValue()));
         }
         else{
             endDateLblEvent.setText(" ");
         }
 
-        if( eventSoccerSelected.getEndTime().getValue() != null){
-            endTimeLblEvent.setText(String.valueOf( eventSoccerSelected.getEndTime().getValue()));
+        if( event.getEndTime().getValue() != null){
+            endTimeLblEvent.setText(String.valueOf( event.getEndTime().getValue()));
         }
         else{
             endTimeLblEvent.setText(" ");
         }
 
-        if(eventSoccerSelected.getNote().getValue() != null){
-            noteLblEvent.setText((String) eventSoccerSelected.getNote().getValue());
+        if(event.getNote().getValue() != null){
+            noteLblEvent.setText((String) event.getNote().getValue());
         }
         else{
             noteLblEvent.setText(" ");
         }
 
 
-        if(eventSoccerSelected.getType().equals(SOCCER_NAME)) {
-            ageLbl.setText("Fascia d'età");
-            genderLbl.setText("Genere");
+        switch(event.getType()){
+            case (SOCCER_NAME): {
 
-            initializeToolPic(ageLbl, AGERANGE_DESCRIPTION);
-            initializeToolPic(genderLbl, GENDER_DESCRIPTION);
+                ageLbl.setText("Fascia d'età");
+                genderLbl.setText("Genere");
 
-            ageLblEvent.setText((String) eventSoccerSelected.getAgeRange().getValue());
-            if(eventSoccerSelected.getGender().getValue() != null){
-                genderLblEvent.setText(String.valueOf(eventSoccerSelected.getGender().getValue()));
+                initializeToolPic(ageLbl, AGERANGE_DESCRIPTION);
+                initializeToolPic(genderLbl, GENDER_DESCRIPTION);
+
+                ageLblEvent.setText((String) ((SoccerMatchEvent) event).getAgeRange().getValue());
+
+                genderLblEvent.setText(String.valueOf(((SoccerMatchEvent) event).getGender().getValue()));
+                break;
             }
-           else{
-                genderLblEvent.setText(" ");
+
+            case (CINEMA_NAME): {
+                genderLbl.setText("Genere");
+                initializeToolPic(genderLbl, FILMTYPE_DESCRIPTION);
+
+                String gender = "";
+                for(String type: ((CinemaEvent) event).getTypes().getValue()){
+                    gender = gender + type +", ";
+                }
+                genderLblEvent.setText(gender);
+
             }
         }
 
-        int postiDisponibili = (eventSoccerSelected.getNumOfParticipants().getValue() + eventSoccerSelected.getExtraParticipants().getValue() )- eventSoccerSelected.getParticipants().size();
+
+
+
+
+    int postiDisponibili = (event.getNumOfParticipants().getValue() + event.getExtraParticipants().getValue() )- event.getParticipants().size();
         placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
 
     }
@@ -219,11 +243,11 @@ public class EventController {
      */
     public void subScribe(){
 
-        eventSoccerSelected.addParticipant(sessionUsername);
+        event.addParticipant(sessionUsername);
         socialNetwork.updateUserAndEventsListFile();
         subScribeBtn.setDisable(true);
         retiredParBtn.setDisable(false);
-        int postiDisponibili = (eventSoccerSelected.getNumOfParticipants().getValue() + eventSoccerSelected.getExtraParticipants().getValue() )- eventSoccerSelected.getParticipants().size();
+        int postiDisponibili = (event.getNumOfParticipants().getValue() + event.getExtraParticipants().getValue() )- event.getParticipants().size();
         placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
 
 
@@ -235,11 +259,11 @@ public class EventController {
      */
     public void disScribe(){
 
-        eventSoccerSelected.removeParticipant(sessionUsername);
+        event.removeParticipant(sessionUsername);
         socialNetwork.updateUserAndEventsListFile();
         subScribeBtn.setDisable(false);
         retiredParBtn.setDisable(true);
-        int postiDisponibili = (eventSoccerSelected.getNumOfParticipants().getValue() + eventSoccerSelected.getExtraParticipants().getValue() )- eventSoccerSelected.getParticipants().size();
+        int postiDisponibili = (event.getNumOfParticipants().getValue() + event.getExtraParticipants().getValue() )- event.getParticipants().size();
         placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
 
 
@@ -251,7 +275,7 @@ public class EventController {
      */
     public void retiredEvent(){
 
-        eventSoccerSelected.setState(new versione2.State(StateValue.DaRitirare, LocalDate.now()));
+        event.setState(new versione2.State(StateValue.DaRitirare, LocalDate.now()));
         subScribeBtn.setDisable(true);
         retiredEventBtn.setDisable(true);
         retiredParBtn.setDisable(true);

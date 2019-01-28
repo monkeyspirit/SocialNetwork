@@ -11,19 +11,24 @@ import javafx.stage.Stage;
 import versione1.*;
 import versione2.StateValue;
 import versione2.notifications.NotificationsBuilder;
+import versione5.CinemaEvent;
+import versione5.FilmType;
 
 import javax.swing.*;
-import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class EventCreateController {
 
     public static final String SOCCER_NAME = "Partite di calcio";
     public static final String SOCCER_DESCRIPTION = "Categoria che ha lo scopo di proporre partite di calcio di vario genere.";
+
+    public static final String CINEMA_NAME = "Cinema";
+    public static final String CINEMA_DESCRIPTION = "Categoria che ha lo scopo di proporre la visione di film di vario genere.";
 
 
     // Messaggi di errore
@@ -36,11 +41,13 @@ public class EventCreateController {
     public static final String MISS_TIME_MSG = "Inserire l'orario";
     public static final String ERROR_TIME_BECAUSE_ERROR_DATE_MSG = "L'orario inserito non risulta valido in quanto la data inserita non risulta valida";
     public static final String MISS_INDIVIDUAL_TEE_MSG = "Inserire la quota individuale";
-    public static final String ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG = "L'orario di conclusione non risulta valido in quanto precedente all'orario di inizio";
     public static final String MISS_AGE_MSG = "Inserire la fascia di eta'";
     public static final String MISS_GENDER_MSG = "Inserire il genere";
+    public static final String ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG = "L'orario di conclusione non risulta valido in quanto precedente all'orario di inizio";
     public static final String MISS_DURATION_OR_ENDDATE_MSG = "Inserire o la durata o il giorno e l'ora di termine";
     public static final String ALREADY_EXIST_EVENT_WITH_THIS_TITLE_MSG = "Esiste gia' un evento con quest titolo";
+
+    public static final String MISS_GENDER_FILM = "Manca il genere del film.";
 
 
 
@@ -48,7 +55,7 @@ public class EventCreateController {
     // ~~~~~ newEvent Stage ~~~~~~~~~~~
 
     @FXML
-    private Label noteLbl, retiredDeadLLbl, extraParLbl, titleLbl,durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
+    private Label minusLbl, typeOfFilmLbl, noteLbl, retiredDeadLLbl, extraParLbl, titleLbl,durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
     @FXML
     private TextField titleTxtF, numPTxtF, placeTxtF, indTeeTxtF, extraNumParTxt;
     @FXML
@@ -68,7 +75,7 @@ public class EventCreateController {
     @FXML
     private CheckBox isTeeActiveCkB;
     @FXML
-    private ListView<CheckBox> inviteParticipantsListView;
+    private ListView<CheckBox> typeOfFilmListView, inviteParticipantsListView;
 
 
     // Asterischi campi di soccerMatch
@@ -78,9 +85,15 @@ public class EventCreateController {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private AgeGroup ageGroup;
+
     private List<CheckBox> userCheckList;
+    private List<CheckBox> typeOfFilmCheckList;
+
     private List<String> selectedUserToInvite;
+    private List<String> typeOfFilmIns;
+
     private ArrayList<Integer> ageRangeMin;
+
     private String[] errorMsg = new  String[13];
 
 
@@ -128,6 +141,9 @@ public class EventCreateController {
     private boolean genderIsVal = false;
     private boolean durIsVal = false;
 
+    private boolean typeOfFilmIsVal = false;
+
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -155,6 +171,10 @@ public class EventCreateController {
 
     public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
     public static final String AGERANGE_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
+
+
+    public static final String FILMTYPE_DESCRIPTION = "Indica la tipologia del film proposto, può elencare più generi";
+
 
     // ~~~~~~~~ Metodi ~~~~~~~~~~~~~
 
@@ -194,6 +214,7 @@ public class EventCreateController {
         initializeToolPic(dateLbl, DATE_DESCRIPTION);
         initializeToolPic(timeLbl, TIME_DESCRIPTION);
         initializeToolPic(indTeeLbl,INDTEE_DESCRIPTION);
+        initializeToolPic(totTeLbl, TEEINC_DESCRIPTION);
         initializeToolPic(endDateLbl, ENDDATE_DESCRIPTION);
         initializeToolPic(endTimeLbl, ENDTIME_DESCRIPTION);
         initializeToolPic(noteLbl, NOTE_DESCRIPTION);
@@ -218,7 +239,12 @@ public class EventCreateController {
         ageGroup = new AgeGroup();
         ageRangeMin = ageGroup.getNumeri();
 
-        catCB.setItems(FXCollections.observableArrayList(SOCCER_NAME));
+        List<String> catName = new ArrayList<>();
+        for(Category category : socialNetwork.getCategories()){
+            catName.add(category.getName());
+        }
+
+        catCB.setItems(FXCollections.observableArrayList(catName));
 
         // Imposto i giorni precedenti ad oggi non selezionabili su datePicker
 
@@ -288,47 +314,120 @@ public class EventCreateController {
             @Override
             public void handle(ActionEvent event) {
 
+                switch(catCB.getSelectionModel().getSelectedItem()){
+
+                    case(SOCCER_NAME): { //Se si seleziona il vuoto così non da errore
+
+                        durBigCB.setDisable(false);
+                        durLitCB.setDisable(true);
+
+                        durUnitLbl.setText("Giorno/i");
+                        durBigCB.setItems(FXCollections.observableArrayList(MyUtil.getArray(1, 10)));
+
+                        // Imposto ltri valori invisibili
+
+                        typeOfFilmLbl.setVisible(false);
+                        typeOfFilmListView.setVisible(false);
+
+                        //
+
+                        genderLbl.setVisible(true);
+                        ageLbl.setVisible(true);
+                        segnoAge.setVisible(true);
+                        segnoGen.setVisible(true);
+                        minusLbl.setVisible(true);
 
 
-                if(catCB.getSelectionModel().getSelectedItem().equals(SOCCER_NAME)){ //Se si seleziona il vuoto così non da errore
+                        minAgeCB.setVisible(true);
+                        maxAgeCB.setVisible(true);
 
-                    genderLbl.setVisible(true);
-                    ageLbl.setVisible(true);
-                    segnoAge.setVisible(true);
-                    segnoGen.setVisible(true);
+                        genderCB.setVisible(true);
 
-                    minAgeCB.setVisible(true);
-                    maxAgeCB.setVisible(true);
+                        minAgeCB.setDisable(false);
+                        minAgeCB.setItems(FXCollections.observableArrayList(ageRangeMin));
 
-                    genderCB.setVisible(true);
-
-                    minAgeCB.setDisable(false);
-                    minAgeCB.setItems(FXCollections.observableArrayList(ageRangeMin));
-
-                    genderCB.setDisable(false);
-
-                    durBigCB.setDisable(false);
-                    durLitCB.setDisable(true);
-
-                    durUnitLbl.setText("Giorno/i");
-                    durBigCB.setItems(FXCollections.observableArrayList(MyUtil.getArray(1, 10)));
-
-                    Tooltip tooltipCategory = new Tooltip();
-                    tooltipCategory.setText(SOCCER_DESCRIPTION);
-                    catLbl.setTooltip(tooltipCategory);
+                        genderCB.setDisable(false);
 
 
-                    // Metto i tollpic sui campi NON sempre presenti
+                        Tooltip tooltipCategory = new Tooltip();
+                        tooltipCategory.setText(SOCCER_DESCRIPTION);
+                        catLbl.setTooltip(tooltipCategory);
 
-                    initializeToolPic(ageLbl, AGERANGE_DESCRIPTION);
-                    initializeToolPic(genderLbl, GENDER_DESCRIPTION);
+
+                        // Metto i tollpic sui campi NON sempre presenti
+
+                        initializeToolPic(ageLbl, AGERANGE_DESCRIPTION);
+                        initializeToolPic(genderLbl, GENDER_DESCRIPTION);
 
 
-                    //
+                        //
+                        break;
+                    }
 
+                    case(CINEMA_NAME): {
+
+                        durBigCB.setDisable(false);
+                        durLitCB.setDisable(true);
+
+                        durUnitLbl.setText("Giorno/i");
+                        durBigCB.setItems(FXCollections.observableArrayList(MyUtil.getArray(1, 10)));
+
+                        //Prima imposto gli altri valori invisibili
+
+                        genderLbl.setVisible(false);
+                        ageLbl.setVisible(false);
+                        segnoAge.setVisible(false);
+                        segnoGen.setVisible(false);
+                        minusLbl.setVisible(false);
+
+
+                        minAgeCB.setVisible(false);
+                        maxAgeCB.setVisible(false);
+
+                        genderCB.setVisible(false);
+
+                        //
+
+                        typeOfFilmLbl.setVisible(true);
+                        typeOfFilmListView.setVisible(true);
+
+                        // Imposto i generi dei film
+
+                        typeOfFilmCheckList = new ArrayList<>();
+
+
+
+                        for(FilmType type : FilmType.values() ){
+
+                            CheckBox filmTypeCheck = new CheckBox();
+                            filmTypeCheck.setText(type.toString());
+                            typeOfFilmCheckList.add(filmTypeCheck);
+                        }
+
+
+                        // Questa parte serve per creare il check box nella list view
+
+                        typeOfFilmListView.setItems(FXCollections.observableList(typeOfFilmCheckList));
+
+                        Tooltip tooltipCategory = new Tooltip();
+                        tooltipCategory.setText(CINEMA_DESCRIPTION);
+                        catLbl.setTooltip(tooltipCategory);
+
+
+                        // Metto i tollpic sui campi NON sempre presenti
+
+                        initializeToolPic(typeOfFilmLbl, FILMTYPE_DESCRIPTION);
+
+                        break;
+                    }
                 }
+
+
             }
         });
+
+
+
 
         /**
          * ActionListeren che permette una volta selezionato il minimo dell'età di selezionare il max, in questo modo lo popolo con i
@@ -620,9 +719,9 @@ public class EventCreateController {
             // data conclusiva
 
             if (endDateDP.getValue() != null && dateIsVal == true) {
-                    endDateIns = endDateDP.getValue();
-                    endDateLbl.setTextFill(Color.BLACK);
-                    endDateIsVal = true;
+                endDateIns = endDateDP.getValue();
+                endDateLbl.setTextFill(Color.BLACK);
+                endDateIsVal = true;
             }
             else {
                 endDateIsVal = true;
@@ -668,43 +767,77 @@ public class EventCreateController {
 
             }
 
-
-
-
             // Acquisisco l eta controllando che l'utente la inserisca se ha scelto partita di calcio
             // OBBLIGATORIO -> se partita di calcio
             //fascia età
             // Acquisisco il genere se partita di calcio
             // OBBLIGATORIO -> se partita di calcio
             // genere
-            if (categoryIns == SOCCER_NAME) {
 
-                if (minAgeCB.getValue() != null && maxAgeCB.getValue() != null) {
-                    minAge = minAgeCB.getValue();
-                    maxAge = maxAgeCB.getValue();
-                    ageGroup.setRange(minAge, maxAge);
-                    ageRangeIns = ageGroup.getRange();
-                    ageLbl.setTextFill(Color.BLACK);
-                    ageIsVal = true;
-                    errorMsg[8] = null;
-                } else {
-                    ageLbl.setTextFill(Color.RED);
-                    ageIsVal = false;
-                    errorMsg[8] = MISS_AGE_MSG;
+            switch (categoryIns){
+                case (SOCCER_NAME): {
+
+                    if (minAgeCB.getValue() != null && maxAgeCB.getValue() != null) {
+                        minAge = minAgeCB.getValue();
+                        maxAge = maxAgeCB.getValue();
+                        ageGroup.setRange(minAge, maxAge);
+                        ageRangeIns = ageGroup.getRange();
+                        ageLbl.setTextFill(Color.BLACK);
+                        ageIsVal = true;
+                        errorMsg[8] = null;
+                    } else {
+                        ageLbl.setTextFill(Color.RED);
+                        ageIsVal = false;
+                        errorMsg[8] = MISS_AGE_MSG;
+                    }
+
+
+                    genderIns = genderCB.getSelectionModel().getSelectedItem();
+                    if (genderCB.getSelectionModel().getSelectedItem() == null) {
+                        genderLbl.setTextFill(Color.RED);
+                        genderIsVal = false;
+                        errorMsg[9] = MISS_GENDER_MSG;
+                    } else {
+                        genderLbl.setTextFill(Color.BLACK);
+                        genderIsVal = true;
+                        errorMsg[9] = null;
+                    }
+
+                    break;
                 }
 
+                case (CINEMA_NAME): {
 
-                genderIns = genderCB.getSelectionModel().getSelectedItem();
-                if (genderCB.getSelectionModel().getSelectedItem() == null) {
-                    genderLbl.setTextFill(Color.RED);
-                    genderIsVal = false;
-                    errorMsg[9] = MISS_GENDER_MSG;
-                } else {
-                    genderLbl.setTextFill(Color.BLACK);
-                    genderIsVal = true;
+                    boolean empty = true;
+
+                    typeOfFilmIns = new ArrayList<>();
+
+                    for(CheckBox check: typeOfFilmCheckList){
+                        if(check.isSelected()){
+                            empty = false;
+                            typeOfFilmIns.add(check.getText());
+                        }
+                    }
+
+
+                    if(empty){
+                        typeOfFilmLbl.setTextFill(Color.RED);
+                        typeOfFilmIsVal = false;
+                        errorMsg[8] = MISS_GENDER_FILM;
+
+                    }
+                    else {
+                        typeOfFilmIsVal = true;
+                        errorMsg[8] = null;
+                        typeOfFilmLbl.setTextFill(Color.BLACK);
+                    }
+
                     errorMsg[9] = null;
+
                 }
             }
+
+
 
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // durata --> guardare end time e end date
@@ -724,10 +857,12 @@ public class EventCreateController {
             // noteIns
             noteIns = noteTxtA.getText();
 
+            System.out.println(categoryIns);
 
+           switch (categoryIns) {
 
-            switch (categoryIns) {
-                case SOCCER_NAME: {
+                case (SOCCER_NAME): {
+
                     if (catIsVal && titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && ageIsVal && genderIsVal && durIsVal) {
 
                         if(endDateIns == null &&  durationIns !=null) {
@@ -762,6 +897,64 @@ public class EventCreateController {
                         socialNetwork.getSoccerMatchCategory().addEvent(match);
 
                         socialNetwork.writeSoccerMatchEventListOnFile();
+                        socialNetwork.updateUsersListFile();
+
+                        thisStage.close();
+
+                    }
+                    else {
+
+                        System.out.println("cat:"+catIsVal +" tit:"+titIsVal+" num:"+ numIsVal+" extra:"+extraNumIsVal+" dead:"+deadLineIsVal+" place:"+placeIsVal +" date:"+ dateIsVal +" time:" +timeIsVal +" endd:" +endDateIsVal +" endt:" +endTimeIsVal +"indT:"+indTeeIsVal +" age:"+ ageIsVal +" gender:"+ genderIsVal + " dur:"+ durIsVal);
+
+
+                            String msgPopUp = "";
+                        for(int i=1; i< errorMsg.length; i++){
+                            if(errorMsg[i] != null){
+                                msgPopUp += errorMsg[i] + "\n";
+                            }
+                        }
+                        JOptionPane.showMessageDialog(null, msgPopUp);
+                    }
+
+                    break;
+                }
+
+                case (CINEMA_NAME): {
+
+                    if (catIsVal && titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && typeOfFilmIsVal && durIsVal) {
+
+                        if(endDateIns == null &&  durationIns !=null) {
+                            endDateIns = dateIns.plusDays(Integer.parseInt(durationIns));
+                        }
+                        else if(endDateIns == null &&  durationIns == null){
+                            endDateIns = dateIns.plusDays(1);
+                        }
+                        else{
+                            if(endTimeIns == null && durationIns !=null){
+                                endTimeIns = timeIns.plusHours(durH).plusMinutes(durM);
+
+                            }
+                        }
+
+                        CinemaEvent filmView = new CinemaEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, StateValue.Creata, LocalDate.now(), noteIns, creator, typeOfFilmIns);
+                        filmView.addParticipant(creator);
+
+                        selectedUserToInvite = new ArrayList<>(); // array di stringhe degli utenti a cui inviare la notifica
+
+                        for(CheckBox check: userCheckList){
+                            if(check.isSelected()){
+                                selectedUserToInvite.add(check.getText());
+                            }
+                        }
+
+                        for(String username : selectedUserToInvite){
+                            User sendTo = socialNetwork.findUserByName(username);
+                            sendTo.addNotification( NotificationsBuilder.buildNotificationInvite(titleIns));
+                        }
+
+                        socialNetwork.getCinemaCategory().addEvent(filmView);
+
+                       // socialNetwork.writeSoccerMatchEventListOnFile();
                         socialNetwork.updateUsersListFile();
 
                         thisStage.close();

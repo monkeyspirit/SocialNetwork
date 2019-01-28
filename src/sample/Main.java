@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import sample.controller.LoginController;
 import versione1.*;
 import versione2.ControlThread;
+import versione5.CinemaCategory;
 
 public class Main extends Application {
 

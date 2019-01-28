@@ -24,8 +24,8 @@
             <Label fx:id="endDateLbl" layoutX="70.0" layoutY="496.0" prefHeight="18.0" prefWidth="104.0" text="Data conclusiva" />
             <Label fx:id="endTimeLbl" layoutX="70.0" layoutY="528.0" text="Ora conclusiva" />
             <Label fx:id="noteLbl" layoutX="70.0" layoutY="652.0" text="Note" />
-            <Label fx:id="ageLbl" layoutX="70.0" layoutY="561.0" />
-            <Label fx:id="genderLbl" layoutX="70.0" layoutY="596.0" />
+            <Label fx:id="genderLbl" layoutX="70.0" layoutY="561.0" />
+            <Label fx:id="ageLbl" layoutX="70.0" layoutY="596.0" />
             <Label fx:id="creatorLbl" layoutX="70.0" layoutY="49.0" text="Creatore" />
             <Label fx:id="stateLbl" layoutX="68.0" layoutY="84.0" text="Stato" />
 
@@ -44,16 +44,17 @@
             <Label fx:id="endDateLblEvent" layoutX="300.0" layoutY="496.0" prefHeight="21.0" prefWidth="228.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="endTimeLblEvent" layoutX="300.0" layoutY="528.0" prefHeight="21.0" prefWidth="202.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="noteLblEvent" layoutX="300.0" layoutY="652.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="ageLblEvent" layoutX="300.0" layoutY="561.0" prefHeight="21.0" prefWidth="195.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="genderLblEvent" layoutX="300.0" layoutY="596.0" prefHeight="21.0" prefWidth="203.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="genderLblEvent" layoutX="300.0" layoutY="561.0" prefHeight="21.0" prefWidth="195.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="ageLblEvent" layoutX="300.0" layoutY="596.0" prefHeight="21.0" prefWidth="203.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="creatorLblEvent" layoutX="300.0" layoutY="46.0" prefHeight="21.0" prefWidth="129.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="stateLblEvent" layoutX="300.0" layoutY="82.0" prefHeight="21.0" prefWidth="155.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="placesAvbLbl" layoutX="76.0" layoutY="723.0" prefHeight="21.0" prefWidth="183.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="codificaDurataLbl" layoutX="350.0" layoutY="400.0" prefHeight="21.0" prefWidth="201.0" textAlignment="JUSTIFY" wrapText="true"/>
 
 
             <Button fx:id="subScribeBtn" layoutX="138.0" layoutY="697.0" mnemonicParsing="false" onAction="#subScribe" text="Iscriviti" />
-            <Button fx:id="retiredParBtn" disable="true" layoutX="248.0" layoutY="697.0" onAction="#disScribe" mnemonicParsing="false" text="Disiscriviti" />
-            <Button fx:id="retiredEventBtn" disable="true" visible="false" layoutX="372.0" onAction="#retiredEvent" layoutY="697.0" mnemonicParsing="false" text="Ritira proposta" />
+            <Button fx:id="retiredParBtn" disable="true" layoutX="248.0" layoutY="697.0" mnemonicParsing="false" onAction="#disScribe" text="Disiscriviti" />
+            <Button fx:id="retiredEventBtn" disable="true" layoutX="372.0" layoutY="697.0" mnemonicParsing="false" onAction="#retiredEvent" text="Ritira proposta" visible="false" />
 
          </children></AnchorPane>
   </content>

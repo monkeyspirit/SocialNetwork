@@ -45,9 +45,6 @@ public class SoccerMatchEvent extends Event{
     }
 
 
-    public SoccerMatchEvent(){
-
-    }
 
     public Field getGender() {
         return gender;

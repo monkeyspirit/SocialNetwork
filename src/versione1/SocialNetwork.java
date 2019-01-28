@@ -1,6 +1,8 @@
 package versione1;
 
 import utilities.FileUtility;
+import versione5.CinemaCategory;
+import versione5.CinemaEvent;
 
 import javax.swing.text.html.ListView;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ public class SocialNetwork {
 	//Attributi
     private List<Category<? extends Event>> categories;
 	private SoccerMatchCategory soccerMatchCategory;
+	private CinemaCategory cinemaCategory;
 	private List<User> users;
 	private User loggedUser; //utente attualmente loggato
 	private FileUtility fileUtility;
@@ -22,7 +25,9 @@ public class SocialNetwork {
 	public SocialNetwork() {
 	    this.categories = new ArrayList<>();
 	    this.soccerMatchCategory = new SoccerMatchCategory();
+	    this.cinemaCategory = new CinemaCategory();
 	    this.categories.add(soccerMatchCategory); //aggiungo la categoria all'array
+		this.categories.add(cinemaCategory);
 		this.fileUtility = new FileUtility();
 //		this.notificationsHandler = new NotificationsBuilder();
 	}
@@ -38,6 +43,11 @@ public class SocialNetwork {
 	public SoccerMatchCategory getSoccerMatchCategory(){
 		return this.soccerMatchCategory;
 	}
+
+	public CinemaCategory getCinemaCategory(){
+		return this.cinemaCategory;
+	}
+
 
 	public List<User> getUsers() { return this.users;	}
 
