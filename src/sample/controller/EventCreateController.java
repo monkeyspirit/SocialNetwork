@@ -1046,7 +1046,7 @@ public class EventCreateController {
 
                         socialNetwork.getCinemaCategory().addEvent(filmView);
 
-                       // socialNetwork.writeSoccerMatchEventListOnFile();
+                        socialNetwork.writeCinemaEventListOnFile();
                         socialNetwork.updateUsersListFile();
 
                         thisStage.close();

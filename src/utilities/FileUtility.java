@@ -7,6 +7,7 @@ import com.google.gson.stream.JsonReader;
 import versione1.Event;
 import versione1.SoccerMatchEvent;
 import versione1.User;
+import versione5.CinemaEvent;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -19,12 +20,14 @@ import java.util.List;
  */
 public class FileUtility {
 
-    public static final String SOCCER_MATCH_EVENTS_FILE_PATH = "JsonFiles/";
+    public static final String EVENTS_FILE_PATH = "JsonFiles/";
     public static final String SOCCER_MATCH_EVENTS_FILE = "SoccerMatchEvents";
+    public static final String CINEMA_EVENTS_FILE = "CinemaEvents";
     public static final String USERS_LIST_FILE_PATH = "JsonFiles/users/usersList.json";
 
     private RuntimeTypeAdapterFactory<Event> typeFactory;
     private GsonBuilder builder;
+
     private Gson gson;
 
     /**
@@ -36,11 +39,12 @@ public class FileUtility {
     public FileUtility() {
         typeFactory = RuntimeTypeAdapterFactory
                 .of(Event.class, "type") // Qui si deve specificare il tipo della superclasse e quale attributo guardare per identificare i figli (attributo type)
-                .registerSubtype(SoccerMatchEvent.class, "SoccerMatchEvent"); //Qui si associa il valore dell'attributo "type" all'interno di ciascuna classe figlia con il tipo corrispondente della classe (e' necessario aggiungere una riga per ogni sottoclasse che si crea)
-
+                .registerSubtype(SoccerMatchEvent.class, "SoccerMatchEvent") //Qui si associa il valore dell'attributo "type" all'interno di ciascuna classe figlia con il tipo corrispondente della classe (e' necessario aggiungere una riga per ogni sottoclasse che si crea)
+                .registerSubtype(CinemaEvent.class, "CinemaEvent");
         builder = new GsonBuilder().registerTypeAdapterFactory(typeFactory);
         gson = builder.create();
     }
+
 
     /**
      * Serializza la lista di eventSoccerMatch e la scrive in un file .json
@@ -48,7 +52,7 @@ public class FileUtility {
      * @param soccerMatchEvents La lista di eventi che si vuole serializzare
      */
     public void writeSoccerMatchEvents(List<SoccerMatchEvent> soccerMatchEvents) {
-        String fileName = PathBuilder.buildJsonFilePath(SOCCER_MATCH_EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE);
+        String fileName = PathBuilder.buildJsonFilePath(EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE);
         writeEventListToJsonFile(soccerMatchEvents, fileName);
     }
 
@@ -58,10 +62,29 @@ public class FileUtility {
      * @return lista di SoccerMatchEvent
      */
     public List<SoccerMatchEvent> readSoccerMatchEvents() {
-        String filePath = PathBuilder.buildJsonFilePath(SOCCER_MATCH_EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE);
+        String filePath = PathBuilder.buildJsonFilePath(EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE);
         return readSoccerMatchEventsFromJsonFile(filePath);
     }
 
+    /**
+     * Serializza la lista di CinemaEvent e la scrive in un file .json
+     *
+     * @param cinemaEvents La lista di eventi che si vuole serializzare
+     */
+    public void writeCinemaEvents(List<CinemaEvent> cinemaEvents) {
+        String fileName = PathBuilder.buildJsonFilePath(EVENTS_FILE_PATH, CINEMA_EVENTS_FILE);
+        writeEventListToJsonFile(cinemaEvents, fileName);
+    }
+
+    /**
+     * Legge il file CinemaEvents.json ed effettua la deserializzazione dei cinemaEvent
+     *
+     * @return lista di CinemaEvent
+     */
+    public List<CinemaEvent> readCinemaEvents() {
+        String filePath = PathBuilder.buildJsonFilePath(EVENTS_FILE_PATH, CINEMA_EVENTS_FILE);
+        return readCinemaEventsFromJsonFile(filePath);
+    }
     /**
      * Serializza la lista di eventSoccerMatch dell'utente e la scrive in un file .json
      *
@@ -71,7 +94,7 @@ public class FileUtility {
      */
     @Deprecated
     public void writeUserLocalSoccerMatchEvents(User user, List<SoccerMatchEvent> soccerMatchEvents) {
-        String fileName = PathBuilder.buildJsonFilePath(SOCCER_MATCH_EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE, user.getUsername());
+        String fileName = PathBuilder.buildJsonFilePath(EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE, user.getUsername());
         writeEventListToJsonFile(soccerMatchEvents, fileName);
     }
 
@@ -84,7 +107,7 @@ public class FileUtility {
      */
     @Deprecated
     public List<SoccerMatchEvent> readUserLocalSoccerMatchEvents(User user) {
-        String filePath = PathBuilder.buildJsonFilePath(SOCCER_MATCH_EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE, user.getUsername());
+        String filePath = PathBuilder.buildJsonFilePath(EVENTS_FILE_PATH, SOCCER_MATCH_EVENTS_FILE, user.getUsername());
         return readSoccerMatchEventsFromJsonFile(filePath);
     }
 
@@ -124,6 +147,26 @@ public class FileUtility {
             e.printStackTrace();
         }
         return soccerMatchEventsDeserialized;
+    }
+
+    /**
+     * Deserializza un file json contenente una lista di CinemaEvent
+     *
+     * @param filePath percorso del file json
+     * @return lista di CinemaEvent
+     */
+    private List<CinemaEvent> readCinemaEventsFromJsonFile(String filePath) {
+        Type listType = new TypeToken<List<CinemaEvent>>() {
+        }.getType(); //listType contiene il tipo di elemento che si vuole deserializzare ossia <List<CinemaEvent>>
+
+        List<CinemaEvent> cinemaEventsDeserialized = null;
+        try {
+            JsonReader reader = new JsonReader(new FileReader(filePath)); //leggo dal file CinemaEvents.json la lista degli eventi di quel tipo
+            cinemaEventsDeserialized = gson.fromJson(reader, listType);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return cinemaEventsDeserialized;
     }
 
     /**

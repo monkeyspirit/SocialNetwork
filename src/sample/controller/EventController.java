@@ -215,13 +215,11 @@ public class EventController {
                 initializeToolPic(genderLbl, GENDER_DESCRIPTION);
 
                 ageLblEvent.setText((String) ((SoccerMatchEvent) event).getAgeRange().getValue());
-
                 genderLblEvent.setText(String.valueOf(((SoccerMatchEvent) event).getGender().getValue()));
                 break;
             }
 
             case (CINEMA_NAME): {
-
                 vociSpeseExtra.setVisible(true);
                 gadgetEventCheckB.setVisible(true);
                 rinfrescoEventCheckB.setVisible(true);

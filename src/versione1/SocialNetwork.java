@@ -156,19 +156,39 @@ public class SocialNetwork {
 	 */
 	public void updateUserAndEventsListFile(){
 		fileUtility.writeUsersList(this.users);
-		fileUtility.writeSoccerMatchEvents(soccerMatchCategory.getEvents());
+		writeSoccerMatchEventListOnFile();
+		writeCinemaEventListOnFile();
+	}
+
+	/**
+	 * legge da file tutti gli eventi appartenenti alle categorie esistenti
+	 */
+	public void loadAllEventsFromFile() {
+		loadSoccerMatchEventListFromFile();
+		loadCinemaEventListFromFile();
+	}
+
+
+	public void writeSoccerMatchEventListOnFile() {
+        fileUtility.writeSoccerMatchEvents(soccerMatchCategory.getEvents());
+    }
+
+	public void writeCinemaEventListOnFile() {
+		fileUtility.writeCinemaEvents(cinemaCategory.getEvents());
 	}
 
 	/**
 	 * legge il file contenente la lista di EventSoccerMatch lo carica all'interno della lista di eventi della categoria corrispondente
 	 */
-	public void loadSoccerMatchEventListFromFile() {
+	private void loadSoccerMatchEventListFromFile() {
 		soccerMatchCategory.setEvents(fileUtility.readSoccerMatchEvents());
 	}
 
-	public void writeSoccerMatchEventListOnFile() {
-        fileUtility.writeSoccerMatchEvents(soccerMatchCategory.getEvents());
-    }
+	private void loadCinemaEventListFromFile() {
+		cinemaCategory.setEvents(fileUtility.readCinemaEvents());
+	}
+
+
 
 	// Metodo che serve per trovare tutti gli eventi a cui e' iscritto un dato utente e ne ritorna i nomi
 	public List<String> findEventByUserNameS(String userSession){
