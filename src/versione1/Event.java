@@ -4,6 +4,7 @@ import versione2.State;
 import versione2.StateValue;
 import versione2.notifications.Notification;
 import versione2.notifications.NotificationsBuilder;
+import versione5.Member;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -64,7 +65,7 @@ public abstract class Event  {
 
 	private List<State> state;
 	private String creator; //serve per capire chi e' il creatore dell'utente
-    private List<String> participants;
+    private List<Member> participants;
 
     /**
      * Costruttore vuoto: viene inizializzata la lista di campi, ciascuno dei quali con
@@ -171,7 +172,17 @@ public abstract class Event  {
 
     public String getCreator() { return creator; }
 
-    public List<String> getParticipants() { return participants; }
+    public List<Member> getParticipants() { return participants; }
+
+    public List<String> getParticipantsNames() {
+        List<String> names = new ArrayList<>();
+
+        for(Member participant : participants){
+            names.add(participant.getUsername());
+        }
+
+        return names;
+    }
 
     public StateValue getStateValue() { return state.get(state.size()-1).getStateValue(); }
 
@@ -197,23 +208,17 @@ public abstract class Event  {
         return false;
     }
 
-    // Usato nella grafica torna una stringa con valore dello stato e data
-    public String getStateValueAndSwitchDate() {
-        String stateAndDate = "";
-
-        for (State stateSel: state ) {
-            stateAndDate = stateAndDate + stateSel.getStateValue()+"-"+stateSel.getSwitchDate()+", ";
-        }
-
-        return  stateAndDate;
-    }
-
     /**
      * Aggiunge il partecipante specificato alla lista di partecipanti
      * @param participantUsername username del partecipante
      */
+    public void addParticipant(String participantUsername, int[] extra){
+        participants.add(new Member(participantUsername, extra));
+    }
+
     public void addParticipant(String participantUsername){
-        participants.add(participantUsername);
+        int[] extra = {0,0,0};
+        participants.add(new Member(participantUsername, extra));
     }
 
     /**
@@ -221,7 +226,13 @@ public abstract class Event  {
      * @param participantRemove username del partecipante
      */
     public void removeParticipant(String participantRemove){
-        participants.remove(participantRemove);
+
+        for(Member remove : participants){
+            if(remove.getUsername().equalsIgnoreCase(participantRemove)){
+                participants.remove(remove);
+            }
+        }
+
     }
 
     /**
@@ -230,8 +241,8 @@ public abstract class Event  {
      * @return true se l'utente si trova nell'elenco dei partecipanti, false altrimenti
      */
     public boolean isUserAlreadyRegistered(String userToCheck){
-        for (String participant : participants) {
-            if(userToCheck.equalsIgnoreCase(participant))
+        for (Member participant : participants) {
+            if(userToCheck.equalsIgnoreCase(participant.getUsername()))
                 return true;
         }
         return false;

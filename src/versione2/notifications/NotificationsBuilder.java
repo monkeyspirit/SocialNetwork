@@ -19,16 +19,38 @@ public class NotificationsBuilder {
     public static final String MSG_INVITE = "Sei stato invitato a partecipare a ";
 
 
-    public static Notification buildReminder(String title, LocalDate date, LocalTime time, String place, Float tee){
+    public static Notification buildReminder(String title, LocalDate date, LocalTime time, String place, Float tee, int[] extra){
         String reminderString = "Ricordati che hai l'evento: "+title+" che si terra' "+date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ITALY)+" "+date.getDayOfMonth()+" "+date.getMonth().getDisplayName(TextStyle.FULL, Locale.ITALY)+ " del "+date.getYear()+" alle ore "+time.getHour()+":"+time.getMinute()+".\n";
         reminderString += "Il luogo di ritrovo e': " + place + ".\n";
-        if(tee!=0){
-            reminderString += "Ricordati di pagare: " + tee + " €.\n";
+        if(tee!=0 ){
+            reminderString += "Ricordati di pagare: " + tee + extra[0] + extra[1] + extra[2] + " €.\n";
         }
+        else {
+            if(extra[0]!= 0 && extra[1]!=0 && extra[2]!=0){
+                reminderString += "Ricordati di pagare: " + extra[0] + extra[1] + extra[2] + " €.\n";
+
+            }
+        }
+
+        if(extra[0]!= 0 && extra[1]!=0 && extra[2]!=0){
+            reminderString +="Di cui:";
+            if( extra[0]!=0){
+                reminderString += extra[0] + "€ per i Gadget\t";
+            }
+            if( extra[1]!=0){
+                reminderString += extra[1] + "€ per il rinfresco\t";
+            }
+            if( extra[2]!=0){
+                reminderString += extra[2] + "€ per i pasti\t";
+            }
+        }
+
+
 
         Notification reminder = new Notification(NotificationType.Reminder, reminderString);
         return reminder;
     }
+
 
     /**
      * Costruisce il messaggio della notifica per un evento nuovo

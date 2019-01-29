@@ -2,6 +2,7 @@ package sample.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import versione1.Event;
@@ -40,11 +41,13 @@ public class EventController {
     public static final String FILMTYPE_DESCRIPTION = "Indica la tipologia del film proposto, può elencare più generi";
 
     @FXML
-    private Label extranumPLblEvent,retiredDeadLLblEvent, placesAvbLbl, stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
+    private Label vociSpeseExtra, gadgetValueVentLbl, rinfrescoValueVentLbl, pastiValueVentLbl, extranumPLblEvent,retiredDeadLLblEvent, placesAvbLbl, stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
     @FXML
     private Button subScribeBtn, retiredParBtn, retiredEventBtn;
     @FXML
     private Label titleLbl, numPLbl, extraNumPLbl, deadLLbl, retiredDeadLLbl, placeLbl, dateLbl, timeLbl, durLbl, indTeeLbl, totTeLbl, endDateLbl, endTimeLbl, noteLbl,codificaDurataLbl;
+    @FXML
+    private CheckBox gadgetEventCheckB, rinfrescoEventCheckB, pastiEventCheckB;
 
     private SocialNetwork socialNetwork;
     private Event event;
@@ -216,6 +219,21 @@ public class EventController {
             }
 
             case (CINEMA_NAME): {
+
+                vociSpeseExtra.setVisible(true);
+                gadgetEventCheckB.setVisible(true);
+                rinfrescoEventCheckB.setVisible(true);
+                pastiEventCheckB.setVisible(true);
+
+                gadgetValueVentLbl.setVisible(true);
+                pastiValueVentLbl.setVisible(true);
+                rinfrescoValueVentLbl.setVisible(true);
+
+
+                gadgetValueVentLbl.setText(String.valueOf(((CinemaEvent) event).getGadgetExtra().getValue())+" €");
+                pastiValueVentLbl.setText(String.valueOf(((CinemaEvent) event).getPastiExtra().getValue())+" €");
+                rinfrescoValueVentLbl.setText(String.valueOf(((CinemaEvent) event).getRinfreschiExtra().getValue())+" €");
+
                 genderLbl.setText("Genere");
                 initializeToolPic(genderLbl, FILMTYPE_DESCRIPTION);
 
@@ -224,6 +242,7 @@ public class EventController {
                     gender = gender + type +", ";
                 }
                 genderLblEvent.setText(gender);
+                break;
 
             }
         }
@@ -243,7 +262,31 @@ public class EventController {
      */
     public void subScribe(){
 
-        event.addParticipant(sessionUsername);
+        int[] extra = {0, 0, 0};
+
+
+        switch(event.getType()){
+            case (CINEMA_NAME): {
+
+                if(gadgetEventCheckB.isSelected()){
+                    extra[0]=1;
+                }
+                if(rinfrescoEventCheckB.isSelected()){
+                    extra[1]=1;
+                }
+                if(pastiEventCheckB.isSelected()){
+                    extra[2]=1;
+                }
+
+                gadgetEventCheckB.setDisable(true);
+                rinfrescoEventCheckB.setDisable(true);
+                pastiEventCheckB.setDisable(true);
+                break;
+            }
+        }
+
+
+        event.addParticipant(sessionUsername, extra);
         socialNetwork.updateUserAndEventsListFile();
         subScribeBtn.setDisable(true);
         retiredParBtn.setDisable(false);
@@ -258,6 +301,16 @@ public class EventController {
      * Il metodo viene associato al pulsante DISiscrivi ed DISiscrive l'utente all'evento
      */
     public void disScribe(){
+
+        switch(event.getType()){
+            case (CINEMA_NAME): {
+
+                gadgetEventCheckB.setDisable(false);
+                rinfrescoEventCheckB.setDisable(false);
+                pastiEventCheckB.setDisable(false);
+                break;
+            }
+        }
 
         event.removeParticipant(sessionUsername);
         socialNetwork.updateUserAndEventsListFile();

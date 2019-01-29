@@ -1,1 +1,776 @@
-[{"gender":{"name":"Sesso","description":"Sesso dei partecipanti","value":"Maschile"},"ageRange":{"name":"Fascia di eta","description":"limite inferiore e superiore di eta\u0027 dei partecipanti","value":"14-17"},"type":"SoccerMatchEvent","title":{"name":"Titolo","description":"Campo facoltativo che consiste in un nome di fantasia attribuito all\u0027evento","value":"Partita prova ritiro"},"numOfParticipants":{"name":"Numero di partecipanti","description":"Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell\u0027evento","value":3},"extraParticipants":{"name":"Tolleranza numero di partecipanti","description":"Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"","value":2},"registrationDeadline":{"name":"Termine ultimo iscrizione","description":"Campo obbligatorio che inidica l\u0027ultima data possibile per iscriversi","value":{"year":2019,"month":1,"day":26}},"retireDeadline":{"name":"Termine ultimo di ritiro iscrizione","description":"Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta","value":{"year":2019,"month":1,"day":25}},"place":{"name":"Luogo","description":"Campo obbligatorio che indica l\u0027indirizzo del luogo che ospitera\u0027  l\u0027evento oppure, se l\u0027evento e\u0027 itinerante, il luogo di ritrovo dei partecipanti","value":"Qui"},"date":{"name":"Data","description":"Campo obbligatorio che indica la data in cui l\u0027evento proposto deve svolgersi o, nel caso l\u0027evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell\u0027evento","value":{"year":2019,"month":1,"day":29}},"time":{"name":"Ora","description":"Campo obbligatorio che indica l\u0027ora in cui i partecipanti dovranno trovarsi nel luogo \u0027Luogo\u0027 in data \u0027Data\u0027 per dare inizio all\u0027evento","value":{"hour":12,"minute":21,"second":0,"nano":0}},"duration":{"name":"Durata","description":"Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu\u0027 giorni consecutivi","value":"1"},"indTee":{"name":"Quota individuale","description":"Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all\u0027iniziativa dovra\u0027  sostenere (si noti che la spesa puo\u0027 anche essere nulla)","value":0.0},"teeInclude":{"name":"Compreso nella quota","description":"Campo facoltativo che indica tutte le voci di spesa comprese nell\u0027ammontare indicato nella \u0027Quota individuale\u0027","value":""},"endDate":{"name":"Data conclusiva","description":"Campo facoltativo che fissa la data di conclusione dell\u0027evento","value":{"year":2019,"month":1,"day":30}},"endTime":{"name":"Ora conclusiva","description":"Campo facoltativo che stima l\u0027ora di conclusione dell\u0027evento"},"note":{"name":"Note","description":"Campo facoltativo contenente informazioni aggiuntive circa l\u0027evento","value":""},"state":[{"state":"Aperta","switchDate":{"year":2019,"month":1,"day":24}},{"state":"Chiusa","switchDate":{"year":2019,"month":1,"day":28}}],"creator":"Maria","participants":["Maria","Giacomo","Traino"]},{"gender":{"name":"Sesso","description":"Sesso dei partecipanti","value":"Maschile"},"ageRange":{"name":"Fascia di eta","description":"limite inferiore e superiore di eta\u0027 dei partecipanti","value":"15-18"},"type":"SoccerMatchEvent","title":{"name":"Titolo","description":"Campo facoltativo che consiste in un nome di fantasia attribuito all\u0027evento","value":"Prova chiusura"},"numOfParticipants":{"name":"Numero di partecipanti","description":"Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell\u0027evento","value":3},"extraParticipants":{"name":"Tolleranza numero di partecipanti","description":"Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"","value":0},"registrationDeadline":{"name":"Termine ultimo iscrizione","description":"Campo obbligatorio che inidica l\u0027ultima data possibile per iscriversi","value":{"year":2019,"month":1,"day":26}},"retireDeadline":{"name":"Termine ultimo di ritiro iscrizione","description":"Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta","value":{"year":2019,"month":1,"day":25}},"place":{"name":"Luogo","description":"Campo obbligatorio che indica l\u0027indirizzo del luogo che ospitera\u0027  l\u0027evento oppure, se l\u0027evento e\u0027 itinerante, il luogo di ritrovo dei partecipanti","value":"Brescia"},"date":{"name":"Data","description":"Campo obbligatorio che indica la data in cui l\u0027evento proposto deve svolgersi o, nel caso l\u0027evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell\u0027evento","value":{"year":2019,"month":1,"day":28}},"time":{"name":"Ora","description":"Campo obbligatorio che indica l\u0027ora in cui i partecipanti dovranno trovarsi nel luogo \u0027Luogo\u0027 in data \u0027Data\u0027 per dare inizio all\u0027evento","value":{"hour":16,"minute":42,"second":0,"nano":0}},"duration":{"name":"Durata","description":"Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu\u0027 giorni consecutivi","value":"1:10"},"indTee":{"name":"Quota individuale","description":"Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all\u0027iniziativa dovra\u0027  sostenere (si noti che la spesa puo\u0027 anche essere nulla)","value":0.0},"teeInclude":{"name":"Compreso nella quota","description":"Campo facoltativo che indica tutte le voci di spesa comprese nell\u0027ammontare indicato nella \u0027Quota individuale\u0027","value":""},"endDate":{"name":"Data conclusiva","description":"Campo facoltativo che fissa la data di conclusione dell\u0027evento","value":{"year":2019,"month":1,"day":28}},"endTime":{"name":"Ora conclusiva","description":"Campo facoltativo che stima l\u0027ora di conclusione dell\u0027evento","value":{"hour":17,"minute":52,"second":0,"nano":0}},"note":{"name":"Note","description":"Campo facoltativo contenente informazioni aggiuntive circa l\u0027evento","value":""},"state":[{"state":"Aperta","switchDate":{"year":2019,"month":1,"day":24}},{"state":"Fallita","switchDate":{"year":2019,"month":1,"day":28}}],"creator":"Maria","participants":["Maria","Pietro"]},{"gender":{"name":"Sesso","description":"Sesso dei partecipanti","value":"Femminile"},"ageRange":{"name":"Fascia di eta","description":"limite inferiore e superiore di eta\u0027 dei partecipanti","value":"12-15"},"type":"SoccerMatchEvent","title":{"name":"Titolo","description":"Campo facoltativo che consiste in un nome di fantasia attribuito all\u0027evento","value":"Prova chiusura 2"},"numOfParticipants":{"name":"Numero di partecipanti","description":"Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell\u0027evento","value":2},"extraParticipants":{"name":"Tolleranza numero di partecipanti","description":"Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"","value":0},"registrationDeadline":{"name":"Termine ultimo iscrizione","description":"Campo obbligatorio che inidica l\u0027ultima data possibile per iscriversi","value":{"year":2019,"month":1,"day":26}},"retireDeadline":{"name":"Termine ultimo di ritiro iscrizione","description":"Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta","value":{"year":2019,"month":1,"day":25}},"place":{"name":"Luogo","description":"Campo obbligatorio che indica l\u0027indirizzo del luogo che ospitera\u0027  l\u0027evento oppure, se l\u0027evento e\u0027 itinerante, il luogo di ritrovo dei partecipanti","value":"qui"},"date":{"name":"Data","description":"Campo obbligatorio che indica la data in cui l\u0027evento proposto deve svolgersi o, nel caso l\u0027evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell\u0027evento","value":{"year":2019,"month":1,"day":28}},"time":{"name":"Ora","description":"Campo obbligatorio che indica l\u0027ora in cui i partecipanti dovranno trovarsi nel luogo \u0027Luogo\u0027 in data \u0027Data\u0027 per dare inizio all\u0027evento","value":{"hour":12,"minute":44,"second":0,"nano":0}},"duration":{"name":"Durata","description":"Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu\u0027 giorni consecutivi","value":"1"},"indTee":{"name":"Quota individuale","description":"Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all\u0027iniziativa dovra\u0027  sostenere (si noti che la spesa puo\u0027 anche essere nulla)","value":0.0},"teeInclude":{"name":"Compreso nella quota","description":"Campo facoltativo che indica tutte le voci di spesa comprese nell\u0027ammontare indicato nella \u0027Quota individuale\u0027","value":""},"endDate":{"name":"Data conclusiva","description":"Campo facoltativo che fissa la data di conclusione dell\u0027evento","value":{"year":2019,"month":1,"day":29}},"endTime":{"name":"Ora conclusiva","description":"Campo facoltativo che stima l\u0027ora di conclusione dell\u0027evento"},"note":{"name":"Note","description":"Campo facoltativo contenente informazioni aggiuntive circa l\u0027evento","value":""},"state":[{"state":"Aperta","switchDate":{"year":2019,"month":1,"day":24}},{"state":"Chiusa","switchDate":{"year":2019,"month":1,"day":26}}],"creator":"Pietro","participants":["Pietro","Maria"]},{"gender":{"name":"Sesso","description":"Sesso dei partecipanti","value":"Femminile"},"ageRange":{"name":"Fascia di eta","description":"limite inferiore e superiore di eta\u0027 dei partecipanti","value":"17-30"},"type":"SoccerMatchEvent","title":{"name":"Titolo","description":"Campo facoltativo che consiste in un nome di fantasia attribuito all\u0027evento","value":"Prova notifica creazione"},"numOfParticipants":{"name":"Numero di partecipanti","description":"Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell\u0027evento","value":5},"extraParticipants":{"name":"Tolleranza numero di partecipanti","description":"Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"","value":4},"registrationDeadline":{"name":"Termine ultimo iscrizione","description":"Campo obbligatorio che inidica l\u0027ultima data possibile per iscriversi","value":{"year":2019,"month":1,"day":29}},"retireDeadline":{"name":"Termine ultimo di ritiro iscrizione","description":"Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta","value":{"year":2019,"month":1,"day":28}},"place":{"name":"Luogo","description":"Campo obbligatorio che indica l\u0027indirizzo del luogo che ospitera\u0027  l\u0027evento oppure, se l\u0027evento e\u0027 itinerante, il luogo di ritrovo dei partecipanti","value":"Qui"},"date":{"name":"Data","description":"Campo obbligatorio che indica la data in cui l\u0027evento proposto deve svolgersi o, nel caso l\u0027evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell\u0027evento","value":{"year":2019,"month":2,"day":1}},"time":{"name":"Ora","description":"Campo obbligatorio che indica l\u0027ora in cui i partecipanti dovranno trovarsi nel luogo \u0027Luogo\u0027 in data \u0027Data\u0027 per dare inizio all\u0027evento","value":{"hour":10,"minute":0,"second":0,"nano":0}},"duration":{"name":"Durata","description":"Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu\u0027 giorni consecutivi","value":"2:0"},"indTee":{"name":"Quota individuale","description":"Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all\u0027iniziativa dovra\u0027  sostenere (si noti che la spesa puo\u0027 anche essere nulla)","value":0.0},"teeInclude":{"name":"Compreso nella quota","description":"Campo facoltativo che indica tutte le voci di spesa comprese nell\u0027ammontare indicato nella \u0027Quota individuale\u0027","value":""},"endDate":{"name":"Data conclusiva","description":"Campo facoltativo che fissa la data di conclusione dell\u0027evento","value":{"year":2019,"month":2,"day":1}},"endTime":{"name":"Ora conclusiva","description":"Campo facoltativo che stima l\u0027ora di conclusione dell\u0027evento","value":{"hour":12,"minute":0,"second":0,"nano":0}},"note":{"name":"Note","description":"Campo facoltativo contenente informazioni aggiuntive circa l\u0027evento","value":""},"state":[{"state":"Creata","switchDate":{"year":2019,"month":1,"day":26}},{"state":"Aperta","switchDate":{"year":2019,"month":1,"day":26}}],"creator":"Maria","participants":["Maria"]},{"gender":{"name":"Sesso","description":"Sesso dei partecipanti","value":"Femminile"},"ageRange":{"name":"Fascia di eta","description":"limite inferiore e superiore di eta\u0027 dei partecipanti","value":"20-60"},"type":"SoccerMatchEvent","title":{"name":"Titolo","description":"Campo facoltativo che consiste in un nome di fantasia attribuito all\u0027evento","value":"coppa uefa"},"numOfParticipants":{"name":"Numero di partecipanti","description":"Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell\u0027evento","value":20},"extraParticipants":{"name":"Tolleranza numero di partecipanti","description":"Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"","value":3},"registrationDeadline":{"name":"Termine ultimo iscrizione","description":"Campo obbligatorio che inidica l\u0027ultima data possibile per iscriversi","value":{"year":2019,"month":1,"day":30}},"retireDeadline":{"name":"Termine ultimo di ritiro iscrizione","description":"Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta","value":{"year":2019,"month":1,"day":29}},"place":{"name":"Luogo","description":"Campo obbligatorio che indica l\u0027indirizzo del luogo che ospitera\u0027  l\u0027evento oppure, se l\u0027evento e\u0027 itinerante, il luogo di ritrovo dei partecipanti","value":"brescia"},"date":{"name":"Data","description":"Campo obbligatorio che indica la data in cui l\u0027evento proposto deve svolgersi o, nel caso l\u0027evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell\u0027evento","value":{"year":2019,"month":2,"day":1}},"time":{"name":"Ora","description":"Campo obbligatorio che indica l\u0027ora in cui i partecipanti dovranno trovarsi nel luogo \u0027Luogo\u0027 in data \u0027Data\u0027 per dare inizio all\u0027evento","value":{"hour":18,"minute":30,"second":0,"nano":0}},"duration":{"name":"Durata","description":"Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu\u0027 giorni consecutivi","value":"3"},"indTee":{"name":"Quota individuale","description":"Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all\u0027iniziativa dovra\u0027  sostenere (si noti che la spesa puo\u0027 anche essere nulla)","value":12.0},"teeInclude":{"name":"Compreso nella quota","description":"Campo facoltativo che indica tutte le voci di spesa comprese nell\u0027ammontare indicato nella \u0027Quota individuale\u0027","value":"ristoro"},"endDate":{"name":"Data conclusiva","description":"Campo facoltativo che fissa la data di conclusione dell\u0027evento","value":{"year":2019,"month":2,"day":4}},"endTime":{"name":"Ora conclusiva","description":"Campo facoltativo che stima l\u0027ora di conclusione dell\u0027evento","value":{"hour":23,"minute":53,"second":0,"nano":0}},"note":{"name":"Note","description":"Campo facoltativo contenente informazioni aggiuntive circa l\u0027evento","value":"e\u0027 gradita la puntualita\u0027"},"state":[{"state":"Creata","switchDate":{"year":2019,"month":1,"day":26}},{"state":"Aperta","switchDate":{"year":2019,"month":1,"day":26}}],"creator":"paola","participants":["paola","Maria"]},{"gender":{"name":"Sesso","description":"Sesso dei partecipanti","value":"Maschile"},"ageRange":{"name":"Fascia di eta","description":"limite inferiore e superiore di eta\u0027 dei partecipanti","value":"19-50"},"type":"SoccerMatchEvent","title":{"name":"Titolo","description":"Campo facoltativo che consiste in un nome di fantasia attribuito all\u0027evento","value":"prova"},"numOfParticipants":{"name":"Numero di partecipanti","description":"Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell\u0027evento","value":5},"extraParticipants":{"name":"Tolleranza numero di partecipanti","description":"Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"","value":0},"registrationDeadline":{"name":"Termine ultimo iscrizione","description":"Campo obbligatorio che inidica l\u0027ultima data possibile per iscriversi","value":{"year":2019,"month":1,"day":31}},"retireDeadline":{"name":"Termine ultimo di ritiro iscrizione","description":"Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta","value":{"year":2019,"month":1,"day":29}},"place":{"name":"Luogo","description":"Campo obbligatorio che indica l\u0027indirizzo del luogo che ospitera\u0027  l\u0027evento oppure, se l\u0027evento e\u0027 itinerante, il luogo di ritrovo dei partecipanti","value":"prova"},"date":{"name":"Data","description":"Campo obbligatorio che indica la data in cui l\u0027evento proposto deve svolgersi o, nel caso l\u0027evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell\u0027evento","value":{"year":2019,"month":2,"day":1}},"time":{"name":"Ora","description":"Campo obbligatorio che indica l\u0027ora in cui i partecipanti dovranno trovarsi nel luogo \u0027Luogo\u0027 in data \u0027Data\u0027 per dare inizio all\u0027evento","value":{"hour":11,"minute":56,"second":0,"nano":0}},"duration":{"name":"Durata","description":"Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu\u0027 giorni consecutivi","value":"1"},"indTee":{"name":"Quota individuale","description":"Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all\u0027iniziativa dovra\u0027  sostenere (si noti che la spesa puo\u0027 anche essere nulla)","value":0.0},"teeInclude":{"name":"Compreso nella quota","description":"Campo facoltativo che indica tutte le voci di spesa comprese nell\u0027ammontare indicato nella \u0027Quota individuale\u0027","value":""},"endDate":{"name":"Data conclusiva","description":"Campo facoltativo che fissa la data di conclusione dell\u0027evento","value":{"year":2019,"month":2,"day":2}},"endTime":{"name":"Ora conclusiva","description":"Campo facoltativo che stima l\u0027ora di conclusione dell\u0027evento"},"note":{"name":"Note","description":"Campo facoltativo contenente informazioni aggiuntive circa l\u0027evento","value":""},"state":[{"state":"Creata","switchDate":{"year":2019,"month":1,"day":26}},{"state":"Aperta","switchDate":{"year":2019,"month":1,"day":26}}],"creator":"paola","participants":["paola","Maria"]}]
+[
+  {
+    "gender": {
+      "name": "Sesso",
+      "description": "Sesso dei partecipanti",
+      "value": "Maschile"
+    },
+    "ageRange": {
+      "name": "Fascia di eta",
+      "description": "limite inferiore e superiore di eta' dei partecipanti",
+      "value": "14-17"
+    },
+    "type": "SoccerMatchEvent",
+    "title": {
+      "name": "Titolo",
+      "description": "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento",
+      "value": "Partita prova ritiro"
+    },
+    "numOfParticipants": {
+      "name": "Numero di partecipanti",
+      "description": "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento",
+      "value": 3
+    },
+    "extraParticipants": {
+      "name": "Tolleranza numero di partecipanti",
+      "description": "Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"",
+      "value": 2
+    },
+    "registrationDeadline": {
+      "name": "Termine ultimo iscrizione",
+      "description": "Campo obbligatorio che inidica l'ultima data possibile per iscriversi",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 26
+      }
+    },
+    "retireDeadline": {
+      "name": "Termine ultimo di ritiro iscrizione",
+      "description": "Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 25
+      }
+    },
+    "place": {
+      "name": "Luogo",
+      "description": "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti",
+      "value": "Qui"
+    },
+    "date": {
+      "name": "Data",
+      "description": "Campo obbligatorio che indica la data in cui l'evento proposto deve svolgersi o, nel caso l'evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 29
+      }
+    },
+    "time": {
+      "name": "Ora",
+      "description": "Campo obbligatorio che indica l'ora in cui i partecipanti dovranno trovarsi nel luogo 'Luogo' in data 'Data' per dare inizio all'evento",
+      "value": {
+        "hour": 12,
+        "minute": 21,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "duration": {
+      "name": "Durata",
+      "description": "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu' giorni consecutivi",
+      "value": "1"
+    },
+    "indTee": {
+      "name": "Quota individuale",
+      "description": "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all'iniziativa dovra'  sostenere (si noti che la spesa puo' anche essere nulla)",
+      "value": 0
+    },
+    "teeInclude": {
+      "name": "Compreso nella quota",
+      "description": "Campo facoltativo che indica tutte le voci di spesa comprese nell'ammontare indicato nella 'Quota individuale'",
+      "value": ""
+    },
+    "endDate": {
+      "name": "Data conclusiva",
+      "description": "Campo facoltativo che fissa la data di conclusione dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 30
+      }
+    },
+    "endTime": {
+      "name": "Ora conclusiva",
+      "description": "Campo facoltativo che stima l'ora di conclusione dell'evento"
+    },
+    "note": {
+      "name": "Note",
+      "description": "Campo facoltativo contenente informazioni aggiuntive circa l'evento",
+      "value": ""
+    },
+    "state": [
+      {
+        "state": "Aperta",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 24
+        }
+      },
+      {
+        "state": "Chiusa",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 28
+        }
+      }
+    ],
+    "creator": "Maria",
+    "participants": [
+      {"username":"Maria","extra":[0,0,0]},
+      {"username":"Giacomo","extra":[0,0,0]},
+      {"username":"Traino","extra":[0,0,0]}
+    ]
+  },
+  {
+    "gender": {
+      "name": "Sesso",
+      "description": "Sesso dei partecipanti",
+      "value": "Maschile"
+    },
+    "ageRange": {
+      "name": "Fascia di eta",
+      "description": "limite inferiore e superiore di eta' dei partecipanti",
+      "value": "15-18"
+    },
+    "type": "SoccerMatchEvent",
+    "title": {
+      "name": "Titolo",
+      "description": "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento",
+      "value": "Prova chiusura"
+    },
+    "numOfParticipants": {
+      "name": "Numero di partecipanti",
+      "description": "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento",
+      "value": 3
+    },
+    "extraParticipants": {
+      "name": "Tolleranza numero di partecipanti",
+      "description": "Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"",
+      "value": 0
+    },
+    "registrationDeadline": {
+      "name": "Termine ultimo iscrizione",
+      "description": "Campo obbligatorio che inidica l'ultima data possibile per iscriversi",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 26
+      }
+    },
+    "retireDeadline": {
+      "name": "Termine ultimo di ritiro iscrizione",
+      "description": "Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 25
+      }
+    },
+    "place": {
+      "name": "Luogo",
+      "description": "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti",
+      "value": "Brescia"
+    },
+    "date": {
+      "name": "Data",
+      "description": "Campo obbligatorio che indica la data in cui l'evento proposto deve svolgersi o, nel caso l'evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 28
+      }
+    },
+    "time": {
+      "name": "Ora",
+      "description": "Campo obbligatorio che indica l'ora in cui i partecipanti dovranno trovarsi nel luogo 'Luogo' in data 'Data' per dare inizio all'evento",
+      "value": {
+        "hour": 16,
+        "minute": 42,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "duration": {
+      "name": "Durata",
+      "description": "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu' giorni consecutivi",
+      "value": "1:10"
+    },
+    "indTee": {
+      "name": "Quota individuale",
+      "description": "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all'iniziativa dovra'  sostenere (si noti che la spesa puo' anche essere nulla)",
+      "value": 0
+    },
+    "teeInclude": {
+      "name": "Compreso nella quota",
+      "description": "Campo facoltativo che indica tutte le voci di spesa comprese nell'ammontare indicato nella 'Quota individuale'",
+      "value": ""
+    },
+    "endDate": {
+      "name": "Data conclusiva",
+      "description": "Campo facoltativo che fissa la data di conclusione dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 28
+      }
+    },
+    "endTime": {
+      "name": "Ora conclusiva",
+      "description": "Campo facoltativo che stima l'ora di conclusione dell'evento",
+      "value": {
+        "hour": 17,
+        "minute": 52,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "note": {
+      "name": "Note",
+      "description": "Campo facoltativo contenente informazioni aggiuntive circa l'evento",
+      "value": ""
+    },
+    "state": [
+      {
+        "state": "Aperta",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 24
+        }
+      },
+      {
+        "state": "Fallita",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 28
+        }
+      }
+    ],
+    "creator": "Maria",
+    "participants": [
+      {"username":"Maria","extra":[0,0,0]},
+      {"username":"Pietro","extra":[0,0,0]}
+    ]
+  },
+  {
+    "gender": {
+      "name": "Sesso",
+      "description": "Sesso dei partecipanti",
+      "value": "Femminile"
+    },
+    "ageRange": {
+      "name": "Fascia di eta",
+      "description": "limite inferiore e superiore di eta' dei partecipanti",
+      "value": "12-15"
+    },
+    "type": "SoccerMatchEvent",
+    "title": {
+      "name": "Titolo",
+      "description": "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento",
+      "value": "Prova chiusura 2"
+    },
+    "numOfParticipants": {
+      "name": "Numero di partecipanti",
+      "description": "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento",
+      "value": 2
+    },
+    "extraParticipants": {
+      "name": "Tolleranza numero di partecipanti",
+      "description": "Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"",
+      "value": 0
+    },
+    "registrationDeadline": {
+      "name": "Termine ultimo iscrizione",
+      "description": "Campo obbligatorio che inidica l'ultima data possibile per iscriversi",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 26
+      }
+    },
+    "retireDeadline": {
+      "name": "Termine ultimo di ritiro iscrizione",
+      "description": "Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 25
+      }
+    },
+    "place": {
+      "name": "Luogo",
+      "description": "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti",
+      "value": "qui"
+    },
+    "date": {
+      "name": "Data",
+      "description": "Campo obbligatorio che indica la data in cui l'evento proposto deve svolgersi o, nel caso l'evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 28
+      }
+    },
+    "time": {
+      "name": "Ora",
+      "description": "Campo obbligatorio che indica l'ora in cui i partecipanti dovranno trovarsi nel luogo 'Luogo' in data 'Data' per dare inizio all'evento",
+      "value": {
+        "hour": 12,
+        "minute": 44,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "duration": {
+      "name": "Durata",
+      "description": "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu' giorni consecutivi",
+      "value": "1"
+    },
+    "indTee": {
+      "name": "Quota individuale",
+      "description": "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all'iniziativa dovra'  sostenere (si noti che la spesa puo' anche essere nulla)",
+      "value": 0
+    },
+    "teeInclude": {
+      "name": "Compreso nella quota",
+      "description": "Campo facoltativo che indica tutte le voci di spesa comprese nell'ammontare indicato nella 'Quota individuale'",
+      "value": ""
+    },
+    "endDate": {
+      "name": "Data conclusiva",
+      "description": "Campo facoltativo che fissa la data di conclusione dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 29
+      }
+    },
+    "endTime": {
+      "name": "Ora conclusiva",
+      "description": "Campo facoltativo che stima l'ora di conclusione dell'evento"
+    },
+    "note": {
+      "name": "Note",
+      "description": "Campo facoltativo contenente informazioni aggiuntive circa l'evento",
+      "value": ""
+    },
+    "state": [
+      {
+        "state": "Aperta",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 24
+        }
+      },
+      {
+        "state": "Chiusa",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 26
+        }
+      }
+    ],
+    "creator": "Pietro",
+    "participants": [
+      {"username":"Pietro","extra":[0,0,0]},
+      {"username":"Maria","extra":[0,0,0]}
+    ]
+  },
+  {
+    "gender": {
+      "name": "Sesso",
+      "description": "Sesso dei partecipanti",
+      "value": "Femminile"
+    },
+    "ageRange": {
+      "name": "Fascia di eta",
+      "description": "limite inferiore e superiore di eta' dei partecipanti",
+      "value": "17-30"
+    },
+    "type": "SoccerMatchEvent",
+    "title": {
+      "name": "Titolo",
+      "description": "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento",
+      "value": "Prova notifica creazione"
+    },
+    "numOfParticipants": {
+      "name": "Numero di partecipanti",
+      "description": "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento",
+      "value": 5
+    },
+    "extraParticipants": {
+      "name": "Tolleranza numero di partecipanti",
+      "description": "Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"",
+      "value": 4
+    },
+    "registrationDeadline": {
+      "name": "Termine ultimo iscrizione",
+      "description": "Campo obbligatorio che inidica l'ultima data possibile per iscriversi",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 29
+      }
+    },
+    "retireDeadline": {
+      "name": "Termine ultimo di ritiro iscrizione",
+      "description": "Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 28
+      }
+    },
+    "place": {
+      "name": "Luogo",
+      "description": "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti",
+      "value": "Qui"
+    },
+    "date": {
+      "name": "Data",
+      "description": "Campo obbligatorio che indica la data in cui l'evento proposto deve svolgersi o, nel caso l'evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 2,
+        "day": 1
+      }
+    },
+    "time": {
+      "name": "Ora",
+      "description": "Campo obbligatorio che indica l'ora in cui i partecipanti dovranno trovarsi nel luogo 'Luogo' in data 'Data' per dare inizio all'evento",
+      "value": {
+        "hour": 10,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "duration": {
+      "name": "Durata",
+      "description": "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu' giorni consecutivi",
+      "value": "2:0"
+    },
+    "indTee": {
+      "name": "Quota individuale",
+      "description": "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all'iniziativa dovra'  sostenere (si noti che la spesa puo' anche essere nulla)",
+      "value": 0
+    },
+    "teeInclude": {
+      "name": "Compreso nella quota",
+      "description": "Campo facoltativo che indica tutte le voci di spesa comprese nell'ammontare indicato nella 'Quota individuale'",
+      "value": ""
+    },
+    "endDate": {
+      "name": "Data conclusiva",
+      "description": "Campo facoltativo che fissa la data di conclusione dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 2,
+        "day": 1
+      }
+    },
+    "endTime": {
+      "name": "Ora conclusiva",
+      "description": "Campo facoltativo che stima l'ora di conclusione dell'evento",
+      "value": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "note": {
+      "name": "Note",
+      "description": "Campo facoltativo contenente informazioni aggiuntive circa l'evento",
+      "value": ""
+    },
+    "state": [
+      {
+        "state": "Creata",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 26
+        }
+      },
+      {
+        "state": "Aperta",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 26
+        }
+      }
+    ],
+    "creator": "Maria",
+    "participants": [
+      {"username":"Maria","extra":[0,0,0]}
+    ]
+  },
+  {
+    "gender": {
+      "name": "Sesso",
+      "description": "Sesso dei partecipanti",
+      "value": "Femminile"
+    },
+    "ageRange": {
+      "name": "Fascia di eta",
+      "description": "limite inferiore e superiore di eta' dei partecipanti",
+      "value": "20-60"
+    },
+    "type": "SoccerMatchEvent",
+    "title": {
+      "name": "Titolo",
+      "description": "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento",
+      "value": "coppa uefa"
+    },
+    "numOfParticipants": {
+      "name": "Numero di partecipanti",
+      "description": "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento",
+      "value": 20
+    },
+    "extraParticipants": {
+      "name": "Tolleranza numero di partecipanti",
+      "description": "Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"",
+      "value": 3
+    },
+    "registrationDeadline": {
+      "name": "Termine ultimo iscrizione",
+      "description": "Campo obbligatorio che inidica l'ultima data possibile per iscriversi",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 30
+      }
+    },
+    "retireDeadline": {
+      "name": "Termine ultimo di ritiro iscrizione",
+      "description": "Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 29
+      }
+    },
+    "place": {
+      "name": "Luogo",
+      "description": "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti",
+      "value": "brescia"
+    },
+    "date": {
+      "name": "Data",
+      "description": "Campo obbligatorio che indica la data in cui l'evento proposto deve svolgersi o, nel caso l'evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 2,
+        "day": 1
+      }
+    },
+    "time": {
+      "name": "Ora",
+      "description": "Campo obbligatorio che indica l'ora in cui i partecipanti dovranno trovarsi nel luogo 'Luogo' in data 'Data' per dare inizio all'evento",
+      "value": {
+        "hour": 18,
+        "minute": 30,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "duration": {
+      "name": "Durata",
+      "description": "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu' giorni consecutivi",
+      "value": "3"
+    },
+    "indTee": {
+      "name": "Quota individuale",
+      "description": "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all'iniziativa dovra'  sostenere (si noti che la spesa puo' anche essere nulla)",
+      "value": 12
+    },
+    "teeInclude": {
+      "name": "Compreso nella quota",
+      "description": "Campo facoltativo che indica tutte le voci di spesa comprese nell'ammontare indicato nella 'Quota individuale'",
+      "value": "ristoro"
+    },
+    "endDate": {
+      "name": "Data conclusiva",
+      "description": "Campo facoltativo che fissa la data di conclusione dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 2,
+        "day": 4
+      }
+    },
+    "endTime": {
+      "name": "Ora conclusiva",
+      "description": "Campo facoltativo che stima l'ora di conclusione dell'evento",
+      "value": {
+        "hour": 23,
+        "minute": 53,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "note": {
+      "name": "Note",
+      "description": "Campo facoltativo contenente informazioni aggiuntive circa l'evento",
+      "value": "e' gradita la puntualita'"
+    },
+    "state": [
+      {
+        "state": "Creata",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 26
+        }
+      },
+      {
+        "state": "Aperta",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 26
+        }
+      }
+    ],
+    "creator": "paola",
+    "participants": [
+      {"username":"paola","extra":[0,0,0]},
+      {"username":"Maria","extra":[0,0,0]}
+    ]
+  },
+  {
+    "gender": {
+      "name": "Sesso",
+      "description": "Sesso dei partecipanti",
+      "value": "Maschile"
+    },
+    "ageRange": {
+      "name": "Fascia di eta",
+      "description": "limite inferiore e superiore di eta' dei partecipanti",
+      "value": "19-50"
+    },
+    "type": "SoccerMatchEvent",
+    "title": {
+      "name": "Titolo",
+      "description": "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento",
+      "value": "prova"
+    },
+    "numOfParticipants": {
+      "name": "Numero di partecipanti",
+      "description": "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento",
+      "value": 5
+    },
+    "extraParticipants": {
+      "name": "Tolleranza numero di partecipanti",
+      "description": "Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"",
+      "value": 0
+    },
+    "registrationDeadline": {
+      "name": "Termine ultimo iscrizione",
+      "description": "Campo obbligatorio che inidica l'ultima data possibile per iscriversi",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 31
+      }
+    },
+    "retireDeadline": {
+      "name": "Termine ultimo di ritiro iscrizione",
+      "description": "Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta",
+      "value": {
+        "year": 2019,
+        "month": 1,
+        "day": 29
+      }
+    },
+    "place": {
+      "name": "Luogo",
+      "description": "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti",
+      "value": "prova"
+    },
+    "date": {
+      "name": "Data",
+      "description": "Campo obbligatorio che indica la data in cui l'evento proposto deve svolgersi o, nel caso l'evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 2,
+        "day": 1
+      }
+    },
+    "time": {
+      "name": "Ora",
+      "description": "Campo obbligatorio che indica l'ora in cui i partecipanti dovranno trovarsi nel luogo 'Luogo' in data 'Data' per dare inizio all'evento",
+      "value": {
+        "hour": 11,
+        "minute": 56,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "duration": {
+      "name": "Durata",
+      "description": "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu' giorni consecutivi",
+      "value": "1"
+    },
+    "indTee": {
+      "name": "Quota individuale",
+      "description": "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all'iniziativa dovra'  sostenere (si noti che la spesa puo' anche essere nulla)",
+      "value": 0
+    },
+    "teeInclude": {
+      "name": "Compreso nella quota",
+      "description": "Campo facoltativo che indica tutte le voci di spesa comprese nell'ammontare indicato nella 'Quota individuale'",
+      "value": ""
+    },
+    "endDate": {
+      "name": "Data conclusiva",
+      "description": "Campo facoltativo che fissa la data di conclusione dell'evento",
+      "value": {
+        "year": 2019,
+        "month": 2,
+        "day": 2
+      }
+    },
+    "endTime": {
+      "name": "Ora conclusiva",
+      "description": "Campo facoltativo che stima l'ora di conclusione dell'evento"
+    },
+    "note": {
+      "name": "Note",
+      "description": "Campo facoltativo contenente informazioni aggiuntive circa l'evento",
+      "value": ""
+    },
+    "state": [
+      {
+        "state": "Creata",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 26
+        }
+      },
+      {
+        "state": "Aperta",
+        "switchDate": {
+          "year": 2019,
+          "month": 1,
+          "day": 26
+        }
+      }
+    ],
+    "creator": "paola",
+    "participants": [
+      {"username":"paola","extra":[0,0,0]},
+      {"username":"Maria","extra":[0,0,0]}
+    ]
+  }
+]

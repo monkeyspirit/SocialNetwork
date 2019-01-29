@@ -46,6 +46,7 @@ public class EventCreateController {
     public static final String ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG = "L'orario di conclusione non risulta valido in quanto precedente all'orario di inizio";
     public static final String MISS_DURATION_OR_ENDDATE_MSG = "Inserire o la durata o il giorno e l'ora di termine";
     public static final String ALREADY_EXIST_EVENT_WITH_THIS_TITLE_MSG = "Esiste gia' un evento con quest titolo";
+    public static final String ERR_EXTRATEE= "Errore nelle voci di spesa extra.";
 
     public static final String MISS_GENDER_FILM = "Manca il genere del film.";
 
@@ -55,9 +56,9 @@ public class EventCreateController {
     // ~~~~~ newEvent Stage ~~~~~~~~~~~
 
     @FXML
-    private Label minusLbl, typeOfFilmLbl, noteLbl, retiredDeadLLbl, extraParLbl, titleLbl,durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
+    private Label extraTeeLbl, minusLbl, typeOfFilmLbl, noteLbl, retiredDeadLLbl, extraParLbl, titleLbl,durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
     @FXML
-    private TextField titleTxtF, numPTxtF, placeTxtF, indTeeTxtF, extraNumParTxt;
+    private TextField titleTxtF, numPTxtF, placeTxtF, indTeeTxtF, extraNumParTxt, pastiExtraTF, gadgetExtraTF, rinfrescoExtraTF;
     @FXML
     private Button createBtn;
     @FXML
@@ -73,7 +74,7 @@ public class EventCreateController {
     @FXML
     private TextArea noteTxtA, totTeeTxtA;
     @FXML
-    private CheckBox isTeeActiveCkB;
+    private CheckBox isTeeActiveCkB, pastiCheckBox,gadgetCheckBox,rinfrescoCheckBox;
     @FXML
     private ListView<CheckBox> typeOfFilmListView, inviteParticipantsListView;
 
@@ -114,6 +115,7 @@ public class EventCreateController {
     private boolean endTimeIsVal = false;
 
 
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // ~~~~~~ Campi OBBLIGATORI ~~~~~~
 
@@ -143,6 +145,9 @@ public class EventCreateController {
 
     private boolean typeOfFilmIsVal = false;
 
+    private float extraPastiTeeIns, extraRinfrescoTeeINs, extraGadgetTeeIns;
+
+    private boolean extraTeeIsVal=false;
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -328,6 +333,13 @@ public class EventCreateController {
 
                         typeOfFilmLbl.setVisible(false);
                         typeOfFilmListView.setVisible(false);
+                        extraTeeLbl.setVisible(false);
+                        pastiCheckBox.setVisible(false);
+                        rinfrescoCheckBox.setVisible(false);
+                        gadgetCheckBox.setVisible(false);
+                        pastiExtraTF.setVisible(false);
+                        gadgetExtraTF.setVisible(false);
+                        rinfrescoExtraTF.setVisible(false);
 
                         //
 
@@ -390,6 +402,14 @@ public class EventCreateController {
 
                         typeOfFilmLbl.setVisible(true);
                         typeOfFilmListView.setVisible(true);
+                        extraTeeLbl.setVisible(true);
+                        pastiCheckBox.setVisible(true);
+                        rinfrescoCheckBox.setVisible(true);
+                        gadgetCheckBox.setVisible(true);
+                        pastiExtraTF.setVisible(true);
+                        gadgetExtraTF.setVisible(true);
+                        rinfrescoExtraTF.setVisible(true);
+
 
                         // Imposto i generi dei film
 
@@ -832,7 +852,79 @@ public class EventCreateController {
                         typeOfFilmLbl.setTextFill(Color.BLACK);
                     }
 
-                    errorMsg[9] = null;
+
+                    // CheckBox voci di spesa aggiuntiva
+
+                    boolean pasti = false;
+                    boolean rinfresco = false;
+                    boolean gadget = false;
+
+                    if(pastiCheckBox.isSelected()){
+                        if(MyUtil.checkFloat(pastiExtraTF.getText())){
+                            extraPastiTeeIns=Float.parseFloat(pastiExtraTF.getText());
+                            errorMsg[9] = null;
+                            extraTeeLbl.setTextFill(Color.BLACK);
+                            pasti = true;
+                        }
+                        else{
+                            errorMsg[9] = ERR_EXTRATEE;
+                            extraTeeLbl.setTextFill(Color.RED);
+                            pasti = false;
+                        }
+                    }
+                    else{
+                        extraPastiTeeIns=0;
+                        errorMsg[9] = null;
+                        extraTeeLbl.setTextFill(Color.BLACK);
+                        pasti = true;
+                    }
+
+                    if(gadgetCheckBox.isSelected()){
+                        if(MyUtil.checkFloat(gadgetExtraTF.getText())){
+                            extraGadgetTeeIns=Float.parseFloat(gadgetExtraTF.getText());
+                            errorMsg[9] = null;
+                            extraTeeLbl.setTextFill(Color.BLACK);
+                            gadget=true;
+                        }
+                        else{
+                            errorMsg[9] = ERR_EXTRATEE;
+                            extraTeeLbl.setTextFill(Color.RED);
+                            gadget=false;
+                        }
+                    }
+                    else{
+                        extraGadgetTeeIns=0;
+                        extraTeeLbl.setTextFill(Color.BLACK);
+                        errorMsg[9] = null;
+                        gadget=true;
+                    }
+
+                    if(rinfrescoCheckBox.isSelected()){
+                        if(MyUtil.checkFloat(rinfrescoExtraTF.getText())){
+                            extraRinfrescoTeeINs=Float.parseFloat(rinfrescoExtraTF.getText());
+                            errorMsg[9] = null;
+                            extraTeeLbl.setTextFill(Color.BLACK);
+                            rinfresco = true;
+                        }
+                        else{
+                            errorMsg[9] = ERR_EXTRATEE;
+                            extraTeeLbl.setTextFill(Color.RED);
+                            rinfresco = false;
+                        }
+                    }
+                    else{
+                        extraRinfrescoTeeINs = 0;
+                        errorMsg[9] = null;
+                        extraTeeLbl.setTextFill(Color.BLACK);
+                        rinfresco = true;
+                    }
+
+                    if(pasti && gadget && rinfresco){
+                        extraTeeIsVal = true;
+                    }
+                    else{
+                        extraTeeIsVal = false;
+                    }
 
                 }
             }
@@ -921,7 +1013,7 @@ public class EventCreateController {
 
                 case (CINEMA_NAME): {
 
-                    if (catIsVal && titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && typeOfFilmIsVal && durIsVal) {
+                    if (catIsVal && titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && typeOfFilmIsVal && durIsVal && extraTeeIsVal) {
 
                         if(endDateIns == null &&  durationIns !=null) {
                             endDateIns = dateIns.plusDays(Integer.parseInt(durationIns));
@@ -936,7 +1028,7 @@ public class EventCreateController {
                             }
                         }
 
-                        CinemaEvent filmView = new CinemaEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, StateValue.Creata, LocalDate.now(), noteIns, creator, typeOfFilmIns);
+                        CinemaEvent filmView = new CinemaEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, StateValue.Creata, LocalDate.now(), noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
                         filmView.addParticipant(creator);
 
                         selectedUserToInvite = new ArrayList<>(); // array di stringhe degli utenti a cui inviare la notifica

@@ -3,6 +3,7 @@ package versione1;
 import utilities.FileUtility;
 import versione5.CinemaCategory;
 import versione5.CinemaEvent;
+import versione5.Member;
 
 import javax.swing.text.html.ListView;
 import java.util.ArrayList;
@@ -244,9 +245,9 @@ public class SocialNetwork {
 		List<Event> eventsCreatedByUser = getEventsCreatedByUser(user);
 
 		for(Event event: eventsCreatedByUser){
-			for(String participant: event.getParticipants()){
-				if(!participantsAlreadyPlay.contains(participant) && !participant.equalsIgnoreCase(user)){
-					participantsAlreadyPlay.add(participant);
+			for(Member participant: event.getParticipants()){
+				if(!participantsAlreadyPlay.contains(participant.getUsername()) && !(participant.getUsername()).equalsIgnoreCase(user)){
+					participantsAlreadyPlay.add(participant.getUsername());
 				}
 			}
 		}

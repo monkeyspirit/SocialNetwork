@@ -13,25 +13,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1100.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
   <content>
-    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="568.0">
+    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1099.0" prefWidth="568.0">
          <children>
 
              <TextField fx:id="titleTxtF" layoutX="355.0" layoutY="68.0" prefHeight="26.0" prefWidth="149.0" />
              <TextField fx:id="numPTxtF" layoutX="355.0" layoutY="100.0" prefHeight="26.0" prefWidth="148.0" /> <Label layoutX="508.0" layoutY="100.0" text="*" textFill="#ee0202" />
              <TextField fx:id="placeTxtF" layoutX="356.0" layoutY="242.0" prefHeight="26.0" prefWidth="150.0" /> <Label layoutX="508.0" layoutY="242.0" text="*" textFill="#ee0202" />
-             <TextField fx:id="indTeeTxtF" disable="true" layoutX="356.0" layoutY="379.0" prefHeight="26.0" prefWidth="150.0" />
+             <TextField fx:id="indTeeTxtF" disable="true" layoutX="356.0" layoutY="379.0" prefHeight="26.0" prefWidth="150.0" promptText="€" />
              <TextField fx:id="extraNumParTxt" layoutX="355.0" layoutY="135.0" prefHeight="26.0" prefWidth="148.0" />
+             <TextField fx:id="pastiExtraTF" layoutX="414.0" layoutY="699.0" prefHeight="26.0" prefWidth="48.0" promptText="€" />
+             <TextField fx:id="gadgetExtraTF" layoutX="414.0" layoutY="735.0" prefHeight="26.0" prefWidth="48.0" promptText="€" />
+             <TextField fx:id="rinfrescoExtraTF" layoutX="414.0" layoutY="773.0" prefHeight="26.0" prefWidth="48.0" promptText="€" />
 
-             <Button fx:id="createBtn" layoutX="228.0" layoutY="937.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="40.0" prefWidth="115.0" text="Crea" />
+             <Button fx:id="createBtn" layoutX="229.0" layoutY="1038.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="40.0" prefWidth="115.0" text="Crea" />
 
              <ChoiceBox fx:id="catCB" layoutX="355.0" layoutY="31.0" prefHeight="28.0" prefWidth="148.0" /> <Label layoutX="508.0" layoutY="31.0" text="*" textFill="#f51010" />
              <ChoiceBox fx:id="durBigCB" layoutX="356.0" layoutY="346.0" prefHeight="26.0" prefWidth="70.0" />
              <ChoiceBox fx:id="durLitCB" layoutX="438.0" layoutY="346.0" prefHeight="26.0" prefWidth="70.0" /> <Label layoutX="508.0" layoutY="346.0" text="**" textFill="#0244eb" />
-             <ChoiceBox fx:id="minAgeCB" disable="true" layoutX="356.0" layoutY="541.0" prefHeight="28.0" prefWidth="67.0" visible="false" />
-             <ChoiceBox fx:id="genderCB" disable="true" layoutX="356.0" layoutY="576.0" prefHeight="26.0" prefWidth="147.0" visible="false" /> <Label fx:id="segnoAge" layoutX="508.0" layoutY="576.0" text="*" textFill="#e80404" visible="false" />
-             <ChoiceBox fx:id="maxAgeCB" disable="true" layoutX="436.0" layoutY="541.0" prefHeight="28.0" prefWidth="67.0" visible="false" /> <Label fx:id="segnoGen" layoutX="508.0" layoutY="541.0" text="*" textFill="#e80404" visible="false" />
+             <ChoiceBox fx:id="minAgeCB" disable="true" layoutX="356.0" layoutY="538.0" prefHeight="28.0" prefWidth="67.0" visible="false" />
+             <ChoiceBox fx:id="genderCB" disable="true" layoutX="356.0" layoutY="573.0" prefHeight="26.0" prefWidth="147.0" visible="false" /> <Label fx:id="segnoAge" layoutX="509.0" layoutY="677.0" text="*" textFill="#e80404" visible="false" />
+             <ChoiceBox fx:id="maxAgeCB" disable="true" layoutX="436.0" layoutY="538.0" prefHeight="28.0" prefWidth="67.0" visible="false" /> <Label fx:id="segnoGen" layoutX="509.0" layoutY="642.0" text="*" textFill="#e80404" visible="false" />
 
              <Label fx:id="catLbl" layoutX="70.0" layoutY="36.0" text="Categoria" />
              <Label fx:id="titleLbl" layoutX="70.0" layoutY="71.0" prefHeight="20.0" prefWidth="49.0" text="Titolo" />
@@ -45,39 +48,47 @@
              <Label fx:id="durLbl" layoutX="71.0" layoutY="350.0" prefHeight="18.0" prefWidth="69.0" text="Durata" />
              <Label fx:id="indTeeLbl" layoutX="71.0" layoutY="383.0" prefHeight="18.0" prefWidth="126.0" text="Quota individuale" />
              <Label fx:id="totTeLbl" layoutX="71.0" layoutY="413.0" prefHeight="18.0" prefWidth="165.0" text="Compreso nella quota" />
-             <Label fx:id="endDateLbl" layoutX="71.0" layoutY="481.0" prefHeight="18.0" prefWidth="104.0" text="Data conclusiva" />
-             <Label fx:id="endTimeLbl" layoutX="71.0" layoutY="513.0" text="Ora conclusiva" />
-             <Label fx:id="noteLbl" layoutX="72.0" layoutY="656.0" text="Note" />
-             <Label fx:id="ageLbl" layoutX="71.0" layoutY="546.0" text="Fascia d'età" visible="false" />
-             <Label fx:id="genderLbl" layoutX="71.0" layoutY="581.0" text="Genere" visible="false" />
-             <Label fx:id="minusLbl" layoutX="426.0" layoutY="546.0" text="-" visible="false" />
+             <Label fx:id="endDateLbl" layoutX="71.0" layoutY="478.0" prefHeight="18.0" prefWidth="104.0" text="Data conclusiva" />
+             <Label fx:id="endTimeLbl" layoutX="71.0" layoutY="510.0" text="Ora conclusiva" />
+             <Label fx:id="noteLbl" layoutX="72.0" layoutY="653.0" text="Note" />
+             <Label fx:id="ageLbl" layoutX="71.0" layoutY="543.0" text="Fascia d'età" visible="false" />
+             <Label fx:id="genderLbl" layoutX="71.0" layoutY="578.0" text="Genere" visible="false" />
+             <Label fx:id="minusLbl" layoutX="426.0" layoutY="543.0" text="-" visible="false" />
              <Label fx:id="durUnitLbl" layoutX="281.0" layoutY="351.0" prefHeight="16.0" prefWidth="73.0" wrapText="true" />
-             <Label layoutX="44.0" layoutY="716.0" prefHeight="85.0" prefWidth="231.0" text="Scegli a chi mandare l'invito tra gli utenti che hanno già partecipato a proposte create da te!" wrapText="true" />
+             <Label layoutX="45.0" layoutY="817.0" prefHeight="85.0" prefWidth="231.0" text="Scegli a chi mandare l'invito tra gli utenti che hanno già partecipato a proposte create da te!" wrapText="true" />
+             <Label fx:id="extraTeeLbl" layoutX="66.0" layoutY="704.0" text="Voci di spesa aggiuntive" />
+             <Label fx:id="typeOfFilmLbl" layoutX="69.0" layoutY="546.0" text="Genere" visible="false" />
 
 
              <DatePicker fx:id="deadLineDP" layoutX="355.0" layoutY="173.0" prefHeight="26.0" prefWidth="150.0" /> <Label layoutX="508.0" layoutY="173.0" text="*" textFill="#ee0202" />
              <DatePicker fx:id="dateDP" disable="true" layoutX="356.0" layoutY="278.0" prefHeight="26.0" prefWidth="150.0" /> <Label layoutX="508.0" layoutY="278.0" text="*" textFill="#ee0202" />
-             <DatePicker fx:id="endDateDP" disable="true" layoutX="356.0" layoutY="477.0" prefHeight="26.0" prefWidth="150.0" />
+             <DatePicker fx:id="endDateDP" disable="true" layoutX="356.0" layoutY="474.0" prefHeight="26.0" prefWidth="150.0" />
              <DatePicker fx:id="retiredDeadLineDP" disable="true" layoutX="355.0" layoutY="207.0" prefHeight="26.0" prefWidth="150.0" />
 
-             <JFXTimePicker fx:id="endTimeTP" disable="true" layoutX="356.0" layoutY="508.0" prefHeight="26.0" prefWidth="150.0" />
+             <JFXTimePicker fx:id="endTimeTP" disable="true" layoutX="356.0" layoutY="505.0" prefHeight="26.0" prefWidth="150.0" />
              <JFXTimePicker fx:id="timeTP" disable="true" layoutX="356.0" layoutY="313.0" prefHeight="26.0" prefWidth="150.0" /> <Label layoutX="508.0" layoutY="313.0" text="*" textFill="#ee0202" />
 
              <TextArea fx:id="totTeeTxtA" layoutX="356.0" layoutY="409.0" prefHeight="59.0" prefWidth="150.0" />
-             <TextArea fx:id="noteTxtA" layoutX="186.0" layoutY="649.0" prefHeight="47.0" prefWidth="320.0" />
+             <TextArea fx:id="noteTxtA" layoutX="186.0" layoutY="646.0" prefHeight="47.0" prefWidth="320.0" />
 
              <CheckBox fx:id="isTeeActiveCkB" layoutX="334.0" layoutY="383.0" mnemonicParsing="false" />
+             <CheckBox fx:id="pastiCheckBox" layoutX="318.0" layoutY="703.0" mnemonicParsing="false" text="Pasti" />
+             <CheckBox fx:id="gadgetCheckBox" layoutX="316.0" layoutY="739.0" mnemonicParsing="false" text="Gadget" />
+             <CheckBox fx:id="rinfrescoCheckBox" layoutX="318.0" layoutY="777.0" mnemonicParsing="false" text="Rinfresco" />
 
 
 
-             <ListView fx:id="inviteParticipantsListView" layoutX="304.0" layoutY="716.0" prefHeight="200.0" prefWidth="200.0" />
-            <Label layoutX="33.0" layoutY="839.0" prefHeight="59.0" prefWidth="166.0" text="* indica i campi da inserire obbligatoriamente" wrapText="true">
+             <ListView fx:id="inviteParticipantsListView" layoutX="305.0" layoutY="817.0" prefHeight="200.0" prefWidth="200.0" />
+             <ListView fx:id="typeOfFilmListView" layoutX="338.0" layoutY="550.0" prefHeight="82.0" prefWidth="192.0" visible="false" />
+
+
+             <Label layoutX="34.0" layoutY="940.0" prefHeight="59.0" prefWidth="166.0" text="* indica i campi da inserire obbligatoriamente" wrapText="true">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <Label layoutX="508.0" layoutY="482.0" text="**" textFill="#0244eb" />
-            <Label layoutX="31.0" layoutY="895.0" prefHeight="42.0" prefWidth="145.0" text="** indica che è richiesto di inserire o la durata o la data conclusiva" wrapText="true">
+            <Label layoutX="505.0" layoutY="479.0" text="**" textFill="#0244eb" />
+            <Label layoutX="32.0" layoutY="996.0" prefHeight="42.0" prefWidth="145.0" text="** indica che è richiesto di inserire o la durata o la data conclusiva" wrapText="true">
                <font>
                   <Font size="10.0" />
                </font>
@@ -89,9 +100,8 @@
             </Label>
 
 
-            <Label fx:id="typeOfFilmLbl" layoutX="69.0" layoutY="549.0" text="Genere" visible="false" />
-            <ListView fx:id="typeOfFilmListView" layoutX="338.0" layoutY="553.0" prefHeight="82.0" prefWidth="192.0" visible="false" />
-           
+
+
 
 
 

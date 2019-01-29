@@ -5,6 +5,7 @@ import versione1.SocialNetwork;
 import versione1.User;
 import versione2.notifications.Notification;
 import versione2.notifications.NotificationsBuilder;
+import versione5.Member;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,7 +21,7 @@ public class ControlThread extends Thread {
     private Notification notificationToSend;
     private Notification reminder;
     private boolean thereIsReminder;
-    private List<String> destinationUser;
+    private List<Member> destinationUser;
 
 
 
@@ -50,10 +51,12 @@ public class ControlThread extends Thread {
                             destinationUser = event.getParticipants();
 
                             for(int i=0; i<destinationUser.size(); i++){
-                                sendTo = socialNetwork.findUserByName(destinationUser.get(i));
+                                sendTo = socialNetwork.findUserByName(destinationUser.get(i).getUsername());
                                 sendTo.addNotification(notificationToSend);
                                 if(thereIsReminder){
+                                    reminder = NotificationsBuilder.buildReminder((String) event.getTitle().getValue(), (LocalDate) event.getDate().getValue(), (LocalTime) event.getTime().getValue(), (String) event.getPlace().getValue(), (Float) event.getIndTee().getValue(), destinationUser.get(i).getExtra() );
                                     sendTo.addNotification(reminder);
+
                                 }
                             }
                         }
@@ -102,7 +105,6 @@ public class ControlThread extends Thread {
 
                     isChanged = true;
                     notificationToSend = NotificationsBuilder.buildNotificationClosed((String) event.getTitle().getValue());
-                    reminder = NotificationsBuilder.buildReminder((String) event.getTitle().getValue(), (LocalDate) event.getDate().getValue(), (LocalTime) event.getTime().getValue(), (String) event.getPlace().getValue(), (Float) event.getIndTee().getValue());
                     thereIsReminder = true;
 
                 }
@@ -113,7 +115,6 @@ public class ControlThread extends Thread {
 
                     isChanged = true;
                     notificationToSend = NotificationsBuilder.buildNotificationClosed((String) event.getTitle().getValue());
-                    reminder = NotificationsBuilder.buildReminder((String) event.getTitle().getValue(), (LocalDate) event.getDate().getValue(), (LocalTime) event.getTime().getValue(), (String) event.getPlace().getValue(), (Float) event.getIndTee().getValue());
                     thereIsReminder = true;
                 }
 

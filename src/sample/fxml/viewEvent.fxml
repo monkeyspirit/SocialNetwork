@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="778.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1">
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="775.0" prefWidth="572.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="846.0" prefWidth="571.0">
          <children>
 
             <Label fx:id="titleLbl" layoutX="70.0" layoutY="119.0" prefHeight="20.0" prefWidth="49.0" text="Titolo" />
@@ -23,7 +24,7 @@
             <Label fx:id="totTeLbl" layoutX="70.0" layoutY="463.0" prefHeight="18.0" prefWidth="165.0" text="Compreso nella quota" />
             <Label fx:id="endDateLbl" layoutX="70.0" layoutY="496.0" prefHeight="18.0" prefWidth="104.0" text="Data conclusiva" />
             <Label fx:id="endTimeLbl" layoutX="70.0" layoutY="528.0" text="Ora conclusiva" />
-            <Label fx:id="noteLbl" layoutX="70.0" layoutY="652.0" text="Note" />
+            <Label fx:id="noteLbl" layoutX="70.0" layoutY="715.0" text="Note" />
             <Label fx:id="genderLbl" layoutX="70.0" layoutY="561.0" />
             <Label fx:id="ageLbl" layoutX="70.0" layoutY="596.0" />
             <Label fx:id="creatorLbl" layoutX="70.0" layoutY="49.0" text="Creatore" />
@@ -43,18 +44,28 @@
             <Label fx:id="totTeLblEvent" layoutX="300.0" layoutY="463.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="endDateLblEvent" layoutX="300.0" layoutY="496.0" prefHeight="21.0" prefWidth="228.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="endTimeLblEvent" layoutX="300.0" layoutY="528.0" prefHeight="21.0" prefWidth="202.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="noteLblEvent" layoutX="300.0" layoutY="652.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="noteLblEvent" layoutX="300.0" layoutY="715.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="genderLblEvent" layoutX="300.0" layoutY="561.0" prefHeight="21.0" prefWidth="195.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="ageLblEvent" layoutX="300.0" layoutY="596.0" prefHeight="21.0" prefWidth="203.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="creatorLblEvent" layoutX="300.0" layoutY="46.0" prefHeight="21.0" prefWidth="129.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="stateLblEvent" layoutX="300.0" layoutY="82.0" prefHeight="21.0" prefWidth="155.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="placesAvbLbl" layoutX="76.0" layoutY="723.0" prefHeight="21.0" prefWidth="183.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="codificaDurataLbl" layoutX="350.0" layoutY="400.0" prefHeight="21.0" prefWidth="201.0" textAlignment="JUSTIFY" wrapText="true"/>
+            <Label fx:id="placesAvbLbl" layoutX="76.0" layoutY="786.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="codificaDurataLbl" layoutX="350.0" layoutY="400.0" prefHeight="21.0" prefWidth="201.0" textAlignment="JUSTIFY" wrapText="true" />
 
 
-            <Button fx:id="subScribeBtn" layoutX="138.0" layoutY="697.0" mnemonicParsing="false" onAction="#subScribe" text="Iscriviti" />
-            <Button fx:id="retiredParBtn" disable="true" layoutX="248.0" layoutY="697.0" mnemonicParsing="false" onAction="#disScribe" text="Disiscriviti" />
-            <Button fx:id="retiredEventBtn" disable="true" layoutX="372.0" layoutY="697.0" mnemonicParsing="false" onAction="#retiredEvent" text="Ritira proposta" visible="false" />
+            <Button fx:id="subScribeBtn" layoutX="138.0" layoutY="760.0" mnemonicParsing="false" onAction="#subScribe" text="Iscriviti" />
+            <Button fx:id="retiredParBtn" disable="true" layoutX="248.0" layoutY="760.0" mnemonicParsing="false" onAction="#disScribe" text="Disiscriviti" />
+            <Button fx:id="retiredEventBtn" disable="true" layoutX="372.0" layoutY="760.0" mnemonicParsing="false" onAction="#retiredEvent" text="Ritira proposta" visible="false" />
+
+            <Label fx:id="vociSpeseExtra" visible="false" layoutX="68.0" layoutY="646.0" text="Voci di spesa aggiuntive" />
+
+            <CheckBox fx:id="gadgetEventCheckB" visible="false" layoutX="258.0" layoutY="645.0" mnemonicParsing="false" text="Gadget" />
+            <CheckBox  fx:id="rinfrescoEventCheckB" visible="false" layoutX="363.0" layoutY="645.0" mnemonicParsing="false" text="Rinfresco" />
+            <CheckBox  fx:id="pastiEventCheckB" visible="false" layoutX="470.0" layoutY="645.0" mnemonicParsing="false" text="Pasti" />
+
+            <Label fx:id="gadgetValueVentLbl" visible="false" layoutX="282.0" layoutY="663.0" />
+            <Label fx:id="rinfrescoValueVentLbl" visible="false" layoutX="396.0" layoutY="663.0" />
+            <Label fx:id="pastiValueVentLbl" visible="false" layoutX="484.0" layoutY="663.0" />
 
          </children></AnchorPane>
   </content>
