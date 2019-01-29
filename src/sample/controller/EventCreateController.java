@@ -949,7 +949,7 @@ public class EventCreateController {
             // noteIns
             noteIns = noteTxtA.getText();
 
-            System.out.println(categoryIns);
+
 
            switch (categoryIns) {
 
@@ -995,11 +995,7 @@ public class EventCreateController {
 
                     }
                     else {
-
-                        System.out.println("cat:"+catIsVal +" tit:"+titIsVal+" num:"+ numIsVal+" extra:"+extraNumIsVal+" dead:"+deadLineIsVal+" place:"+placeIsVal +" date:"+ dateIsVal +" time:" +timeIsVal +" endd:" +endDateIsVal +" endt:" +endTimeIsVal +"indT:"+indTeeIsVal +" age:"+ ageIsVal +" gender:"+ genderIsVal + " dur:"+ durIsVal);
-
-
-                            String msgPopUp = "";
+                        String msgPopUp = "";
                         for(int i=1; i< errorMsg.length; i++){
                             if(errorMsg[i] != null){
                                 msgPopUp += errorMsg[i] + "\n";

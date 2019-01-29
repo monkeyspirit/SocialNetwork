@@ -300,7 +300,7 @@ public class EventController {
             }
 
             event.addParticipant(sessionUsername, extra);
-            System.out.println(extra[0]+" "+extra[1]+" "+extra[2]);
+
         }
         else{
             event.addParticipant(sessionUsername);
