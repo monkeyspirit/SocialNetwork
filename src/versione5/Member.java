@@ -3,9 +3,9 @@ package versione5;
 public class Member {
 
     private String username;
-    private int[] extra;
+    private float[] extra;
 
-    public Member(String username, int[] extra) {
+    public Member(String username, float[] extra) {
         this.username = username;
         this.extra = extra;
     }
@@ -14,7 +14,7 @@ public class Member {
         return username;
     }
 
-    public int[] getExtra() {
+    public float[] getExtra() {
         return extra;
     }
 

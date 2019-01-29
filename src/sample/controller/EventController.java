@@ -10,9 +10,11 @@ import versione1.SoccerMatchEvent;
 import versione1.SocialNetwork;
 import versione1.User;
 import versione2.StateValue;
+import versione2.notifications.NotificationsBuilder;
 import versione5.CinemaEvent;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class EventController {
@@ -262,34 +264,39 @@ public class EventController {
      */
     public void subScribe(){
 
-        int[] extra = {0, 0, 0};
+
+        float[] extra = {0, 0 ,0};
+
+        if((event.getType()).equalsIgnoreCase(CINEMA_NAME)){
 
 
-        switch(event.getType()){
-            case (CINEMA_NAME): {
+            gadgetEventCheckB.setDisable(true);
+            rinfrescoEventCheckB.setDisable(true);
+            pastiEventCheckB.setDisable(true);
 
-                if(gadgetEventCheckB.isSelected()){
-                    extra[0]=1;
-                }
-                if(rinfrescoEventCheckB.isSelected()){
-                    extra[1]=1;
-                }
-                if(pastiEventCheckB.isSelected()){
-                    extra[2]=1;
-                }
 
-                gadgetEventCheckB.setDisable(true);
-                rinfrescoEventCheckB.setDisable(true);
-                pastiEventCheckB.setDisable(true);
-                break;
+            if(gadgetEventCheckB.isSelected()){
+                extra[0]=((CinemaEvent) event).getGadgetExtra().getValue();
             }
+            if(rinfrescoEventCheckB.isSelected()){
+                extra[1]=((CinemaEvent) event).getRinfreschiExtra().getValue();
+            }
+            if(pastiEventCheckB.isSelected()){
+                extra[2]=((CinemaEvent) event).getPastiExtra().getValue();
+            }
+
+            event.addParticipant(sessionUsername, extra);
+            System.out.println(extra[0]+" "+extra[1]+" "+extra[2]);
+        }
+        else{
+            event.addParticipant(sessionUsername);
         }
 
-
-        event.addParticipant(sessionUsername, extra);
         socialNetwork.updateUserAndEventsListFile();
         subScribeBtn.setDisable(true);
         retiredParBtn.setDisable(false);
+        System.out.println((NotificationsBuilder.buildReminder((String) event.getTitle().getValue(), (LocalDate) event.getDate().getValue(), (LocalTime) event.getTime().getValue(), (String) event.getPlace().getValue(), (Float) event.getIndTee().getValue(), extra )).getNotificationMessage());
+
         int postiDisponibili = (event.getNumOfParticipants().getValue() + event.getExtraParticipants().getValue() )- event.getParticipants().size();
         placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
 

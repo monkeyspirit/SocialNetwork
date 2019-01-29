@@ -19,20 +19,22 @@ public class NotificationsBuilder {
     public static final String MSG_INVITE = "Sei stato invitato a partecipare a ";
 
 
-    public static Notification buildReminder(String title, LocalDate date, LocalTime time, String place, Float tee, int[] extra){
+    public static Notification buildReminder(String title, LocalDate date, LocalTime time, String place, Float tee, float[] extra){
         String reminderString = "Ricordati che hai l'evento: "+title+" che si terra' "+date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ITALY)+" "+date.getDayOfMonth()+" "+date.getMonth().getDisplayName(TextStyle.FULL, Locale.ITALY)+ " del "+date.getYear()+" alle ore "+time.getHour()+":"+time.getMinute()+".\n";
         reminderString += "Il luogo di ritrovo e': " + place + ".\n";
         if(tee!=0 ){
-            reminderString += "Ricordati di pagare: " + tee + extra[0] + extra[1] + extra[2] + " €.\n";
+            float tot = tee + extra[0] + extra[1] + extra[2];
+            reminderString += "Ricordati di pagare: " + tot + " €.\n";
         }
         else {
-            if(extra[0]!= 0 && extra[1]!=0 && extra[2]!=0){
-                reminderString += "Ricordati di pagare: " + extra[0] + extra[1] + extra[2] + " €.\n";
+            if(extra[0]!= 0 || extra[1]!=0 || extra[2]!=0){
+                float tot = extra[0] + extra[1] + extra[2];
+                reminderString += "Ricordati di pagare: " + tot + " €.\n";
 
             }
         }
 
-        if(extra[0]!= 0 && extra[1]!=0 && extra[2]!=0){
+        if(extra[0]!= 0 || extra[1]!=0 || extra[2]!=0){
             reminderString +="Di cui:";
             if( extra[0]!=0){
                 reminderString += extra[0] + "€ per i Gadget\t";

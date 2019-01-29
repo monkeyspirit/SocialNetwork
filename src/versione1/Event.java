@@ -212,12 +212,12 @@ public abstract class Event  {
      * Aggiunge il partecipante specificato alla lista di partecipanti
      * @param participantUsername username del partecipante
      */
-    public void addParticipant(String participantUsername, int[] extra){
+    public void addParticipant(String participantUsername, float[] extra){
         participants.add(new Member(participantUsername, extra));
     }
 
     public void addParticipant(String participantUsername){
-        int[] extra = {0,0,0};
+        float[] extra = {0,0,0};
         participants.add(new Member(participantUsername, extra));
     }
 
@@ -227,11 +227,15 @@ public abstract class Event  {
      */
     public void removeParticipant(String participantRemove){
 
-        for(Member remove : participants){
-            if(remove.getUsername().equalsIgnoreCase(participantRemove)){
-                participants.remove(remove);
+        List<Member> removeAll = new ArrayList<>();
+
+        for(Member removeThis : participants){
+            if(participantRemove.equalsIgnoreCase(removeThis.getUsername())){
+                removeAll.add(removeThis);
             }
         }
+
+        participants.removeAll(removeAll);
 
     }
 
