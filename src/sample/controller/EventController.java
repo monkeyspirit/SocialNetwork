@@ -99,6 +99,23 @@ public class EventController {
         if(event.getStateValue().equals(StateValue.Aperta)){
 
                 if (event.isUserAlreadyRegistered(sessionUsername)) {
+
+                    switch(event.getType()){
+                        case (CINEMA_NAME): {
+
+                            boolean[] settings = event.extraCheckBoxSettings(sessionUsername);
+
+                            gadgetEventCheckB.setSelected(settings[0]);
+                            rinfrescoEventCheckB.setSelected(settings[1]);
+                            pastiEventCheckB.setSelected(settings[2]);
+
+                            gadgetEventCheckB.setDisable(true);
+                            rinfrescoEventCheckB.setDisable(true);
+                            pastiEventCheckB.setDisable(true);
+                            break;
+                        }
+                    }
+
                     if (event.isUserCreator(sessionUsername)) {
                         retiredParBtn.setDisable(true);
                         subScribeBtn.setDisable(true);
@@ -130,7 +147,6 @@ public class EventController {
             retiredEventBtn.setDisable(true);
             retiredParBtn.setDisable(true);
         }
-
 
 
 
@@ -293,7 +309,6 @@ public class EventController {
         socialNetwork.updateUserAndEventsListFile();
         subScribeBtn.setDisable(true);
         retiredParBtn.setDisable(false);
-        System.out.println((NotificationsBuilder.buildReminder((String) event.getTitle().getValue(), (LocalDate) event.getDate().getValue(), (LocalTime) event.getTime().getValue(), (String) event.getPlace().getValue(), (Float) event.getIndTee().getValue(), extra )).getNotificationMessage());
 
         int postiDisponibili = (event.getNumOfParticipants().getValue() + event.getExtraParticipants().getValue() )- event.getParticipants().size();
         placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);

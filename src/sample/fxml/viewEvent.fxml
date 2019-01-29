@@ -6,7 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="846.0" prefWidth="571.0">
          <children>
@@ -44,28 +44,28 @@
             <Label fx:id="totTeLblEvent" layoutX="300.0" layoutY="463.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="endDateLblEvent" layoutX="300.0" layoutY="496.0" prefHeight="21.0" prefWidth="228.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="endTimeLblEvent" layoutX="300.0" layoutY="528.0" prefHeight="21.0" prefWidth="202.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="noteLblEvent" layoutX="300.0" layoutY="715.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="noteLblEvent" layoutX="150.0" layoutY="715.0" prefHeight="38.0" prefWidth="411.0" textAlignment="JUSTIFY" wrapText="true" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="10.0" />
             <Label fx:id="genderLblEvent" layoutX="300.0" layoutY="561.0" prefHeight="21.0" prefWidth="195.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="ageLblEvent" layoutX="300.0" layoutY="596.0" prefHeight="21.0" prefWidth="203.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="creatorLblEvent" layoutX="300.0" layoutY="46.0" prefHeight="21.0" prefWidth="129.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="stateLblEvent" layoutX="300.0" layoutY="82.0" prefHeight="21.0" prefWidth="155.0" textAlignment="JUSTIFY" wrapText="true" />
-            <Label fx:id="placesAvbLbl" layoutX="76.0" layoutY="786.0" textAlignment="JUSTIFY" wrapText="true" />
+            <Label fx:id="placesAvbLbl" layoutX="73.0" layoutY="807.0" prefHeight="16.0" prefWidth="227.0" textAlignment="JUSTIFY" wrapText="true" />
             <Label fx:id="codificaDurataLbl" layoutX="350.0" layoutY="400.0" prefHeight="21.0" prefWidth="201.0" textAlignment="JUSTIFY" wrapText="true" />
 
 
-            <Button fx:id="subScribeBtn" layoutX="138.0" layoutY="760.0" mnemonicParsing="false" onAction="#subScribe" text="Iscriviti" />
-            <Button fx:id="retiredParBtn" disable="true" layoutX="248.0" layoutY="760.0" mnemonicParsing="false" onAction="#disScribe" text="Disiscriviti" />
-            <Button fx:id="retiredEventBtn" disable="true" layoutX="372.0" layoutY="760.0" mnemonicParsing="false" onAction="#retiredEvent" text="Ritira proposta" visible="false" />
+            <Button fx:id="subScribeBtn" layoutX="138.0" layoutY="773.0" mnemonicParsing="false" onAction="#subScribe" text="Iscriviti" />
+            <Button fx:id="retiredParBtn" disable="true" layoutX="248.0" layoutY="773.0" mnemonicParsing="false" onAction="#disScribe" text="Disiscriviti" />
+            <Button fx:id="retiredEventBtn" disable="true" layoutX="372.0" layoutY="773.0" mnemonicParsing="false" onAction="#retiredEvent" text="Ritira proposta" visible="false" />
 
-            <Label fx:id="vociSpeseExtra" visible="false" layoutX="68.0" layoutY="646.0" text="Voci di spesa aggiuntive" />
+            <Label fx:id="vociSpeseExtra" layoutX="68.0" layoutY="646.0" text="Voci di spesa aggiuntive" visible="false" />
 
-            <CheckBox fx:id="gadgetEventCheckB" visible="false" layoutX="258.0" layoutY="645.0" mnemonicParsing="false" text="Gadget" />
-            <CheckBox  fx:id="rinfrescoEventCheckB" visible="false" layoutX="363.0" layoutY="645.0" mnemonicParsing="false" text="Rinfresco" />
-            <CheckBox  fx:id="pastiEventCheckB" visible="false" layoutX="470.0" layoutY="645.0" mnemonicParsing="false" text="Pasti" />
+            <CheckBox fx:id="gadgetEventCheckB" layoutX="258.0" layoutY="645.0" mnemonicParsing="false" text="Gadget" visible="false" />
+            <CheckBox fx:id="rinfrescoEventCheckB" layoutX="363.0" layoutY="645.0" mnemonicParsing="false" text="Rinfresco" visible="false" />
+            <CheckBox fx:id="pastiEventCheckB" layoutX="470.0" layoutY="645.0" mnemonicParsing="false" text="Pasti" visible="false" />
 
-            <Label fx:id="gadgetValueVentLbl" visible="false" layoutX="282.0" layoutY="663.0" />
-            <Label fx:id="rinfrescoValueVentLbl" visible="false" layoutX="396.0" layoutY="663.0" />
-            <Label fx:id="pastiValueVentLbl" visible="false" layoutX="484.0" layoutY="663.0" />
+            <Label fx:id="gadgetValueVentLbl" layoutX="282.0" layoutY="663.0" visible="false" />
+            <Label fx:id="rinfrescoValueVentLbl" layoutX="396.0" layoutY="663.0" visible="false" />
+            <Label fx:id="pastiValueVentLbl" layoutX="484.0" layoutY="663.0" visible="false" />
 
          </children></AnchorPane>
   </content>

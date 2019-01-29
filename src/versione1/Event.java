@@ -273,4 +273,24 @@ public abstract class Event  {
     }
 
 
+    /**
+     *  Trova un utente tra i membri, mi serve nella grafica per impostare i checkbox degli extra
+     */
+    public boolean[] extraCheckBoxSettings(String username){
+
+        boolean[] settings = { false, false, false};
+
+        for(Member participant: participants){
+            if(username.equalsIgnoreCase(participant.getUsername())){
+                float[] extraPaid = participant.getExtra();
+                for(int i=0; i<3; i++){
+                    if(extraPaid[i]!=0){
+                        settings[i] = true;
+                    }
+                }
+            }
+        }
+
+        return settings;
+    }
 }
