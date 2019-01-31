@@ -146,6 +146,22 @@ public class EventController {
             subScribeBtn.setDisable(true);
             retiredEventBtn.setDisable(true);
             retiredParBtn.setDisable(true);
+
+            switch(event.getType()){
+                case (CINEMA_NAME): {
+
+                    boolean[] settings = event.extraCheckBoxSettings(sessionUsername);
+
+                    gadgetEventCheckB.setSelected(settings[0]);
+                    rinfrescoEventCheckB.setSelected(settings[1]);
+                    pastiEventCheckB.setSelected(settings[2]);
+
+                    gadgetEventCheckB.setDisable(true);
+                    rinfrescoEventCheckB.setDisable(true);
+                    pastiEventCheckB.setDisable(true);
+                    break;
+                }
+            }
         }
 
 
