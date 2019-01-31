@@ -39,11 +39,12 @@ public class EventController {
 
     public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
     public static final String AGERANGE_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
-
+    public static final String CREATOR_DESCRIPTION = "Creatore dell'evento";
+    public static final String STATE_DESCRIPTION = "Stato in cui si trova l'evento";
     public static final String FILMTYPE_DESCRIPTION = "Indica la tipologia del film proposto, può elencare più generi";
 
     @FXML
-    private Label vociSpeseExtra, gadgetValueVentLbl, rinfrescoValueVentLbl, pastiValueVentLbl, extranumPLblEvent,retiredDeadLLblEvent, placesAvbLbl, stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
+    private Label creatorLbl, stateLbl, vociSpeseExtra, gadgetValueVentLbl, rinfrescoValueVentLbl, pastiValueVentLbl, extranumPLblEvent,retiredDeadLLblEvent, placesAvbLbl, stateLblEvent, ageLbl, genderLbl, creatorLblEvent,titleLblEvent,numPLblEvent, deadLLblEvent, placeLblEvent, dateLblEvent, timeLblEvent, durLblEvent, indTeeLblEvent, totTeLblEvent, endDateLblEvent,endTimeLblEvent, noteLblEvent, ageLblEvent,genderLblEvent;
     @FXML
     private Button subScribeBtn, retiredParBtn, retiredEventBtn;
     @FXML
@@ -78,7 +79,8 @@ public class EventController {
     private void initialize(){
 
         // Metto i tollpic sui campi sempre presenti
-
+        initializeToolPic(creatorLbl, CREATOR_DESCRIPTION);
+        initializeToolPic(stateLbl, STATE_DESCRIPTION);
         initializeToolPic(titleLbl, TITLE_DESCRIPTION);
         initializeToolPic(numPLbl, NUMPLAY_DESCRIPTION);
         initializeToolPic(extraNumPLbl, EXTRA_PARTECIPANTS_DESCRIPTION);

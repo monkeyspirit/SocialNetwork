@@ -56,7 +56,7 @@ public class EventCreateController {
     // ~~~~~ newEvent Stage ~~~~~~~~~~~
 
     @FXML
-    private Label extraTeeLbl, creatorLbl, stateLbl, minusLbl, typeOfFilmLbl, noteLbl, retiredDeadLLbl, extraParLbl, titleLbl,durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
+    private Label extraTeeLbl, minusLbl, typeOfFilmLbl, noteLbl, retiredDeadLLbl, extraParLbl, titleLbl,durLbl, durUnitLbl, catLbl, numPLbl, deadLLbl, placeLbl,dateLbl,timeLbl,indTeeLbl, endDateLbl, endTimeLbl, ageLbl,totTeLbl, genderLbl;
     @FXML
     private TextField titleTxtF, numPTxtF, placeTxtF, indTeeTxtF, extraNumParTxt, pastiExtraTF, gadgetExtraTF, rinfrescoExtraTF;
     @FXML
@@ -177,8 +177,7 @@ public class EventCreateController {
     public static final String GENDER_DESCRIPTION = "Sesso dei partecipanti";
     public static final String AGERANGE_DESCRIPTION = "limite inferiore e superiore di eta' dei partecipanti";
 
-    public static final String CREATOR_DESCRIPTION = "Creatore dell'evento";
-    public static final String STATE_DESCRIPTION = "Stato in cui si trova l'evento";
+
 
     public static final String FILMTYPE_DESCRIPTION = "Indica la tipologia del film proposto, può elencare più generi";
 
@@ -211,8 +210,7 @@ public class EventCreateController {
 
         // Metto i tollpic sui campi sempre presenti
 
-        initializeToolPic(creatorLbl, CREATOR_DESCRIPTION);
-        initializeToolPic(stateLbl, STATE_DESCRIPTION);
+
         initializeToolPic(titleLbl, TITLE_DESCRIPTION);
         initializeToolPic(numPLbl, NUMPLAY_DESCRIPTION);
         initializeToolPic(extraParLbl, EXTRA_PARTECIPANTS_DESCRIPTION);
