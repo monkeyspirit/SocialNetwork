@@ -3,7 +3,7 @@ package versione1;
 import java.util.ArrayList;
 
 /**
- * Classe di supporto, serve per poter avere un arraylist di numeri che torna utile nella rappresentazione grafica
+ * Classe di supporto, serve per poter avere un arraylist di numeri che torna utile nella rappresentazione sample
  * per la questione delle fasce di età, fino ai 20 anni i numeri ci sono tutti dai 20 in poi ci si muove di 10 in 10
  */
 
@@ -29,6 +29,7 @@ public class AgeGroup {
     public ArrayList<Integer> getNumeri() {
         return numeri;
     }
+
 
     public ArrayList<Integer> getMinOf(int min){
         ArrayList<Integer> numMin = new ArrayList<>();

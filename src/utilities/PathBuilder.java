@@ -1,5 +1,8 @@
 package utilities;
 
+/**
+ * Classe di supporto per la costruzione della stringa corrispondente al path di un file
+ */
 public class PathBuilder {
 
     /**

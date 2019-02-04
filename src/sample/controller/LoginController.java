@@ -1,10 +1,6 @@
 package sample.controller;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import sample.Main;
 import versione1.AgeGroup;
 import versione1.Category;
@@ -197,7 +192,7 @@ public class LoginController {
      */
     public void loadSecond() throws IOException {
 
-        // Carico il file per la grafica
+        // Carico il file per la sample
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("fxml/sample.fxml"));
         SampleController controller = new SampleController();
 

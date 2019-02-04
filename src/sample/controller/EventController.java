@@ -10,12 +10,9 @@ import versione1.SoccerMatchEvent;
 import versione1.SocialNetwork;
 import versione1.User;
 import versione2.StateValue;
-import versione2.notifications.NotificationsBuilder;
 import versione5.CinemaEvent;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
 
 public class EventController {
 

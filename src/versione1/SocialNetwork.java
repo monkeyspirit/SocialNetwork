@@ -2,13 +2,15 @@ package versione1;
 
 import utilities.FileUtility;
 import versione5.CinemaCategory;
-import versione5.CinemaEvent;
 import versione5.Member;
 
-import javax.swing.text.html.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe principale del social network, contiene i riferimenti alle varie categorie, agli utenti iscritti,
+ * agli oggetti di utilità per la lettura/scrittura su file
+ */
 public class SocialNetwork {
 
 	//Attributi
@@ -169,25 +171,33 @@ public class SocialNetwork {
 	}
 
 
+	/**
+	 * Salva in maniera persistente su file la lista di eventi di tipo SoccerMatchEvent
+	 */
 	public void writeSoccerMatchEventListOnFile() {
         fileUtility.writeSoccerMatchEvents(soccerMatchCategory.getEvents());
     }
 
+	/**
+	 * Salva in maniera persistente su file la lista di eventi di tipo CinemaEvent
+	 */
 	public void writeCinemaEventListOnFile() {
 		fileUtility.writeCinemaEvents(cinemaCategory.getEvents());
 	}
 
 	/**
-	 * legge il file contenente la lista di EventSoccerMatch lo carica all'interno della lista di eventi della categoria corrispondente
+	 * legge il file contenente la lista di SoccerMatchEvent e lo carica all'interno della lista di eventi della categoria corrispondente
 	 */
 	private void loadSoccerMatchEventListFromFile() {
 		soccerMatchCategory.setEvents(fileUtility.readSoccerMatchEvents());
 	}
 
+	/**
+	 * legge il file contenente la lista di CinemaEvent e lo carica all'interno della lista di eventi della categoria corrispondente
+	 */
 	private void loadCinemaEventListFromFile() {
 		cinemaCategory.setEvents(fileUtility.readCinemaEvents());
 	}
-
 
 
 	// Metodo che serve per trovare tutti gli eventi a cui e' iscritto un dato utente e ne ritorna i nomi
@@ -243,6 +253,11 @@ public class SocialNetwork {
 		return null;
 	}
 
+	/**
+	 * Restituisce la lista di eventi creati da un certo utente
+	 * @param user l'username dell'utente
+	 * @return la lista di eventi creati dall'utente specificato
+	 */
 	private List<Event> getEventsCreatedByUser(String user){
 
 		List<Event> eventsCreatedByUser = new ArrayList<>();
@@ -259,6 +274,11 @@ public class SocialNetwork {
 		return eventsCreatedByUser;
 	}
 
+	/**
+	 * Restituisce la lista di utenti che hanno partecipato ad eventi passati creati da un utente specificato
+	 * @param user l'username dell'utente, creatore degli eventi passati
+	 * @return la lista di utenti che hanno partecipato ad eventi creati dall'utente specificato
+	 */
 	public List<String> getUserThatPlayOtherCreatorEvents(String user){
 
 		List<String> participantsAlreadyPlay = new ArrayList<>();

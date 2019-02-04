@@ -7,7 +7,7 @@ import java.util.Locale;
 
 
 /**
- * Questa classe si occupa di creare il messaggio di una notifica/reminder
+ * Questa classe si occupa di creare il messaggio di una notifica o di un reminder
  */
 public class NotificationsBuilder {
 
@@ -19,6 +19,16 @@ public class NotificationsBuilder {
     public static final String MSG_INVITE = "Sei stato invitato a partecipare a ";
 
 
+    /**
+     * Costruisce un messaggio di tipo Reminder
+     * @param title titolo dell'evento
+     * @param date data dell'evento
+     * @param time ora dell'evento
+     * @param place luogo dell'evento
+     * @param tee voci di spesa dell'evento
+     * @param extra spese extra da pagare
+     * @return
+     */
     public static Notification buildReminder(String title, LocalDate date, LocalTime time, String place, Float tee, float[] extra){
         String reminderString = "Ricordati che hai l'evento: "+title+" che si terra' "+date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ITALY)+" "+date.getDayOfMonth()+" "+date.getMonth().getDisplayName(TextStyle.FULL, Locale.ITALY)+ " del "+date.getYear()+" alle ore "+time.getHour()+":"+time.getMinute()+".\n";
         reminderString += "Il luogo di ritrovo e': " + place + ".\n";

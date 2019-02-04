@@ -5,6 +5,9 @@ import versione2.StateValue;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Rappresenta un evento di tipo partita di calcio
+ */
 public class SoccerMatchEvent extends Event{
 
     //Costanti della classe SoccerMatchEvent
@@ -22,21 +25,6 @@ public class SoccerMatchEvent extends Event{
     /**
      * Costruttore SoccerMatchEvent: chiama il costruttore dei campi obbligatori
      * della classe madre e inizializza l'attributo valore di gender e ageGroup.
-     * @param titleIns
-     * @param numParIns
-     * @param deadLineIns
-     * @param placeIns
-     * @param dateIns
-     * @param timeIns
-     * @param durationIns
-     * @param indTeeIns
-     * @param totTeeIns
-     * @param endDateIns
-     * @param endTimeIns
-     * @param ageRangeIns
-     * @param genderIns
-     * @param noteIns
-     * @param creatorIns
      */
     public SoccerMatchEvent(String titleIns, int numParIns, int extraParIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Gender genderIns, StateValue stateValue, LocalDate stateSwitch, String noteIns, String creatorIns) {
         super(TYPE, titleIns,  numParIns, extraParIns  ,  deadLineIns, retiredDeadLineIns,  placeIns,  dateIns,  timeIns,  durationIns,  indTeeIns,  totTeeIns,  endDateIns,  endTimeIns,stateValue, stateSwitch, noteIns, creatorIns);

@@ -14,6 +14,11 @@ import java.util.List;
 
 import static versione2.StateValue.Fallita;
 
+/**
+ * Classe che si occupa di osservare la lista di eventi per riconoscerne i cambiamenti e aggiornare
+ * lo stato del social network in base a questi. Per esempio cambia lo stato di un evento quando i
+ * requisiti per la transizione sono verificati
+ */
 public class ControlThread extends Thread {
 
 

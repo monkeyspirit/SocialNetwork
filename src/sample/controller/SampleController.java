@@ -190,7 +190,7 @@ public class SampleController {
 
 
     /**
-     * Il Metodo si occupa di aggiornare gli elementi delle listview in modo che poi il thread aggiorni la grafica
+     * Il Metodo si occupa di aggiornare gli elementi delle listview in modo che poi il thread aggiorni la sample
      */
     public void refreshListView(){
         Platform.runLater(new Runnable() {

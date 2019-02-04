@@ -174,6 +174,10 @@ public abstract class Event  {
 
     public List<Member> getParticipants() { return participants; }
 
+    /**
+     * Permette di ottenere la lista dei nomi dei partecipanti
+     * @return lista dei nomi dei partecipanti
+     */
     public List<String> getParticipantsNames() {
         List<String> names = new ArrayList<>();
 
@@ -201,6 +205,11 @@ public abstract class Event  {
 
     // METODI
 
+    /**
+     * Verifica se un certo utente è il creatore dell'evento
+     * @param user l'username dell'utente
+     * @return true, se user è il creatore dell'evento corrente, false altrimenti
+     */
     public boolean isUserCreator(String user){
         if(user.equalsIgnoreCase(this.creator)){
             return true;
@@ -211,19 +220,24 @@ public abstract class Event  {
     /**
      * Aggiunge il partecipante specificato alla lista di partecipanti
      * @param participantUsername username del partecipante
+     * @param extra array di voci di spesa extra che l'utente si è impegnato a pagare
      */
     public void addParticipant(String participantUsername, float[] extra){
         participants.add(new Member(participantUsername, extra));
     }
 
+    /**
+     * Aggiunge il partecipante specificato alla lista di partecipanti
+     * @param participantUsername username del partecipante
+     */
     public void addParticipant(String participantUsername){
         float[] extra = {0,0,0};
         participants.add(new Member(participantUsername, extra));
     }
 
     /**
-     * Aggiunge il partecipante specificato alla lista di partecipanti
-     * @param participantRemove username del partecipante
+     * Rimuove il partecipante specificato dalla lista di partecipanti
+     * @param participantRemove username del partecipante da rimuovere
      */
     public void removeParticipant(String participantRemove){
 
@@ -274,7 +288,7 @@ public abstract class Event  {
 
 
     /**
-     *  Trova un utente tra i membri, mi serve nella grafica per impostare i checkbox degli extra
+     *  Trova un utente tra i membri, utilizzato nella sample per impostare i checkbox degli extra
      */
     public boolean[] extraCheckBoxSettings(String username){
 

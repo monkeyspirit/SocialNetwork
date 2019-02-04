@@ -1,5 +1,9 @@
 package versione5;
 
+/**
+ * Classe che rappresenta le voci di spesa extra che un utente si impegna a pagare per un
+ * evento
+ */
 public class Member {
 
     private String username;

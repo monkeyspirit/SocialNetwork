@@ -2,6 +2,9 @@ package versione1;
 
 import java.util.List;
 
+/**
+ * Rappresenta la categoria Soccer Match, per eventi di partite di calcio
+ */
 public class SoccerMatchCategory extends Category<SoccerMatchEvent> {
 
 	public static final String SOCCER_NAME = "Partite di calcio";

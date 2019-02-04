@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import sample.controller.LoginController;
 import versione1.*;
 import versione2.ControlThread;
-import versione5.CinemaCategory;
 
 public class Main extends Application {
 
@@ -19,7 +18,7 @@ public class Main extends Application {
     }
 
     /**
-     * Il metodo start ha il compito principale di far avviare l'interfaccia grafica e impostare
+     * Il metodo start ha il compito principale di far avviare l'interfaccia sample e impostare
      * tutti i parametri necessari al suo funzionamento, nel nostro caso si occupa anche di creare le istnze iniziali (in mancanza
      * di un metodo di lettur scrittura da file)
      * @param primaryStage

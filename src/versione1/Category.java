@@ -3,6 +3,10 @@ package versione1;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Questa classe rappresenta una categoria del social network
+ * @param <T> il tipo specifico di eventi da associare a questa categoria
+ */
 public abstract class Category <T extends Event> {
 
 	//Attributi
@@ -13,8 +17,8 @@ public abstract class Category <T extends Event> {
 	/**
 	 * Costruttore Category: inizializza il nome e la descrizione della categoria (figlia)
 	 * e la list degli eventi associati alla categoria creata
-	 * @param name
-	 * @param description
+	 * @param name nome della categoria
+	 * @param description descrizione della categoria
 	 */
 	public Category(String name, String description) {
 		this.name = name;
@@ -56,7 +60,7 @@ public abstract class Category <T extends Event> {
 		}
 	    return null;
     }
-    //----------Sostituiscilo ai metodi in social Network
+
 
 	/**
 	 * Controlla se un evento con un certo nome è già presente nella lista degli eventi

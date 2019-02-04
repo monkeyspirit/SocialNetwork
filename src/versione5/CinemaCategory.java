@@ -4,6 +4,9 @@ import versione1.Category;
 
 import java.util.List;
 
+/**
+ * Classe che rappresenta un evento di tipo Cinema
+ */
 public class CinemaCategory extends Category<CinemaEvent> {
 
     public static final String CINEMA_NAME = "Cinema";

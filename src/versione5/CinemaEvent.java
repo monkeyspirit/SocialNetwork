@@ -9,6 +9,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Rappresenta un evento di tipo cinema
+ */
 public class CinemaEvent extends Event {
 
     //Costanti della classe SoccerMatchEvent
@@ -31,23 +34,6 @@ public class CinemaEvent extends Event {
     /**
      * Costruttore SoccerMatchEvent: chiama il costruttore dei campi obbligatori
      * della classe madre e inizializza l'attributo valore di gender e ageGroup.
-     * @param titleIns
-     * @param numParIns
-     * @param deadLineIns
-     * @param placeIns
-     * @param dateIns
-     * @param timeIns
-     * @param durationIns
-     * @param indTeeIns
-     * @param totTeeIns
-     * @param endDateIns
-     * @param endTimeIns
-     * @param noteIns
-     * @param creatorIns
-     * @param typesIns
-     * @param extraPastiTeeIns
-     * @param extraGadgetTeeIns
-     * @param extraRinfrescoTeeINs
      */
     public CinemaEvent(String titleIns, int numParIns, int extraParIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, StateValue stateValue, LocalDate stateSwitch, String noteIns, String creatorIns, List<String> typesIns, float extraPastiTeeIns,  float extraRinfrescoTeeINs, float extraGadgetTeeIns) {
         super(TYPE, titleIns, numParIns, extraParIns, deadLineIns, retiredDeadLineIns, placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, stateValue, stateSwitch, noteIns, creatorIns);

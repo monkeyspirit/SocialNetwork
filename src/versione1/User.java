@@ -3,6 +3,10 @@ import versione2.notifications.Notification;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Classe per rappresentare un utente del social network
+ */
 public class User{
 
     //Attributi
