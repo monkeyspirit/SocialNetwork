@@ -79,7 +79,7 @@
 
 
              <ListView fx:id="inviteParticipantsListView" layoutX="305.0" layoutY="817.0" prefHeight="200.0" prefWidth="200.0" />
-             <ListView fx:id="typeOfFilmListView" layoutX="338.0" layoutY="550.0" prefHeight="82.0" prefWidth="192.0" visible="false" /> <Label fx:id="segnoGenF" layoutX="508.0" visible="false"  layoutY="550.0" text="*" textFill="#ee0202" />
+             <ListView fx:id="typeOfFilmListView" layoutX="338.0" layoutY="550.0" prefHeight="82.0" prefWidth="192.0" visible="false" /> <Label fx:id="segnoGenF" layoutX="540.0" visible="false"  layoutY="550.0" text="*" textFill="#ee0202" />
 
 
              <Label layoutX="34.0" layoutY="940.0" prefHeight="59.0" prefWidth="166.0" text="* indica i campi da inserire obbligatoriamente" wrapText="true">
