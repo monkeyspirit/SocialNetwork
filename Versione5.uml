@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="4880.284425891568" y="4310.0">sample.Main</node>
+    <node x="5205.034821428571" y="306.5">versione5.Member</node>
+    <node x="950.0" y="2238.0">utilities.PathBuilder</node>
+    <node x="600.0" y="4484.0">versione2.GraphicThread</node>
+    <node x="4763.534425891568" y="4058.0">versione2.ControlThread</node>
+    <node x="1360.0" y="2117.0">utilities.RuntimeTypeAdapterFactory</node>
+    <node x="473.059425891568" y="307.0">versione2.notifications.NotificationType</node>
+    <node x="418.309425891568" y="1177.0">versione2.notifications.Notification</node>
+    <node x="4178.947321428572" y="528.0">versione1.Event</node>
+    <node x="4736.170819160996" y="0.0">versione2.StateValue</node>
+    <node x="1970.0" y="2165.0">versione1.SoccerMatchEvent</node>
+    <node x="5185.875" y="2784.5">versione5.CinemaCategory</node>
+    <node x="5112.735006957327" y="2177.0">versione1.Category</node>
+    <node x="624.0" y="2141.0">versione1.User</node>
+    <node x="4780.752728818799" y="306.5">versione2.State</node>
+    <node x="3301.0" y="2093.0">versione5.CinemaEvent</node>
+    <node x="0.0" y="2105.5">versione2.notifications.NotificationsBuilder</node>
+    <node x="184.0" y="4484.0">versione1.MyUtil</node>
+    <node x="2318.6875" y="1225.5">versione1.Gender</node>
+    <node x="942.0" y="4484.0">versione1.AgeGroup</node>
+    <node x="0.0" y="4484.0">versione5.FilmType</node>
+    <node x="4857.875" y="2784.5">versione1.SoccerMatchCategory</node>
+    <node x="4868.489569160996" y="3261.0">versione1.SocialNetwork</node>
+    <node x="3525.770819160997" y="270.0">versione1.Field</node>
+    <node x="1801.434425891568" y="2593.0">utilities.FileUtility</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="sample.Main" target="versione1.SocialNetwork">
+      <point x="40.0" y="-64.5" />
+      <point x="5020.284425891568" y="4280.0" />
+      <point x="5141.215228818799" y="4280.0" />
+      <point x="5141.215228818799" y="3988.0" />
+      <point x="5157.239569160996" y="3988.0" />
+      <point x="57.75" y="353.5" />
+    </edge>
+    <edge source="versione2.ControlThread" target="versione2.notifications.NotificationsBuilder">
+      <point x="-130.05000000000018" y="-101.0" />
+      <point x="4777.984425891567" y="4038.0" />
+      <point x="301.5" y="4038.0" />
+      <point x="0.0" y="172.5" />
+    </edge>
+    <edge source="sample.Main" target="versione1.User">
+      <point x="-80.0" y="-64.5" />
+      <point x="4900.284425891568" y="4290.0" />
+      <point x="717.0" y="4290.0" />
+      <point x="717.0" y="2573.0" />
+      <point x="649.5" y="2573.0" />
+      <point x="-127.5" y="137.0" />
+    </edge>
+    <edge source="versione2.ControlThread" target="versione1.Event">
+      <point x="-43.350000000000364" y="-101.0" />
+      <point x="4864.684425891568" y="4008.0" />
+      <point x="4720.489569160996" y="4008.0" />
+      <point x="4720.489569160996" y="2043.0" />
+      <point x="4936.847321428571" y="2043.0" />
+      <point x="174.89999999999964" y="737.5" />
+    </edge>
+    <edge source="versione1.SocialNetwork" target="versione5.Member">
+      <point x="216.5625" y="-353.5" />
+      <point x="5316.052069160996" y="3241.0" />
+      <point x="5669.358830653473" y="3241.0" />
+      <point x="5669.358830653473" y="478.0" />
+      <point x="5368.134821428572" y="478.0" />
+      <point x="46.600000000000364" y="52.5" />
+    </edge>
+    <edge source="versione1.Category" target="versione1.Event">
+      <point x="0.0" y="-101.0" />
+      <point x="5283.235006957327" y="2063.0" />
+      <point x="5286.647321428572" y="2063.0" />
+      <point x="524.6999999999998" y="737.5" />
+    </edge>
+    <edge source="versione2.ControlThread" target="versione2.State">
+      <point x="72.25" y="-101.0" />
+      <point x="4980.284425891568" y="4018.0" />
+      <point x="5545.913578385898" y="4018.0" />
+      <point x="5545.913578385898" y="488.0" />
+      <point x="5017.877728818799" y="488.0" />
+      <point x="101.625" y="52.5" />
+    </edge>
+    <edge source="utilities.FileUtility" target="versione5.CinemaEvent">
+      <point x="104.8125" y="-269.0" />
+      <point x="2185.746925891568" y="2553.0" />
+      <point x="3645.5" y="2553.0" />
+      <point x="-344.5" y="185.0" />
+    </edge>
+    <edge source="versione1.SocialNetwork" target="versione5.CinemaCategory">
+      <point x="129.9375" y="-353.5" />
+      <point x="5229.427069160996" y="3211.0" />
+      <point x="5413.375" y="3211.0" />
+      <point x="91.0" y="77.5" />
+    </edge>
+    <edge source="versione5.CinemaCategory" target="versione5.CinemaEvent">
+      <point x="-91.0" y="-77.5" />
+      <point x="5231.375" y="2533.0" />
+      <point x="4334.5" y="2533.0" />
+      <point x="344.5" y="185.0" />
+    </edge>
+    <edge source="utilities.FileUtility" target="versione1.User">
+      <point x="-244.5625" y="-269.0" />
+      <point x="1836.371925891568" y="2573.0" />
+      <point x="904.5" y="2573.0" />
+      <point x="127.5" y="137.0" />
+    </edge>
+    <edge source="versione1.Event" target="versione2.StateValue">
+      <point x="-174.89999999999964" y="-737.5" />
+      <point x="4587.047321428572" y="508.0" />
+      <point x="4652.670819160997" y="508.0" />
+      <point x="4652.670819160997" y="250.0" />
+      <point x="4767.420819160996" y="250.0" />
+      <point x="-31.25" y="100.0" />
+    </edge>
+    <edge source="utilities.FileUtility" target="versione1.Event">
+      <point x="174.6875" y="-269.0" />
+      <point x="2255.621925891568" y="2563.0" />
+      <point x="4689.5" y="2563.0" />
+      <point x="4689.5" y="2023.0" />
+      <point x="4703.647321428572" y="2023.0" />
+      <point x="-58.30000000000018" y="737.5" />
+    </edge>
+    <edge source="versione1.Event" target="versione1.Field">
+      <point x="-408.09999999999945" y="-737.5" />
+      <point x="4353.847321428572" y="488.0" />
+      <point x="3711.6041524943303" y="488.0" />
+      <point x="74.33333333333348" y="89.0" />
+    </edge>
+    <edge source="versione1.User" target="versione2.notifications.Notification">
+      <point x="76.5" y="-137.0" />
+      <point x="853.5" y="2073.0" />
+      <point x="760.309425891568" y="2073.0" />
+      <point x="152.0" y="88.5" />
+    </edge>
+    <edge source="versione1.SocialNetwork" target="versione1.Event">
+      <point x="-72.1875" y="-353.5" />
+      <point x="5027.302069160996" y="3191.0" />
+      <point x="4788.028175891568" y="3191.0" />
+      <point x="4788.028175891568" y="2053.0" />
+      <point x="5053.447321428572" y="2053.0" />
+      <point x="291.5" y="737.5" />
+    </edge>
+    <edge source="utilities.FileUtility" target="versione1.SoccerMatchEvent">
+      <point x="34.9375" y="-269.0" />
+      <point x="2115.871925891568" y="2543.0" />
+      <point x="2297.75" y="2543.0" />
+      <point x="-327.75" y="113.0" />
+    </edge>
+    <edge source="sample.Main" target="versione2.ControlThread">
+      <point x="0.0" y="-64.5" />
+      <point x="72.25" y="101.0" />
+    </edge>
+    <edge source="versione5.CinemaEvent" target="versione1.Field">
+      <point x="-574.1666666666661" y="-185.0" />
+      <point x="3415.833333333334" y="2023.0" />
+      <point x="3626.270819160997" y="2023.0" />
+      <point x="3626.270819160997" y="508.0" />
+      <point x="3612.493041383219" y="508.0" />
+      <point x="-24.77777777777783" y="89.0" />
+    </edge>
+    <edge source="versione1.SoccerMatchEvent" target="versione1.Event">
+      <point x="409.6875" y="-113.0" />
+      <point x="3035.1875" y="2033.0" />
+      <point x="4237.247321428572" y="2033.0" />
+      <point x="-524.6999999999998" y="737.5" />
+    </edge>
+    <edge source="versione1.Event" target="versione5.Member">
+      <point x="524.6999999999998" y="-737.5" />
+      <point x="5286.647321428572" y="508.0" />
+      <point x="5321.534821428571" y="508.0" />
+      <point x="0.0" y="52.5" />
+    </edge>
+    <edge source="versione2.ControlThread" target="versione1.User">
+      <point x="-72.25" y="-101.0" />
+      <point x="4835.784425891568" y="4018.0" />
+      <point x="763.875" y="4018.0" />
+      <point x="763.875" y="2563.0" />
+      <point x="700.5" y="2563.0" />
+      <point x="-76.5" y="137.0" />
+    </edge>
+    <edge source="versione2.ControlThread" target="versione5.Member">
+      <point x="101.14999999999964" y="-101.0" />
+      <point x="5009.184425891568" y="4028.0" />
+      <point x="5680.358830653473" y="4028.0" />
+      <point x="5680.358830653473" y="468.0" />
+      <point x="5414.734821428572" y="468.0" />
+      <point x="93.19999999999982" y="52.5" />
+    </edge>
+    <edge source="versione2.ControlThread" target="versione1.SocialNetwork">
+      <point x="-14.449999999999818" y="-101.0" />
+      <point x="4893.584425891568" y="3988.0" />
+      <point x="4926.239569160996" y="3988.0" />
+      <point x="-173.25" y="353.5" />
+    </edge>
+    <edge source="versione2.notifications.NotificationsBuilder" target="versione2.notifications.Notification">
+      <point x="201.0" y="-172.5" />
+      <point x="502.5" y="2073.0" />
+      <point x="532.309425891568" y="2073.0" />
+      <point x="-76.0" y="88.5" />
+    </edge>
+    <edge source="versione2.notifications.NotificationsBuilder" target="versione2.notifications.NotificationType">
+      <point x="-201.0" y="-172.5" />
+      <point x="100.5" y="2063.0" />
+      <point x="300.75" y="2063.0" />
+      <point x="300.75" y="508.0" />
+      <point x="500.559425891568" y="508.0" />
+      <point x="-55.0" y="52.0" />
+    </edge>
+    <edge source="versione2.State" target="versione2.StateValue">
+      <point x="-67.75" y="-52.5" />
+      <point x="4848.502728818799" y="250.0" />
+      <point x="4788.25415249433" y="250.0" />
+      <point x="-10.41666666666697" y="100.0" />
+    </edge>
+    <edge source="versione1.SocialNetwork" target="versione1.User">
+      <point x="-216.5625" y="-353.5" />
+      <point x="4882.927069160996" y="3241.0" />
+      <point x="782.309425891568" y="3241.0" />
+      <point x="782.309425891568" y="2553.0" />
+      <point x="751.5" y="2553.0" />
+      <point x="-25.5" y="137.0" />
+    </edge>
+    <edge source="versione5.CinemaCategory" target="versione1.Category">
+      <point x="0.0" y="-77.5" />
+      <point x="5322.375" y="2523.0" />
+      <point x="5234.520721243041" y="2523.0" />
+      <point x="-48.714285714285325" y="101.0" />
+    </edge>
+    <edge source="versione1.SoccerMatchEvent" target="versione2.StateValue">
+      <point x="-573.5625" y="-113.0" />
+      <point x="2051.9375" y="2063.0" />
+      <point x="2308.1875" y="2063.0" />
+      <point x="2308.1875" y="240.0" />
+      <point x="4746.587485827664" y="240.0" />
+      <point x="-52.08333333333303" y="100.0" />
+    </edge>
+    <edge source="versione5.CinemaEvent" target="versione1.Event">
+      <point x="114.83333333333348" y="-185.0" />
+      <point x="4104.833333333333" y="2053.0" />
+      <point x="4470.447321428572" y="2053.0" />
+      <point x="-291.5" y="737.5" />
+    </edge>
+    <edge source="versione2.ControlThread" target="versione1.Category">
+      <point x="43.350000000000364" y="-101.0" />
+      <point x="4951.384425891569" y="4008.0" />
+      <point x="5511.645819160996" y="4008.0" />
+      <point x="5511.645819160996" y="2483.0" />
+      <point x="5429.377864100184" y="2483.0" />
+      <point x="146.14285714285688" y="101.0" />
+    </edge>
+    <edge source="versione1.SocialNetwork" target="versione1.SoccerMatchCategory">
+      <point x="43.3125" y="-353.5" />
+      <point x="5142.802069160996" y="3151.0" />
+      <point x="5114.541666666667" y="3151.0" />
+      <point x="102.66666666666697" y="77.5" />
+    </edge>
+    <edge source="versione1.Event" target="versione2.State">
+      <point x="174.89999999999964" y="-737.5" />
+      <point x="4936.847321428571" y="508.0" />
+      <point x="4950.127728818799" y="508.0" />
+      <point x="33.875" y="52.5" />
+    </edge>
+    <edge source="utilities.FileUtility" target="utilities.RuntimeTypeAdapterFactory">
+      <point x="-104.8125" y="-269.0" />
+      <point x="1976.121925891568" y="2553.0" />
+      <point x="1507.5" y="2553.0" />
+      <point x="-147.5" y="161.0" />
+    </edge>
+    <edge source="utilities.FileUtility" target="utilities.PathBuilder">
+      <point x="-174.6875" y="-269.0" />
+      <point x="1906.246925891568" y="2563.0" />
+      <point x="1145.0" y="2563.0" />
+      <point x="0.0" y="40.0" />
+    </edge>
+    <edge source="versione1.SoccerMatchCategory" target="versione1.SoccerMatchEvent">
+      <point x="-102.66666666666697" y="-77.5" />
+      <point x="4909.208333333333" y="2543.0" />
+      <point x="2953.25" y="2543.0" />
+      <point x="327.75" y="113.0" />
+    </edge>
+    <edge source="versione2.ControlThread" target="versione2.StateValue">
+      <point x="130.05000000000018" y="-101.0" />
+      <point x="5038.084425891568" y="4038.0" />
+      <point x="5736.491071428572" y="4038.0" />
+      <point x="5736.491071428572" y="220.0" />
+      <point x="4850.75415249433" y="220.0" />
+      <point x="52.08333333333303" y="100.0" />
+    </edge>
+    <edge source="versione1.SocialNetwork" target="utilities.FileUtility">
+      <point x="-101.0625" y="-353.5" />
+      <point x="4998.427069160996" y="3201.0" />
+      <point x="2220.684425891568" y="3201.0" />
+      <point x="139.75" y="269.0" />
+    </edge>
+    <edge source="versione1.SoccerMatchCategory" target="versione1.Category">
+      <point x="0.0" y="-77.5" />
+      <point x="5011.875" y="2563.0" />
+      <point x="5137.09214981447" y="2563.0" />
+      <point x="-146.14285714285688" y="101.0" />
+    </edge>
+    <edge source="versione2.notifications.Notification" target="versione2.notifications.NotificationType">
+      <point x="-95.0" y="-88.5" />
+      <point x="513.309425891568" y="508.0" />
+      <point x="555.559425891568" y="508.0" />
+      <point x="0.0" y="52.0" />
+    </edge>
+    <edge source="versione1.SocialNetwork" target="versione1.Category">
+      <point x="158.8125" y="-353.5" />
+      <point x="5258.302069160996" y="3221.0" />
+      <point x="5469.375" y="3221.0" />
+      <point x="5469.375" y="2503.0" />
+      <point x="5331.949292671612" y="2503.0" />
+      <point x="48.714285714285325" y="101.0" />
+    </edge>
+    <edge source="versione1.SoccerMatchEvent" target="versione1.Gender">
+      <point x="-409.6875" y="-113.0" />
+      <point x="2215.8125" y="2073.0" />
+      <point x="2346.4375" y="2073.0" />
+      <point x="-27.75" y="40.0" />
+    </edge>
+    <edge source="versione1.SoccerMatchEvent" target="versione1.Field">
+      <point x="81.9375" y="-113.0" />
+      <point x="2707.4375" y="2073.0" />
+      <point x="2645.2150162337657" y="2073.0" />
+      <point x="2645.2150162337657" y="498.0" />
+      <point x="3562.9374858276633" y="498.0" />
+      <point x="-74.33333333333348" y="89.0" />
+    </edge>
+    <edge source="versione2.ControlThread" target="versione2.notifications.Notification">
+      <point x="-101.14999999999964" y="-101.0" />
+      <point x="4806.884425891569" y="4028.0" />
+      <point x="613.5" y="4028.0" />
+      <point x="613.5" y="2073.0" />
+      <point x="608.309425891568" y="2073.0" />
+      <point x="0.0" y="88.5" />
+    </edge>
+    <edge source="versione5.CinemaEvent" target="versione2.StateValue">
+      <point x="574.166666666667" y="-185.0" />
+      <point x="4564.166666666667" y="2073.0" />
+      <point x="5725.491071428572" y="2073.0" />
+      <point x="5725.491071428572" y="230.0" />
+      <point x="4829.920819160996" y="230.0" />
+      <point x="31.25" y="100.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.11218795888399413" x="3037.5" y="1692.5" />
+  <SelectedNodes>
+    <node>versione2.notifications.NotificationsBuilder</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
