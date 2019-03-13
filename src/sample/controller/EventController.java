@@ -99,6 +99,13 @@ public class EventController {
 
                 if (event.isUserAlreadyRegistered(sessionUsername)) {
 
+                    if(LocalDate.now().isAfter(event.getRegistrationDeadline().getValue())){
+                        retiredEventBtn.setDisable(true);
+                    }
+                    else{
+                        retiredEventBtn.setDisable(true);
+                    }
+
                     switch(event.getType()){
                         case (CINEMA_NAME): {
 
@@ -128,6 +135,7 @@ public class EventController {
                         else{
                             retiredParBtn.setDisable(false);
                         }
+
                     }
                 } else {
                     if (event.isNumOfTotalParticipantsEqualsMaxPlusTolerance()) {
@@ -337,25 +345,26 @@ public class EventController {
      */
     public void disScribe(){
 
-        switch(event.getType()){
-            case (CINEMA_NAME): {
 
-                gadgetEventCheckB.setDisable(false);
-                rinfrescoEventCheckB.setDisable(false);
-                pastiEventCheckB.setDisable(false);
-                break;
+            switch (event.getType()) {
+                case (CINEMA_NAME): {
+
+                    gadgetEventCheckB.setDisable(false);
+                    rinfrescoEventCheckB.setDisable(false);
+                    pastiEventCheckB.setDisable(false);
+                    break;
+                }
             }
+
+            event.removeParticipant(sessionUsername);
+            socialNetwork.updateUserAndEventsListFile();
+            subScribeBtn.setDisable(false);
+            retiredParBtn.setDisable(true);
+            int postiDisponibili = (event.getNumOfParticipants().getValue() + event.getExtraParticipants().getValue()) - event.getParticipants().size();
+            placesAvbLbl.setText("Posti disponibili: " + postiDisponibili);
         }
 
-        event.removeParticipant(sessionUsername);
-        socialNetwork.updateUserAndEventsListFile();
-        subScribeBtn.setDisable(false);
-        retiredParBtn.setDisable(true);
-        int postiDisponibili = (event.getNumOfParticipants().getValue() + event.getExtraParticipants().getValue() )- event.getParticipants().size();
-        placesAvbLbl.setText("Posti disponibili: "+postiDisponibili);
 
-
-    }
 
 
     /**
