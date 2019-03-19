@@ -1,0 +1,38 @@
+
+* {
+    -fx-text-primary: #2c4557;
+    -fx-primary: #8aa7ec;
+    -fx-secondary: #dee3e9;
+}
+
+.root{
+    -fx-background-color: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+}
+
+.button{
+    -fx-text-fill: -fx-text-primary;
+    -fx-background-color: -fx-primary;
+}
+
+.loginButton{
+    -fx-border-color: -fx-secondary;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.loginButton:hover{
+    -fx-border-color: -fx-secondary;
+    -fx-background-color: -fx-secondary;
+}
+
+.text-field{
+    -jfx-focus-color: -fx-secondary;
+    -fx-text-fill: derive(-fx-secondary, 20%);
+}
+
+.check-box{
+
+    -jfx-checked-color: -fx-secondary;
+}
+
+
