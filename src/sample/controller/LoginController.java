@@ -1,5 +1,7 @@
 package sample.controller;
 
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.scene.paint.Color;
 import javafx.event.ActionEvent;
@@ -37,7 +39,7 @@ public class LoginController {
     @FXML
     private Label errorLbl, preferenceCatLbl, ageRangeLbl, show;
     @FXML
-    private ListView preferenceCategoryListView;
+    private JFXListView preferenceCategoryListView;
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -101,7 +103,7 @@ public class LoginController {
                    categoryCheck = new ArrayList<>();
 
                    for(Category category : social.getCategories()){
-                       CheckBox catCheck = new CheckBox();
+                       JFXCheckBox catCheck = new JFXCheckBox();
                        catCheck.setText(category.getName());
                        categoryCheck.add(catCheck);
 

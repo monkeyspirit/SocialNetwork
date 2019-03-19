@@ -3,6 +3,7 @@
     -fx-text-primary: #2c4557;
     -fx-primary: #8aa7ec;
     -fx-secondary: #dee3e9;
+    -fx-check-color:  #2c4557;
 }
 
 .root{
@@ -32,7 +33,7 @@
 
 .check-box{
 
-    -jfx-checked-color: -fx-secondary;
+    -jfx-checked-color:  -fx-check-color;
 }
 
 

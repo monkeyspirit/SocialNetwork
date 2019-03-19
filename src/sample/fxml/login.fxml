@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import com.jfoenix.controls.JFXListView?>
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@newThemeLogin.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
 
@@ -28,7 +29,7 @@
       <ChoiceBox fx:id="minAgeCB" layoutX="262.0" layoutY="128.0" prefHeight="26.0" prefWidth="51.0" visible="false" />
       <ChoiceBox fx:id="maxAgeCB" disable="true" layoutX="324.0" layoutY="128.0" prefHeight="26.0" prefWidth="51.0" visible="false" />
 
-      <ListView fx:id="preferenceCategoryListView" layoutX="313.0" layoutY="168.0" prefHeight="83.0" prefWidth="187.0" visible="false" />
+      <JFXListView fx:id="preferenceCategoryListView" layoutX="313.0" layoutY="168.0" prefHeight="83.0" prefWidth="187.0" visible="false" />
       <JFXTextField fx:id="usrnameTF" layoutX="215.0" layoutY="262.0" promptText="Username" styleClass="text-field" stylesheets="@newThemeLogin.css" />
       <JFXCheckBox fx:id="checkRgCB" layoutX="107.0" layoutY="345.0" stylesheets="@newThemeLogin.css" text="Nuovo utente? Seleziona il box alla tua sinistra e registrati!" />
 
