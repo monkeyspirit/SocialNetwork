@@ -1,5 +1,6 @@
 package sample.controller;
 
+import com.jfoenix.controls.JFXCheckBox;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -32,9 +33,9 @@ public class SettingsController {
     @FXML
     private Label usernameLbl;
     @FXML
-    private ListView<CheckBox> catgPrefListView;
+    private ListView<JFXCheckBox> catgPrefListView;
 
-    private List<CheckBox> categoryCheck;
+    private List<JFXCheckBox> categoryCheck;
     private ArrayList<String> selectedCategory;
     private List<String> categoryAlrPref;
 
@@ -77,7 +78,7 @@ public class SettingsController {
 
         for(Category category : socialNetwork.getCategories()){
 
-            CheckBox catCheck = new CheckBox();
+            JFXCheckBox catCheck = new JFXCheckBox();
             catCheck.setText(category.getName());
             categoryCheck.add(catCheck);
 

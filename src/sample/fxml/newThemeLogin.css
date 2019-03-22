@@ -1,39 +1,96 @@
 
+/**
+        LIGHT THEME
+ */
 * {
-    -fx-text-primary: #2c4557;
-    -fx-primary: #8aa7ec;
-    -fx-secondary: #dee3e9;
-    -fx-check-color:  #2c4557;
+    -fx-text-primary: #000000;
+    -fx-primary: #FFFFFF;
+    -fx-secondary: #338fbf;
+    -fx-third: #f8dec3;
+    -fx-check-color: #338fbf ;
 }
 
 .root{
-    -fx-background-color: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+    -fx-background-color: #FFFFFF;
 }
 
-.button{
+/**
+    Background gradient style
+ */
+
+
+
+/**
+    Button Style
+ */
+
+/* Bottone semplice  */
+.buttonPress{
+
     -fx-text-fill: -fx-text-primary;
     -fx-background-color: -fx-primary;
-}
-
-.loginButton{
     -fx-border-color: -fx-secondary;
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
 }
 
-.loginButton:hover{
+/*  Quando si preme il bottone cambia colore */
+.buttonPress:hover{
     -fx-border-color: -fx-secondary;
     -fx-background-color: -fx-secondary;
 }
 
+/**
+    Text Field Style
+ */
 .text-field{
     -jfx-focus-color: -fx-secondary;
     -fx-text-fill: derive(-fx-secondary, 20%);
 }
 
+/**
+    CheckBox Style
+ */
 .check-box{
-
     -jfx-checked-color:  -fx-check-color;
 }
+
+
+
+/**
+    Tab Pane Style
+ */
+.tab{
+    /* tab size */
+    -fx-pref-width: 150;
+    -fx-pref-height: 30;
+
+    /* tab color background */
+    -fx-background-color:  -fx-secondary;
+
+}
+
+/* Serve per colorare anche quella parte della barra in cui non ci sono tab effettive */
+.tab-header-background{
+    /* tab color background */
+    -fx-background-color:  -fx-secondary;
+}
+
+/*  Serve per colorare e impostare la dimensione del testo */
+.tab-label{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 10pt;
+}
+
+/* Cambia il colore alla linea di selezione del tab */
+.tab-selected-line{
+    -fx-background-color:  #FFFFFF;
+}
+
+/*  Cambia il colore alla selezione della tab   */
+.jfx-tab-pane .headers-region > .tab > .jfx-rippler {
+    -jfx-rippler-fill: #FFFFFF;
+}
+
 
 
