@@ -25,7 +25,7 @@
  */
 
 /* Bottone semplice  */
-.buttonPress{
+.button{
 
     -fx-text-fill: -fx-text-primary;
     -fx-background-color: -fx-primary;
@@ -35,9 +35,10 @@
 }
 
 /*  Quando si preme il bottone cambia colore */
-.buttonPress:hover{
+.button:hover{
     -fx-border-color: -fx-secondary;
     -fx-background-color: -fx-secondary;
+    -fx-text-fill: #FFFFFF;
 }
 
 /**
@@ -49,12 +50,20 @@
 }
 
 /**
+    Text Area Style
+ */
+
+.text-area{
+    -jfx-focus-color: -fx-secondary;
+    -fx-text-fill: derive(-fx-secondary, 20%);
+}
+
+/**
     CheckBox Style
  */
 .check-box{
     -jfx-checked-color:  -fx-check-color;
 }
-
 
 
 /**

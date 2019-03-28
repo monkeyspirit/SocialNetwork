@@ -1,5 +1,6 @@
 package sample.controller;
 
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTimePicker;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -73,7 +74,7 @@ public class EventCreateController {
     @FXML
     private TextArea noteTxtA, totTeeTxtA;
     @FXML
-    private CheckBox isTeeActiveCkB, pastiCheckBox,gadgetCheckBox,rinfrescoCheckBox;
+    private JFXCheckBox isTeeActiveCkB, pastiCheckBox,gadgetCheckBox,rinfrescoCheckBox;
     @FXML
     private ListView<CheckBox> typeOfFilmListView, inviteParticipantsListView;
 
@@ -231,7 +232,7 @@ public class EventCreateController {
 
         for(String username : socialNetwork.getUserThatPlayOtherCreatorEvents(creator)){
 
-            CheckBox userCheck = new CheckBox();
+            JFXCheckBox userCheck = new JFXCheckBox();
             userCheck.setText(username);
             userCheckList.add(userCheck);
         }
