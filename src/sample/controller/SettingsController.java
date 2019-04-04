@@ -31,6 +31,8 @@ public class SettingsController {
     @FXML
     private ChoiceBox<Integer> minAgeCB, maxAgeCB;
     @FXML
+    private ChoiceBox themeCB;
+    @FXML
     private Label usernameLbl;
     @FXML
     private ListView<JFXCheckBox> catgPrefListView;

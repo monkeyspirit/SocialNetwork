@@ -215,6 +215,7 @@ public class LoginController {
         // Imposto lo stage e la scene principali
         Parent root = (Parent) loader.load();
         Scene scene = new Scene(root, 600, 400);
+        scene.getStylesheets().add(social.getThemePath());
         primaryStage.setTitle("Bacheca");
         primaryStage.setScene(scene);
         primaryStage.show();

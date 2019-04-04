@@ -15,7 +15,7 @@
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1100.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
   <content>
-    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1099.0" prefWidth="568.0" stylesheets="@newThemeLogin.css">
+    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1099.0" prefWidth="568.0">
          <children>
 
              <JFXTextField fx:id="titleTxtF" layoutX="355.0" layoutY="68.0" prefHeight="26.0" prefWidth="149.0" />
@@ -27,7 +27,7 @@
              <JFXTextField fx:id="gadgetExtraTF" layoutX="414.0" layoutY="735.0" prefHeight="26.0" prefWidth="48.0" promptText="€" visible="false" />
              <JFXTextField fx:id="rinfrescoExtraTF" layoutX="414.0" layoutY="773.0" prefHeight="26.0" prefWidth="48.0" promptText="€" visible="false" />
 
-             <Button fx:id="createBtn" layoutX="229.0" layoutY="1038.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="40.0" prefWidth="115.0" styleClass="buttonPress" stylesheets="@newThemeLogin.css" text="Crea" />
+             <Button fx:id="createBtn" layoutX="229.0" layoutY="1038.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="40.0" prefWidth="115.0" styleClass="buttonPress"  text="Crea" />
 
 
              <ChoiceBox fx:id="catCB" layoutX="355.0" layoutY="31.0" prefHeight="28.0" prefWidth="148.0" /> <Label layoutX="508.0" layoutY="31.0" text="*" textFill="#f51010" />

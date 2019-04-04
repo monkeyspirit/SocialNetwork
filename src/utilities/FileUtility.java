@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import javafx.scene.Scene;
 import versione1.Event;
 import versione1.SoccerMatchEvent;
 import versione1.User;
@@ -228,4 +229,6 @@ public class FileUtility {
     }
 
     //CON LO STESSO APPROCCIO SI LEGGONO E SCRIVONO UTENTI/EVENTI DI ALTRE CATEGORIE/..
+
+
 }

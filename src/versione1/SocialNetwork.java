@@ -20,6 +20,8 @@ public class SocialNetwork {
 	private List<User> users;
 	private User loggedUser; //utente attualmente loggato
 	private FileUtility fileUtility;
+
+	private String themePath;
 //	private NotificationsBuilder notificationsHandler;
 
 	/**
@@ -34,6 +36,10 @@ public class SocialNetwork {
 		this.fileUtility = new FileUtility();
 //		this.notificationsHandler = new NotificationsBuilder();
 	}
+
+	public void setThemePath(String path){ this.themePath = path; }
+
+	public String getThemePath() { return themePath; }
 
 	public void addCategory(Category category) {
 	    this.categories.add(category);

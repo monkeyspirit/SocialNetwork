@@ -10,10 +10,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bacl-login" stylesheets="@newThemeLogin.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bacl-login" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
 
-      <Button fx:id="loginBtn" layoutX="247.0" layoutY="301.0" mnemonicParsing="false" onAction="#checkAccess" prefHeight="26.0" prefWidth="90.0" styleClass="buttonPress" stylesheets="@newThemeLogin.css" text="Accedi" />
+      <Button fx:id="loginBtn" layoutX="247.0" layoutY="301.0" mnemonicParsing="false" onAction="#checkAccess" prefHeight="26.0" prefWidth="90.0" styleClass="buttonPress" text="Accedi" />
 
       <ImageView fitHeight="90.0" fitWidth="199.0" layoutX="255.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -29,8 +29,8 @@
       <ChoiceBox fx:id="maxAgeCB" disable="true" layoutX="324.0" layoutY="128.0" prefHeight="26.0" prefWidth="51.0" visible="false" />
 
       <JFXListView fx:id="preferenceCategoryListView" layoutX="313.0" layoutY="168.0" prefHeight="83.0" prefWidth="187.0" visible="false" />
-      <JFXTextField fx:id="usrnameTF" layoutX="215.0" layoutY="262.0" promptText="Username" styleClass="text-field" stylesheets="@newThemeLogin.css" />
-      <JFXCheckBox fx:id="checkRgCB" layoutX="107.0" layoutY="345.0" stylesheets="@newThemeLogin.css" text="Nuovo utente? Seleziona il box alla tua sinistra e registrati!" />
+      <JFXTextField fx:id="usrnameTF" layoutX="215.0" layoutY="262.0" promptText="Username" styleClass="text-field" />
+      <JFXCheckBox fx:id="checkRgCB" layoutX="107.0" layoutY="345.0" text="Nuovo utente? Seleziona il box alla tua sinistra e registrati!" />
 
    </children>
 </AnchorPane>

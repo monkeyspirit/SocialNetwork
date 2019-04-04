@@ -30,6 +30,7 @@ public class SampleController {
     private GraphicThread graphicThread;
     public void setGraphicThread(GraphicThread graphicThread) { this.graphicThread = graphicThread; }
 
+    private String path;
 
     public static final String SOCCER_NAME = "Partite di calcio";
 
@@ -77,6 +78,8 @@ public class SampleController {
 
     @FXML
     private void initialize() throws IOException {
+
+        path = socialNetwork.getThemePath();
 
         userTb.setText(sessionUser.getUsername());
         ageRangeLbl.setText(sessionUser.getAgeRange());
@@ -257,6 +260,7 @@ public class SampleController {
 
         Parent notifyView = loaderNotify.load();
         Scene sceneNotify = new Scene(notifyView, 500, 300);
+        sceneNotify.getStylesheets().add(path);
         notify.setTitle("Notifica");
         notify.setScene(sceneNotify);
         notify.show();
@@ -291,6 +295,7 @@ public class SampleController {
 
         Parent eventView = loaderEvent.load();
         Scene sceneEvent = new Scene(eventView, 600, 400);
+        sceneEvent.getStylesheets().add(path);
         view.setX(600); // In questo modo non è sovrapposto a quello degli eventi
         view.setY(200);
         view.setTitle((String)eventSelected.getTitle().getValue());
@@ -326,7 +331,7 @@ public class SampleController {
         eventCreateController.setThisStage(create);
         Parent eventCreate =  (Parent) loaderCreate.load();
         Scene scene = new Scene(eventCreate, 600, 1000);
-
+        scene.getStylesheets().add(path);
         create.setY(200);
         create.setX(400); // In questo modo non è sovrapposto a quello degli eventi
         create.setTitle("Crea");
@@ -366,6 +371,7 @@ public class SampleController {
         // Imposto lo stage e la scene principali
         Parent root =  (Parent) loader.load();
         Scene scene = new Scene(root, 600, 400);
+        scene.getStylesheets().add(path);
         newLogin.setTitle("Accesso");
         newLogin.setScene(scene);
         newLogin.show();
@@ -390,7 +396,7 @@ public class SampleController {
         settingsController.setThisStage(settings);
         Parent settingStage =  (Parent) loaderSettings.load();
         Scene scene = new Scene(settingStage, 600, 250);
-
+        scene.getStylesheets().add(path);
         settings.setY(200);
         settings.setX(200); // In questo modo non è sovrapposto ad altri
         settings.setTitle("Impostazioni");

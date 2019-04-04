@@ -12,6 +12,7 @@ import versione2.ControlThread;
 public class Main extends Application {
 
     private static Stage guiStage;
+    private String path = "sample/Theme/mintTheme.css";
 
     public static Stage getStage() {
         return guiStage;
@@ -34,6 +35,7 @@ public class Main extends Application {
         // e queste righe saranno in una parte di codice alternativa
 
         SocialNetwork social = new SocialNetwork();
+        social.setThemePath(path);
         social.loadUsersListFromFile(); //NUOVO: carico la lista di utenti da file
 
         User system = social.getUsers().get(0); //prendo il primo utente di quella lista
@@ -84,6 +86,7 @@ public class Main extends Application {
         // Imposto lo stage e la scene principali
         Parent root =  (Parent) loader.load();
         Scene scene = new Scene(root, 600, 400);
+        scene.getStylesheets().add(path);
         primaryStage.setTitle("Accesso");
         primaryStage.setScene(scene);
         primaryStage.show();
