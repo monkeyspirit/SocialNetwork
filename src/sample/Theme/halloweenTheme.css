@@ -45,6 +45,9 @@
     -fx-text-fill: -fx-secondary;
 }
 
+.label-text{
+    -fx-text-fill: -fx-text-primary;
+}
 
 
 /**

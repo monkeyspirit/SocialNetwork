@@ -15,7 +15,7 @@
 
         <Label layoutX="393.0" layoutY="34.0" text="Categorie preferite" />
         <Label layoutX="34.0" layoutY="34.0" text="Username:" />
-        <Label fx:id="usernameLbl" layoutX="139.0" layoutY="34.0" prefHeight="16.0" prefWidth="106.0" text="Label" />
+        <Label fx:id="usernameLbl" layoutX="139.0" layoutY="34.0" prefHeight="16.0" prefWidth="106.0" styleClass="label-text" text="Label" />
         <Label layoutX="34.0" layoutY="89.0" text="Fascia d'età:" />
 
         <ChoiceBox fx:id="minAgeCB" layoutX="125.0" layoutY="84.0" prefHeight="26.0" prefWidth="54.0" />
