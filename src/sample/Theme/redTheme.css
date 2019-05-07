@@ -1,12 +1,12 @@
 
 /**
-        LIGHT THEME
+        RED THEME
  */
 * {
     -fx-text-primary: #000000;
     -fx-primary: #FFFFFF;
-    -fx-secondary: #6dd052;
-    -fx-check-color:   #6dd052 ;
+    -fx-secondary: #cc4216;
+    -fx-check-color: #cc4216;
 }
 
 .root{
@@ -24,7 +24,7 @@
 }
 
 .list-view-image{
-    -fx-background-image: url("golf.png");
+    -fx-background-image: url("pop.png");
     -fx-background-position: right bottom;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 50%;
