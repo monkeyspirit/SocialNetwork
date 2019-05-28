@@ -71,7 +71,8 @@ public abstract class Event  {
      * Costruttore vuoto: viene inizializzata la lista di campi, ciascuno dei quali con
      * nome e descrizione ma senza valore.
      */
-	public Event() {
+	public Event(String type) {
+        this.type=type;
 	}
 
     /**
@@ -189,6 +190,10 @@ public abstract class Event  {
     }
 
     public StateValue getStateValue() { return state.get(state.size()-1).getStateValue(); }
+
+    public void setTitle(String title) {
+        this.title.setValue(title);
+    }
 
     public void setState(State stateAdd) { this.state.add(stateAdd); }
 

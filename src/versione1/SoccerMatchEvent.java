@@ -22,6 +22,10 @@ public class SoccerMatchEvent extends Event{
     private Field<String> ageRange = new Field(AGERANGE_NAME, AGERANGE_DESCRIPTION);
 
 
+    public SoccerMatchEvent() {
+        super(TYPE);
+    }
+
     /**
      * Costruttore SoccerMatchEvent: chiama il costruttore dei campi obbligatori
      * della classe madre e inizializza l'attributo valore di gender e ageGroup.
