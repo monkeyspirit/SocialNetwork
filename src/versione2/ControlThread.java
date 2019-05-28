@@ -10,6 +10,7 @@ import versione5.Member;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static versione2.StateValue.Fallita;
@@ -19,54 +20,25 @@ import static versione2.StateValue.Fallita;
  * lo stato del social network in base a questi. Per esempio cambia lo stato di un evento quando i
  * requisiti per la transizione sono verificati
  */
-public class ControlThread extends Thread {
+public class ControlThread extends Thread implements StateHandler {
 
 
     SocialNetwork socialNetwork;
-    private Notification notificationToSend;
-    private Notification reminder;
-    private boolean thereIsReminder;
-    private List<Member> destinationUser;
+    private HashMap<StateValue,StateHandler> stateHandlers = new HashMap<StateValue,StateHandler>();
 
 
 
     public void setSocialNetwork(SocialNetwork socialNetwork) {
         this.socialNetwork = socialNetwork;
+        this.initializeStateHandlers();
     }
 
     @Override
     public void run() {
 
         while (true) {
-
             if(socialNetwork != null) {
-                for (Category cat : socialNetwork.getCategories()) {
-                    for(Event event : (ArrayList<Event>) cat.getEvents()){
-
-
-                        if(event.getLastState().equals(StateValue.Creata) && controlState(event)) {
-                            for (User user: socialNetwork.getUsers() ) {
-                                if(!(user.equals(socialNetwork.getLoggedUser())) && user.getCategoryPref().contains(cat.getName())){
-                                    user.addNotification(notificationToSend);
-                                }
-                            }
-                        }
-                        else if(controlState(event)){
-                            User sendTo;
-                            destinationUser = event.getParticipants();
-
-                            for(int i=0; i<destinationUser.size(); i++){
-                                sendTo = socialNetwork.findUserByName(destinationUser.get(i).getUsername());
-                                sendTo.addNotification(notificationToSend);
-                                if(thereIsReminder){
-                                    reminder = NotificationsBuilder.buildReminder((String) event.getTitle().getValue(), (LocalDate) event.getDate().getValue(), (LocalTime) event.getTime().getValue(), (String) event.getPlace().getValue(), (Float) event.getIndTee().getValue(), destinationUser.get(i).getExtra() );
-                                    sendTo.addNotification(reminder);
-
-                                }
-                            }
-                        }
-                    }
-                }
+                controlState();
             }
 
             try {
@@ -76,91 +48,131 @@ public class ControlThread extends Thread {
             }
         }
 
+    }
+    public Category getCategoryFromEvent(Event event){
+        for(Category cat : this.socialNetwork.getCategories()){
+            if(cat.getEvents().contains((event)))
+                return cat;
         }
+    return null;
+    }
+
+    public void sendNotificationForCreation(Event event, Notification notification){
+        Category cat = getCategoryFromEvent(event);
+        for (User user: socialNetwork.getUsers() ) {
+            if(!(user.equals(socialNetwork.getLoggedUser())) && user.getCategoryPref().contains(cat.getName())){
+                user.addNotification(notification);
+            }
+        }
+    }
+
+    public void sendNotificationAndReminder(Event event, Notification notification, boolean reminder){
+        User sendTo;
+        for(int i=0; i<event.getParticipants().size(); i++){
+             sendTo=socialNetwork.findUserByName(event.getParticipants().get(i).getUsername());
+             sendTo.addNotification(notification);
+
+            if(reminder){
+                sendTo.addNotification( NotificationsBuilder.buildReminder((String) event.getTitle().getValue(),
+                        (LocalDate) event.getDate().getValue(), (LocalTime) event.getTime().getValue(), (String) event.getPlace().getValue(),
+                        (Float) event.getIndTee().getValue(), event.getParticipants().get(i).getExtra() )  );
+
+            }
+        }
+    }
+
+    // inizializzazione dell'hash map: assegno ad ogni stato il relativo metodo
+
+    public void initializeStateHandlers(){
+        this.stateHandlers.put(StateValue.Creata,(Event event) -> changeStateFromCreated(event));
+        this.stateHandlers.put(StateValue.Aperta,(Event event) -> changeStateFromOpened(event));
+        this.stateHandlers.put(StateValue.Chiusa,(Event event) -> changeStateFromClosed(event));
+        this.stateHandlers.put(StateValue.DaRitirare,(Event event) -> changeStateFromRetired(event));
+    }
+
+    @Override
+    public void checkChangeFromState(Event event) {
+        for(StateValue state : stateHandlers.keySet()){
+            if( state == event.getLastState() ){
+                 stateHandlers.get(state).checkChangeFromState(event);
+            }
+        }
+    }
+
+    // --------------------- METODI PER CAMBIARE STATO -------------------------
+
+    public void changeStateFromCreated(Event event){
+            event.setState(new versione2.State(StateValue.Aperta, LocalDate.now()));
+            sendNotificationForCreation(event,buildNotificationNewEvent(event) );
+    }
+
+    public void changeStateFromOpened(Event event){
+            // se il numero di partecipanti e' uguale al numero massimo e non ci si può più ritirare --> CHIUSA
+            if (event.isNumOfTotalParticipantsEqualsMaxPlusTolerance() && LocalDate.now().isAfter(event.getRetireDeadline().getValue())) {
+                event.setState(new versione2.State(StateValue.Chiusa, LocalDate.now()));
+                sendNotificationAndReminder(event, buildNotificationEventClosed(event),true );
+
+            }
+
+            // se il numero dei partecipanti è tra il numero minimo e la tolleranza e siamo oltre alla data di termine iscrizione --> CHIUSA
+            if (event.isNumOfParticipantsMore() && LocalDate.now().isAfter(event.getRegistrationDeadline().getValue())) {
+                event.setState(new versione2.State(StateValue.Chiusa, LocalDate.now()));
+                sendNotificationAndReminder(event,buildNotificationEventClosed(event), true);
+            }
+
+            // se la data di termine e' oltre oggi e non abbiamo il numero di partecipanti --> FALLITA
+            if (LocalDate.now().isAfter(event.getRegistrationDeadline().getValue()) && !event.isNumOfParticipantsMore()) {
+                event.setState(new versione2.State(Fallita, LocalDate.now()));
+                sendNotificationAndReminder(event,buildNotificationEventFailed(event), false);
+            }
+    }
+
+    public void changeStateFromClosed(Event event){
+            //se la data di termine è oltre oggi --> CONCLUSA
+            if (event.getEndDate().getValue() != null && LocalDate.now().isAfter(event.getEndDate().getValue())) {
+                event.setState(new versione2.State(StateValue.Conclusa, LocalDate.now()));
+                sendNotificationAndReminder(event,buildNotificationEventTerminated(event), false);
+            }
+    }
+
+    public void changeStateFromRetired(Event event){
+            event.setState(new versione2.State(StateValue.Ritirata, LocalDate.now()));
+            sendNotificationAndReminder(event,buildNotificationEventRetired(event), false);
+    }
 
 
     /**
      * Controlla e modifica lo stato degli eventi
      */
-    public boolean controlState(Event event){
-
-        boolean isChanged = false;
-        thereIsReminder=false;
-
-
-        // Per gli eventi aperti:
-        switch (event.getState().get(event.getState().size()-1).getStateValue()) {
-
-
-            case Creata: {
-                event.getState().add(new versione2.State(StateValue.Aperta, LocalDate.now()));
-                isChanged = true;
-                thereIsReminder = false;
-                notificationToSend = NotificationsBuilder.buildNotificationNewEvent ((String) event.getTitle().getValue());
-
-
-                break;
+    public void controlState(){
+        for (Category cat : socialNetwork.getCategories()) {
+            for(Event event : (ArrayList<Event>) cat.getEvents()){
+                checkChangeFromState(event);
             }
-
-            case Aperta: {
-
-                // se il numero di partecipanti e' uguale al numero massimo e non ci si può più ritirare --> CHIUSA
-                if (event.isNumOfTotalParticipantsEqualsMaxPlusTolerance() && LocalDate.now().isAfter(event.getRetireDeadline().getValue())) {
-                    event.getState().add(new versione2.State(StateValue.Chiusa, LocalDate.now()));
-
-                    isChanged = true;
-                    notificationToSend = NotificationsBuilder.buildNotificationClosed((String) event.getTitle().getValue());
-                    thereIsReminder = true;
-
-                }
-
-                // se il numero dei partecipanti è tra il numero minimo e la tolleranza e siamo oltre alla data di termine iscrizione --> CHIUSA
-                if (event.isNumOfParticipantsMore() && LocalDate.now().isAfter(event.getRegistrationDeadline().getValue())) {
-                    event.getState().add(new versione2.State(StateValue.Chiusa, LocalDate.now()));
-
-                    isChanged = true;
-                    notificationToSend = NotificationsBuilder.buildNotificationClosed((String) event.getTitle().getValue());
-                    thereIsReminder = true;
-                }
-
-                // se la data di termine e' oltre oggi e non abbiamo il numero di partecipanti --> FALLITA
-                if (LocalDate.now().isAfter(event.getRegistrationDeadline().getValue()) && !event.isNumOfParticipantsMore()) {
-
-                    event.getState().add(new versione2.State(Fallita, LocalDate.now()));
-                    isChanged = true;
-
-                    notificationToSend = NotificationsBuilder.buildNotificationFailed((String) event.getTitle().getValue());
-                    thereIsReminder = false;
-                }break;
-            }
-
-
-            case Chiusa: {
-                //se la data di termine è oltre oggi --> CONCLUSA
-                if (event.getEndDate().getValue() != null && LocalDate.now().isAfter(event.getEndDate().getValue())) {
-                    event.getState().add(new versione2.State(StateValue.Conclusa, LocalDate.now()));
-                    isChanged = true;
-                    thereIsReminder = false;
-                    notificationToSend = NotificationsBuilder.buildNotificationTerminated((String) event.getTitle().getValue());
-
-                }
-                break;
-            }
-
-            case DaRitirare: {
-                event.getState().add(new versione2.State(StateValue.Ritirata, LocalDate.now()));
-                isChanged = true;
-                thereIsReminder = false;
-                notificationToSend = NotificationsBuilder.buildNotificationRetiredEvent((String) event.getTitle().getValue());
-
-                break;
-            }
-
-
         }
-
-        return isChanged;
     }
 
 
+    // ------------------- METODI PER LA CREAZIONE DI NOTIFICHE -------------------------
+
+    public Notification buildNotificationNewEvent(Event event){
+        return NotificationsBuilder.buildNotificationNewEvent ((String) event.getTitle().getValue());
+    }
+
+    public Notification buildNotificationEventClosed(Event event){
+        return NotificationsBuilder.buildNotificationClosed((String) event.getTitle().getValue());
+    }
+    public Notification buildNotificationEventFailed(Event event){
+        return NotificationsBuilder.buildNotificationFailed((String) event.getTitle().getValue());
+    }
+
+    public Notification buildNotificationEventTerminated(Event event){
+        return  NotificationsBuilder.buildNotificationTerminated((String) event.getTitle().getValue());
+    }
+
+    public Notification buildNotificationEventRetired(Event event){
+        return NotificationsBuilder.buildNotificationRetiredEvent((String) event.getTitle().getValue());
+    }
+
 }
+

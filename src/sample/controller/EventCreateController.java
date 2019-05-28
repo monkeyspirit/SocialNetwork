@@ -1053,7 +1053,7 @@ public class EventCreateController {
                     }
                     else {
                         String msgPopUp = "";
-                        for(int i=1; i< errorMsg.length; i++){
+                        for(int i=0; i< errorMsg.length; i++){
                             if(errorMsg[i] != null){
                                 msgPopUp += errorMsg[i] + "\n";
                             }
