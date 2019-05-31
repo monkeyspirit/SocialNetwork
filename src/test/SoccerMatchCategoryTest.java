@@ -1,9 +1,6 @@
-package test;
-
 import org.junit.Test;
-import versione1.Field;
-import versione1.SoccerMatchCategory;
-import versione1.SoccerMatchEvent;
+import main.model.soccerMatchCategory.SoccerMatchCategory;
+import main.model.soccerMatchCategory.SoccerMatchEvent;
 
 import static org.junit.Assert.*;
 

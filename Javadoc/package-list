@@ -1,7 +1,7 @@
-sample
-sample.controller
-utilities
+main.sample
+main.sample.controller
+main.sample.utilities
 versione1
 versione2
-versione2.notifications
+main.model.notifications
 versione5
