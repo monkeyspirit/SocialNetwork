@@ -15,10 +15,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.Main;
 import main.model.Category;
-import main.model.event.Event;
 import main.model.SocialNetwork;
 import main.model.User;
 import main.model.GraphicThread;
+import main.model.event.Event;
 
 import java.io.IOException;
 import java.util.ArrayList;

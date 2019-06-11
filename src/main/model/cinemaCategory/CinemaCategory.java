@@ -1,7 +1,6 @@
 package main.model.cinemaCategory;
 
 import main.model.Category;
-
 import java.util.List;
 
 /**

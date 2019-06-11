@@ -1,4 +1,4 @@
-import org.junit.Test;
+import org.junit.*;
 import main.model.soccerMatchCategory.SoccerMatchCategory;
 import main.model.soccerMatchCategory.SoccerMatchEvent;
 

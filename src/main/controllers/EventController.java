@@ -5,10 +5,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import main.model.event.State;
-import main.model.event.Event;
-import main.model.soccerMatchCategory.SoccerMatchEvent;
 import main.model.SocialNetwork;
+import main.model.event.Event;
+import main.model.event.State;
+import main.model.event.states.ToRetire;
+import main.model.soccerMatchCategory.SoccerMatchEvent;
 import main.model.User;
 import main.model.event.StateValue;
 import main.model.cinemaCategory.CinemaEvent;
@@ -373,7 +374,7 @@ public class EventController {
      */
     public void retiredEvent(){
 
-        event.setState(new State(StateValue.DaRitirare, LocalDate.now()));
+        event.setState(new ToRetire(""));
         subScribeBtn.setDisable(true);
         retiredEventBtn.setDisable(true);
         retiredParBtn.setDisable(true);

@@ -5,9 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import main.model.event.Event;
 import main.model.SocialNetwork;
 import main.model.User;
+import main.model.event.Event;
 import main.model.notifications.Notification;
 import main.model.notifications.NotificationType;
 

@@ -1,9 +1,8 @@
 package main.model;
 
-import main.model.event.Event;
-
 import java.util.ArrayList;
 import java.util.List;
+import main.model.event.Event;
 
 /**
  * Questa classe rappresenta una categoria del social network

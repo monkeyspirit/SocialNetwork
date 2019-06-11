@@ -1,10 +1,11 @@
 package main.model;
 
-import main.model.event.Event;
-import main.model.soccerMatchCategory.SoccerMatchCategory;
-import main.fileUtilities.FileUtility;
-import main.model.cinemaCategory.CinemaCategory;
-import main.model.event.Member;
+import main.model.event.*;
+import main.model.soccerMatchCategory.*;
+import main.model.cinemaCategory.*;
+import main.fileUtilities.*;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,10 @@ public class SocialNetwork {
 		this.users.add(user);
 	}
 
+	public void setUsers(List<User> users){
+		this.users = users;
+	}
+
 	/**
 	 * Metodo per la ricerca di una categoria all'interno del Social Network, la ricerca
 	 * viene effettuata attraverso il nome, considerato ceh sono delle costanti non ci possono
@@ -78,9 +83,9 @@ public class SocialNetwork {
 	public Category findCategoryByName(String name){
 		Category found = null;
 
-		for(int i=0; i<categories.size(); i++){
-			if ( name.equals(categories.get(i).getName())){
-				found = categories.get(i);
+		for(Category cat : categories){
+			if ( cat.getName().equalsIgnoreCase(name)){
+				found = cat;
 			}
 		}
 
@@ -212,7 +217,7 @@ public class SocialNetwork {
 	public List<String> findEventByUserNameS(String userSession){
 
 		ArrayList<String> eventsUser = new ArrayList<>();
-
+	/*
 		for(int i=0; i<categories.size(); i++){
 			Category catSel = categories.get(i);
 			List<Event> eventsByCat = catSel.getEvents();
@@ -223,6 +228,13 @@ public class SocialNetwork {
 			}
 
 		}
+	*/
+		for(Category<?extends Event> cat: categories){
+			for(Event event: cat.getEvents()){
+				if(event.isUserAlreadyRegistered(userSession))
+					eventsUser.add((String) event.getTitle().getValue());
+			}
+		}
 
 		return eventsUser;
 	}
@@ -231,7 +243,7 @@ public class SocialNetwork {
 	public List<Event> findEventByUserNameE(String userSession){
 
 		ArrayList<Event> eventsUser = new ArrayList<>();
-
+/*
 		for(int i=0; i<categories.size(); i++){
 			Category catSel = categories.get(i);
 			List<Event> eventsByCat = catSel.getEvents();
@@ -242,7 +254,13 @@ public class SocialNetwork {
 			}
 
 		}
-
+*/
+		for(Category<?extends Event> cat: categories){
+			for(Event event: cat.getEvents()){
+				if(event.isUserAlreadyRegistered(userSession))
+					eventsUser.add(event);
+			}
+		}
 		return eventsUser;
 	}
 

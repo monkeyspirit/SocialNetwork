@@ -1,41 +1,46 @@
 package main.model.event;
 
+import main.model.event.states.Created;
+import main.model.notifications.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Event  {
+
+
+public abstract class Event {
 
     //Costanti della classe Event
-	private static final String TITLE_NAME = "Titolo";
-    private static final String TITLE_DESCRIPTION = "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento";
-    private static final String NUMPLAY_NAME = "Numero di partecipanti";
-    private static final String NUMPLAY_DESCRIPTION = "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento";
-    private static final String EXTRA_PARTECIPANTS_NAME= "Tolleranza numero di partecipanti";
-    private static final String EXTRA_PARTECIPANTS_DESCRIPTION ="Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"";
-    private static final String REGDEADLINE_NAME = "Termine ultimo iscrizione";
-    private static final String REGDEADLINE_DESCRIPTION = "Campo obbligatorio che inidica l'ultima data possibile per iscriversi";
-    private static final String RETIRED_DEADLINE_NAME ="Termine ultimo di ritiro iscrizione";
-    private static final String RETIRED_DEADLINE_DESCRIPTION ="Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta";
-    private static final String PLACE_NAME = "Luogo";
-    private static final String PLACE_DESCRIPTION = "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti";
-    private static final String DATE_NAME = "Data";
-    private static final String DATE_DESCRIPTION = "Campo obbligatorio che indica la data in cui l'evento proposto deve svolgersi o, nel caso l'evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell'evento";
-    private static final String TIME_NAME = "Ora";
-    private static final String TIME_DESCRIPTION = "Campo obbligatorio che indica l'ora in cui i partecipanti dovranno trovarsi nel luogo 'Luogo' in data 'Data' per dare inizio all'evento";
-    private static final String DURATION_NAME = "Durata";
-    private static final String DURATION_DESCRIPTION =  "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu' giorni consecutivi";
-    private static final String INDTEE_NAME = "Quota individuale";
-    private static final String INDTEE_DESCRIPTION = "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all'iniziativa dovra'  sostenere (si noti che la spesa puo' anche essere nulla)";
-    private static final String TEEINC_NAME = "Compreso nella quota";
-    private static final String TEEINC_DESCRIPTION = "Campo facoltativo che indica tutte le voci di spesa comprese nell'ammontare indicato nella 'Quota individuale'";
-    private static final String ENDDATE_NAME = "Data conclusiva";
-    private static final String ENDDATE_DESCRIPTION = "Campo facoltativo che fissa la data di conclusione dell'evento";
-    private static final String ENDTIME_NAME = "Ora conclusiva";
-    private static final String ENDTIME_DESCRIPTION = "Campo facoltativo che stima l'ora di conclusione dell'evento";
-    private static final String NOTE_NAME = "Note";
-    private static final String NOTE_DESCRIPTION = "Campo facoltativo contenente informazioni aggiuntive circa l'evento";
+	public static final String TITLE_NAME = "Titolo";
+    public static final String TITLE_DESCRIPTION = "Campo facoltativo che consiste in un nome di fantasia attribuito all'evento";
+    public static final String NUMPLAY_NAME = "Numero di partecipanti";
+    public static final String NUMPLAY_DESCRIPTION = "Campo obbligatorio che stabilisce il numero di persone da coinvolgere nell'evento";
+    public static final String EXTRA_PARTECIPANTS_NAME= "Tolleranza numero di partecipanti";
+    public static final String EXTRA_PARTECIPANTS_DESCRIPTION ="Campo facoltativo che indica quanti partecipanti siano eventualmente accettabili in esubero rispetto al \"Numero di partecipanti\"";
+    public static final String REGDEADLINE_NAME = "Termine ultimo iscrizione";
+    public static final String REGDEADLINE_DESCRIPTION = "Campo obbligatorio che inidica l'ultima data possibile per iscriversi";
+    public static final String RETIRED_DEADLINE_NAME ="Termine ultimo di ritiro iscrizione";
+    public static final String RETIRED_DEADLINE_DESCRIPTION ="Campo facoltativo che indica la data entro cui a ogni fruitore che ha aderito all’evento è concesso di cancellare la sua iscrizione e al fruitore che ha proposto l’evento di ritirare la proposta";
+    public static final String PLACE_NAME = "Luogo";
+    public static final String PLACE_DESCRIPTION = "Campo obbligatorio che indica l'indirizzo del luogo che ospitera'  l'evento oppure, se l'evento e' itinerante, il luogo di ritrovo dei partecipanti";
+    public static final String DATE_NAME = "Data";
+    public static final String DATE_DESCRIPTION = "Campo obbligatorio che indica la data in cui l'evento proposto deve svolgersi o, nel caso l'evento non termini nello stesso giorno in cui ha inizio, la data di inizio dell'evento";
+    public static final String TIME_NAME = "Ora";
+    public static final String TIME_DESCRIPTION = "Campo obbligatorio che indica l'ora in cui i partecipanti dovranno trovarsi nel luogo 'Luogo' in data 'Data' per dare inizio all'evento";
+    public static final String DURATION_NAME = "Durata";
+    public static final String DURATION_DESCRIPTION =  "Campo facoltativo che indica la durata in termini di numero (approssimativo) di ore e minuti, per gli eventi che si esauriscono in un sol giorno, o in termini di numero esatto di giorni, per gli eventi che occupano piu' giorni consecutivi";
+    public static final String INDTEE_NAME = "Quota individuale";
+    public static final String INDTEE_DESCRIPTION = "Campo obbligatorio che indica la spesa (o una stima della stessa) che ogni partecipante all'iniziativa dovra'  sostenere (si noti che la spesa puo' anche essere nulla)";
+    public static final String TEEINC_NAME = "Compreso nella quota";
+    public static final String TEEINC_DESCRIPTION = "Campo facoltativo che indica tutte le voci di spesa comprese nell'ammontare indicato nella 'Quota individuale'";
+    public static final String ENDDATE_NAME = "Data conclusiva";
+    public static final String ENDDATE_DESCRIPTION = "Campo facoltativo che fissa la data di conclusione dell'evento";
+    public static final String ENDTIME_NAME = "Ora conclusiva";
+    public static final String ENDTIME_DESCRIPTION = "Campo facoltativo che stima l'ora di conclusione dell'evento";
+    public static final String NOTE_NAME = "Note";
+    public static final String NOTE_DESCRIPTION = "Campo facoltativo contenente informazioni aggiuntive circa l'evento";
 
 
 	//Attributi della classe Event
@@ -55,7 +60,7 @@ public abstract class Event  {
 	private Field<LocalTime> endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
 	private Field<String> note = new Field(NOTE_NAME,NOTE_DESCRIPTION);
 
-	private List<State> state;
+	private State state;
 	private String creator; //serve per capire chi e' il creatore dell'utente
     private List<Member> participants;
 
@@ -63,8 +68,7 @@ public abstract class Event  {
      * Costruttore vuoto: viene inizializzata la lista di campi, ciascuno dei quali con
      * nome e descrizione ma senza valore.
      */
-	public Event(String type) {
-        this.type=type;
+	public Event() {
 	}
 
     /**
@@ -88,7 +92,7 @@ public abstract class Event  {
      * @param noteIns note aggiuntive riguardanti l'evento
      * @param creator username del creatore dell'evento
      */
-    public Event(String type, String titleIns, int numParIns, int extraParIns,  LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, StateValue stateValue, LocalDate stateSwitch, String noteIns,  String creator) {
+    public Event(String type, String titleIns, int numParIns, int extraParIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, StateValue stateValue, LocalDate stateSwitch, String noteIns, String creator) {
         this.type = type;
 	    this.title.setValue(titleIns);
         this.numOfParticipants.setValue(numParIns);
@@ -106,10 +110,10 @@ public abstract class Event  {
         this.endTime.setValue(endTimeIns);
         this.note.setValue(noteIns);
         this.creator = creator;
-        this.state = new ArrayList<>();
-        this.state.add(new State(stateValue, stateSwitch));
+        this.state = new Created();
         this.participants = new ArrayList<>();
     }
+
 
 
     //Setter e Getter
@@ -181,19 +185,15 @@ public abstract class Event  {
         return names;
     }
 
-    public StateValue getStateValue() { return state.get(state.size()-1).getStateValue(); }
+    public StateValue getStateValue() { return state.getStateValue(); }
 
-    public void setTitle(String title) {
-        this.title.setValue(title);
+    public void setState(State state) { this.state = state; }
+
+    public State getState() {  return state; }
+
+    public Notification checkChangeState(){
+        return this.state.changeState(this);
     }
-
-    public void setState(State stateAdd) { this.state.add(stateAdd); }
-
-    public List<State> getState() {  return state; }
-
-    public StateValue getLastState(){ return state.get(state.size()-1).getStateValue(); }
-
-    public LocalDate getStateSwitchDate() { return state.get(state.size()-1).getSwitchDate(); }
 
     public String getType() { return type; }
 
@@ -285,7 +285,7 @@ public abstract class Event  {
 
 
     /**
-     *  Trova un utente tra i membri, utilizzato nella main.sample per impostare i checkbox degli extra
+     *  Trova un utente tra i membri, utilizzato nella sample per impostare i checkbox degli extra
      */
     public boolean[] extraCheckBoxSettings(String username){
 

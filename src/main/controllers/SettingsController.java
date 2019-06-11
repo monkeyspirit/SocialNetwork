@@ -10,9 +10,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import main.model.SocialNetwork;
 import main.model.event.AgeGroup;
 import main.model.Category;
-import main.model.SocialNetwork;
 import main.model.User;
 
 import java.io.IOException;

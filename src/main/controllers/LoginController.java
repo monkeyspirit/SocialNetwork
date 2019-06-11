@@ -14,9 +14,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import main.Main;
+import main.model.SocialNetwork;
 import main.model.event.AgeGroup;
 import main.model.Category;
-import main.model.SocialNetwork;
 import main.model.User;
 import main.model.GraphicThread;
 
