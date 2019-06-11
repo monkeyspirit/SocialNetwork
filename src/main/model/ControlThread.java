@@ -1,19 +1,17 @@
-package versione2;
-import versione1.Category;
-import versione1.Event;
-import versione1.SocialNetwork;
-import versione1.User;
-import versione2.notifications.Notification;
-import versione2.notifications.NotificationsBuilder;
-import versione5.Member;
+package main.model;
+
+import main.model.event.Event;
+import main.model.event.StateValue;
+import main.model.notifications.Notification;
+import main.model.notifications.NotificationsBuilder;
+import main.model.event.StateHandler;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import static versione2.StateValue.Fallita;
+import static main.model.event.StateValue.Fallita;
 
 /**
  * Classe che si occupa di osservare la lista di eventi per riconoscerne i cambiamenti e aggiornare
@@ -102,27 +100,27 @@ public class ControlThread extends Thread implements StateHandler {
     // --------------------- METODI PER CAMBIARE STATO -------------------------
 
     public void changeStateFromCreated(Event event){
-            event.setState(new versione2.State(StateValue.Aperta, LocalDate.now()));
+            event.setState(new main.model.event.State(StateValue.Aperta, LocalDate.now()));
             sendNotificationForCreation(event,buildNotificationNewEvent(event) );
     }
 
     public void changeStateFromOpened(Event event){
             // se il numero di partecipanti e' uguale al numero massimo e non ci si può più ritirare --> CHIUSA
             if (event.isNumOfTotalParticipantsEqualsMaxPlusTolerance() && LocalDate.now().isAfter(event.getRetireDeadline().getValue())) {
-                event.setState(new versione2.State(StateValue.Chiusa, LocalDate.now()));
+                event.setState(new main.model.event.State(StateValue.Chiusa, LocalDate.now()));
                 sendNotificationAndReminder(event, buildNotificationEventClosed(event),true );
 
             }
 
             // se il numero dei partecipanti è tra il numero minimo e la tolleranza e siamo oltre alla data di termine iscrizione --> CHIUSA
             if (event.isNumOfParticipantsMore() && LocalDate.now().isAfter(event.getRegistrationDeadline().getValue())) {
-                event.setState(new versione2.State(StateValue.Chiusa, LocalDate.now()));
+                event.setState(new main.model.event.State(StateValue.Chiusa, LocalDate.now()));
                 sendNotificationAndReminder(event,buildNotificationEventClosed(event), true);
             }
 
             // se la data di termine e' oltre oggi e non abbiamo il numero di partecipanti --> FALLITA
             if (LocalDate.now().isAfter(event.getRegistrationDeadline().getValue()) && !event.isNumOfParticipantsMore()) {
-                event.setState(new versione2.State(Fallita, LocalDate.now()));
+                event.setState(new main.model.event.State(Fallita, LocalDate.now()));
                 sendNotificationAndReminder(event,buildNotificationEventFailed(event), false);
             }
     }
@@ -130,13 +128,13 @@ public class ControlThread extends Thread implements StateHandler {
     public void changeStateFromClosed(Event event){
             //se la data di termine è oltre oggi --> CONCLUSA
             if (event.getEndDate().getValue() != null && LocalDate.now().isAfter(event.getEndDate().getValue())) {
-                event.setState(new versione2.State(StateValue.Conclusa, LocalDate.now()));
+                event.setState(new main.model.event.State(StateValue.Conclusa, LocalDate.now()));
                 sendNotificationAndReminder(event,buildNotificationEventTerminated(event), false);
             }
     }
 
     public void changeStateFromRetired(Event event){
-            event.setState(new versione2.State(StateValue.Ritirata, LocalDate.now()));
+            event.setState(new main.model.event.State(StateValue.Ritirata, LocalDate.now()));
             sendNotificationAndReminder(event,buildNotificationEventRetired(event), false);
     }
 

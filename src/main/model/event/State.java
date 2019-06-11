@@ -1,5 +1,7 @@
 package main.model.event;
 
+import main.model.event.StateValue;
+
 import java.time.LocalDate;
 
 /**
