@@ -11,6 +11,7 @@ public class SoccerMatchCategoryTest {
         assertNotNull(new SoccerMatchCategory().getEvents());
     }
 
+    /*
     @Test
     public void shouldFindEventByName() {
         SoccerMatchEvent e = new SoccerMatchEvent();
@@ -20,5 +21,5 @@ public class SoccerMatchCategoryTest {
         assertEquals("titolo", s.findEventByName("titolo").getTitle().getValue());
     }
 
-
+*/
 }

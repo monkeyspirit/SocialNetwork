@@ -1,18 +1,21 @@
 package main.model;
 
-import org.junit.Test;
-
+import main.model.event.Gender;
+import main.model.event.StateValue;
+import main.model.event.states.Opened;
+import main.model.event.states.ToRetire;
 import main.model.soccerMatchCategory.SoccerMatchEvent;
-import main.model.*;
-import main.model.event.states.*;
-
+import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.junit.Assert.*;
 
+public class ControlThreadTest {
 
-class ControlThreadTest {
     private SocialNetwork socialNetwork;
 
     public void addEvents(SocialNetwork socialNetwork, User user1, User user2){
@@ -71,7 +74,7 @@ class ControlThreadTest {
     }
 
     @Test
-    void createdToOpenedToClosedToEnded() {
+   public void createdToOpenedToClosedToEnded() {
         ControlThread control = new ControlThread();
         this.populateSocialNetwork();
         control.setSocialNetwork(this.socialNetwork);
@@ -86,7 +89,7 @@ class ControlThreadTest {
     }
 
     @Test
-    void OpenedToFailed() {
+   public void OpenedToFailed() {
         ControlThread control = new ControlThread();
         this.populateSocialNetwork();
         control.setSocialNetwork(this.socialNetwork);
@@ -98,7 +101,7 @@ class ControlThreadTest {
     }
 
     @Test
-    void ToRetireToRetired() {
+    public void ToRetireToRetired() {
         ControlThread control = new ControlThread();
         this.populateSocialNetwork();
         control.setSocialNetwork(this.socialNetwork);
@@ -108,4 +111,5 @@ class ControlThreadTest {
 
 
     }
+
 }
