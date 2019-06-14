@@ -161,6 +161,7 @@ public class FileUtility {
 
         List<CinemaEvent> cinemaEventsDeserialized = null;
         try {
+
             JsonReader reader = new JsonReader(new FileReader(filePath)); //leggo dal file CinemaEvents.json la lista degli eventi di quel tipo
             cinemaEventsDeserialized = gson.fromJson(reader, listType);
         } catch (FileNotFoundException e) {

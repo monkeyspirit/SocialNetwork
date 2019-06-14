@@ -286,18 +286,16 @@ public class SocialNetwork {
 	 */
 	private List<Event> getEventsCreatedByUser(String user){
 
+
 		List<Event> eventsCreatedByUser = new ArrayList<>();
 
 		for(Category<? extends Event> category : categories) {
 
-			for (Event event : category.getEvents()) {
-
-				if (event.getCreator().equalsIgnoreCase(user)) {
-					eventsCreatedByUser.add(event);
-				}
-			}
+			eventsCreatedByUser.addAll(category.getEventCreateByUserinCat(user));
 		}
+
 		return eventsCreatedByUser;
+
 	}
 
 	/**

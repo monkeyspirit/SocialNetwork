@@ -1,7 +1,11 @@
 package main.model.soccerMatchCategory;
 
 import main.model.Category;
+import main.model.event.Gender;
+import main.model.event.StateValue;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -32,10 +36,21 @@ public class SoccerMatchCategory extends Category<SoccerMatchEvent> {
 
 	/**
 	 * Aggiunge un nuovo evento alla list di eventi
+	 *
 	 * @param event l'evento da aggiungere
 	 */
 	@Override
-    public void addEvent(SoccerMatchEvent event) {
+	public void addEvent(SoccerMatchEvent event) {
 		super.addEvent(event);
-    }
+	}
+
+
+	public SoccerMatchEvent createEvent(String titleIns, int numParIns, int extraNumIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Gender genderIns, String noteIns, String creator){
+		SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, StateValue.Creata, LocalDate.now(), noteIns, creator);
+		match.addParticipant(creator);
+		this.addEvent(match);
+		return match;
+	}
+
+
 }

@@ -1,6 +1,12 @@
 package main.model.cinemaCategory;
 
 import main.model.Category;
+import main.model.event.Gender;
+import main.model.event.StateValue;
+import main.model.soccerMatchCategory.SoccerMatchEvent;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -34,6 +40,13 @@ public class CinemaCategory extends Category<CinemaEvent> {
     @Override
     public void addEvent(CinemaEvent event) {
         super.addEvent(event);
+    }
+
+    public CinemaEvent createEvent(String titleIns, int numParIns, int extraNumIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String noteIns, String creator, List<String> typeOfFilmIns, float extraPastiTeeIns,  float extraRinfrescoTeeINs, float extraGadgetTeeIns){
+        CinemaEvent match = new CinemaEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, StateValue.Creata, LocalDate.now(), noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
+        match.addParticipant(creator);
+        this.addEvent(match);
+        return match;
     }
 
 }

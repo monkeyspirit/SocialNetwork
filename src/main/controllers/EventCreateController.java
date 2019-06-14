@@ -976,10 +976,9 @@ public class EventCreateController {
                             }
                         }
 
-                        SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, StateValue.Creata, LocalDate.now(), noteIns, creator);
-                        match.addParticipant(creator);
+                        SoccerMatchEvent match = socialNetwork.getSoccerMatchCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
 
-                        selectedUserToInvite = new ArrayList<>(); // array di stringhe degli utenti a cui inviare la notifica
+                        selectedUserToInvite = new ArrayList<>();
 
                         for(CheckBox check: userCheckList){
                             if(check.isSelected()){
@@ -991,8 +990,6 @@ public class EventCreateController {
                             User sendTo = socialNetwork.findUserByName(username);
                             sendTo.addNotification( NotificationsBuilder.buildNotificationInvite(titleIns));
                         }
-
-                        socialNetwork.getSoccerMatchCategory().addEvent(match);
 
                         socialNetwork.writeSoccerMatchEventListOnFile();
                         socialNetwork.updateUsersListFile();
@@ -1030,10 +1027,9 @@ public class EventCreateController {
                             }
                         }
 
-                        CinemaEvent filmView = new CinemaEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, StateValue.Creata, LocalDate.now(), noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
-                        filmView.addParticipant(creator);
+                        CinemaEvent filmView =  socialNetwork.getCinemaCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
 
-                        selectedUserToInvite = new ArrayList<>(); // array di stringhe degli utenti a cui inviare la notifica
+                        selectedUserToInvite = new ArrayList<>();
 
                         for(CheckBox check: userCheckList){
                             if(check.isSelected()){
@@ -1045,8 +1041,6 @@ public class EventCreateController {
                             User sendTo = socialNetwork.findUserByName(username);
                             sendTo.addNotification( NotificationsBuilder.buildNotificationInvite(titleIns));
                         }
-
-                        socialNetwork.getCinemaCategory().addEvent(filmView);
 
                         socialNetwork.writeCinemaEventListOnFile();
                         socialNetwork.updateUsersListFile();

@@ -13,7 +13,7 @@ import main.model.ControlThread;
 public class Main extends Application {
 
     private static Stage guiStage;
-    private String path = "main/view/Theme/mintTheme.css";
+    private String path = "main/view/Theme/redTheme.css";
 
     public static Stage getStage() {
         return guiStage;
@@ -41,7 +41,7 @@ public class Main extends Application {
 
         User system = social.getUsers().get(0); //prendo il primo utente di quella lista
 
-        social.loadAllEventsFromFile(); //carico tutti gli eventi
+     //   social.loadAllEventsFromFile(); //carico tutti gli eventi
 
         //Il blocco seguente serve per creare un nuovo evento e scriverlo su file
 //

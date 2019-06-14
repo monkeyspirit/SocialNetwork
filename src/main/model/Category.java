@@ -49,6 +49,7 @@ public abstract class Category <T extends Event> {
 		this.events.add(event);
 	}
 
+
 	/**
 	 * Cerca un evento a partire dal nome
 	 * @param eventNameToFind il nome dell'evento da cercare
@@ -76,6 +77,18 @@ public abstract class Category <T extends Event> {
 		}
 		return false;
     }
+
+    public List<Event> getEventCreateByUserinCat(String user){
+		List<Event> eventsCreatedByUser = new ArrayList<>();
+
+		for(Event event: events) {
+			if (event.getCreator().equalsIgnoreCase(user)) {
+				eventsCreatedByUser.add(event);
+			}
+		}
+
+		return  eventsCreatedByUser;
+	}
 
 
 }
