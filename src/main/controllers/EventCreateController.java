@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.model.*;
+import main.model.cinemaCategory.CinemaEventBuilder;
 import main.model.event.AgeGroup;
 import main.model.event.Gender;
 import main.model.event.StateValue;
@@ -17,6 +18,7 @@ import main.model.soccerMatchCategory.SoccerMatchEvent;
 import main.model.notifications.NotificationsBuilder;
 import main.model.cinemaCategory.CinemaEvent;
 import main.model.cinemaCategory.FilmType;
+import main.model.soccerMatchCategory.SoccerMatchEventBuilder;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -976,7 +978,28 @@ public class EventCreateController {
                             }
                         }
 
-                        SoccerMatchEvent match = socialNetwork.getSoccerMatchCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
+                        //SoccerMatchEvent match = socialNetwork.getSoccerMatchCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
+                        SoccerMatchEvent match = (SoccerMatchEvent) new SoccerMatchEventBuilder()
+                                .ageRange(ageRangeIns)
+                                .gender(genderIns)
+                                .title(titleIns)
+                                .numOfParticipants(numParIns)
+                                .extraParticipants(extraNumIns)
+                                .registrationDeadline(deadLineIns)
+                                .retireDeadline(retiredDeadLineIns)
+                                .place(placeIns)
+                                .date(dateIns)
+                                .time(timeIns)
+                                .duration(durationIns)
+                                .individualTee(indTeeIns)
+                                .teeInclude(totTeeIns)
+                                .endDate(endDateIns)
+                                .endTime(endTimeIns)
+                                .note(noteIns)
+                                .creator(creator)
+                                .build(); //problema: questo build è chiamato su ciò che ritorna creator ossia Event...
+
+                        socialNetwork.getSoccerMatchCategory().addEvent(match);
 
                         selectedUserToInvite = new ArrayList<>();
 
@@ -1027,7 +1050,31 @@ public class EventCreateController {
                             }
                         }
 
-                        CinemaEvent filmView =  socialNetwork.getCinemaCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
+                        //CinemaEvent cinemaEvent =  socialNetwork.getCinemaCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
+                        CinemaEvent cinemaEvent = (CinemaEvent) new CinemaEventBuilder()
+                                .genres(typeOfFilmIns)
+                                .extraMeals(extraPastiTeeIns)
+                                .gadgetExtra(extraGadgetTeeIns)
+                                .rinfreschiExtra(extraRinfrescoTeeINs)
+                                .title(titleIns)
+                                .numOfParticipants(numParIns)
+                                .extraParticipants(extraNumIns)
+                                .registrationDeadline(deadLineIns)
+                                .retireDeadline(retiredDeadLineIns)
+                                .place(placeIns)
+                                .date(dateIns)
+                                .time(timeIns)
+                                .duration(durationIns)
+                                .individualTee(indTeeIns)
+                                .teeInclude(totTeeIns)
+                                .endDate(endDateIns)
+                                .endTime(endTimeIns)
+                                .note(noteIns)
+                                .creator(creator)
+                                .build(); //problema: questo build è chiamato su ciò che ritorna creator ossia Event...
+
+                        socialNetwork.getCinemaCategory().addEvent(cinemaEvent);
+
 
                         selectedUserToInvite = new ArrayList<>();
 

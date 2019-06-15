@@ -66,7 +66,7 @@ public class ControlThread extends Thread{
             if(event.getState().getStateValue() == StateValue.Chiusa){
                 sendTo.addNotification( NotificationsBuilder.buildReminder((String) event.getTitle().getValue(),
                         (LocalDate) event.getDate().getValue(), (LocalTime) event.getTime().getValue(), (String) event.getPlace().getValue(),
-                        (Float) event.getIndTee().getValue(), event.getParticipants().get(i).getExtra() )  );
+                        (Float) event.getIndividualTee().getValue(), event.getParticipants().get(i).getExtra() )  );
 
             }
         }

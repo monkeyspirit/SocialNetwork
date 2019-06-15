@@ -54,7 +54,7 @@ public abstract class Event {
 	private Field<LocalDate> date = new Field(DATE_NAME,DATE_DESCRIPTION);
 	private Field<LocalTime> time = new Field(TIME_NAME, TIME_DESCRIPTION);
 	private Field<String> duration = new Field(DURATION_NAME, DURATION_DESCRIPTION);
-	private Field<Float> indTee = new Field(INDTEE_NAME,INDTEE_DESCRIPTION);
+	private Field<Float> individualTee = new Field(INDTEE_NAME,INDTEE_DESCRIPTION);
 	private Field<String> teeInclude = new Field(TEEINC_NAME, TEEINC_DESCRIPTION);
 	private Field<LocalDate> endDate = new Field(ENDDATE_NAME,ENDDATE_DESCRIPTION);
 	private Field<LocalTime> endTime = new Field(ENDTIME_NAME, ENDTIME_DESCRIPTION);
@@ -71,41 +71,41 @@ public abstract class Event {
 	public Event() {
 	}
 
+
+
     /**
      * Costruttore degli eventi, vengono settati tutti i valori dei campi e quello dell'utente creatore
      * @param type tipo dell'evento, uguale al nome della classe
-     * @param titleIns titolo dell'evento
-     * @param numParIns numero di partecipanti
-     * @param extraParIns numero di partecipanti extra tollerati
-     * @param deadLineIns termine ultimo iscrizione
-     * @param retiredDeadLineIns termine ultimo per ritirare l'iscrizione
+     * @param title titolo dell'evento
+     * @param numOfParticipants numero di partecipanti
+     * @param extraParticipants numero di partecipanti extra tollerati
+     * @param deadline termine ultimo iscrizione
+     * @param retiredDeadline termine ultimo per ritirare l'iscrizione
      * @param placeIns luogo dell'evento
      * @param dateIns data di inizio dell'evento
      * @param timeIns ora di inizio dell'evento
      * @param durationIns durata dell'evento
-     * @param indTeeIns quota individuale
-     * @param totTeeIns spese comprese nella quota individuale
+     * @param individualTee quota individuale
+     * @param teeInclude spese comprese nella quota individuale
      * @param endDateIns data di termine dell'evento
      * @param endTimeIns ora di termine dell'evento
-     * @param stateValue stato dell'evento
-     * @param stateSwitch data del cambio dello stato dell'evento
      * @param noteIns note aggiuntive riguardanti l'evento
      * @param creator username del creatore dell'evento
      */
-    public Event(String type, String titleIns, int numParIns, int extraParIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, StateValue stateValue, LocalDate stateSwitch, String noteIns, String creator) {
+    public Event(String type, String title, int numOfParticipants, int extraParticipants, LocalDate deadline, LocalDate retiredDeadline, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float individualTee, String teeInclude, LocalDate endDateIns, LocalTime endTimeIns, String noteIns, String creator) {
         this.type = type;
-	    this.title.setValue(titleIns);
-        this.numOfParticipants.setValue(numParIns);
-        this.extraParticipants.setValue(extraParIns);
-        this.registrationDeadline.setValue(deadLineIns);
-        this.retireDeadline.setValue(retiredDeadLineIns);
+	    this.title.setValue(title);
+        this.numOfParticipants.setValue(numOfParticipants);
+        this.extraParticipants.setValue(extraParticipants);
+        this.registrationDeadline.setValue(deadline);
+        this.retireDeadline.setValue(retiredDeadline);
         this.place.setValue(placeIns);
         this.date.setValue(dateIns);
         this.time.setValue(timeIns);
-        this.indTee.setValue(indTeeIns);
+        this.individualTee.setValue(individualTee);
         this.duration.setValue(durationIns);
-        this.indTee.setValue(indTeeIns);
-        this.teeInclude.setValue(totTeeIns);
+        this.individualTee.setValue(individualTee);
+        this.teeInclude.setValue(teeInclude);
         this.endDate.setValue(endDateIns);
         this.endTime.setValue(endTimeIns);
         this.note.setValue(noteIns);
@@ -147,8 +147,8 @@ public abstract class Event {
         return duration;
     }
 
-    public Field<Float> getIndTee() {
-        return indTee;
+    public Field<Float> getIndividualTee() {
+        return individualTee;
     }
 
     public Field<String> getTeeInclude() {

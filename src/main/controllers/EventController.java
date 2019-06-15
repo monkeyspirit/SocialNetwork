@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import main.model.SocialNetwork;
 import main.model.event.Event;
-import main.model.event.State;
 import main.model.event.states.ToRetire;
 import main.model.soccerMatchCategory.SoccerMatchEvent;
 import main.model.User;
@@ -215,7 +214,7 @@ public class EventController {
             durLblEvent.setText(" ");
         }
 
-        indTeeLblEvent.setText(String.valueOf(event.getIndTee().getValue()));
+        indTeeLblEvent.setText(String.valueOf(event.getIndividualTee().getValue()));
 
         if(event.getTeeInclude().getValue() != null){
             totTeLblEvent.setText(String.valueOf(event.getTeeInclude().getValue()));
@@ -272,14 +271,14 @@ public class EventController {
 
 
                 gadgetValueVentLbl.setText(String.valueOf(((CinemaEvent) event).getGadgetExtra().getValue())+" €");
-                pastiValueVentLbl.setText(String.valueOf(((CinemaEvent) event).getPastiExtra().getValue())+" €");
+                pastiValueVentLbl.setText(String.valueOf(((CinemaEvent) event).getExtraMeals().getValue())+" €");
                 rinfrescoValueVentLbl.setText(String.valueOf(((CinemaEvent) event).getRinfreschiExtra().getValue())+" €");
 
                 genderLbl.setText("Genere");
                 initializeToolPic(genderLbl, FILMTYPE_DESCRIPTION);
 
                 String gender = "";
-                for(String type: ((CinemaEvent) event).getTypes().getValue()){
+                for(String type: ((CinemaEvent) event).getGenres().getValue()){
                     gender = gender + type +", ";
                 }
                 genderLblEvent.setText(gender);
@@ -321,7 +320,7 @@ public class EventController {
                 extra[1]=((CinemaEvent) event).getRinfreschiExtra().getValue();
             }
             if(pastiEventCheckB.isSelected()){
-                extra[2]=((CinemaEvent) event).getPastiExtra().getValue();
+                extra[2]=((CinemaEvent) event).getExtraMeals().getValue();
             }
 
             event.addParticipant(sessionUsername, extra);

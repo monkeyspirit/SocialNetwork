@@ -26,7 +26,7 @@ public class ControlThreadTest {
                 LocalDate.of(2018,6,13), LocalTime.of(15,15),"10",
                 10, "10", LocalDate.of(2018,6,13),
                 LocalTime.of(15,25), "10-99", Gender.Maschile,
-                StateValue.Creata, LocalDate.of(2018,6,13), "ciao", "Alice");
+               "ciao", "Alice");
 
         soccerMatchEvent1.addParticipant(user1.getUsername());
         soccerMatchEvent1.addParticipant(user2.getUsername());
@@ -39,7 +39,7 @@ public class ControlThreadTest {
                 LocalDate.of(2018,6,13), LocalTime.of(15,15),"10",
                 10, "10", LocalDate.of(2018,6,13),
                 LocalTime.of(15,25), "10-99", Gender.Maschile,
-                StateValue.Aperta, LocalDate.of(2018,6,13), "ciao", "Bob");
+                "ciao", "Bob");
         soccerMatchEvent2.setState(new Opened());
 
         //creazione evento che passerà negli stati DA RITIRARE -> RITIRATO
@@ -49,12 +49,11 @@ public class ControlThreadTest {
                 LocalDate.of(2019,6,13), LocalTime.of(15,15),"10",
                 10, "10", LocalDate.of(2019,6,13),
                 LocalTime.of(15,25), "10-99", Gender.Maschile,
-                StateValue.DaRitirare, LocalDate.of(2019,6,13), "ciao", "Bob");
+                 "ciao", "Bob");
         soccerMatchEvent3.setState(new ToRetire());
         socialNetwork.getSoccerMatchCategory().addEvent(soccerMatchEvent1);
         socialNetwork.getSoccerMatchCategory().addEvent(soccerMatchEvent2);
         socialNetwork.getSoccerMatchCategory().addEvent(soccerMatchEvent3);
-
 
     }
     public void populateSocialNetwork(){

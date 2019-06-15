@@ -30,10 +30,10 @@ public class SoccerMatchEvent extends Event {
      * Costruttore SoccerMatchEvent: chiama il costruttore dei campi obbligatori
      * della classe madre e inizializza l'attributo valore di gender e ageGroup.
      */
-    public SoccerMatchEvent(String titleIns, int numParIns, int extraParIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Gender genderIns, StateValue stateValue, LocalDate stateSwitch, String noteIns, String creatorIns) {
-        super(TYPE, titleIns,  numParIns, extraParIns  ,  deadLineIns, retiredDeadLineIns,  placeIns,  dateIns,  timeIns,  durationIns,  indTeeIns,  totTeeIns,  endDateIns,  endTimeIns,stateValue, stateSwitch, noteIns, creatorIns);
-        this.gender.setValue(genderIns);
-        this.ageRange.setValue(ageRangeIns);
+    public SoccerMatchEvent(String title, int numOfParticipants, int extraParticipants, LocalDate registrationDeadline, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float individualTee, String teeInclude, LocalDate endDate, LocalTime endTime, String ageRange, Gender gender, String note, String creator) {
+        super(TYPE, title,  numOfParticipants, extraParticipants,  registrationDeadline, retiredDeadLineIns,  placeIns,  dateIns,  timeIns,  durationIns, individualTee, teeInclude,  endDate, endTime, note, creator);
+        this.gender.setValue(gender);
+        this.ageRange.setValue(ageRange);
     }
 
 

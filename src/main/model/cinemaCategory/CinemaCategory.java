@@ -1,9 +1,6 @@
 package main.model.cinemaCategory;
 
 import main.model.Category;
-import main.model.event.Gender;
-import main.model.event.StateValue;
-import main.model.soccerMatchCategory.SoccerMatchEvent;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -42,8 +39,9 @@ public class CinemaCategory extends Category<CinemaEvent> {
         super.addEvent(event);
     }
 
+    //dal momento che usiamo il builder, non serve questo metodo.
     public CinemaEvent createEvent(String titleIns, int numParIns, int extraNumIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String noteIns, String creator, List<String> typeOfFilmIns, float extraPastiTeeIns,  float extraRinfrescoTeeINs, float extraGadgetTeeIns){
-        CinemaEvent match = new CinemaEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, StateValue.Creata, LocalDate.now(), noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
+        CinemaEvent match = new CinemaEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
         match.addParticipant(creator);
         this.addEvent(match);
         return match;

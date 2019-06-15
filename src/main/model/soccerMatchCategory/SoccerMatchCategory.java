@@ -2,7 +2,6 @@ package main.model.soccerMatchCategory;
 
 import main.model.Category;
 import main.model.event.Gender;
-import main.model.event.StateValue;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -44,9 +43,9 @@ public class SoccerMatchCategory extends Category<SoccerMatchEvent> {
 		super.addEvent(event);
 	}
 
-
+	//utilizzando il builder, questa non serve più
 	public SoccerMatchEvent createEvent(String titleIns, int numParIns, int extraNumIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Gender genderIns, String noteIns, String creator){
-		SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, StateValue.Creata, LocalDate.now(), noteIns, creator);
+		SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
 		match.addParticipant(creator);
 		this.addEvent(match);
 		return match;
