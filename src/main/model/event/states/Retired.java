@@ -6,8 +6,7 @@ import main.model.notifications.*;
 import java.time.LocalDate;
 
 public class Retired extends State {
-    public Retired(String oldEvolution){
-        super.setEvolution(oldEvolution + "\n Giorno ritiro evento: " + LocalDate.now());
+    public Retired(){
         super.setStateValue(StateValue.Ritirata);
     }
 

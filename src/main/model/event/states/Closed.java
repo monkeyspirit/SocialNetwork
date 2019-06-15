@@ -7,13 +7,12 @@ import java.time.LocalDate;
 
 public class Closed extends State {
 
-    public Closed(String oldEvolution){
-        super.setEvolution(oldEvolution + "\nGiorno chiusura evento: " + LocalDate.now());
+    public Closed(){
         super.setStateValue(StateValue.Chiusa);
     }
     public Notification changeState(Event event){
         if (event.getEndDate().getValue() != null && LocalDate.now().isAfter(event.getEndDate().getValue())) {
-            event.setState(new Ended(super.getEvolution()));
+            event.setState(new Ended());
             return buildNotificationEventTerminated(event);
         }
         return null;

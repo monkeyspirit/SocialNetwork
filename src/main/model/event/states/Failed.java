@@ -7,8 +7,7 @@ import java.time.LocalDate;
 
 public class Failed extends State {
 
-    public Failed(String oldEvolution){
-        super.setEvolution(oldEvolution + "\n Giorno fallimento evento: " + LocalDate.now());
+    public Failed(){
         super.setStateValue(StateValue.Fallita);
     }
 

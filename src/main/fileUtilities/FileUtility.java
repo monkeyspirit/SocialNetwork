@@ -1,10 +1,13 @@
 package main.fileUtilities;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import main.fileUtilities.statesDeserializers.*;
 import main.model.event.Event;
+import main.model.event.State;
+import main.model.event.states.*;
+import main.model.event.states.ToRetire;
 import main.model.soccerMatchCategory.SoccerMatchEvent;
 import main.model.User;
 import main.model.cinemaCategory.CinemaEvent;
@@ -26,9 +29,11 @@ public class FileUtility {
     public static final String USERS_LIST_FILE_PATH = "JsonFiles/users/usersList.json";
 
     private RuntimeTypeAdapterFactory<Event> typeFactory;
+    private RuntimeTypeAdapterFactory<State> stateTypeFactory;
     private GsonBuilder builder;
 
     private Gson gson;
+
 
     /**
      * Il costruttore della classe FileUtility si occupa di creare il RuntimeTypeAdaprterFactory
@@ -41,7 +46,25 @@ public class FileUtility {
                 .of(Event.class, "type") // Qui si deve specificare il tipo della superclasse e quale attributo guardare per identificare i figli (attributo type)
                 .registerSubtype(SoccerMatchEvent.class, "SoccerMatchEvent") //Qui si associa il valore dell'attributo "type" all'interno di ciascuna classe figlia con il tipo corrispondente della classe (e' necessario aggiungere una riga per ogni sottoclasse che si crea)
                 .registerSubtype(CinemaEvent.class, "CinemaEvent");
+        stateTypeFactory = RuntimeTypeAdapterFactory
+                .of(State.class, "stateValue") // Qui si deve specificare il tipo della superclasse e quale attributo guardare per identificare i figli (attributo type)
+                .registerSubtype(Created.class, "Creata")
+                .registerSubtype(Opened.class, "Aperta")//Qui si associa il valore dell'attributo "type" all'interno di ciascuna classe figlia con il tipo corrispondente della classe (e' necessario aggiungere una riga per ogni sottoclasse che si crea)
+                .registerSubtype(Closed.class, "Chiusa")
+                .registerSubtype(Failed.class, "Fallita")
+                .registerSubtype(Retired.class, "Ritirata")
+                .registerSubtype(ToRetire.class, "DaRitirare")
+                .registerSubtype(Ended.class, "Conclusa");
         builder = new GsonBuilder().registerTypeAdapterFactory(typeFactory);
+        builder.registerTypeAdapterFactory(stateTypeFactory);
+        builder.registerTypeAdapter(Created.class,new CreatedDeserializer());
+        builder.registerTypeAdapter(Closed.class,new ClosedDeserializer());
+        builder.registerTypeAdapter(Ended.class,new EndedDeserializer());
+        builder.registerTypeAdapter(Failed.class,new FailedDeserializer());
+        builder.registerTypeAdapter(Opened.class,new OpenedDeserializer());
+        builder.registerTypeAdapter(Retired.class,new RetiredDeserializer());
+        builder.registerTypeAdapter(ToRetire.class,new ToRetireDeserializer());
+
         gson = builder.create();
     }
 

@@ -8,19 +8,8 @@ import main.model.notifications.*;
 public abstract class State {
 
     // Attributi
-    private String evolution;
     private StateValue stateValue;
     public abstract Notification changeState(Event event);
-
-
-    public void setEvolution(String evolution){
-        this.evolution = evolution;
-    }
-
-    public String getEvolution(){
-        return this.evolution;
-    }
-
     public void setStateValue(StateValue stateValue){
         this.stateValue = stateValue;
     }

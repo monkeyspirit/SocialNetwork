@@ -41,7 +41,7 @@ public class Main extends Application {
 
         User system = social.getUsers().get(0); //prendo il primo utente di quella lista
 
-     //   social.loadAllEventsFromFile(); //carico tutti gli eventi
+       social.loadAllEventsFromFile(); //carico tutti gli eventi
 
         //Il blocco seguente serve per creare un nuovo evento e scriverlo su file
 //

@@ -8,12 +8,11 @@ import java.time.LocalDate;
 public class Created extends State{
 
     public Created(){
-        super.setEvolution("Giorno creazione: " + LocalDate.now());
         super.setStateValue(StateValue.Creata);
     }
     @Override
     public Notification changeState(Event event) {
-        event.setState(new Opened(super.getEvolution()));
+        event.setState(new Opened());
         return buildNotificationNewEvent( event );
     }
 

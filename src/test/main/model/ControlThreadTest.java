@@ -40,7 +40,7 @@ public class ControlThreadTest {
                 10, "10", LocalDate.of(2018,6,13),
                 LocalTime.of(15,25), "10-99", Gender.Maschile,
                 StateValue.Aperta, LocalDate.of(2018,6,13), "ciao", "Bob");
-        soccerMatchEvent2.setState(new Opened(""));
+        soccerMatchEvent2.setState(new Opened());
 
         //creazione evento che passerà negli stati DA RITIRARE -> RITIRATO
         SoccerMatchEvent soccerMatchEvent3 = new SoccerMatchEvent("Allenamento",
@@ -50,7 +50,7 @@ public class ControlThreadTest {
                 10, "10", LocalDate.of(2019,6,13),
                 LocalTime.of(15,25), "10-99", Gender.Maschile,
                 StateValue.DaRitirare, LocalDate.of(2019,6,13), "ciao", "Bob");
-        soccerMatchEvent3.setState(new ToRetire(""));
+        soccerMatchEvent3.setState(new ToRetire());
         socialNetwork.getSoccerMatchCategory().addEvent(soccerMatchEvent1);
         socialNetwork.getSoccerMatchCategory().addEvent(soccerMatchEvent2);
         socialNetwork.getSoccerMatchCategory().addEvent(soccerMatchEvent3);
@@ -85,7 +85,6 @@ public class ControlThreadTest {
         control.controlState();
         assertEquals(StateValue.Conclusa, socialNetwork.getSoccerMatchCategory().getEvents().get(0).getStateValue());
 
-        System.out.println( socialNetwork.getSoccerMatchCategory().getEvents().get(0).getState().getEvolution() );
     }
 
     @Test
@@ -94,7 +93,6 @@ public class ControlThreadTest {
         this.populateSocialNetwork();
         control.setSocialNetwork(this.socialNetwork);
         control.controlState();
-        System.out.println( socialNetwork.getSoccerMatchCategory().getEvents().get(1).getState().getEvolution() );
         assertEquals(StateValue.Fallita, socialNetwork.getSoccerMatchCategory().getEvents().get(1).getStateValue());
 
 
@@ -106,7 +104,6 @@ public class ControlThreadTest {
         this.populateSocialNetwork();
         control.setSocialNetwork(this.socialNetwork);
         control.controlState();
-        System.out.println( socialNetwork.getSoccerMatchCategory().getEvents().get(2).getState().getEvolution() );
         assertEquals(StateValue.Ritirata, socialNetwork.getSoccerMatchCategory().getEvents().get(2).getStateValue());
 
 

@@ -374,7 +374,7 @@ public class EventController {
      */
     public void retiredEvent(){
 
-        event.setState(new ToRetire(""));
+        event.setState(new ToRetire());
         subScribeBtn.setDisable(true);
         retiredEventBtn.setDisable(true);
         retiredParBtn.setDisable(true);
