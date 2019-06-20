@@ -36,7 +36,7 @@ public class SocialNetwork {
 	    this.cinemaCategory = new CinemaCategory();
 	    this.categories.add(soccerMatchCategory); //aggiungo la categoria all'array
 		this.categories.add(cinemaCategory);
-		this.fileUtility = new FileUtility();
+		this.fileUtility = FileUtility.getInstance();
 //		this.notificationsHandler = new NotificationsBuilder();
 	}
 

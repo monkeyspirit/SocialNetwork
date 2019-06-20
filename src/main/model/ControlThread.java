@@ -73,10 +73,12 @@ public class ControlThread extends Thread{
     }
 
     public void sendNotification(Event event, Notification notification){
-        if (event.getState().getStateValue() == StateValue.Aperta)
-            sendNotificationForCreation(event,notification);
-        else
-            sendNotificationAndReminder(event, notification);
+        if(notification != null) {
+            if (event.getState().getStateValue() == StateValue.Aperta)
+                sendNotificationForCreation(event, notification);
+            else
+                sendNotificationAndReminder(event, notification);
+        }
     }
 
 
@@ -87,9 +89,7 @@ public class ControlThread extends Thread{
         Notification notification;
         for (Category cat : socialNetwork.getCategories()) {
             for(Event event : (ArrayList<Event>) cat.getEvents()){
-                notification = event.checkChangeState();
-                if(notification!=null)
-                    sendNotification(event,notification);
+                    sendNotification(event, event.checkChangeState());
             }
         }
     }

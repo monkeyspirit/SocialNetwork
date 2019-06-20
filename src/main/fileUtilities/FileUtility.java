@@ -34,6 +34,8 @@ public class FileUtility {
 
     private Gson gson;
 
+    private static FileUtility instance;
+
 
     /**
      * Il costruttore della classe FileUtility si occupa di creare il RuntimeTypeAdaprterFactory
@@ -41,7 +43,7 @@ public class FileUtility {
      * Questo serve in caso si abbia una lista di Event, che pero' all'interno potrebbe
      * avere oggetti SoccerMatchEvent ma anche altri.
      */
-    public FileUtility() {
+    private FileUtility() {
         typeFactory = RuntimeTypeAdapterFactory
                 .of(Event.class, "type") // Qui si deve specificare il tipo della superclasse e quale attributo guardare per identificare i figli (attributo type)
                 .registerSubtype(SoccerMatchEvent.class, "SoccerMatchEvent") //Qui si associa il valore dell'attributo "type" all'interno di ciascuna classe figlia con il tipo corrispondente della classe (e' necessario aggiungere una riga per ogni sottoclasse che si crea)
@@ -57,6 +59,7 @@ public class FileUtility {
                 .registerSubtype(Ended.class, "Conclusa");
         builder = new GsonBuilder().registerTypeAdapterFactory(typeFactory);
         builder.registerTypeAdapterFactory(stateTypeFactory);
+
         builder.registerTypeAdapter(Created.class,new CreatedDeserializer());
         builder.registerTypeAdapter(Closed.class,new ClosedDeserializer());
         builder.registerTypeAdapter(Ended.class,new EndedDeserializer());
@@ -66,6 +69,13 @@ public class FileUtility {
         builder.registerTypeAdapter(ToRetire.class,new ToRetireDeserializer());
 
         gson = builder.create();
+    }
+
+    public static FileUtility getInstance(){
+        if(instance == null){
+            instance = new FileUtility();
+        }
+        return instance;
     }
 
 
