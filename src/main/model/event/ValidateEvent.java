@@ -210,25 +210,20 @@ public class ValidateEvent {
 
     }
 
-    public boolean validateTypeOfFilm(List<CheckBox> typeOfFilmCheckList){
-        boolean empty = true;
-
-        List<String> typeOfFilmIns = new ArrayList<>();
+    public boolean validateTypeOfFilm(List<CheckBox> typeOfFilmCheckList,  List<String> typeOfFilmIns){
+         typeOfFilmIns = new ArrayList<>();
 
         for (CheckBox check : typeOfFilmCheckList) {
             if (check.isSelected()) {
-                empty = false;
                 typeOfFilmIns.add(check.getText());
             }
         }
 
-        eventCreateController.setTypeOfFilmIns(typeOfFilmIns);
-
-        if (empty) {
+        if (typeOfFilmIns.isEmpty()) {
             return false;
 
         } else {
-            return false;
+            return true;
         }
     }
 
@@ -274,11 +269,8 @@ public class ValidateEvent {
             rinfresco = true;
         }
 
-        if (pasti && gadget && rinfresco) {
-            return true;
-        } else {
-            return false;
-        }
+       return (pasti && gadget && rinfresco);
+
     }
 
 }

@@ -100,7 +100,7 @@ public class EventCreateController {
 
     private ArrayList<Integer> ageRangeMin;
 
-    private String[] errorMsg = new  String[13];
+    private String[] errorMsg = new  String[12];
 
 
     // ~~~~~~ Campi FACOLTATIVI ~~~~~~~~
@@ -147,7 +147,6 @@ public class EventCreateController {
     private boolean ageIsVal= false;
     private boolean genderIsVal = false;
     private boolean durIsVal = false;
-    private boolean extraIsVal = false;
 
     private boolean typeOfFilmIsVal = false;
 
@@ -568,7 +567,8 @@ public class EventCreateController {
         catIsVal = validateEvent.validateCategory(catCB);
         if (!catIsVal) {
             setLabelRedError(catLbl, -1, MISS_CATEGORY_MSG);
-        } else {
+        }
+        else {
             setLabelBlackNoError(catLbl, -1);
 
             // Acquisisco se c'e' il titolo
@@ -725,7 +725,7 @@ public class EventCreateController {
 
                 case (CINEMA_NAME): {
 
-                    typeOfFilmIsVal = validateEvent.validateTypeOfFilm(typeOfFilmCheckList);
+                    typeOfFilmIsVal = validateEvent.validateTypeOfFilm(typeOfFilmCheckList, typeOfFilmIns);
 
                     if(!typeOfFilmIsVal){
                         setLabelRedError(typeOfFilmLbl, 8, MISS_GENDER_FILM);
@@ -737,9 +737,9 @@ public class EventCreateController {
 
 
                     // CheckBox voci di spesa aggiuntiva
-                    extraIsVal = validateEvent.validateExtraTeeIns(pastiExtraTF, gadgetExtraTF,rinfrescoExtraTF, pastiCheckBox, gadgetCheckBox, rinfrescoCheckBox);
+                    extraTeeIsVal = validateEvent.validateExtraTeeIns(pastiExtraTF, gadgetExtraTF,rinfrescoExtraTF, pastiCheckBox, gadgetCheckBox, rinfrescoCheckBox);
 
-                    if(!extraIsVal){
+                    if(!extraTeeIsVal){
                         setLabelRedError(extraTeeLbl, 9, ERR_EXTRATEE);
                     }
                     else{
@@ -769,9 +769,6 @@ public class EventCreateController {
             // noteIns
             validateEvent.validateNote(noteTxtA);
 
-            validateEvent.validateDurationAndTimeDate(endDateIns, durationIns, endTimeIns, timeIns, dateIns, durH, durM );
-
-
             switch (categoryIns) {
 
                 case (SOCCER_NAME): {
@@ -779,6 +776,8 @@ public class EventCreateController {
                     boolean validateEventCreation = titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && indTeeIsVal && endTimeIsVal && ageIsVal && genderIsVal && endDateAndTimeIsVal;
 
                     if (validateEventCreation) {
+
+                        validateEvent.validateDurationAndTimeDate(endDateIns, durationIns, endTimeIns, timeIns, dateIns, durH, durM );
 
 
                         //SoccerMatchEvent match = socialNetwork.getSoccerMatchCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
@@ -802,6 +801,7 @@ public class EventCreateController {
                                 .creator(creator)
                                 .build(); //problema: questo build è chiamato su ciò che ritorna creator ossia Event...
 
+                        match.addParticipant(creator);
                         socialNetwork.getSoccerMatchCategory().addEvent(match);
 
                         userCheckInvite();
@@ -820,9 +820,12 @@ public class EventCreateController {
 
                 case (CINEMA_NAME): {
 
-                    boolean validateEventCreation = titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && indTeeIsVal && endTimeIsVal && typeOfFilmIsVal && extraTeeIsVal && endDateAndTimeIsVal;
 
+                    boolean validateEventCreation = titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && indTeeIsVal && endTimeIsVal && typeOfFilmIsVal && extraTeeIsVal && endDateAndTimeIsVal;
+                    System.out.println(titIsVal +" "+ numIsVal +" "+ extraNumIsVal +" "+ deadLineIsVal +" "+ placeIsVal +" "+ dateIsVal  +" "+  timeIsVal  +" "+  indTeeIsVal  +" "+  endTimeIsVal  +" "+  typeOfFilmIsVal  +" "+  extraTeeIsVal  +" "+  endDateAndTimeIsVal);
                     if (validateEventCreation) {
+                        validateEvent.validateDurationAndTimeDate(endDateIns, durationIns, endTimeIns, timeIns, dateIns, durH, durM );
+
 
 
                         //CinemaEvent cinemaEvent =  socialNetwork.getCinemaCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
@@ -848,6 +851,7 @@ public class EventCreateController {
                                 .creator(creator)
                                 .build(); //problema: questo build è chiamato su ciò che ritorna creator ossia Event...
 
+                        cinemaEvent.addParticipant(creator);
                         socialNetwork.getCinemaCategory().addEvent(cinemaEvent);
 
 
@@ -887,7 +891,8 @@ public class EventCreateController {
         String msgPopUp = "";
         for (int i = 0; i < errorMsg.length; i++) {
             if (errorMsg[i] != null) {
-                msgPopUp += errorMsg[i] + "\n";
+                msgPopUp += errorMsg[i] +"\n";
+
             }
         }
         JOptionPane.showMessageDialog(null, msgPopUp);
