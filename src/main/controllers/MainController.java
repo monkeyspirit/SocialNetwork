@@ -19,6 +19,7 @@ import main.model.SocialNetwork;
 import main.model.User;
 import main.model.GraphicThread;
 import main.model.event.Event;
+import main.model.event.ValidateEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -324,8 +325,7 @@ public class MainController {
 
         eventCreateController.setSocialNetwork(socialNetwork);
         eventCreateController.setCreator(sessionUser.getUsername());
-
-
+        eventCreateController.setValidateEvent();
         create = new Stage();
 
         eventCreateController.setThisStage(create);

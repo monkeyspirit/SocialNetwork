@@ -13,7 +13,7 @@ import main.model.*;
 import main.model.cinemaCategory.CinemaEventBuilder;
 import main.model.event.AgeGroup;
 import main.model.event.Gender;
-import main.model.event.StateValue;
+import main.model.event.ValidateEvent;
 import main.model.soccerMatchCategory.SoccerMatchEvent;
 import main.model.notifications.NotificationsBuilder;
 import main.model.cinemaCategory.CinemaEvent;
@@ -56,7 +56,7 @@ public class EventCreateController {
     public static final String MISS_GENDER_FILM = "Manca il genere del film.";
 
 
-
+    ValidateEvent validateEvent;
 
     // ~~~~~ newEvent Stage ~~~~~~~~~~~
 
@@ -116,7 +116,7 @@ public class EventCreateController {
     private String durationIns;
 
     private boolean extraNumIsVal = false;
-    private boolean endDateIsVal = false;
+    private boolean endDateAndTimeIsVal = false;
     private boolean endTimeIsVal = false;
 
 
@@ -147,6 +147,7 @@ public class EventCreateController {
     private boolean ageIsVal= false;
     private boolean genderIsVal = false;
     private boolean durIsVal = false;
+    private boolean extraIsVal = false;
 
     private boolean typeOfFilmIsVal = false;
 
@@ -196,7 +197,10 @@ public class EventCreateController {
 
     public void setCreator(String creator) { this.creator = creator;  }
 
-    /**
+    public void setValidateEvent(){ this.validateEvent = new ValidateEvent(this);}
+
+    public ValidateEvent getValidateEvent(){ return validateEvent;}
+   /**
      * Il metodo serve per inizializzare la finestra, in particolare per impostare gli observable list nei
      * choiceBox e per rendere determinati choiceBox abilitati o meno in base alla scelta della categoria.
      * Se si seleziona Partita di Calcio viene abilitata:
@@ -336,7 +340,7 @@ public class EventCreateController {
                         durUnitLbl.setText("Giorno/i");
                         durBigCB.setItems(FXCollections.observableArrayList(MyUtil.getArray(1, 10)));
 
-                        // Imposto ltri valori invisibili
+                        // Imposto altri valori invisibili
 
                         typeOfFilmLbl.setVisible(false);
                         typeOfFilmListView.setVisible(false);
@@ -559,240 +563,135 @@ public class EventCreateController {
      */
     public void createEvent(ActionEvent actionEvent) throws IOException {
 
-
         // OBBLIGATORIO
         // categoria
-
-        // Acquisisco la categoria dal choiceBox, e se la categoria non viene selezionata non vado avanti
-        // Nel caso in cui non sia selezionata diventa rossa la label e compare un msg di errore
-        if (catCB.getSelectionModel().getSelectedItem() == null) {
-            catLbl.setTextFill(Color.RED);
-            catIsVal = false;
-            JOptionPane.showMessageDialog(null, MISS_CATEGORY_MSG);
+        catIsVal = validateEvent.validateCategory(catCB);
+        if (!catIsVal) {
+            setLabelRedError(catLbl, -1, MISS_CATEGORY_MSG);
         } else {
-            categoryIns = catCB.getSelectionModel().getSelectedItem();
-            catLbl.setTextFill(Color.BLACK);
-            catIsVal = true;
-
+            setLabelBlackNoError(catLbl, -1);
 
             // Acquisisco se c'e' il titolo
             // FACOLTATIVO
-            //titolo
-            if(titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).doesEventAlreadyExist(titleTxtF.getText()) == true){
-                errorMsg[0] = ALREADY_EXIST_EVENT_WITH_THIS_TITLE_MSG;
-                titleLbl.setTextFill(Color.RED);
-                titIsVal = false;
+            titIsVal = validateEvent.validateTitle(titleTxtF, socialNetwork, categoryIns);
+            if( ! titIsVal ){
+                setLabelRedError(titleLbl, 0, ALREADY_EXIST_EVENT_WITH_THIS_TITLE_MSG);
             }
-            else if (titleTxtF.getText()!=null && socialNetwork.findCategoryByName(categoryIns).doesEventAlreadyExist(titleTxtF.getText()) == false){
-                titleIns = titleTxtF.getText();
-                errorMsg[0] = null;
-                titleLbl.setTextFill(Color.BLACK);
-                titIsVal = true;
-
+            else {
+                setLabelBlackNoError(titleLbl, 0);
             }
 
 
             // Acquisisco il numero di partecipanti, controllo sia inserito e che sia un valore numerico
             // OBBLIGATORIO
             // numero partecipanti
-
-            if (numPTxtF.getText().isEmpty() || !MyUtil.checkInteger(numPTxtF.getText())) {
-                numPLbl.setTextFill(Color.RED);
-                numIsVal = false;
-                errorMsg[1] = MISS_NUMBER_OF_PARTECIPANTS_MSG;
-            } else {
-                String numPS = numPTxtF.getText();
-                numPLbl.setTextFill(Color.BLACK);
-                numParIns = Integer.parseInt(numPS);
-                numIsVal = true;
-                errorMsg[1] = null;
+            numIsVal = validateEvent.validateNumPar(numPTxtF);
+            if(! numIsVal ){
+                setLabelRedError(numPLbl, 1, MISS_NUMBER_OF_PARTECIPANTS_MSG);
             }
+            else{
+                setLabelBlackNoError(numPLbl, 1);
+            }
+
 
             // Acquisisco il numero di partecipanti tollerati in più
             // FACOLTATIVO
             // tolleranza partecipanti
-            if(extraNumParTxt.getText().isEmpty()){
-                extraParLbl.setTextFill(Color.BLACK);
-                extraNumIns = 0;
-                extraNumIsVal = true;
-                errorMsg[11]= null;
+            extraNumIsVal = validateEvent.validateExtraNumPar(extraNumParTxt);
+            if(!extraNumIsVal){
+                setLabelRedError(extraParLbl, 11, ERROR_NUMBER_REQUIRED);
             }
             else{
-                if(!MyUtil.checkInteger(extraNumParTxt.getText())){
-                    extraParLbl.setTextFill(Color.RED);
-                    extraNumIsVal = false;
-                    errorMsg[11] = ERROR_NUMBER_REQUIRED;
-                }
-                else {
-                    extraParLbl.setTextFill(Color.BLACK);
-                    extraNumIns = Integer.parseInt(extraNumParTxt.getText());
-                    extraNumIsVal = true;
-                    errorMsg[11]= null;
-                }
+                setLabelBlackNoError(extraParLbl,11);
             }
 
 
             // Acquisco il campo data e controllo che non sia una data precedente ad oggi e vuota
             // OBBLIGATORIO
             // termine ultimo iscrizione
-
-            if (deadLineDP.getValue() == null) {
-                deadLLbl.setTextFill(Color.RED);
-                deadLineIsVal = false;
-                errorMsg[2] = MISS_DEADLINE_MSG;
-            } else {
-                deadLineIns = deadLineDP.getValue();
-                deadLLbl.setTextFill(Color.BLACK);
-                deadLineIsVal = true;
-                errorMsg[2] = null;
+            deadLineIsVal = validateEvent.validateDeadLine(deadLineDP);
+            if(!deadLineIsVal){
+                setLabelRedError(deadLLbl,2, MISS_DEADLINE_MSG);
             }
+            else{
+               setLabelBlackNoError(deadLLbl,2);
+            }
+
 
             // Acquisisco il termine di ritiro iscrizione
             // FACOLTATIVO
             // termine ultimo ritiro iscrizione
+            validateEvent.validateRetiredDeadLine(retiredDeadLineDP, deadLineIns);
 
-            if(retiredDeadLineDP.getValue() == null){
-                retiredDeadLineIns = deadLineIns;
-            }
-            else{
-                retiredDeadLineIns = retiredDeadLineDP.getValue();
-            }
 
             // Acquisisco il luogo controllando che sia inserito e che sia una stringa
             // OBBLIGATORIO
             //luogo
-
-            if (placeTxtF.getText().isEmpty() || !MyUtil.checkString(placeTxtF.getText())) {
-                placeLbl.setTextFill(Color.RED);
-                placeIsVal = false;
-                errorMsg[3] = MISS_PLACE_MSG;
-            } else {
-                placeIns = placeTxtF.getText();
-                placeLbl.setTextFill(Color.BLACK);
-                placeIsVal = true;
-                errorMsg[3] = null;
+            placeIsVal = validateEvent.validatePlace(placeTxtF);
+            if(!placeIsVal){
+                setLabelRedError(placeLbl, 3, MISS_PLACE_MSG);
+            }
+            else {
+                setLabelBlackNoError(placeLbl, 3);
             }
 
             // Acquisisco la data dell'evento, controllo che il campo non sia vuoto, non sia prima il termine ultimo + 1
             // OBBLIGATORIO
             //data
-
-            if ((dateDP.getValue() == null)) {
-                dateLbl.setTextFill(Color.RED);
-                dateIsVal = false;
-                errorMsg[4] = MISS_DATE_MSG;
-            } else {
-                dateIns = dateDP.getValue();
-                dateLbl.setTextFill(Color.BLACK);
-                dateIsVal = true;
-                errorMsg[4] = null;
+            dateIsVal = validateEvent.validateDate(dateDP);
+            if(!dateIsVal){
+                setLabelRedError(dateLbl,4,MISS_DATE_MSG);
             }
+            else{
+                setLabelBlackNoError(dateLbl,4);
+            }
+
 
             // Acquisisco l ora a cui si verifichera
             // OBBLIGATORIO
             //ora
-
-            if (timeTP.getValue() == null || dateIsVal == false) {
-                timeLbl.setTextFill(Color.RED);
-                timeIsVal = false;
-
-                if(timeTP.getValue() == null){
-                    errorMsg[5] = MISS_TIME_MSG;
-                }
-                else {
-                    errorMsg[5] = ERROR_TIME_BECAUSE_ERROR_DATE_MSG;
-                }
-
-            } else {
-                timeIns = timeTP.getValue();
-                timeLbl.setTextFill(Color.BLACK);
-                timeIsVal = true;
-                errorMsg[5] = null;
+            timeIsVal = validateEvent.validateTime(timeTP, dateIsVal);
+            if(!timeIsVal){
+                setLabelRedError(timeLbl,5, MISS_TIME_MSG+" oppure "+ERROR_TIME_BECAUSE_ERROR_DATE_MSG);
+            }
+            else {
+                setLabelBlackNoError(timeLbl, 5);
             }
 
             // Acquisisco la quota individuale e controllo non sia vuota, in caso la converto in decimale, ma prima controllo
             // che il CheckBox sia selezionato o meno
             // OBBLIGATORIO
             //quota individuale
-
-            if(isTeeActiveCkB.isSelected()){
-                if (indTeeTxtF.getText().isEmpty() || !MyUtil.checkFloat(indTeeTxtF.getText())) {
-                    indTeeLbl.setTextFill(Color.RED);
-                    indTeeIsVal = false;
-                    errorMsg[6] = MISS_INDIVIDUAL_TEE_MSG;
-                } else {
-                    String indTeeS = indTeeTxtF.getText();
-
-                    indTeeIns = Float.parseFloat(indTeeS);
-                    indTeeLbl.setTextFill(Color.BLACK);
-                    indTeeIsVal = true;
-                    errorMsg[6] = null;
-                }
+            indTeeIsVal = validateEvent.validateTeeIndividual(isTeeActiveCkB, indTeeTxtF);
+            if(!indTeeIsVal){
+                setLabelRedError(indTeeLbl, 6, MISS_INDIVIDUAL_TEE_MSG);
             }
-            else{
-                indTeeIns=0;
-                indTeeIsVal = true;
-                errorMsg[6] = null;
+            else {
+                setLabelBlackNoError(indTeeLbl, 6);
             }
 
 
             // Indicala voci di spesa
             // FACOLTATIVO
             // voci della quota
-            totTeeIns = totTeeTxtA.getText();
+            validateEvent.validateTotTee(totTeeTxtA);
 
 
             // Acquisisco se c e la data di termine e controllo che non sia prima della data dell evento
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // data conclusiva
-
-            if (endDateDP.getValue() != null && dateIsVal == true) {
-                endDateIns = endDateDP.getValue();
-                endDateLbl.setTextFill(Color.BLACK);
-                endDateIsVal = true;
-            }
-            else {
-                endDateIsVal = true;
-                if(durBigCB.getValue() != null){
-                    durD = durBigCB.getValue();
-                    durationIns = String.valueOf(durD);
-
-                }
-
-            }
+            validateEvent.validateEndDate(endDateDP, dateIsVal, durBigCB);
 
 
             // Acquisisco se c e l ora di termine e controllo non sia prima dell ora impostata nello stesso giorno
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // ora conclusiva
-            if (endTimeTP.getValue() != null && timeIsVal == true) {
-
-                if (endTimeTP.getValue().isBefore(timeIns) && endDateIns.isEqual(dateIns)) {
-
-                    endTimeLbl.setTextFill(Color.RED);
-                    endTimeIsVal = false;
-                    errorMsg[7] = ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG;
-
-                } else {
-
-                    endTimeIns = endTimeTP.getValue();
-                    endTimeLbl.setTextFill(Color.BLACK);
-                    endTimeIsVal = true;
-                    errorMsg[7] = null;
-
-                }
+            endTimeIsVal = validateEvent.validateEndTime(endTimeTP, endDateIns, dateIns, timeIns, durBigCB, durLitCB);
+            if(!endTimeIsVal){
+                setLabelRedError(endTimeLbl, 7, ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG);
             }
-
-            else {
-
-                endTimeIsVal = true;
-
-                if( durBigCB.getValue()!= null && durLitCB.getValue() != null){
-                    durH = durBigCB.getValue();
-                    durM = durLitCB.getValue();
-                    durationIns = durH+":"+durM;
-                }
-
+            else{
+                setLabelBlackNoError(endTimeLbl,7);
             }
 
             // Acquisisco l eta controllando che l'utente la inserisca se ha scelto partita di calcio
@@ -802,33 +701,23 @@ public class EventCreateController {
             // OBBLIGATORIO -> se partita di calcio
             // genere
 
-            switch (categoryIns){
+            switch (categoryIns) {
                 case (SOCCER_NAME): {
 
-                    if (minAgeCB.getValue() != null && maxAgeCB.getValue() != null) {
-                        minAge = minAgeCB.getValue();
-                        maxAge = maxAgeCB.getValue();
-                        ageGroup.setRange(minAge, maxAge);
-                        ageRangeIns = ageGroup.getRange();
-                        ageLbl.setTextFill(Color.BLACK);
-                        ageIsVal = true;
-                        errorMsg[8] = null;
-                    } else {
-                        ageLbl.setTextFill(Color.RED);
-                        ageIsVal = false;
-                        errorMsg[8] = MISS_AGE_MSG;
+                    ageIsVal = validateEvent.validateAge(minAgeCB, maxAgeCB, ageGroup);
+                    if(!ageIsVal){
+                        setLabelRedError(ageLbl, 8, MISS_AGE_MSG);
+                    }
+                    else {
+                        setLabelBlackNoError(ageLbl, 8);
                     }
 
-
-                    genderIns = genderCB.getSelectionModel().getSelectedItem();
-                    if (genderCB.getSelectionModel().getSelectedItem() == null) {
-                        genderLbl.setTextFill(Color.RED);
-                        genderIsVal = false;
-                        errorMsg[9] = MISS_GENDER_MSG;
-                    } else {
-                        genderLbl.setTextFill(Color.BLACK);
-                        genderIsVal = true;
-                        errorMsg[9] = null;
+                    genderIsVal = validateEvent.validateGender(genderCB);
+                    if(!genderIsVal){
+                        setLabelRedError(genderLbl, 9, MISS_GENDER_MSG);
+                    }
+                    else {
+                        setLabelBlackNoError(genderLbl, 9);
                     }
 
                     break;
@@ -836,147 +725,61 @@ public class EventCreateController {
 
                 case (CINEMA_NAME): {
 
-                    boolean empty = true;
+                    typeOfFilmIsVal = validateEvent.validateTypeOfFilm(typeOfFilmCheckList);
 
-                    typeOfFilmIns = new ArrayList<>();
-
-                    for(CheckBox check: typeOfFilmCheckList){
-                        if(check.isSelected()){
-                            empty = false;
-                            typeOfFilmIns.add(check.getText());
-                        }
-                    }
-
-
-                    if(empty){
-                        typeOfFilmLbl.setTextFill(Color.RED);
-                        typeOfFilmIsVal = false;
-                        errorMsg[8] = MISS_GENDER_FILM;
-
+                    if(!typeOfFilmIsVal){
+                        setLabelRedError(typeOfFilmLbl, 8, MISS_GENDER_FILM);
                     }
                     else {
-                        typeOfFilmIsVal = true;
-                        errorMsg[8] = null;
-                        typeOfFilmLbl.setTextFill(Color.BLACK);
+                        setLabelBlackNoError(typeOfFilmLbl, 8);
                     }
+
 
 
                     // CheckBox voci di spesa aggiuntiva
+                    extraIsVal = validateEvent.validateExtraTeeIns(pastiExtraTF, gadgetExtraTF,rinfrescoExtraTF, pastiCheckBox, gadgetCheckBox, rinfrescoCheckBox);
 
-                    boolean pasti = false;
-                    boolean rinfresco = false;
-                    boolean gadget = false;
-
-                    if(pastiCheckBox.isSelected()){
-                        if(MyUtil.checkFloat(pastiExtraTF.getText())){
-                            extraPastiTeeIns=Float.parseFloat(pastiExtraTF.getText());
-                            errorMsg[9] = null;
-                            extraTeeLbl.setTextFill(Color.BLACK);
-                            pasti = true;
-                        }
-                        else{
-                            errorMsg[9] = ERR_EXTRATEE;
-                            extraTeeLbl.setTextFill(Color.RED);
-                            pasti = false;
-                        }
+                    if(!extraIsVal){
+                        setLabelRedError(extraTeeLbl, 9, ERR_EXTRATEE);
                     }
                     else{
-                        extraPastiTeeIns=0;
-                        errorMsg[9] = null;
-                        extraTeeLbl.setTextFill(Color.BLACK);
-                        pasti = true;
+                        setLabelBlackNoError(extraTeeLbl, 9);
                     }
 
-                    if(gadgetCheckBox.isSelected()){
-                        if(MyUtil.checkFloat(gadgetExtraTF.getText())){
-                            extraGadgetTeeIns=Float.parseFloat(gadgetExtraTF.getText());
-                            errorMsg[9] = null;
-                            extraTeeLbl.setTextFill(Color.BLACK);
-                            gadget=true;
-                        }
-                        else{
-                            errorMsg[9] = ERR_EXTRATEE;
-                            extraTeeLbl.setTextFill(Color.RED);
-                            gadget=false;
-                        }
-                    }
-                    else{
-                        extraGadgetTeeIns=0;
-                        extraTeeLbl.setTextFill(Color.BLACK);
-                        errorMsg[9] = null;
-                        gadget=true;
-                    }
 
-                    if(rinfrescoCheckBox.isSelected()){
-                        if(MyUtil.checkFloat(rinfrescoExtraTF.getText())){
-                            extraRinfrescoTeeINs=Float.parseFloat(rinfrescoExtraTF.getText());
-                            errorMsg[9] = null;
-                            extraTeeLbl.setTextFill(Color.BLACK);
-                            rinfresco = true;
-                        }
-                        else{
-                            errorMsg[9] = ERR_EXTRATEE;
-                            extraTeeLbl.setTextFill(Color.RED);
-                            rinfresco = false;
-                        }
-                    }
-                    else{
-                        extraRinfrescoTeeINs = 0;
-                        errorMsg[9] = null;
-                        extraTeeLbl.setTextFill(Color.BLACK);
-                        rinfresco = true;
-                    }
 
-                    if(pasti && gadget && rinfresco){
-                        extraTeeIsVal = true;
-                    }
-                    else{
-                        extraTeeIsVal = false;
-                    }
 
                 }
             }
 
 
-
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // durata --> guardare end time e end date
-            if( (endDateDP.getValue() != null && endTimeTP.getValue() == null ) && durationIns == null ){
-                errorMsg[10] = MISS_DURATION_OR_ENDDATE_MSG;
-                durLbl.setTextFill(Color.RED);
-                durIsVal = false;
+            endDateAndTimeIsVal = validateEvent.validateEndDateEndTime(endDateDP, endTimeTP, durationIns);
+            if(!endDateAndTimeIsVal){
+                setLabelRedError(durLbl, 11, MISS_DURATION_OR_ENDDATE_MSG);
             }
-            else {
-                errorMsg[10] = null;
-                durLbl.setTextFill(Color.BLACK);
-                durIsVal = true;
+            else{
+                setLabelBlackNoError(durLbl, 11);
             }
+
 
 
             // FACOLTATIVO
             // noteIns
-            noteIns = noteTxtA.getText();
+            validateEvent.validateNote(noteTxtA);
+
+            validateEvent.validateDurationAndTimeDate(endDateIns, durationIns, endTimeIns, timeIns, dateIns, durH, durM );
 
 
-
-           switch (categoryIns) {
+            switch (categoryIns) {
 
                 case (SOCCER_NAME): {
 
-                    if (catIsVal && titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && ageIsVal && genderIsVal && durIsVal) {
+                    boolean validateEventCreation = titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && indTeeIsVal && endTimeIsVal && ageIsVal && genderIsVal && endDateAndTimeIsVal;
 
-                        if(endDateIns == null &&  durationIns !=null) {
-                            endDateIns = dateIns.plusDays(Integer.parseInt(durationIns));
-                        }
-                        else if(endDateIns == null &&  durationIns == null){
-                            endDateIns = dateIns.plusDays(1);
-                        }
-                        else{
-                            if(endTimeIns == null && durationIns !=null){
-                                endTimeIns = timeIns.plusHours(durH).plusMinutes(durM);
+                    if (validateEventCreation) {
 
-                            }
-                        }
 
                         //SoccerMatchEvent match = socialNetwork.getSoccerMatchCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
                         SoccerMatchEvent match = (SoccerMatchEvent) new SoccerMatchEventBuilder()
@@ -1001,33 +804,15 @@ public class EventCreateController {
 
                         socialNetwork.getSoccerMatchCategory().addEvent(match);
 
-                        selectedUserToInvite = new ArrayList<>();
-
-                        for(CheckBox check: userCheckList){
-                            if(check.isSelected()){
-                                selectedUserToInvite.add(check.getText());
-                            }
-                        }
-
-                        for(String username : selectedUserToInvite){
-                            User sendTo = socialNetwork.findUserByName(username);
-                            sendTo.addNotification( NotificationsBuilder.buildNotificationInvite(titleIns));
-                        }
+                        userCheckInvite();
 
                         socialNetwork.writeSoccerMatchEventListOnFile();
                         socialNetwork.updateUsersListFile();
 
                         thisStage.close();
 
-                    }
-                    else {
-                        String msgPopUp = "";
-                        for(int i=1; i< errorMsg.length; i++){
-                            if(errorMsg[i] != null){
-                                msgPopUp += errorMsg[i] + "\n";
-                            }
-                        }
-                        JOptionPane.showMessageDialog(null, msgPopUp);
+                    } else {
+                        errorMessagePrint();
                     }
 
                     break;
@@ -1035,20 +820,10 @@ public class EventCreateController {
 
                 case (CINEMA_NAME): {
 
-                    if (catIsVal && titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && endDateIsVal && endTimeIsVal && indTeeIsVal && typeOfFilmIsVal && durIsVal && extraTeeIsVal) {
+                    boolean validateEventCreation = titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && indTeeIsVal && endTimeIsVal && typeOfFilmIsVal && extraTeeIsVal && endDateAndTimeIsVal;
 
-                        if(endDateIns == null &&  durationIns !=null) {
-                            endDateIns = dateIns.plusDays(Integer.parseInt(durationIns));
-                        }
-                        else if(endDateIns == null &&  durationIns == null){
-                            endDateIns = dateIns.plusDays(1);
-                        }
-                        else{
-                            if(endTimeIns == null && durationIns !=null){
-                                endTimeIns = timeIns.plusHours(durH).plusMinutes(durM);
+                    if (validateEventCreation) {
 
-                            }
-                        }
 
                         //CinemaEvent cinemaEvent =  socialNetwork.getCinemaCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
                         CinemaEvent cinemaEvent = (CinemaEvent) new CinemaEventBuilder()
@@ -1076,33 +851,15 @@ public class EventCreateController {
                         socialNetwork.getCinemaCategory().addEvent(cinemaEvent);
 
 
-                        selectedUserToInvite = new ArrayList<>();
-
-                        for(CheckBox check: userCheckList){
-                            if(check.isSelected()){
-                                selectedUserToInvite.add(check.getText());
-                            }
-                        }
-
-                        for(String username : selectedUserToInvite){
-                            User sendTo = socialNetwork.findUserByName(username);
-                            sendTo.addNotification( NotificationsBuilder.buildNotificationInvite(titleIns));
-                        }
+                        userCheckInvite();
 
                         socialNetwork.writeCinemaEventListOnFile();
                         socialNetwork.updateUsersListFile();
 
                         thisStage.close();
 
-                    }
-                    else {
-                        String msgPopUp = "";
-                        for(int i=0; i< errorMsg.length; i++){
-                            if(errorMsg[i] != null){
-                                msgPopUp += errorMsg[i] + "\n";
-                            }
-                        }
-                        JOptionPane.showMessageDialog(null, msgPopUp);
+                    } else {
+                        errorMessagePrint();
                     }
 
                     break;
@@ -1111,7 +868,140 @@ public class EventCreateController {
         }
     }
 
+    private void userCheckInvite() {
+        selectedUserToInvite = new ArrayList<>();
 
+        for (CheckBox check : userCheckList) {
+            if (check.isSelected()) {
+                selectedUserToInvite.add(check.getText());
+            }
+        }
+
+        for (String username : selectedUserToInvite) {
+            User sendTo = socialNetwork.findUserByName(username);
+            sendTo.addNotification(NotificationsBuilder.buildNotificationInvite(titleIns));
+        }
+    }
+
+    private void errorMessagePrint() {
+        String msgPopUp = "";
+        for (int i = 0; i < errorMsg.length; i++) {
+            if (errorMsg[i] != null) {
+                msgPopUp += errorMsg[i] + "\n";
+            }
+        }
+        JOptionPane.showMessageDialog(null, msgPopUp);
+    }
+
+
+    // METODI SETTER
+    public void setCategoryIns(String category) {
+        this.categoryIns = category;
+    }
+
+    public void setTitleIns(String title){
+        this.titleIns = title;
+    }
+
+    public void setNumParIns(int numPar){
+        this.numParIns = numPar;
+    }
+
+    public void setExtraNumParIns(int extraNum){
+        this.extraNumIns = extraNum;
+    }
+
+    public void setDeadLineIns(LocalDate deadLine) {
+        this.deadLineIns = deadLine;
+    }
+
+    public void setTotTeeIns(String totTee) {
+        this.totTeeIns = totTee;
+    }
+
+    public void setRetiredDeadLineIns(LocalDate retiredDeadLine) {
+        this.retiredDeadLineIns = retiredDeadLine;
+    }
+
+    public void setEndDateIns(LocalDate endDate) {
+        this.endDateIns = endDate;
+    }
+
+    public void setEndTimeIns(LocalTime endTime) {
+        this.endTimeIns = endTime;
+    }
+
+    public void setNoteIns(String note) {
+        this.noteIns = note;
+    }
+
+    public void setDurationIns(String duration) {
+        this.durationIns = duration;
+    }
+
+    public void setPlaceIns(String place) {
+        this.placeIns = place;
+    }
+
+    public void setDateIns(LocalDate date) {
+        this.dateIns = date;
+    }
+
+    public void setTimeIns(LocalTime time) {
+        this.timeIns = time;
+    }
+
+    public void setIndTeeIns(float indTee) {
+        this.indTeeIns = indTee;
+    }
+
+    public void setAgeRangeIns(String ageRange) {
+        this.ageRangeIns = ageRange;
+    }
+
+    public void setGenderIns(Gender gender) {
+        this.genderIns = gender;
+    }
+
+
+    public void setTypeOfFilmIns(List<String> typeOfFilm) {
+        this.typeOfFilmIns = typeOfFilm;
+    }
+
+    public void setExtraPastiTeeIns(float extraPastiTee) {
+        this.extraPastiTeeIns = extraPastiTee;
+    }
+
+    public void setExtraGadgetTeeIns(float extraGadgetTee) {
+        this.extraGadgetTeeIns = extraGadgetTee;
+    }
+
+    public void setExtraRinfrescoTeeIns(float extraRinfrescoTee) {
+        this.extraRinfrescoTeeINs = extraRinfrescoTee;
+    }
+
+    // METODI PER MODIFICA LABEL
+
+    public void setLabelRedError(Label label, int i, String MSG){
+        if(i == -1){
+            label.setTextFill(Color.RED);
+            JOptionPane.showMessageDialog(null, MISS_CATEGORY_MSG);
+        }
+        else {
+            label.setTextFill(Color.RED);
+            errorMsg[i] = MSG;
+        }
+    }
+
+    public void setLabelBlackNoError(Label label, int i){
+        if(i==-1){
+            label.setTextFill(Color.BLACK);
+        }
+        else {
+            errorMsg[i] = null;
+            label.setTextFill(Color.BLACK);
+        }
+    }
 
     public void initializeToolPic( Label label, String DESCRIPTION){
         Tooltip tooltip = new Tooltip();

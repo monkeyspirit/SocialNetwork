@@ -25,6 +25,7 @@ public abstract class EventBuilder {
     protected String type;
     protected String creator;
 
+
     public EventBuilder title(String title) {
         this.title = title;
         return this;
