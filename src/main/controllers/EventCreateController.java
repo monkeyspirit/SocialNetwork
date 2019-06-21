@@ -725,7 +725,7 @@ public class EventCreateController {
 
                 case (CINEMA_NAME): {
 
-                    typeOfFilmIsVal = validateEvent.validateTypeOfFilm(typeOfFilmCheckList, typeOfFilmIns);
+                    typeOfFilmIsVal = validateEvent.validateTypeOfFilm(typeOfFilmCheckList);
 
                     if(!typeOfFilmIsVal){
                         setLabelRedError(typeOfFilmLbl, 8, MISS_GENDER_FILM);

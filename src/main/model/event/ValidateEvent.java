@@ -210,14 +210,16 @@ public class ValidateEvent {
 
     }
 
-    public boolean validateTypeOfFilm(List<CheckBox> typeOfFilmCheckList,  List<String> typeOfFilmIns){
-         typeOfFilmIns = new ArrayList<>();
+    public boolean validateTypeOfFilm(List<CheckBox> typeOfFilmCheckList){
+         List<String>  typeOfFilmIns = new ArrayList<>();
 
         for (CheckBox check : typeOfFilmCheckList) {
             if (check.isSelected()) {
                 typeOfFilmIns.add(check.getText());
             }
         }
+
+        eventCreateController.setTypeOfFilmIns(typeOfFilmIns);
 
         if (typeOfFilmIns.isEmpty()) {
             return false;
