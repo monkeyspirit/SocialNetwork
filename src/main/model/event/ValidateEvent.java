@@ -34,11 +34,11 @@ public class ValidateEvent {
         }
     }
 
-    public boolean validateTitle(TextField title, SocialNetwork socialNetwork, String category){
-        if (title.getText() != null && socialNetwork.findCategoryByName(category).doesEventAlreadyExist(title.getText()) == true) {
+    public boolean validateTitle(String title, SocialNetwork socialNetwork, String category){
+        if (title != null && socialNetwork.findCategoryByName(category).doesEventAlreadyExist(title) == true) {
             return false;
-        } else if (title.getText() != null && socialNetwork.findCategoryByName(category).doesEventAlreadyExist(title.getText())  == false) {
-            eventCreateController.setTitleIns(title.getText());
+        } else if (title != null && socialNetwork.findCategoryByName(category).doesEventAlreadyExist(title)  == false) {
+            eventCreateController.setTitleIns(title);
             return true;
         }
         else{
@@ -49,81 +49,81 @@ public class ValidateEvent {
         }
     }
 
-    public boolean validateNumPar(TextField numPTxtF){
-        if (numPTxtF.getText().isEmpty() || !MyUtil.checkInteger(numPTxtF.getText())) {
+    public boolean validateNumPar(String numPTxtF){
+        if (numPTxtF.isEmpty() || !MyUtil.checkInteger(numPTxtF)) {
            return false;
         } else {
-            eventCreateController.setNumParIns(Integer.parseInt(numPTxtF.getText()));
+            eventCreateController.setNumParIns(Integer.parseInt(numPTxtF));
             return true;
         }
     }
 
-    public boolean validateExtraNumPar(TextField extraNumParTxt){
-        if (extraNumParTxt.getText().isEmpty()) {
+    public boolean validateExtraNumPar(String extraNumParTxt){
+        if (extraNumParTxt.isEmpty()) {
             eventCreateController.setExtraNumParIns(0);
             return true;
         } else {
-            if (!MyUtil.checkInteger(extraNumParTxt.getText())) {
+            if (!MyUtil.checkInteger(extraNumParTxt)) {
                 return false;
             } else {
-                eventCreateController.setExtraNumParIns(Integer.parseInt(extraNumParTxt.getText()));
+                eventCreateController.setExtraNumParIns(Integer.parseInt(extraNumParTxt));
                 return true;
             }
         }
     }
 
-    public boolean validateDeadLine(DatePicker deadLineDP){
-        if (deadLineDP.getValue() == null) {
+    public boolean validateDeadLine(LocalDate deadLine){
+        if (deadLine == null) {
             return false;
         }
         else{
-            eventCreateController.setDeadLineIns(deadLineDP.getValue());
+            eventCreateController.setDeadLineIns(deadLine);
             return true;
         }
     }
 
-    public void validateRetiredDeadLine(DatePicker retiredDeadLineDP, LocalDate deadLineIns){
-        if (retiredDeadLineDP.getValue() == null) {
+    public void validateRetiredDeadLine(LocalDate retiredDeadLine, LocalDate deadLineIns){
+        if (retiredDeadLine == null) {
             eventCreateController.setRetiredDeadLineIns(deadLineIns);
         } else {
-            eventCreateController.setRetiredDeadLineIns(retiredDeadLineDP.getValue());
+            eventCreateController.setRetiredDeadLineIns(retiredDeadLine);
         }
     }
 
-    public boolean validatePlace(TextField placeTxtF){
-        if(placeTxtF.getText().isEmpty() || !MyUtil.checkString(placeTxtF.getText()) ){
+    public boolean validatePlace(String placeTxtF){
+        if(placeTxtF.isEmpty() || !MyUtil.checkString(placeTxtF) ){
             return false;
         }
         else{
-            eventCreateController.setPlaceIns(placeTxtF.getText());
+            eventCreateController.setPlaceIns(placeTxtF);
             return true;
         }
     }
 
-    public boolean validateDate(DatePicker dateP){
-        if ((dateP.getValue() == null)) {
+    public boolean validateDate(LocalDate date){
+        if ((date == null)) {
             return false;
         } else {
-            eventCreateController.setDateIns(dateP.getValue());
+            eventCreateController.setDateIns(date);
             return true;
         }
     }
 
-    public boolean validateTime(JFXTimePicker timeTP, boolean dateIsVal){
-        if (timeTP.getValue() == null || dateIsVal == false) {
+    public boolean validateTime(LocalTime time, boolean dateIsVal){
+        if (time == null || dateIsVal == false) {
             return false;
         } else {
-            eventCreateController.setTimeIns(timeTP.getValue());
+            eventCreateController.setTimeIns(time);
             return true;
         }
     }
 
-    public boolean validateTeeIndividual(JFXCheckBox teeA, TextField indTeeTxtF){
+    public boolean validateTeeIndividual(JFXCheckBox teeA, String individualTee){
         if (teeA.isSelected()) {
-            if (indTeeTxtF.getText().isEmpty() || !MyUtil.checkFloat(indTeeTxtF.getText())) {
+            if (individualTee.isEmpty() || !MyUtil.checkFloat(individualTee)) {
                 return false;
             } else {
-                eventCreateController.setIndTeeIns(Float.parseFloat(indTeeTxtF.getText()));
+                eventCreateController.setIndTeeIns(Float.parseFloat(individualTee));
                 return true;
             }
         } else {

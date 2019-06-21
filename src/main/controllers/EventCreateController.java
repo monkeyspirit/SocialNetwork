@@ -573,7 +573,7 @@ public class EventCreateController {
 
             // Acquisisco se c'e' il titolo
             // FACOLTATIVO
-            titIsVal = validateEvent.validateTitle(titleTxtF, socialNetwork, categoryIns);
+            titIsVal = validateEvent.validateTitle(titleTxtF.getText(), socialNetwork, categoryIns);
             if( ! titIsVal ){
                 setLabelRedError(titleLbl, 0, ALREADY_EXIST_EVENT_WITH_THIS_TITLE_MSG);
             }
@@ -585,7 +585,7 @@ public class EventCreateController {
             // Acquisisco il numero di partecipanti, controllo sia inserito e che sia un valore numerico
             // OBBLIGATORIO
             // numero partecipanti
-            numIsVal = validateEvent.validateNumPar(numPTxtF);
+            numIsVal = validateEvent.validateNumPar(numPTxtF.getText());
             if(! numIsVal ){
                 setLabelRedError(numPLbl, 1, MISS_NUMBER_OF_PARTECIPANTS_MSG);
             }
@@ -597,7 +597,7 @@ public class EventCreateController {
             // Acquisisco il numero di partecipanti tollerati in più
             // FACOLTATIVO
             // tolleranza partecipanti
-            extraNumIsVal = validateEvent.validateExtraNumPar(extraNumParTxt);
+            extraNumIsVal = validateEvent.validateExtraNumPar(extraNumParTxt.getText());
             if(!extraNumIsVal){
                 setLabelRedError(extraParLbl, 11, ERROR_NUMBER_REQUIRED);
             }
@@ -609,7 +609,7 @@ public class EventCreateController {
             // Acquisco il campo data e controllo che non sia una data precedente ad oggi e vuota
             // OBBLIGATORIO
             // termine ultimo iscrizione
-            deadLineIsVal = validateEvent.validateDeadLine(deadLineDP);
+            deadLineIsVal = validateEvent.validateDeadLine(deadLineDP.getValue());
             if(!deadLineIsVal){
                 setLabelRedError(deadLLbl,2, MISS_DEADLINE_MSG);
             }
@@ -621,13 +621,13 @@ public class EventCreateController {
             // Acquisisco il termine di ritiro iscrizione
             // FACOLTATIVO
             // termine ultimo ritiro iscrizione
-            validateEvent.validateRetiredDeadLine(retiredDeadLineDP, deadLineIns);
+            validateEvent.validateRetiredDeadLine(retiredDeadLineDP.getValue(), deadLineIns);
 
 
             // Acquisisco il luogo controllando che sia inserito e che sia una stringa
             // OBBLIGATORIO
             //luogo
-            placeIsVal = validateEvent.validatePlace(placeTxtF);
+            placeIsVal = validateEvent.validatePlace(placeTxtF.getText());
             if(!placeIsVal){
                 setLabelRedError(placeLbl, 3, MISS_PLACE_MSG);
             }
@@ -638,7 +638,7 @@ public class EventCreateController {
             // Acquisisco la data dell'evento, controllo che il campo non sia vuoto, non sia prima il termine ultimo + 1
             // OBBLIGATORIO
             //data
-            dateIsVal = validateEvent.validateDate(dateDP);
+            dateIsVal = validateEvent.validateDate(dateDP.getValue());
             if(!dateIsVal){
                 setLabelRedError(dateLbl,4,MISS_DATE_MSG);
             }
@@ -650,7 +650,7 @@ public class EventCreateController {
             // Acquisisco l ora a cui si verifichera
             // OBBLIGATORIO
             //ora
-            timeIsVal = validateEvent.validateTime(timeTP, dateIsVal);
+            timeIsVal = validateEvent.validateTime(timeTP.getValue(), dateIsVal);
             if(!timeIsVal){
                 setLabelRedError(timeLbl,5, MISS_TIME_MSG+" oppure "+ERROR_TIME_BECAUSE_ERROR_DATE_MSG);
             }
@@ -662,7 +662,7 @@ public class EventCreateController {
             // che il CheckBox sia selezionato o meno
             // OBBLIGATORIO
             //quota individuale
-            indTeeIsVal = validateEvent.validateTeeIndividual(isTeeActiveCkB, indTeeTxtF);
+            indTeeIsVal = validateEvent.validateTeeIndividual(isTeeActiveCkB, indTeeTxtF.getText());
             if(!indTeeIsVal){
                 setLabelRedError(indTeeLbl, 6, MISS_INDIVIDUAL_TEE_MSG);
             }
