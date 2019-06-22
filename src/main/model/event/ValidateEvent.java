@@ -24,12 +24,12 @@ public class ValidateEvent {
         this.eventCreateController=eventCreateController;
     }
 
-    public boolean validateCategory(ChoiceBox<String> category){
-        if (category.getSelectionModel().getSelectedItem() == null) {
+    public boolean validateCategory(String category){
+        if (category == null) {
             return false;
         }
         else{
-            eventCreateController.setCategoryIns(category.getSelectionModel().getSelectedItem());
+            eventCreateController.setCategoryIns(category);
             return true;
         }
     }
@@ -118,8 +118,8 @@ public class ValidateEvent {
         }
     }
 
-    public boolean validateTeeIndividual(JFXCheckBox teeA, String individualTee){
-        if (teeA.isSelected()) {
+    public boolean validateTeeIndividual(boolean teeA, String individualTee){
+        if (teeA) {
             if (individualTee.isEmpty() || !MyUtil.checkFloat(individualTee)) {
                 return false;
             } else {
@@ -132,39 +132,39 @@ public class ValidateEvent {
         }
     }
 
-    public void validateTotTee(TextArea tot){
-        eventCreateController.setTotTeeIns(tot.getText());
+    public void validateTotTee(String tot){
+        eventCreateController.setTotTeeIns(tot);
     }
 
-    public void validateEndDate(DatePicker endDateDP, boolean dateIsVal, ChoiceBox<Integer> durBigCB){
-        if (endDateDP.getValue() != null && dateIsVal == true) {
-            eventCreateController.setEndDateIns(endDateDP.getValue());
-        } else if (endDateDP.getValue() == null ){
-            if (durBigCB.getValue() != null) {
-                eventCreateController.setDurationIns(String.valueOf(durBigCB.getValue()));
+    public void validateEndDate(LocalDate endDateDP, boolean dateIsVal, Integer durBigCB){
+        if (endDateDP != null && dateIsVal == true) {
+            eventCreateController.setEndDateIns(endDateDP);
+        } else if (endDateDP == null ){
+            if (durBigCB != null) {
+                eventCreateController.setDurationIns(String.valueOf(durBigCB));
             }
         }
     }
 
-    public boolean validateEndTime(JFXTimePicker endTimeTP, LocalDate endDateIns, LocalDate dateIns, LocalTime timeIns, ChoiceBox<Integer> durBigCB, ChoiceBox<Integer> durLitCB){
-        if (endTimeTP.getValue() != null) {
-            if (endTimeTP.getValue().isBefore(timeIns) && endDateIns.isEqual(dateIns)) {
+    public boolean validateEndTime(LocalTime endTimeTP, LocalDate endDateIns, LocalDate dateIns, LocalTime timeIns, Integer durBigCB, Integer durLitCB){
+        if (endTimeTP != null) {
+            if (endTimeTP.isBefore(timeIns) && endDateIns.isEqual(dateIns)) {
                 return false;
             } else {
-                eventCreateController.setEndTimeIns( endTimeTP.getValue());
+                eventCreateController.setEndTimeIns( endTimeTP);
                 return true;
             }
 
         } else {
-            if (durBigCB.getValue() != null && durLitCB.getValue() != null) {
-                eventCreateController.setDurationIns(durBigCB.getValue() + ":" + durLitCB.getValue());
+            if (durBigCB!= null && durLitCB != null) {
+                eventCreateController.setDurationIns(durBigCB + ":" + durLitCB);
             }
             return  true;
         }
     }
 
-    public boolean validateEndDateEndTime(DatePicker endDateDP, JFXTimePicker endTimeTP, String durationIns){
-        if ((endDateDP.getValue() != null && endTimeTP.getValue() == null) && durationIns == null) {
+    public boolean validateEndDateEndTime(LocalDate endDateDP, LocalTime endTimeTP, String durationIns){
+        if ((endDateDP != null && endTimeTP == null) && durationIns == null) {
             return false;
         } else {
            return true;
@@ -172,13 +172,14 @@ public class ValidateEvent {
 
     }
 
-    public void validateNote(TextArea note){
-        eventCreateController.setNoteIns(note.getText());
+    public void validateNote(String note){
+
+        eventCreateController.setNoteIns(note);
     }
 
-    public boolean validateAge(ChoiceBox<Integer> minAgeCB, ChoiceBox<Integer> maxAgeCB, AgeGroup ageGroup){
-        if (minAgeCB.getValue() != null && maxAgeCB.getValue() != null) {
-            ageGroup.setRange(minAgeCB.getValue(), maxAgeCB.getValue());
+    public boolean validateAge(Integer minAgeCB, Integer maxAgeCB, AgeGroup ageGroup){
+        if (minAgeCB != null && maxAgeCB != null) {
+            ageGroup.setRange(minAgeCB, maxAgeCB);
             eventCreateController.setAgeRangeIns(ageGroup.getRange());
             return true;
         } else {
@@ -186,11 +187,11 @@ public class ValidateEvent {
         }
     }
 
-    public boolean validateGender(ChoiceBox<Gender> genderCB){
-        if (genderCB.getSelectionModel().getSelectedItem() == null) {
+    public boolean validateGender(Gender genderCB){
+        if (genderCB == null) {
             return false;
         } else {
-            eventCreateController.setGenderIns(genderCB.getSelectionModel().getSelectedItem());
+            eventCreateController.setGenderIns(genderCB);
             return true;
         }
 
@@ -229,15 +230,15 @@ public class ValidateEvent {
         }
     }
 
-    public boolean validateExtraTeeIns(TextField pastiExtraTF, TextField gadgetExtraTF, TextField rinfrescoExtraTF, JFXCheckBox pastiCheckBox, JFXCheckBox gadgetCheckBox, JFXCheckBox rinfrescoCheckBox){
+    public boolean validateExtraTeeIns(String pastiExtraTF, String gadgetExtraTF, String rinfrescoExtraTF, boolean pastiCheckBox, boolean gadgetCheckBox, boolean rinfrescoCheckBox){
 
         boolean pasti = false;
         boolean rinfresco = false;
         boolean gadget = false;
 
-        if (pastiCheckBox.isSelected()) {
-            if (MyUtil.checkFloat(pastiExtraTF.getText())) {
-                eventCreateController.setExtraPastiTeeIns(Float.parseFloat(pastiExtraTF.getText()));
+        if (pastiCheckBox) {
+            if (MyUtil.checkFloat(pastiExtraTF)) {
+                eventCreateController.setExtraPastiTeeIns(Float.parseFloat(pastiExtraTF));
                 pasti = true;
             } else {
                 pasti = false;
@@ -247,9 +248,9 @@ public class ValidateEvent {
             pasti = true;
         }
 
-        if (gadgetCheckBox.isSelected()) {
-            if (MyUtil.checkFloat(gadgetExtraTF.getText())) {
-               eventCreateController.setExtraGadgetTeeIns(Float.parseFloat(gadgetExtraTF.getText()));
+        if (gadgetCheckBox) {
+            if (MyUtil.checkFloat(gadgetExtraTF)) {
+               eventCreateController.setExtraGadgetTeeIns(Float.parseFloat(gadgetExtraTF));
                 gadget = true;
             } else {
                 gadget = false;
@@ -259,9 +260,9 @@ public class ValidateEvent {
             gadget = true;
         }
 
-        if (rinfrescoCheckBox.isSelected()) {
-            if (MyUtil.checkFloat(rinfrescoExtraTF.getText())) {
-                eventCreateController.setExtraRinfrescoTeeIns(Float.parseFloat(rinfrescoExtraTF.getText()));
+        if (rinfrescoCheckBox) {
+            if (MyUtil.checkFloat(rinfrescoExtraTF)) {
+                eventCreateController.setExtraRinfrescoTeeIns(Float.parseFloat(rinfrescoExtraTF));
                 rinfresco = true;
             } else {
                 rinfresco = false;
