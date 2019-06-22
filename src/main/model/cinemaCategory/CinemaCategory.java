@@ -1,6 +1,7 @@
 package main.model.cinemaCategory;
 
 import main.model.Category;
+import main.model.CreateParameter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -39,12 +40,32 @@ public class CinemaCategory extends Category<CinemaEvent> {
         super.addEvent(event);
     }
 
-    //dal momento che usiamo il builder, non serve questo metodo.
-    public CinemaEvent createEvent(String titleIns, int numParIns, int extraNumIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String noteIns, String creator, List<String> typeOfFilmIns, float extraPastiTeeIns,  float extraRinfrescoTeeINs, float extraGadgetTeeIns){
-        CinemaEvent match = new CinemaEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
-        match.addParticipant(creator);
-        this.addEvent(match);
-        return match;
+    public void createCinemaEvent(CreateParameter passParameter){
+        CinemaEvent match = (CinemaEvent) new CinemaEventBuilder()
+                .genres(passParameter.getTypeOfFilm())
+                .extraMeals(passParameter.getExtraPastiTee())
+                .gadgetExtra(passParameter.getExtraGadgetTee())
+                .rinfreschiExtra(passParameter.getExtraRinfrescoTee())
+                .title(passParameter.getTitle())
+                .numOfParticipants(passParameter.getNumPar())
+                .extraParticipants(passParameter.getExtraNum())
+                .registrationDeadline(passParameter.getDeadLine())
+                .retireDeadline(passParameter.getRetiredDeadLine())
+                .place(passParameter.getPlace())
+                .date(passParameter.getDate())
+                .time(passParameter.getTime())
+                .duration(passParameter.getDuration())
+                .individualTee(passParameter.getIndTee())
+                .teeInclude(passParameter.getTotTee())
+                .endDate(passParameter.getEndDate())
+                .endTime(passParameter.getEndTime())
+                .note(passParameter.getNote())
+                .creator(passParameter.getCreator())
+                .build(); //problema: questo build è chiamato su ciò che ritorna creator ossia Event...
+
+        match.addParticipant(passParameter.getCreator());
+        addEvent(match);
+
     }
 
 }

@@ -325,7 +325,7 @@ public class MainController {
 
         eventCreateController.setSocialNetwork(socialNetwork);
         eventCreateController.setCreator(sessionUser.getUsername());
-        eventCreateController.setValidateEvent();
+
         create = new Stage();
 
         eventCreateController.setThisStage(create);

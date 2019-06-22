@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXTimePicker;
 import com.sun.xml.internal.txw2.TXW;
 import javafx.scene.control.*;
 import main.controllers.EventCreateController;
+import main.model.Category;
+import main.model.CreateParameter;
 import main.model.MyUtil;
 import main.model.SocialNetwork;
 
@@ -17,94 +19,100 @@ import java.util.spi.TimeZoneNameProvider;
 
 public class ValidateEvent {
 
-    private EventCreateController eventCreateController;
+    //private EventCreateController eventCreateController;
+    private CreateParameter passParameter;
     private int counterTitleNull = 1;
 
-    public ValidateEvent(EventCreateController eventCreateController){
+   /* public ValidateEvent(EventCreateController eventCreateController){
         this.eventCreateController=eventCreateController;
     }
+    */
 
-    public boolean validateCategory(String category){
+    public ValidateEvent() {
+        passParameter = new CreateParameter();
+    }
+
+    public CreateParameter getPassParameter(){
+        return passParameter;
+    }
+
+    public boolean validateCategory(String category) {
         if (category == null) {
             return false;
-        }
-        else{
-            eventCreateController.setCategoryIns(category);
+        } else {
+            passParameter.setCategory(category);
             return true;
         }
     }
 
-    public boolean validateTitle(String title, SocialNetwork socialNetwork, String category){
-        if (title != null && socialNetwork.findCategoryByName(category).doesEventAlreadyExist(title) == true) {
+    public boolean validateTitle(String title, SocialNetwork socialNetwork) {
+        if (title != null && socialNetwork.findCategoryByName(passParameter.getCategory()).doesEventAlreadyExist(title) == true) {
             return false;
-        } else if (title != null && socialNetwork.findCategoryByName(category).doesEventAlreadyExist(title)  == false) {
-            eventCreateController.setTitleIns(title);
+        } else if (title != null && socialNetwork.findCategoryByName(passParameter.getCategory()).doesEventAlreadyExist(title) == false) {
+            passParameter.setTitle(title);
             return true;
-        }
-        else{
-            String titleNull = "Titolo ("+counterTitleNull+")";
-            eventCreateController.setTitleIns(titleNull);
+        } else {
+            String titleNull = "Titolo (" + counterTitleNull + ")";
+            passParameter.setTitle(titleNull);
             counterTitleNull++;
             return true;
         }
     }
 
-    public boolean validateNumPar(String numPTxtF){
+    public boolean validateNumPar(String numPTxtF) {
         if (numPTxtF.isEmpty() || !MyUtil.checkInteger(numPTxtF)) {
-           return false;
+            return false;
         } else {
-            eventCreateController.setNumParIns(Integer.parseInt(numPTxtF));
+            passParameter.setNumPar(Integer.parseInt(numPTxtF));
             return true;
         }
     }
 
-    public boolean validateExtraNumPar(String extraNumParTxt){
+    public boolean validateExtraNumPar(String extraNumParTxt) {
         if (extraNumParTxt.isEmpty()) {
-            eventCreateController.setExtraNumParIns(0);
+            passParameter.setExtraNum(0);
             return true;
         } else {
             if (!MyUtil.checkInteger(extraNumParTxt)) {
                 return false;
             } else {
-                eventCreateController.setExtraNumParIns(Integer.parseInt(extraNumParTxt));
+                passParameter.setExtraNum(Integer.parseInt(extraNumParTxt));
                 return true;
             }
         }
     }
 
-    public boolean validateDeadLine(LocalDate deadLine){
+    public boolean validateDeadLine(LocalDate deadLine) {
         if (deadLine == null) {
             return false;
-        }
-        else{
-            eventCreateController.setDeadLineIns(deadLine);
-            return true;
-        }
-    }
-
-    public void validateRetiredDeadLine(LocalDate retiredDeadLine, LocalDate deadLineIns){
-        if (retiredDeadLine == null) {
-            eventCreateController.setRetiredDeadLineIns(deadLineIns);
         } else {
-            eventCreateController.setRetiredDeadLineIns(retiredDeadLine);
-        }
-    }
-
-    public boolean validatePlace(String placeTxtF){
-        if(placeTxtF.isEmpty() || !MyUtil.checkString(placeTxtF) ){
-            return false;
-        }
-        else{
-            eventCreateController.setPlaceIns(placeTxtF);
+            passParameter.setDeadLine(deadLine);
             return true;
         }
     }
 
-    public boolean validateDate(LocalDate date){
+    public void validateRetiredDeadLine(LocalDate retiredDeadLine) {
+        if (retiredDeadLine == null) {
+            passParameter.setRetiredDeadLine(passParameter.getDeadLine());
+        } else {
+            passParameter.setRetiredDeadLine(retiredDeadLine);
+        }
+    }
+
+    public boolean validatePlace(String placeTxtF) {
+        if (placeTxtF.isEmpty() || !MyUtil.checkString(placeTxtF)) {
+            return false;
+        } else {
+            passParameter.setPlace(placeTxtF);
+            return true;
+        }
+    }
+
+    public boolean validateDate(LocalDate date) {
         if ((date == null)) {
             return false;
         } else {
-            eventCreateController.setDateIns(date);
+            passParameter.setDate(date);
             return true;
         }
     }
@@ -113,7 +121,7 @@ public class ValidateEvent {
         if (time == null || dateIsVal == false) {
             return false;
         } else {
-            eventCreateController.setTimeIns(time);
+            passParameter.setTime(time);
             return true;
         }
     }
@@ -123,48 +131,48 @@ public class ValidateEvent {
             if (individualTee.isEmpty() || !MyUtil.checkFloat(individualTee)) {
                 return false;
             } else {
-                eventCreateController.setIndTeeIns(Float.parseFloat(individualTee));
+                passParameter.setIndTee(Float.parseFloat(individualTee));
                 return true;
             }
         } else {
-            eventCreateController.setIndTeeIns(0);
+            passParameter.setIndTee(0);
             return true;
         }
     }
 
     public void validateTotTee(String tot){
-        eventCreateController.setTotTeeIns(tot);
+        passParameter.setTotTee(tot);
     }
 
     public void validateEndDate(LocalDate endDateDP, boolean dateIsVal, Integer durBigCB){
         if (endDateDP != null && dateIsVal == true) {
-            eventCreateController.setEndDateIns(endDateDP);
+            passParameter.setEndDate(endDateDP);
         } else if (endDateDP == null ){
             if (durBigCB != null) {
-                eventCreateController.setDurationIns(String.valueOf(durBigCB));
+                passParameter.setDuration(String.valueOf(durBigCB));
             }
         }
     }
 
-    public boolean validateEndTime(LocalTime endTimeTP, LocalDate endDateIns, LocalDate dateIns, LocalTime timeIns, Integer durBigCB, Integer durLitCB){
+    public boolean validateEndTime(LocalTime endTimeTP, Integer durBigCB, Integer durLitCB){
         if (endTimeTP != null) {
-            if (endTimeTP.isBefore(timeIns) && endDateIns.isEqual(dateIns)) {
+            if (endTimeTP.isBefore(passParameter.getTime()) && passParameter.getEndDate().isEqual(passParameter.getDate())) {
                 return false;
             } else {
-                eventCreateController.setEndTimeIns( endTimeTP);
+                passParameter.setEndTime( endTimeTP);
                 return true;
             }
 
         } else {
             if (durBigCB!= null && durLitCB != null) {
-                eventCreateController.setDurationIns(durBigCB + ":" + durLitCB);
+                passParameter.setDuration(durBigCB + ":" + durLitCB);
             }
             return  true;
         }
     }
 
-    public boolean validateEndDateEndTime(LocalDate endDateDP, LocalTime endTimeTP, String durationIns){
-        if ((endDateDP != null && endTimeTP == null) && durationIns == null) {
+    public boolean validateEndDateEndTime(LocalDate endDateDP, LocalTime endTimeTP){
+        if ((endDateDP != null && endTimeTP == null) && passParameter.getDuration() == null) {
             return false;
         } else {
            return true;
@@ -174,13 +182,13 @@ public class ValidateEvent {
 
     public void validateNote(String note){
 
-        eventCreateController.setNoteIns(note);
+        passParameter.setNote(note);
     }
 
     public boolean validateAge(Integer minAgeCB, Integer maxAgeCB, AgeGroup ageGroup){
         if (minAgeCB != null && maxAgeCB != null) {
             ageGroup.setRange(minAgeCB, maxAgeCB);
-            eventCreateController.setAgeRangeIns(ageGroup.getRange());
+            passParameter.setAgeRange(ageGroup.getRange());
             return true;
         } else {
             return false;
@@ -191,20 +199,21 @@ public class ValidateEvent {
         if (genderCB == null) {
             return false;
         } else {
-            eventCreateController.setGenderIns(genderCB);
+            passParameter.setGender(genderCB);
             return true;
         }
 
     }
 
-    public void validateDurationAndTimeDate(LocalDate endDateIns, String durationIns, LocalTime endTimeIns, LocalTime timeIns, LocalDate dateIns, int durH, int durM){
-        if (endDateIns == null && durationIns != null) {
-            eventCreateController.setEndDateIns(dateIns.plusDays(Integer.parseInt(durationIns)));
-        } else if (endDateIns == null && durationIns == null) {
-            eventCreateController.setEndDateIns(dateIns.plusDays(1));
+    public void validateDurationAndTimeDate(Integer durH, Integer durM){
+        if (passParameter.getEndDate() == null && passParameter.getDuration() != null) {
+            passParameter.setEndDate(passParameter.getDate().plusDays(Integer.parseInt(passParameter.getDuration() )));
+        } else if (passParameter.getEndDate() == null && passParameter.getDuration()  == null) {
+            passParameter.setEndDate(passParameter.getDate().plusDays(1));
         } else {
-            if (endTimeIns == null && durationIns != null) {
-                eventCreateController.setEndTimeIns(timeIns.plusHours(durH).plusMinutes(durM));
+            if (passParameter.getEndDate() == null && passParameter.getDuration()  != null) {
+                System.out.println("QUI");
+                passParameter.setEndTime(passParameter.getTime().plusHours(durH).plusMinutes(durM));
 
             }
         }
@@ -220,7 +229,7 @@ public class ValidateEvent {
             }
         }
 
-        eventCreateController.setTypeOfFilmIns(typeOfFilmIns);
+        passParameter.setTypeOfFilm(typeOfFilmIns);
 
         if (typeOfFilmIns.isEmpty()) {
             return false;
@@ -238,42 +247,43 @@ public class ValidateEvent {
 
         if (pastiCheckBox) {
             if (MyUtil.checkFloat(pastiExtraTF)) {
-                eventCreateController.setExtraPastiTeeIns(Float.parseFloat(pastiExtraTF));
+                passParameter.setExtraPastiTee(Float.parseFloat(pastiExtraTF));
                 pasti = true;
             } else {
                 pasti = false;
             }
         } else {
-            eventCreateController.setExtraPastiTeeIns(0);
+            passParameter.setExtraPastiTee(0);
             pasti = true;
         }
 
         if (gadgetCheckBox) {
             if (MyUtil.checkFloat(gadgetExtraTF)) {
-               eventCreateController.setExtraGadgetTeeIns(Float.parseFloat(gadgetExtraTF));
+               passParameter.setExtraGadgetTee(Float.parseFloat(gadgetExtraTF));
                 gadget = true;
             } else {
                 gadget = false;
             }
         } else {
-            eventCreateController.setExtraGadgetTeeIns(0);
+            passParameter.setExtraGadgetTee(0);
             gadget = true;
         }
 
         if (rinfrescoCheckBox) {
             if (MyUtil.checkFloat(rinfrescoExtraTF)) {
-                eventCreateController.setExtraRinfrescoTeeIns(Float.parseFloat(rinfrescoExtraTF));
+                passParameter.setExtraRinfrescoTee(Float.parseFloat(rinfrescoExtraTF));
                 rinfresco = true;
             } else {
                 rinfresco = false;
             }
         } else {
-            eventCreateController.setExtraRinfrescoTeeIns(0);
+            passParameter.setExtraRinfrescoTee(0);
             rinfresco = true;
         }
 
        return (pasti && gadget && rinfresco);
 
     }
+
 
 }

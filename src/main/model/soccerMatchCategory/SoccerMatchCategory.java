@@ -1,6 +1,7 @@
 package main.model.soccerMatchCategory;
 
 import main.model.Category;
+import main.model.CreateParameter;
 import main.model.event.Gender;
 
 import java.time.LocalDate;
@@ -43,15 +44,35 @@ public class SoccerMatchCategory extends Category<SoccerMatchEvent> {
 		super.addEvent(event);
 	}
 
-	//utilizzando il builder, questa non serve più
-	public SoccerMatchEvent createEvent(String titleIns, int numParIns, int extraNumIns, LocalDate deadLineIns, LocalDate retiredDeadLineIns, String placeIns, LocalDate dateIns, LocalTime timeIns, String durationIns, float indTeeIns, String totTeeIns, LocalDate endDateIns, LocalTime endTimeIns, String ageRangeIns, Gender genderIns, String noteIns, String creator){
-		SoccerMatchEvent match = new SoccerMatchEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
 
+	public void createSoccerEvent(CreateParameter passParameter){
+		SoccerMatchEvent match = (SoccerMatchEvent) new SoccerMatchEventBuilder()
+				.ageRange(passParameter.getAgeRange())
+				.gender(passParameter.getGender())
+				.title(passParameter.getTitle())
+				.numOfParticipants(passParameter.getNumPar())
+				.extraParticipants(passParameter.getExtraNum())
+				.registrationDeadline(passParameter.getDeadLine())
+				.retireDeadline(passParameter.getRetiredDeadLine())
+				.place(passParameter.getPlace())
+				.date(passParameter.getDate())
+				.time(passParameter.getTime())
+				.duration(passParameter.getDuration())
+				.individualTee(passParameter.getIndTee())
+				.teeInclude(passParameter.getTotTee())
+				.endDate(passParameter.getEndDate())
+				.endTime(passParameter.getEndTime())
+				.note(passParameter.getNote())
+				.creator(passParameter.getCreator())
+				.build(); //problema: questo build è chiamato su ciò che ritorna creator ossia Event...
 
-		match.addParticipant(creator);
-		this.addEvent(match);
-		return match;
+		match.addParticipant(passParameter.getCreator());
+		addEvent(match);
+
 	}
+
+
+
 
 
 }

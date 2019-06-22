@@ -96,44 +96,10 @@ public class EventCreateController {
     private List<CheckBox> typeOfFilmCheckList;
 
     private List<String> selectedUserToInvite;
-    private List<String> typeOfFilmIns;
 
     private ArrayList<Integer> ageRangeMin;
 
     private String[] errorMsg = new  String[12];
-
-
-    // ~~~~~~ Campi FACOLTATIVI ~~~~~~~~
-
-    private String titleIns;
-    private int extraNumIns;
-    private String totTeeIns;
-    private LocalDate retiredDeadLineIns;
-    private LocalDate endDateIns;
-    private LocalTime endTimeIns;
-    private String noteIns;
-    private int durH, durM, durD;
-    private String durationIns;
-
-    private boolean extraNumIsVal = false;
-    private boolean endDateAndTimeIsVal = false;
-    private boolean endTimeIsVal = false;
-
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    // ~~~~~~ Campi OBBLIGATORI ~~~~~~
-
-    private String categoryIns;
-    private int numParIns;
-    private LocalDate deadLineIns;
-    private String placeIns;
-    private LocalDate dateIns;
-    private LocalTime timeIns;
-    private float indTeeIns;
-    private int minAge, maxAge;
-    private String ageRangeIns;
-    private Gender genderIns;
-
 
     private boolean catIsVal = false;
     private boolean titIsVal = false;
@@ -145,11 +111,12 @@ public class EventCreateController {
     private boolean indTeeIsVal = false;
     private boolean ageIsVal= false;
     private boolean genderIsVal = false;
-    private boolean durIsVal = false;
-
     private boolean typeOfFilmIsVal = false;
+    private boolean extraNumIsVal = false;
+    private boolean endTimeIsVal = false;
+    private boolean endDateAndTimeIsVal = false;
 
-    private float extraPastiTeeIns, extraRinfrescoTeeINs, extraGadgetTeeIns;
+    //private float extraPastiTeeIns, extraRinfrescoTeeINs, extraGadgetTeeIns;
 
     private boolean extraTeeIsVal=false;
 
@@ -195,9 +162,6 @@ public class EventCreateController {
 
     public void setCreator(String creator) { this.creator = creator;  }
 
-    public void setValidateEvent(){ this.validateEvent = new ValidateEvent(this);}
-
-    public ValidateEvent getValidateEvent(){ return validateEvent;}
 
    /**
      * Il metodo serve per inizializzare la finestra, in particolare per impostare gli observable list nei
@@ -527,7 +491,6 @@ public class EventCreateController {
                     indTeeIsVal=false;
                 }
                 else{
-                    indTeeIns=0;
                     indTeeTxtF.setDisable(true);
                     indTeeIsVal=true;
                 }
@@ -562,6 +525,9 @@ public class EventCreateController {
      */
     public void createEvent(ActionEvent actionEvent) throws IOException {
 
+        ValidateEvent validateEvent = new ValidateEvent();
+        validateEvent.getPassParameter().setCreator(creator);
+
         // OBBLIGATORIO
         // categoria
         catIsVal = validateEvent.validateCategory(catCB.getSelectionModel().getSelectedItem());
@@ -573,7 +539,7 @@ public class EventCreateController {
 
             // Acquisisco se c'e' il titolo
             // FACOLTATIVO
-            titIsVal = validateEvent.validateTitle(titleTxtF.getText(), socialNetwork, categoryIns);
+            titIsVal = validateEvent.validateTitle(titleTxtF.getText(), socialNetwork);
             if( ! titIsVal ){
                 setLabelRedError(titleLbl, 0, ALREADY_EXIST_EVENT_WITH_THIS_TITLE_MSG);
             }
@@ -621,7 +587,7 @@ public class EventCreateController {
             // Acquisisco il termine di ritiro iscrizione
             // FACOLTATIVO
             // termine ultimo ritiro iscrizione
-            validateEvent.validateRetiredDeadLine(retiredDeadLineDP.getValue(), deadLineIns);
+            validateEvent.validateRetiredDeadLine(retiredDeadLineDP.getValue());
 
 
             // Acquisisco il luogo controllando che sia inserito e che sia una stringa
@@ -686,7 +652,7 @@ public class EventCreateController {
             // Acquisisco se c e l ora di termine e controllo non sia prima dell ora impostata nello stesso giorno
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // ora conclusiva
-            endTimeIsVal = validateEvent.validateEndTime(endTimeTP.getValue(), endDateIns, dateIns, timeIns, durBigCB.getValue(), durLitCB.getValue());
+            endTimeIsVal = validateEvent.validateEndTime(endTimeTP.getValue(), durBigCB.getValue(), durLitCB.getValue());
             if(!endTimeIsVal){
                 setLabelRedError(endTimeLbl, 7, ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG);
             }
@@ -701,7 +667,7 @@ public class EventCreateController {
             // OBBLIGATORIO -> se partita di calcio
             // genere
 
-            switch (categoryIns) {
+            switch (validateEvent.getPassParameter().getCategory()) {
                 case (SOCCER_NAME): {
 
                     ageIsVal = validateEvent.validateAge(minAgeCB.getValue(), maxAgeCB.getValue(), ageGroup);
@@ -755,7 +721,7 @@ public class EventCreateController {
 
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // durata --> guardare end time e end date
-            endDateAndTimeIsVal = validateEvent.validateEndDateEndTime(endDateDP.getValue(), endTimeTP.getValue(), durationIns);
+            endDateAndTimeIsVal = validateEvent.validateEndDateEndTime(endDateDP.getValue(), endTimeTP.getValue());
             if(!endDateAndTimeIsVal){
                 setLabelRedError(durLbl, 11, MISS_DURATION_OR_ENDDATE_MSG);
             }
@@ -769,7 +735,7 @@ public class EventCreateController {
             // noteIns
             validateEvent.validateNote(noteTxtA.getText());
 
-            switch (categoryIns) {
+            switch (validateEvent.getPassParameter().getCategory()) {
 
                 case (SOCCER_NAME): {
 
@@ -777,9 +743,12 @@ public class EventCreateController {
 
                     if (validateEventCreation) {
 
-                        validateEvent.validateDurationAndTimeDate(endDateIns, durationIns, endTimeIns, timeIns, dateIns, durH, durM );
+                        validateEvent.validateDurationAndTimeDate(durBigCB.getValue(), durLitCB.getValue() );
+
+                        socialNetwork.getSoccerMatchCategory().createSoccerEvent(validateEvent.getPassParameter());
 
 
+/* Non serve più
                         //SoccerMatchEvent match = socialNetwork.getSoccerMatchCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, ageRangeIns, genderIns, noteIns, creator);
                         SoccerMatchEvent match = (SoccerMatchEvent) new SoccerMatchEventBuilder()
                                 .ageRange(ageRangeIns)
@@ -802,9 +771,11 @@ public class EventCreateController {
                                 .build(); //problema: questo build è chiamato su ciò che ritorna creator ossia Event...
 
                         match.addParticipant(creator);
-                        socialNetwork.getSoccerMatchCategory().addEvent(match);
 
-                        userCheckInvite();
+                        socialNetwork.getSoccerMatchCategory().addEvent(match);
+                        */
+
+                        userCheckInvite(validateEvent.getPassParameter().getTitle());
 
                         socialNetwork.writeSoccerMatchEventListOnFile();
                         socialNetwork.updateUsersListFile();
@@ -822,11 +793,12 @@ public class EventCreateController {
 
 
                     boolean validateEventCreation = titIsVal && numIsVal && extraNumIsVal && deadLineIsVal && placeIsVal && dateIsVal && timeIsVal && indTeeIsVal && endTimeIsVal && typeOfFilmIsVal && extraTeeIsVal && endDateAndTimeIsVal;
-                    System.out.println(titIsVal +" "+ numIsVal +" "+ extraNumIsVal +" "+ deadLineIsVal +" "+ placeIsVal +" "+ dateIsVal  +" "+  timeIsVal  +" "+  indTeeIsVal  +" "+  endTimeIsVal  +" "+  typeOfFilmIsVal  +" "+  extraTeeIsVal  +" "+  endDateAndTimeIsVal);
+
                     if (validateEventCreation) {
-                        validateEvent.validateDurationAndTimeDate(endDateIns, durationIns, endTimeIns, timeIns, dateIns, durH, durM );
+                        validateEvent.validateDurationAndTimeDate(durBigCB.getValue(), durLitCB.getValue() );
 
-
+                        socialNetwork.getCinemaCategory().createCinemaEvent(validateEvent.getPassParameter());
+                        /*
 
                         //CinemaEvent cinemaEvent =  socialNetwork.getCinemaCategory().createEvent(titleIns, numParIns, extraNumIns, deadLineIns, retiredDeadLineIns,  placeIns, dateIns, timeIns, durationIns, indTeeIns, totTeeIns, endDateIns, endTimeIns, noteIns, creator, typeOfFilmIns, extraPastiTeeIns,  extraRinfrescoTeeINs, extraGadgetTeeIns);
                         CinemaEvent cinemaEvent = (CinemaEvent) new CinemaEventBuilder()
@@ -851,11 +823,13 @@ public class EventCreateController {
                                 .creator(creator)
                                 .build(); //problema: questo build è chiamato su ciò che ritorna creator ossia Event...
 
+
                         cinemaEvent.addParticipant(creator);
                         socialNetwork.getCinemaCategory().addEvent(cinemaEvent);
+                        */
 
 
-                        userCheckInvite();
+                        userCheckInvite(validateEvent.getPassParameter().getTitle());
 
                         socialNetwork.writeCinemaEventListOnFile();
                         socialNetwork.updateUsersListFile();
@@ -872,8 +846,10 @@ public class EventCreateController {
         }
     }
 
-    private void userCheckInvite() {
-        selectedUserToInvite = new ArrayList<>();
+
+
+    private void userCheckInvite(String titleIns ) {
+        List<String> selectedUserToInvite = new ArrayList<>();
 
         for (CheckBox check : userCheckList) {
             if (check.isSelected()) {
@@ -898,6 +874,7 @@ public class EventCreateController {
         JOptionPane.showMessageDialog(null, msgPopUp);
     }
 
+    /*
 
     // METODI SETTER
     public void setCategoryIns(String category) {
@@ -984,6 +961,7 @@ public class EventCreateController {
     public void setExtraRinfrescoTeeIns(float extraRinfrescoTee) {
         this.extraRinfrescoTeeINs = extraRinfrescoTee;
     }
+    */
 
     // METODI PER MODIFICA LABEL
 
