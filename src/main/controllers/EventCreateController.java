@@ -119,9 +119,8 @@ public class EventCreateController {
     private boolean endDateAndTimeIsVal = false;
     private boolean endTimeIsVal = false;
 
-
-
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     // ~~~~~~ Campi OBBLIGATORI ~~~~~~
 
     private String categoryIns;
@@ -199,6 +198,7 @@ public class EventCreateController {
     public void setValidateEvent(){ this.validateEvent = new ValidateEvent(this);}
 
     public ValidateEvent getValidateEvent(){ return validateEvent;}
+
    /**
      * Il metodo serve per inizializzare la finestra, in particolare per impostare gli observable list nei
      * choiceBox e per rendere determinati choiceBox abilitati o meno in base alla scelta della categoria.
@@ -564,7 +564,7 @@ public class EventCreateController {
 
         // OBBLIGATORIO
         // categoria
-        catIsVal = validateEvent.validateCategory(catCB);
+        catIsVal = validateEvent.validateCategory(catCB.getSelectionModel().getSelectedItem());
         if (!catIsVal) {
             setLabelRedError(catLbl, -1, MISS_CATEGORY_MSG);
         }
@@ -662,7 +662,7 @@ public class EventCreateController {
             // che il CheckBox sia selezionato o meno
             // OBBLIGATORIO
             //quota individuale
-            indTeeIsVal = validateEvent.validateTeeIndividual(isTeeActiveCkB, indTeeTxtF.getText());
+            indTeeIsVal = validateEvent.validateTeeIndividual(isTeeActiveCkB.isSelected(), indTeeTxtF.getText());
             if(!indTeeIsVal){
                 setLabelRedError(indTeeLbl, 6, MISS_INDIVIDUAL_TEE_MSG);
             }
@@ -674,19 +674,19 @@ public class EventCreateController {
             // Indicala voci di spesa
             // FACOLTATIVO
             // voci della quota
-            validateEvent.validateTotTee(totTeeTxtA);
+            validateEvent.validateTotTee(totTeeTxtA.getText());
 
 
             // Acquisisco se c e la data di termine e controllo che non sia prima della data dell evento
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // data conclusiva
-            validateEvent.validateEndDate(endDateDP, dateIsVal, durBigCB);
+            validateEvent.validateEndDate(endDateDP.getValue(), dateIsVal, durBigCB.getValue());
 
 
             // Acquisisco se c e l ora di termine e controllo non sia prima dell ora impostata nello stesso giorno
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // ora conclusiva
-            endTimeIsVal = validateEvent.validateEndTime(endTimeTP, endDateIns, dateIns, timeIns, durBigCB, durLitCB);
+            endTimeIsVal = validateEvent.validateEndTime(endTimeTP.getValue(), endDateIns, dateIns, timeIns, durBigCB.getValue(), durLitCB.getValue());
             if(!endTimeIsVal){
                 setLabelRedError(endTimeLbl, 7, ERROR_ENDTIME_BEFORE_TIME_IF_DATE_EQUAL_ENDDATE_MSG);
             }
@@ -704,7 +704,7 @@ public class EventCreateController {
             switch (categoryIns) {
                 case (SOCCER_NAME): {
 
-                    ageIsVal = validateEvent.validateAge(minAgeCB, maxAgeCB, ageGroup);
+                    ageIsVal = validateEvent.validateAge(minAgeCB.getValue(), maxAgeCB.getValue(), ageGroup);
                     if(!ageIsVal){
                         setLabelRedError(ageLbl, 8, MISS_AGE_MSG);
                     }
@@ -712,7 +712,7 @@ public class EventCreateController {
                         setLabelBlackNoError(ageLbl, 8);
                     }
 
-                    genderIsVal = validateEvent.validateGender(genderCB);
+                    genderIsVal = validateEvent.validateGender(genderCB.getSelectionModel().getSelectedItem());
                     if(!genderIsVal){
                         setLabelRedError(genderLbl, 9, MISS_GENDER_MSG);
                     }
@@ -737,7 +737,7 @@ public class EventCreateController {
 
 
                     // CheckBox voci di spesa aggiuntiva
-                    extraTeeIsVal = validateEvent.validateExtraTeeIns(pastiExtraTF, gadgetExtraTF,rinfrescoExtraTF, pastiCheckBox, gadgetCheckBox, rinfrescoCheckBox);
+                    extraTeeIsVal = validateEvent.validateExtraTeeIns(pastiExtraTF.getText(), gadgetExtraTF.getText(),rinfrescoExtraTF.getText(), pastiCheckBox.isSelected(), gadgetCheckBox.isSelected(), rinfrescoCheckBox.isSelected());
 
                     if(!extraTeeIsVal){
                         setLabelRedError(extraTeeLbl, 9, ERR_EXTRATEE);
@@ -755,7 +755,7 @@ public class EventCreateController {
 
             // FACOLTATIVO -> ma se c e devo controllare la coerenza
             // durata --> guardare end time e end date
-            endDateAndTimeIsVal = validateEvent.validateEndDateEndTime(endDateDP, endTimeTP, durationIns);
+            endDateAndTimeIsVal = validateEvent.validateEndDateEndTime(endDateDP.getValue(), endTimeTP.getValue(), durationIns);
             if(!endDateAndTimeIsVal){
                 setLabelRedError(durLbl, 11, MISS_DURATION_OR_ENDDATE_MSG);
             }
@@ -767,7 +767,7 @@ public class EventCreateController {
 
             // FACOLTATIVO
             // noteIns
-            validateEvent.validateNote(noteTxtA);
+            validateEvent.validateNote(noteTxtA.getText());
 
             switch (categoryIns) {
 
