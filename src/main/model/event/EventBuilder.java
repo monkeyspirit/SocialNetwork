@@ -5,25 +5,25 @@ import java.time.LocalTime;
 
 public abstract class EventBuilder {
 
-    //Attributi della classe Event
-    protected String title;
+    //Attributi della classe Event (quelli facoltativi inizializzati ad un valore di default)
+    protected String title = "";
     protected Integer numOfParticipants;
-    protected Integer extraParticipants;
+    protected Integer extraParticipants = 0;
     protected LocalDate registrationDeadline;
-    protected LocalDate retireDeadline;
+    protected LocalDate retireDeadline = null;
     protected String place;
     protected LocalDate date;
     protected LocalTime time;
-    protected String duration;
+    protected String duration = "";
     protected Float individualTee;
-    protected String teeInclude;
-    protected LocalDate endDate;
-    protected LocalTime endTime;
-    protected String note;
+    protected String teeInclude = "";
+    protected LocalDate endDate = null;
+    protected LocalTime endTime = null;
+    protected String note = "";
 
     protected State state;
     protected String type;
-    protected String creator;
+    protected String creator = "";
 
 
     public EventBuilder title(String title) {

@@ -2,14 +2,15 @@ package main.model.cinemaCategory;
 
 import main.model.event.EventBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CinemaEventBuilder extends EventBuilder {
 
-    private List<String> genres;
-    private Float extraMeals;
-    private Float gadgetExtra;
-    private Float rinfreschiExtra;
+    private List<String> genres = new ArrayList<>();
+    private Float extraMeals = Float.valueOf(0);
+    private Float gadgetExtra = Float.valueOf(0);
+    private Float rinfreschiExtra = Float.valueOf(0);
 
     public CinemaEventBuilder() {
 

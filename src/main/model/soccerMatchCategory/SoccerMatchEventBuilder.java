@@ -5,8 +5,9 @@ import main.model.event.Gender;
 
 public class SoccerMatchEventBuilder extends EventBuilder {
 
-    private Gender gender;
-    private String ageRange;
+    //Inizializzo con valori di default
+    private Gender gender = Gender.Maschile;
+    private String ageRange = "";
 
     public SoccerMatchEventBuilder() {
 
